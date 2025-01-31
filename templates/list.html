@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}Export List - SGK Global Shipping{% endblock %}
+
+{% block extra_head %}
+<style>
+    .export-list {
+        margin-top: 20px;
+    }
+    .export-item {
+        background: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .export-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .export-status {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+    .status-draft {
+        background: #ffd700;
+        color: #856404;
+    }
+    .status-saved {
+        background: #28a745;
+        color: white;
+    }
+    .export-actions {
+        display: flex;
+        gap: 10px;
+    }
+    .search-box {
+        margin-bottom: 20px;
+    }
+    .search-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    /* Modal styles */
+    .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+    }
+    
+    .modal-content {
+        position: relative;
+        margin: auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 700px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .modal-image {
+        width: 100%;
+        height: auto;
+    }
+    
+    .close-modal {
+        position: absolute;
+        right: 25px;
+        top: 10px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    /* Enhanced Modal styles */
+    .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.8);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s;
+    }
+    
+    .modal-nav:hover {
+        background: rgba(255,255,255,1);
+    }
+    
+    .modal-prev {
+        left: -50px;
+    }
+    
+    .modal-next {
+        right: -50px;
+    }
+    
+    .image-counter {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by waybill number, sender, or receiver...">
+    </div>
+    
+    <div class="export-list">
+        {% for export in exports %}
+        <div class="export-item" data-waybill="{{ export.waybill_number }}" data-sender="{{ export.sender_name }}" data-receiver="{{ export.receiver_name }}">
+            <div class="export-header">
+                <h3>Waybill #{{ export.waybill_number }}</h3>
+                <span class="export-status status-{{ export.status }}">{{ export.status|title }}</span>
+            </div>
+            <div class="export-details">
+                <p><strong>Sender:</strong> {{ export.sender_name }}</p>
+                <p><strong>Receiver:</strong> {{ export.receiver_name }}</p>
+                <p><strong>Created:</strong> {{ export.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+            </div>
+            <div class="export-actions">
+                <a href="{{ url_for('preview', id=export.id) }}" class="action-button">View Details</a>
+                {% if export.status == 'draft' %}
+                <form action="{{ url_for('save_export', id=export.id) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="action-button">Save Export</button>
+                </form>
+                {% endif %}
+                {% if export.items|selectattr('image_filename')|list|length > 0 %}
+                <button class="action-button secondary view-images-btn" data-export-id="{{ export.id }}">
+                    <i class="fas fa-images"></i> View Images
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Enhanced Image Modal -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <button class="modal-nav modal-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="modalImage" class="modal-image" src="" alt="Item Image">
+        <button class="modal-nav modal-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="image-counter">Image <span id="currentImageNum">1</span> of <span id="totalImages">1</span></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    $('#searchInput').on('input', function() {
+        var query = $(this).val().toLowerCase();
+        
+        $('.export-item').each(function() {
+            var $item = $(this);
+            var waybill = $item.data('waybill').toLowerCase();
+            var sender = $item.data('sender').toLowerCase();
+            var receiver = $item.data('receiver').toLowerCase();
+            
+            if (waybill.includes(query) || sender.includes(query) || receiver.includes(query)) {
+                $item.show();
+            } else {
+                $item.hide();
+            }
+        });
+    });
+
+    // Enhanced image modal functionality
+    let currentImages = [];
+    let currentImageIndex = 0;
+
+    $('.view-images-btn').click(function() {
+        var exportId = $(this).data('export-id');
+        $.get('/get-images/' + exportId, function(data) {
+            if (data.images && data.images.length > 0) {
+                currentImages = data.images;
+                currentImageIndex = 0;
+                updateModalImage();
+                $('#imageModal').fadeIn();
+            }
+        });
+    });
+
+    function updateModalImage() {
+        $('#modalImage').attr('src', '/uploads/' + currentImages[currentImageIndex]);
+        $('#currentImageNum').text(currentImageIndex + 1);
+        $('#totalImages').text(currentImages.length);
+        
+        // Show/hide navigation buttons based on image count
+        if (currentImages.length <= 1) {
+            $('.modal-nav').hide();
+        } else {
+            $('.modal-nav').show();
+        }
+    }
+
+    $('.modal-next').click(function() {
+        currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+        updateModalImage();
+    });
+
+    $('.modal-prev').click(function() {
+        currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+        updateModalImage();
+    });
+
+    // Handle keyboard navigation
+    $(document).keydown(function(e) {
+        if ($('#imageModal').is(':visible')) {
+            if (e.key === 'ArrowRight') {
+                $('.modal-next').click();
+            } else if (e.key === 'ArrowLeft') {
+                $('.modal-prev').click();
+            } else if (e.key === 'Escape') {
+                $('.close-modal').click();
+            }
+        }
+    });
+
+    $('.close-modal').click(function() {
+        $('#imageModal').fadeOut();
+    });
+
+    $(window).click(function(e) {
+        if ($(e.target).is('#imageModal')) {
+            $('#imageModal').fadeOut();
+        }
+    });
+});
+</script>
+{% endblock %} 

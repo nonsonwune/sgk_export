@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}Export Request Form - SGK Global Shipping{% endblock %}
+
+{% block extra_head %}
+<style>
+    @media print {
+        .main-nav, .action-buttons { display: none !important; }
+        body { font-size: 12pt; }
+    }
+
+    .print-form {
+        max-width: 210mm;  /* A4 width */
+        margin: 20mm auto;
+        padding: 20mm;
+        background: white;
+    }
+
+    .company-header {
+        text-align: center;
+        margin-bottom: 10mm;
+    }
+
+    .company-logo {
+        width: 140px;
+        height: auto;
+    }
+
+    .form-section {
+        margin-bottom: 8mm;
+    }
+
+    .section-title {
+        font-size: 14pt;
+        font-weight: bold;
+        margin-bottom: 4mm;
+        border-bottom: 2px solid #000;
+        padding-bottom: 2mm;
+    }
+
+    .input-row {
+        display: flex;
+        margin-bottom: 6mm;
+    }
+
+    .input-label {
+        width: 30%;
+        font-weight: bold;
+    }
+
+    .input-field {
+        width: 70%;
+        border-bottom: 1px dotted #000;
+        height: 7mm;
+    }
+
+    .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8mm;
+    }
+
+    .items-table th {
+        border: 1px solid #000;
+        padding: 3mm;
+        text-align: left;
+        background: #f8f9fe;
+    }
+
+    .items-table td {
+        border: 1px solid #000;
+        padding: 6mm 3mm;
+        height: 10mm;
+    }
+
+    .signature-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15mm;
+    }
+
+    .signature-box {
+        width: 45%;
+    }
+
+    .signature-line {
+        border-top: 1px solid #000;
+        margin-top: 15mm;
+        padding-top: 2mm;
+        text-align: center;
+    }
+
+    .date-line {
+        text-align: right;
+        margin-top: 10mm;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="print-form">
+    <div class="company-header">
+        <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
+        <h1>Export Request Form</h1>
+        <p>Waybill #{{ request.waybill_number }}</p>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">Sender Information</div>
+        <div class="input-row">
+            <div class="input-label">Name:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Email:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Address:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Business:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Mobile:</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">Receiver Information</div>
+        <div class="input-row">
+            <div class="input-label">Name:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Email:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Address:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Business:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Mobile:</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">Destination Details</div>
+        <div class="input-row">
+            <div class="input-label">Address:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Country:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Postcode:</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">Shipment Items</div>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Value ($)</th>
+                    <th>Weight (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(7) %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">Additional Details</div>
+        <div class="input-row">
+            <div class="input-label">Collection Required:</div>
+            <div class="input-field">□ Yes □ No</div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Customer Group:</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Order Booked By:</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line">Sender's Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line">Date</div>
+        </div>
+    </div>
+</div>
+
+<div class="action-buttons">
+    <button onclick="window.print()" class="action-button primary">
+        <i class="fas fa-print"></i> Print Form
+    </button>
+</div>
+{% endblock %} 

@@ -1,0 +1,669 @@
+{% extends "base.html" %}
+
+{% block title %}Export Request Preview - SGK Global Shipping{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Enhanced Preview Styles */
+    .preview-container {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        overflow: hidden;
+        margin: 2rem auto;
+        max-width: 1200px;
+    }
+
+    .document-header {
+        color: white;
+        padding: 2rem 3rem;
+        position: relative;
+    }
+
+    .company-header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .company-logo {
+        width: 140px;
+        height: auto;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .company-info h1 {
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+    }
+
+    .document-meta {
+        display: flex;
+        gap: 2.5rem;
+        background: rgba(64, 0, 255, 0.119);
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: rgba(0, 0, 0, 0.483);
+    }
+
+    .status-badge {
+        padding: 0.35rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .status-draft { background: #FFD700; color: #724d00; }
+    .status-saved { background: #28a745; color: white; }
+
+    .info-section {
+        padding: 2rem 3rem;
+    }
+
+    .info-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-card {
+        background: #ffffff;
+        border: 1px solid #eef0f3;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-header {
+        background: #f8f9fe;
+        padding: 1.25rem;
+        border-bottom: 1px solid #eef0f3;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .card-header i {
+        font-size: 1.4rem;
+        color: #4169E1;
+    }
+
+    .card-header h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    .info-content {
+        padding: 1.5rem;
+    }
+
+    .info-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f5f6f8;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .label {
+        color: #718096;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .value {
+        color: #2d3748;
+        font-weight: 500;
+    }
+
+    .items-table {
+        border: 1px solid #eef0f3;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1.5rem;
+    }
+
+    .items-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .items-table th {
+        background: #f8f9fe;
+        padding: 1rem;
+        text-align: left;
+        color: #4169E1;
+        font-weight: 600;
+        border-bottom: 2px solid #eef0f3;
+    }
+
+    .items-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #eef0f3;
+        vertical-align: top;
+    }
+
+    .items-table tr:nth-child(even) {
+        background: #fafbff;
+    }
+
+    .pricing-summary {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 3rem;
+        padding: 1.5rem;
+    }
+
+    .pricing-details {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .total-section {
+        background: #f8f9fe;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid #eef0f3;
+    }
+
+    .total-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        color: #2d3748;
+    }
+
+    .total-row.final {
+        font-size: 1.3rem;
+        font-weight: 600;
+        padding-top: 1rem;
+        margin-top: 1rem;
+        border-top: 2px solid #eef0f3;
+    }
+
+    .view-images-btn {
+        padding: 0.5rem 0.75rem;
+        background: rgba(65, 105, 225, 0.1);
+        color: #4169E1;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .view-images-btn:hover {
+        background: #4169E1;
+        color: white;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        padding: 2rem 3rem;
+        background: #f8f9fe;
+        border-top: 1px solid #eef0f3;
+    }
+
+    .action-button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+    }
+
+    .action-button.primary {
+        background: #4169E1;
+        color: white;
+        border: none;
+    }
+
+    .action-button.primary:hover {
+        background: #3154b4;
+    }
+
+    .action-button.secondary {
+        background: #718096;
+        color: white;
+        border: none;
+    }
+
+    .action-button.secondary:hover {
+        background: #4a5568;
+    }
+
+    /* Enhanced Modal */
+    .image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 1000;
+        animation: modalFade 0.3s ease;
+    }
+
+    .modal-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        max-height: 90vh;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+    }
+
+    @keyframes modalFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .close-modal {
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .close-modal:hover {
+        opacity: 1;
+    }
+
+    @media print {
+        .main-nav,
+        .action-buttons,
+        .view-images-btn,
+        .no-print,
+        th.no-print,
+        td.no-print {
+            display: none !important;
+        }
+        .document-header { 
+            background: white !important; 
+            color: #000;
+            padding: 1rem;
+        }
+        .preview-container {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+        .info-section {
+            padding: 1rem;
+        }
+        .document-meta {
+            background: none;
+            padding: 0;
+        }
+        .meta-item {
+            color: #000;
+        }
+        .items-table th:last-child,
+        .items-table td:last-child {
+            display: none !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="preview-container">
+    <div class="document-header">
+        <div class="company-header">
+            <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
+            <div class="company-info">
+                <h1>Export Documentation</h1>
+                <div class="document-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Waybill #{{ request.waybill_number }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="status-badge status-{{ request.status }}">
+                            <i class="fas fa-{{ 'check-circle' if request.status == 'saved' else 'edit' }}"></i>
+                            {{ request.status|title }}
+                        </span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>{{ request.created_at.strftime('%B %d, %Y') }}</span>
+                    </div>
+        </div>
+            </div>
+            </div>
+        </div>
+
+    <div class="info-section">
+        <div class="info-cards-grid">
+            <div class="info-card">
+                <div class="card-header">
+                    <i class="fas fa-user-tie"></i>
+                    <h2>Sender Information</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-row">
+                        <span class="label">Name:</span>
+                        <span class="value">{{ request.sender_name }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value">{{ request.sender_email or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Address:</span>
+                        <span class="value">{{ request.sender_address or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Business:</span>
+                        <span class="value">{{ request.sender_business or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Mobile:</span>
+                        <span class="value">{{ request.sender_mobile }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <i class="fas fa-user-check"></i>
+                    <h2>Receiver Information</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-row">
+                        <span class="label">Name:</span>
+                        <span class="value">{{ request.receiver_name }}</span>
+        </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value">{{ request.receiver_email or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Address:</span>
+                        <span class="value">{{ request.receiver_address or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Business:</span>
+                        <span class="value">{{ request.receiver_business or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Mobile:</span>
+                        <span class="value">{{ request.receiver_mobile }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-map-marker-alt"></i>
+                <h2>Destination Details</h2>
+            </div>
+            <div class="info-content">
+                <div class="info-row">
+                    <span class="label">Address:</span>
+                    <span class="value">{{ request.destination_address }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Country:</span>
+                    <span class="value">{{ request.destination_country }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Postcode:</span>
+                    <span class="value">{{ request.destination_postcode }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-box-open"></i>
+                <h2>Shipment Items</h2>
+            </div>
+            <div class="items-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Value</th>
+                            <th>Weight (kg)</th>
+                            <th class="no-print">Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in request.items %}
+                        <tr>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ "%.2f"|format(item.value) }}</td>
+                            <td>{{ "%.1f"|format(item.weight) }}</td>
+                            <td class="no-print">
+                                {% if item.image_filename %}
+                                <button class="view-images-btn" data-image="{{ item.image_filename }}">
+                                    <i class="fas fa-expand"></i> View
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-receipt"></i>
+                <h2>Financial Summary</h2>
+            </div>
+            <div class="pricing-summary">
+                <div class="pricing-details">
+                    <div class="info-row">
+                        <span class="label">Freight Pricing:</span>
+                        <span class="value">${{ "%.2f"|format(request.freight_pricing) }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Additional Charges:</span>
+                        <span class="value">${{ "%.2f"|format(request.additional_charges) }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Pick Up Charge:</span>
+                        <span class="value">${{ "%.2f"|format(request.pickup_charge) }}</span>
+                </div>
+                <div class="info-row">
+                        <span class="label">Handling Fees:</span>
+                        <span class="value">${{ "%.2f"|format(request.handling_fees) }}</span>
+                </div>
+                <div class="info-row">
+                        <span class="label">Crating:</span>
+                        <span class="value">${{ "%.2f"|format(request.crating) }}</span>
+                </div>
+                <div class="info-row">
+                        <span class="label">Insurance Charge:</span>
+                        <span class="value">${{ "%.2f"|format(request.insurance_charge) }}</span>
+                    </div>
+                </div>
+            <div class="total-section">
+                <div class="total-row">
+                        <span>Subtotal</span>
+                        <span>${{ "%.2f"|format(subtotal) }}</span>
+                </div>
+                <div class="total-row">
+                        <span>VAT (7%)</span>
+                        <span>${{ "%.2f"|format(vat) }}</span>
+                </div>
+                <div class="total-row final">
+                        <span>Total Amount</span>
+                        <span>${{ "%.2f"|format(total) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-clipboard-list"></i>
+                <h2>Additional Details</h2>
+            </div>
+            <div class="info-content">
+                <div class="info-row">
+                    <span class="label">Collection Status:</span>
+                    <span class="value">{{ "Yes" if request.is_collection else "No" }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Customer Group:</span>
+                    <span class="value">{{ request.customer_group }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Order Booked By:</span>
+                    <span class="value">{{ request.order_booked_by }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Sender Signature:</span>
+                    <span class="value">{{ request.sender_signature or 'N/A' }}</span>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+        {% if request.status == 'draft' %}
+        <form action="{{ url_for('save_export', id=request.id) }}" method="POST" style="display: inline;">
+            <button type="submit" class="action-button primary">
+                <i class="fas fa-save"></i> Save Export
+            </button>
+        </form>
+        {% endif %}
+        <a href="{{ url_for('print_form', id=request.id) }}" class="action-button secondary">
+            <i class="fas fa-pen"></i> Print Form
+        </a>
+        <button onclick="window.print()" class="action-button secondary">
+            <i class="fas fa-print"></i> Print Preview
+        </button>
+    </div>
+        </div>
+
+<!-- Enhanced Image Modal -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <button class="modal-nav modal-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="modalImage" class="modal-image" src="" alt="Item Image">
+        <button class="modal-nav modal-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="image-counter">Image <span id="currentImageNum">1</span> of <span id="totalImages">1</span></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Enhanced image modal functionality
+    let currentImages = [];
+    let currentImageIndex = 0;
+
+    $('.view-images-btn').click(function() {
+        const exportId = "{{ request.id }}";
+        $.get('/get-images/' + exportId, function(data) {
+            if (data.images && data.images.length > 0) {
+                currentImages = data.images;
+                currentImageIndex = 0;
+                updateModalImage();
+                $('#imageModal').fadeIn();
+            }
+        });
+    });
+
+    function updateModalImage() {
+        $('#modalImage').attr('src', '/uploads/' + currentImages[currentImageIndex]);
+        $('#currentImageNum').text(currentImageIndex + 1);
+        $('#totalImages').text(currentImages.length);
+        
+        // Show/hide navigation buttons based on image count
+        if (currentImages.length <= 1) {
+            $('.modal-nav').hide();
+        } else {
+            $('.modal-nav').show();
+        }
+    }
+
+    $('.modal-next').click(function() {
+        currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+        updateModalImage();
+    });
+
+    $('.modal-prev').click(function() {
+        currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+        updateModalImage();
+    });
+
+    // Handle keyboard navigation
+    $(document).keydown(function(e) {
+        if ($('#imageModal').is(':visible')) {
+            if (e.key === 'ArrowRight') {
+                $('.modal-next').click();
+            } else if (e.key === 'ArrowLeft') {
+                $('.modal-prev').click();
+            } else if (e.key === 'Escape') {
+                $('.close-modal').click();
+            }
+        }
+    });
+
+    $('.close-modal').click(function() {
+        $('#imageModal').fadeOut();
+    });
+
+    $(window).click(function(e) {
+        if ($(e.target).is('#imageModal')) {
+            $('#imageModal').fadeOut();
+        }
+    });
+});
+</script>
+{% endblock %} 
