@@ -109,23 +109,23 @@
         <div class="section-title">Sender Information</div>
         <div class="input-row">
             <div class="input-label">Name:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.sender_name }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Email:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.sender_email or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Address:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.sender_address or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Business:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.sender_business or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Mobile:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.sender_mobile }}</div>
         </div>
     </div>
 
@@ -133,23 +133,23 @@
         <div class="section-title">Receiver Information</div>
         <div class="input-row">
             <div class="input-label">Name:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.receiver_name }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Email:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.receiver_email or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Address:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.receiver_address or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Business:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.receiver_business or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Mobile:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.receiver_mobile }}</div>
         </div>
     </div>
 
@@ -157,15 +157,15 @@
         <div class="section-title">Destination Details</div>
         <div class="input-row">
             <div class="input-label">Address:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.destination_address or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Country:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.destination_country or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Postcode:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.destination_postcode or '' }}</div>
         </div>
     </div>
 
@@ -197,24 +197,24 @@
         <div class="section-title">Additional Details</div>
         <div class="input-row">
             <div class="input-label">Collection Required:</div>
-            <div class="input-field">□ Yes □ No</div>
+            <div class="input-field">{% if request.is_collection %}☑ Yes □ No{% else %}□ Yes ☑ No{% endif %}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Customer Group:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.customer_group or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Order Booked By:</div>
-            <div class="input-field"></div>
+            <div class="input-field">{{ request.order_booked_by or '' }}</div>
         </div>
     </div>
 
     <div class="signature-section">
         <div class="signature-box">
-            <div class="signature-line">Sender's Signature</div>
+            <div class="signature-line">{{ request.sender_signature or 'Sender\'s Signature' }}</div>
         </div>
         <div class="signature-box">
-            <div class="signature-line">Date</div>
+            <div class="signature-line">{{ request.created_at.strftime('%B %d, %Y') }}</div>
         </div>
     </div>
 </div>

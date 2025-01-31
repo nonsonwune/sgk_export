@@ -16,6 +16,7 @@
             <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="nav-logo">
             <span class="brand-text">SGK Global Shipping</span>
         </div>
+        {% if current_user.is_authenticated %}
         <div class="nav-links">
             <a href="{{ url_for('new_export') }}" class="nav-link {% if request.endpoint == 'new_export' %}active{% endif %}">
                 <i class="fas fa-file-export"></i> New Export
@@ -26,7 +27,19 @@
             <a href="{{ url_for('print_form_template') }}" class="nav-link">
                 <i class="fas fa-pen"></i> Print Form
             </a>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('create_user') }}" class="nav-link">
+                <i class="fas fa-user-plus"></i> Create User
+            </a>
+            {% endif %}
+            <div class="user-menu">
+                <span class="user-name">{{ current_user.name }}</span>
+                <a href="{{ url_for('logout') }}" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
         </div>
+        {% endif %}
     </nav>
 
     <style>
@@ -102,6 +115,20 @@
             .nav-link {
                 padding: 0.5rem;
             }
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 2rem;
+            padding-left: 2rem;
+            border-left: 1px solid #e2e8f0;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: #4a5568;
         }
     </style>
 

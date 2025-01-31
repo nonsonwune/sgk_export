@@ -1,7 +1,9 @@
-from flask import Flask, request, render_template, redirect, url_for, make_response, jsonify, send_from_directory
+from flask import Flask, request, render_template, redirect, url_for, make_response, jsonify, send_from_directory, flash
 from flask_sqlalchemy import SQLAlchemy
 from weasyprint import HTML, CSS
 from weasyprint.urls import URLFetchingError
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import logging
 from werkzeug.utils import secure_filename
@@ -14,9 +16,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Initialize Flask and extensions
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///exports.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.urandom(24)
+
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.init_app(app)
+
+# Initialize SQLAlchemy
+db = SQLAlchemy(app)
 
 # Configure upload folder
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
@@ -28,7 +40,36 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 
-db = SQLAlchemy(app)
+# Models
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(120), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+        
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+def create_default_admin():
+    """Create default admin user if no users exist"""
+    if User.query.count() == 0:
+        admin = User(
+            username='admin',
+            name='Administrator',
+            is_admin=True
+        )
+        admin.set_password('admin123')  # Default password should be changed on first login
+        db.session.add(admin)
+        db.session.commit()
+        logger.info('Default admin user created')
 
 class ItemDetail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -92,31 +133,10 @@ class ExportRequest(db.Model):
         next_number = last_number + 1
         return f'WR{next_number:05d}'
 
-def init_db():
-    """Initialize the database and create all tables"""
-    try:
-        # Only create tables if they don't exist
-        with app.app_context():
-            db.create_all()
-            logger.info("Database tables are ready")
-    except Exception as e:
-        logger.error(f"Error initializing database: {str(e)}")
-        raise
-
-# Initialize database when the app starts
-if not os.path.exists('instance/exports.db'):
-    init_db()
-
-@app.before_request
-def log_request_info():
-    logger.debug('-------------------------')
-    logger.debug(f'Endpoint: {request.endpoint}')
-    logger.debug(f'Method: {request.method}')
-    logger.debug(f'URL: {request.url}')
-    logger.debug('-------------------------')
-
+# Routes
 @app.route('/')
 @app.route('/new-export')
+@login_required
 def new_export():
     logger.debug('Accessing new export form route')
     logger.debug(f'Request path: {request.path}')
@@ -129,33 +149,69 @@ def new_export():
         raise
 
 @app.route('/list')
+@login_required
 def list_exports():
     exports = ExportRequest.query.order_by(ExportRequest.created_at.desc()).all()
     return render_template('list.html', exports=exports)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = User.query.filter_by(username=username).first()
+        
+        if user and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('new_export'))
+        else:
+            flash('Invalid username or password')
+    
+    return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/admin/create-user', methods=['GET', 'POST'])
+@login_required
+def create_user():
+    if not current_user.is_admin:
+        flash('Access denied')
+        return redirect(url_for('new_export'))
+        
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        name = request.form.get('name')
+        
+        if User.query.filter_by(username=username).first():
+            flash('Username already exists')
+        else:
+            new_user = User(username=username, name=name)
+            new_user.set_password(password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('User created successfully')
+            return redirect(url_for('new_export'))
+            
+    return render_template('create_user.html')
+
 @app.route('/submit', methods=['POST'])
+@login_required
 def submit():
     logger.debug('Processing form submission')
     try:
         data = request.form
         logger.debug(f'Received form data: {data}')
         
-        # Validate required fields
-        required_fields = [
-            'sender_name', 'sender_mobile',
-            'receiver_name', 'receiver_mobile',
-            'destination_address', 'destination_country', 'destination_postcode'
-        ]
-        for field in required_fields:
-            if not data.get(field):
-                error_msg = f"Please fill in the required field: {field.replace('_', ' ').title()}"
-                logger.error(f"Validation error: {error_msg}")
-                return render_template('form.html', error=error_msg), 400
-        
-        # Create new export request with draft status
+        # Create new export request with logged-in user
         new_request = ExportRequest(
             waybill_number=ExportRequest.generate_waybill_number(),
             status='draft',
+            order_booked_by=current_user.name,  # Use logged-in user's name
             
             # Sender Information
             sender_name=data.get('sender_name'),
@@ -187,7 +243,6 @@ def submit():
             # Additional Details
             is_collection=bool(data.get('is_collection')),
             customer_group=data.get('customer_group'),
-            order_booked_by=data.get('order_booked_by'),
             sender_signature=data.get('sender_signature')
         )
         logger.debug(f'Created new export request with waybill: {new_request.waybill_number}')
@@ -353,5 +408,116 @@ def print_form_template():
         'created_at': datetime.now()
     })
 
+# Add new route for printing specific export request
+@app.route('/print-form/<int:id>')
+def print_form(id):
+    """Route to display a printable form for a specific export request."""
+    try:
+        request_data = ExportRequest.query.get_or_404(id)
+        logger.debug(f'Accessing print form for export request {id}')
+        logger.debug(f'Found export request: {request_data.waybill_number}')
+        
+        # Calculate totals (same as preview route)
+        subtotal = sum([
+            request_data.freight_pricing or 0,
+            request_data.additional_charges or 0,
+            request_data.pickup_charge or 0,
+            request_data.handling_fees or 0,
+            request_data.crating or 0,
+            request_data.insurance_charge or 0
+        ])
+        vat = subtotal * 0.07
+        total = subtotal + vat
+        
+        logger.debug(f'Calculated subtotal: {subtotal}, VAT: {vat}, Total: {total}')
+        
+        return render_template('print_form.html',
+                            request=request_data,
+                            subtotal=subtotal,
+                            vat=vat,
+                            total=total)
+    except Exception as e:
+        logger.error(f'Error in print form route: {str(e)}')
+        raise
+
+# Database initialization functions
+def init_db():
+    """Initialize the database and create all tables"""
+    try:
+        logger.info("Starting database initialization")
+        with app.app_context():
+            # Check if tables exist
+            inspector = db.inspect(db.engine)
+            existing_tables = inspector.get_table_names()
+            logger.debug(f"Existing tables: {existing_tables}")
+            
+            # Create tables if they don't exist
+            db.create_all()
+            logger.info("Database tables created successfully")
+            
+            # Create default admin if user table is empty
+            if 'user' in inspector.get_table_names():
+                user_count = User.query.count()
+                logger.debug(f"Current user count: {user_count}")
+                if user_count == 0:
+                    create_default_admin()
+            else:
+                logger.warning("User table not found after creation")
+                
+    except Exception as e:
+        logger.error(f"Error initializing database: {str(e)}")
+        raise
+
+def verify_database():
+    """Verify database state and log detailed information"""
+    try:
+        with app.app_context():
+            inspector = db.inspect(db.engine)
+            tables = inspector.get_table_names()
+            logger.info(f"Current database tables: {tables}")
+            
+            # Check User table
+            if 'user' in tables:
+                user_count = User.query.count()
+                logger.info(f"User table exists with {user_count} users")
+                if user_count == 0:
+                    logger.warning("User table exists but is empty")
+            else:
+                logger.error("User table does not exist")
+                
+            # Log table columns
+            for table in tables:
+                columns = [col['name'] for col in inspector.get_columns(table)]
+                logger.debug(f"Table '{table}' columns: {columns}")
+                
+    except Exception as e:
+        logger.error(f"Error verifying database: {str(e)}")
+        raise
+
+# After all routes are defined
+def log_registered_routes():
+    """Log all registered routes for debugging"""
+    logger.info("Registered Routes:")
+    for rule in app.url_map.iter_rules():
+        logger.info(f"Route: {rule.rule}, Endpoint: {rule.endpoint}, Methods: {rule.methods}")
+
+# Main execution
 if __name__ == '__main__':
-    app.run(debug=True) 
+    if not os.path.exists('instance/exports.db'):
+        logger.info("Database file not found, initializing new database")
+        init_db()
+    else:
+        logger.info("Database file exists, checking tables")
+        init_db()
+    
+    verify_database()
+    log_registered_routes()  # Log routes before running the app
+    app.run(debug=True)
+
+@app.before_request
+def log_request_info():
+    logger.debug('-------------------------')
+    logger.debug(f'Endpoint: {request.endpoint}')
+    logger.debug(f'Method: {request.method}')
+    logger.debug(f'URL: {request.url}')
+    logger.debug('-------------------------') 
