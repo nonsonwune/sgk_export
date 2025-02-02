@@ -44,6 +44,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 
+# Add this function after imports
+def ensure_upload_dirs():
+    """Ensure all required upload directories exist"""
+    upload_dirs = ['uploads', 'uploads/sender_signature']
+    for directory in upload_dirs:
+        os.makedirs(directory, exist_ok=True)
+
+# Add this to your app initialization
+ensure_upload_dirs()
+
 # Models
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -208,7 +218,8 @@ def create_user():
 def submit():
     logger.debug('Processing form submission')
     try:
-        data = request.form
+        # Create a mutable copy of form data
+        data = request.form.to_dict()
         logger.debug(f'Received form data: {data}')
         
         # Handle signature data
@@ -216,19 +227,25 @@ def submit():
         if data.get('sender_signature'):
             signature_data = data.get('sender_signature')
             if signature_data.startswith('data:image/png;base64,'):
-                # Extract the base64 data
-                signature_data = signature_data.split(',')[1]
-                # Generate filename
-                signature_filename = f"signature_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
-                # Save file
-                with open(os.path.join(app.config['UPLOAD_FOLDER'], signature_filename), 'wb') as f:
-                    f.write(base64.b64decode(signature_data))
+                # Generate unique filename
+                timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+                signature_filename = f'signature_{timestamp}.png'
+                signature_path = os.path.join('uploads/sender_signature', signature_filename)
+                
+                # Save the signature
+                signature_data = signature_data.split(',')[1]  # Remove data URL prefix
+                signature_bytes = base64.b64decode(signature_data)
+                with open(signature_path, 'wb') as f:
+                    f.write(signature_bytes)
+                
+                # Store the filename in the mutable dictionary
+                data['sender_signature'] = signature_filename
         
         # Create new export request with logged-in user
         new_request = ExportRequest(
             waybill_number=ExportRequest.generate_waybill_number(),
             status='draft',
-            order_booked_by=current_user.name,  # Use logged-in user's name
+            order_booked_by=current_user.name,
             
             # Sender Information
             sender_name=data.get('sender_name'),
@@ -260,7 +277,7 @@ def submit():
             # Additional Details
             is_collection=bool(data.get('is_collection')),
             customer_group=data.get('customer_group'),
-            sender_signature=signature_filename
+            sender_signature=data.get('sender_signature')
         )
         logger.debug(f'Created new export request with waybill: {new_request.waybill_number}')
         
@@ -287,13 +304,13 @@ def submit():
             try:
                 item = ItemDetail(
                     description=descriptions[i],
-                    value=float(values[i] or 0),
-                    quantity=int(quantities[i] or 0),
-                    weight=float(weights[i] or 0)
+                    value=float(values[i] if values[i] else 0),
+                    quantity=int(quantities[i] if quantities[i] else 0),
+                    weight=float(weights[i] if weights[i] else 0)
                 )
                 
                 # Handle image upload
-                if i < len(images) and images[i]:
+                if i < len(images) and images[i] and images[i].filename:
                     filename = secure_filename(images[i].filename)
                     if filename:
                         logger.debug(f'Saving image for item {i+1}: {filename}')
@@ -430,11 +447,8 @@ def get_images(id):
 
 @app.route('/uploads/<path:filename>')
 def serve_image(filename):
-    try:
-        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-    except Exception as e:
-        logger.error(f"Error serving image: {str(e)}")
-        return f"Error serving image: {str(e)}", 500
+    """Serve uploaded images"""
+    return send_from_directory('uploads', filename)
 
 @app.route('/print-form-template')
 def print_form_template():

@@ -352,6 +352,11 @@
         .qr-code-section {
             margin-left: auto;
         }
+        .signature-image {
+            max-width: 150px !important;
+            border: none !important;
+            padding: 0 !important;
+        }
     }
 
     .company-info-section {
@@ -602,7 +607,16 @@
                 </div>
                 <div class="info-row">
                     <span class="label">Sender Signature:</span>
-                    <span class="value">{{ request.sender_signature or 'N/A' }}</span>
+                    <span class="value">
+                        {% if request.sender_signature %}
+                            <img src="{{ url_for('serve_image', filename='sender_signature/' + request.sender_signature) }}" 
+                                 alt="Sender's Signature" 
+                                 class="signature-image"
+                                 style="max-width: 200px; border: 1px solid #eef0f3; border-radius: 4px; padding: 5px;">
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </span>
                 </div>
             </div>
         </div>
