@@ -23,6 +23,7 @@
     .company-header {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 2rem;
         margin-bottom: 1.5rem;
     }
@@ -31,6 +32,12 @@
         width: 140px;
         height: auto;
         filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
     .company-info h1 {
@@ -342,6 +349,34 @@
         .items-table td:last-child {
             display: none !important;
         }
+        .qr-code-section {
+            margin-left: auto;
+        }
+    }
+
+    .company-info-section {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .qr-code-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .qr-code-image {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+    }
+
+    .qr-code-label {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #718096;
     }
 </style>
 {% endblock %}
@@ -350,25 +385,31 @@
     <div class="preview-container">
     <div class="document-header">
         <div class="company-header">
+            <div class="company-info-section">
             <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
-            <div class="company-info">
-                <h1>Export Documentation</h1>
-                <div class="document-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-file-alt"></i>
-                        <span>Waybill #{{ request.waybill_number }}</span>
+                <div class="company-info">
+                    <h1>Export Documentation</h1>
+                    <div class="document-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Waybill #{{ request.waybill_number }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="status-badge status-{{ request.status }}">
+                                <i class="fas fa-{{ 'check-circle' if request.status == 'saved' else 'edit' }}"></i>
+                                {{ request.status|title }}
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>{{ request.created_at.strftime('%B %d, %Y') }}</span>
+                        </div>
                     </div>
-                    <div class="meta-item">
-                        <span class="status-badge status-{{ request.status }}">
-                            <i class="fas fa-{{ 'check-circle' if request.status == 'saved' else 'edit' }}"></i>
-                            {{ request.status|title }}
-                        </span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-calendar"></i>
-                        <span>{{ request.created_at.strftime('%B %d, %Y') }}</span>
-                    </div>
+                </div>
         </div>
+            <div class="qr-code-section">
+                <img src="{{ url_for('serve_image', filename=qr_code) }}" alt="QR Code" class="qr-code-image">
+                <span class="qr-code-label">Scan for details</span>
             </div>
             </div>
         </div>
@@ -563,23 +604,22 @@
                     <span class="label">Sender Signature:</span>
                     <span class="value">{{ request.sender_signature or 'N/A' }}</span>
                 </div>
-                </div>
             </div>
         </div>
 
         <div class="action-buttons">
-        {% if request.status == 'draft' %}
-        <form action="{{ url_for('save_export', id=request.id) }}" method="POST" style="display: inline;">
-            <button type="submit" class="action-button primary">
-                <i class="fas fa-save"></i> Save Export
+            {% if request.status == 'draft' %}
+            <form action="{{ url_for('save_export', id=request.id) }}" method="POST" style="display: inline;">
+                <button type="submit" class="action-button primary">
+                    <i class="fas fa-save"></i> Save Export
+                </button>
+            </form>
+            {% endif %}
+            <button onclick="window.print()" class="action-button secondary">
+                <i class="fas fa-print"></i> Print
             </button>
-        </form>
-        {% endif %}
-        <button onclick="window.print()" class="action-button secondary">
-            <i class="fas fa-print"></i> Print
-        </button>
-    </div>
         </div>
+    </div>
 
 <!-- Enhanced Image Modal -->
 <div id="imageModal" class="image-modal">

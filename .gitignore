@@ -1,0 +1,10 @@
+venv/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.py
+
+uploads/
+instance/

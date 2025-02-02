@@ -8,6 +8,10 @@ import os
 import logging
 from werkzeug.utils import secure_filename
 from datetime import datetime
+import base64
+import qrcode
+import io
+from PIL import Image
 
 # Configure logging
 logging.basicConfig(
@@ -207,6 +211,19 @@ def submit():
         data = request.form
         logger.debug(f'Received form data: {data}')
         
+        # Handle signature data
+        signature_filename = None
+        if data.get('sender_signature'):
+            signature_data = data.get('sender_signature')
+            if signature_data.startswith('data:image/png;base64,'):
+                # Extract the base64 data
+                signature_data = signature_data.split(',')[1]
+                # Generate filename
+                signature_filename = f"signature_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+                # Save file
+                with open(os.path.join(app.config['UPLOAD_FOLDER'], signature_filename), 'wb') as f:
+                    f.write(base64.b64decode(signature_data))
+        
         # Create new export request with logged-in user
         new_request = ExportRequest(
             waybill_number=ExportRequest.generate_waybill_number(),
@@ -243,7 +260,7 @@ def submit():
             # Additional Details
             is_collection=bool(data.get('is_collection')),
             customer_group=data.get('customer_group'),
-            sender_signature=data.get('sender_signature')
+            sender_signature=signature_filename
         )
         logger.debug(f'Created new export request with waybill: {new_request.waybill_number}')
         
@@ -305,6 +322,25 @@ def preview(id):
         request_data = ExportRequest.query.get_or_404(id)
         logger.debug(f'Found export request: {request_data.waybill_number}')
 
+        # Generate QR code with optimized data format
+        qr_data = f"Waybill: {request_data.waybill_number}, Sender Mobile: {request_data.sender_mobile}, Receiver Mobile: {request_data.receiver_mobile}, Booked By: {request_data.order_booked_by}"
+        
+        # Create QR code with optimized settings
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4
+        )
+        qr.add_data(qr_data)
+        qr.make(fit=True)
+        qr_image = qr.make_image(fill_color="black", back_color="white")
+        
+        # Save QR code
+        qr_filename = f"qr_{request_data.waybill_number}.png"
+        qr_path = os.path.join(app.config['UPLOAD_FOLDER'], qr_filename)
+        qr_image.save(qr_path)
+
         # Calculate totals
         subtotal = sum([
             request_data.freight_pricing or 0,
@@ -325,7 +361,8 @@ def preview(id):
                             request=request_data,
                             subtotal=subtotal,
                             vat=vat,
-                            total=total)
+                            total=total,
+                            qr_code=qr_filename)
     except Exception as e:
         logger.error(f'Error in preview route: {str(e)}')
         raise
