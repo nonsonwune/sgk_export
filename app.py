@@ -491,6 +491,93 @@ def print_form(id):
         logger.error(f'Error in print form route: {str(e)}')
         raise
 
+@app.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    if request.method == 'POST':
+        current_password = request.form.get('current_password')
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+        
+        # Validate current password
+        if not current_user.check_password(current_password):
+            flash('Current password is incorrect', 'danger')
+            return render_template('change_password.html')
+        
+        # Validate new password
+        if new_password != confirm_password:
+            flash('New passwords do not match', 'danger')
+            return render_template('change_password.html')
+        
+        # Validate password strength
+        if len(new_password) < 8 or not any(c.isalpha() for c in new_password) or not any(c.isdigit() for c in new_password):
+            flash('Password must be at least 8 characters long and contain both letters and numbers', 'danger')
+            return render_template('change_password.html')
+        
+        # Update password
+        current_user.set_password(new_password)
+        db.session.commit()
+        
+        flash('Password changed successfully', 'success')
+        return redirect(url_for('new_export'))
+        
+    return render_template('change_password.html')
+
+@app.route('/admin/users')
+@login_required
+def manage_users():
+    if not current_user.is_admin:
+        flash('Access denied', 'danger')
+        return redirect(url_for('new_export'))
+    
+    users = User.query.all()
+    return render_template('manage_users.html', users=users)
+
+@app.route('/admin/reset-password/<int:user_id>', methods=['POST'])
+@login_required
+def reset_user_password(user_id):
+    if not current_user.is_admin:
+        flash('Access denied', 'danger')
+        return redirect(url_for('new_export'))
+    
+    user = User.query.get_or_404(user_id)
+    new_password = request.form.get('new_password')
+    
+    # Validate password strength
+    if len(new_password) < 8 or not any(c.isalpha() for c in new_password) or not any(c.isdigit() for c in new_password):
+        flash('Password must be at least 8 characters long and contain both letters and numbers', 'danger')
+        return redirect(url_for('manage_users'))
+    
+    user.set_password(new_password)
+    db.session.commit()
+    flash(f'Password reset for user {user.username}', 'success')
+    return redirect(url_for('manage_users'))
+
+@app.route('/admin/delete-user/<int:user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    if not current_user.is_admin:
+        flash('Access denied', 'danger')
+        return redirect(url_for('new_export'))
+    
+    user = User.query.get_or_404(user_id)
+    
+    # Prevent deleting the last admin
+    if user.is_admin and User.query.filter_by(is_admin=True).count() <= 1:
+        flash('Cannot delete the last admin user', 'danger')
+        return redirect(url_for('manage_users'))
+    
+    # Prevent self-deletion
+    if user.id == current_user.id:
+        flash('Cannot delete your own account', 'danger')
+        return redirect(url_for('manage_users'))
+    
+    username = user.username
+    db.session.delete(user)
+    db.session.commit()
+    flash(f'User {username} has been deleted', 'success')
+    return redirect(url_for('manage_users'))
+
 # Database initialization functions
 def init_db():
     """Initialize the database and create all tables"""
