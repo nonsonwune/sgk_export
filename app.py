@@ -14,6 +14,7 @@ import io
 from PIL import Image
 import fcntl
 import time
+from sqlalchemy import text
 
 # Configure logging
 logging.basicConfig(
@@ -24,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask and extensions
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///exports.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{os.environ.get("USER")}@localhost/sgk_export_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Use a fixed SECRET_KEY for consistent session management across workers
@@ -63,7 +64,7 @@ ensure_upload_dirs()
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     
@@ -83,16 +84,23 @@ def load_user(user_id):
 
 def create_default_admin():
     """Create default admin user if no users exist"""
-    if User.query.count() == 0:
-        admin = User(
-            username='admin',
-            name='Administrator',
-            is_admin=True
-        )
-        admin.set_password('admin123')  # Default password should be changed on first login
-        db.session.add(admin)
-        db.session.commit()
-        logger.info('Default admin user created')
+    try:
+        admin = User.query.filter_by(username='admin').first()
+        if not admin:
+            admin = User(
+                username='admin',
+                name='Administrator',
+                is_admin=True
+            )
+            admin.set_password('admin123')  # Default password should be changed on first login
+            db.session.add(admin)
+            db.session.commit()
+            logger.info('Default admin user created')
+        else:
+            logger.info('Admin user already exists')
+    except Exception as e:
+        logger.error(f'Error creating default admin: {str(e)}')
+        db.session.rollback()
 
 class ItemDetail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -641,68 +649,30 @@ def release_lock(lock_file_handle):
         fcntl.flock(lock_file_handle, fcntl.LOCK_UN)
         lock_file_handle.close()
 
+def verify_db_connection():
+    """Verify database connection by executing a simple query"""
+    try:
+        db.session.execute(text('SELECT 1'))
+        return True
+    except Exception as e:
+        logger.error(f"Database connection failed: {str(e)}")
+        return False
+
 def init_db():
     """Initialize the database and create all tables"""
-    lock_file = "db_init.lock"
-    lock_handle = None
-    
     try:
-        # Try to acquire lock
-        lock_handle = acquire_lock(lock_file)
-        if not lock_handle:
-            logger.info("Another process is initializing the database")
-            # Wait for other process to finish
-            time.sleep(2)
-            return
-        
-        logger.info("Starting database initialization")
         with app.app_context():
-            inspector = db.inspect(db.engine)
-            existing_tables = inspector.get_table_names()
-            logger.debug(f"Existing tables: {existing_tables}")
+            # Verify connection first
+            if not verify_db_connection():
+                raise Exception("Database connection failed")
             
-            try:
-                db.create_all()
-                logger.info("Database tables created successfully")
-            except Exception as e:
-                if 'already exists' in str(e):
-                    logger.info("Tables already exist, skipping creation")
-                else:
-                    raise
-            
-            # Create default admin if user table is empty
-            if 'user' in inspector.get_table_names():
-                try:
-                    # Use SELECT FOR UPDATE to lock the row
-                    with db.session.begin():
-                        user_count = User.query.count()
-                        if user_count == 0:
-                            admin = User(
-                                username='admin',
-                                name='Administrator',
-                                is_admin=True
-                            )
-                            admin.set_password('admin123')
-                            db.session.add(admin)
-                            db.session.commit()
-                            logger.info("Default admin user created")
-                except Exception as e:
-                    if 'UNIQUE constraint' in str(e):
-                        logger.info("Admin user already exists")
-                        db.session.rollback()
-                    else:
-                        raise
-                
+            # Proceed with initialization
+            db.create_all()
+            create_default_admin()
+            logger.info("Database initialized successfully")
     except Exception as e:
-        logger.error(f"Error initializing database: {str(e)}")
+        logger.error(f"Database initialization error: {str(e)}")
         raise
-    finally:
-        release_lock(lock_handle)
-        if os.path.exists(lock_file):
-            try:
-                os.remove(lock_file)
-            except:
-                pass
 
 def verify_database():
     """Verify database state and log detailed information"""
