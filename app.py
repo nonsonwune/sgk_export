@@ -659,13 +659,18 @@ def release_lock(lock_file_handle):
 def verify_db_connection():
     """Verify database connection by executing a simple query"""
     try:
-        logger.info(f"Attempting to connect to database: {app.config['SQLALCHEMY_DATABASE_URI']}")
+        # Log the database URL (with password masked)
+        db_url = app.config['SQLALCHEMY_DATABASE_URI']
+        if 'postgresql://' in db_url:
+            masked_url = db_url.replace(db_url.split('@')[0].split('://')[-1], '****:****')
+            logger.info(f"Attempting to connect to database: {masked_url}")
+        
+        # Test the connection
         db.session.execute(text('SELECT 1'))
         logger.info("Database connection successful")
         return True
     except Exception as e:
         logger.error(f"Database connection failed: {str(e)}")
-        logger.error(f"Database URL: {app.config['SQLALCHEMY_DATABASE_URI']}")
         return False
 
 def init_db():
