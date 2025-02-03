@@ -6,77 +6,119 @@
 <style>
     @media print {
         .main-nav, .action-buttons { display: none !important; }
-        body { font-size: 12pt; }
+        body { 
+            font-size: 11pt;
+            line-height: 1.3;
+            background: white;
+            margin: 0;
+            padding: 0;
+        }
+        .print-form {
+            margin: 0 !important;
+            padding: 15mm !important;
+            box-shadow: none !important;
+        }
     }
 
     .print-form {
         max-width: 210mm;  /* A4 width */
-        margin: 20mm auto;
+        margin: 2rem auto;
         padding: 20mm;
         background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .company-header {
         text-align: center;
-        margin-bottom: 10mm;
+        margin-bottom: 5mm;
+        padding-bottom: 5mm;
+        border-bottom: 2px solid #4169E1;
     }
 
     .company-logo {
-        width: 140px;
+        width: 100px;
         height: auto;
+        margin-bottom: 2mm;
+    }
+
+    .company-header h1 {
+        margin: 3mm 0 2mm;
+        color: #2d3748;
+        font-size: 24pt;
+        font-weight: 600;
+    }
+
+    .company-header p {
+        margin: 0;
+        color: #4a5568;
+        font-size: 12pt;
     }
 
     .form-section {
-        margin-bottom: 8mm;
+        margin-bottom: 6mm;
+        page-break-inside: avoid;
     }
 
     .section-title {
-        font-size: 14pt;
-        font-weight: bold;
-        margin-bottom: 4mm;
-        border-bottom: 2px solid #000;
-        padding-bottom: 2mm;
+        font-size: 12pt;
+        font-weight: 600;
+        margin-bottom: 3mm;
+        color: #2d3748;
+        background: #f8f9fe;
+        padding: 2mm 3mm;
+        border-left: 4px solid #4169E1;
     }
 
     .input-row {
         display: flex;
-        margin-bottom: 6mm;
+        margin-bottom: 3mm;
+        align-items: baseline;
     }
 
     .input-label {
-        width: 30%;
-        font-weight: bold;
+        width: 25%;
+        font-weight: 500;
+        color: #4a5568;
+        padding-right: 3mm;
     }
 
     .input-field {
-        width: 70%;
-        border-bottom: 1px dotted #000;
-        height: 7mm;
+        width: 75%;
+        border-bottom: 1px solid #e2e8f0;
+        min-height: 6mm;
+        padding: 1mm 0;
     }
 
     .items-table {
         width: 100%;
         border-collapse: collapse;
-        margin-bottom: 8mm;
+        margin: 2mm 0 6mm;
     }
 
     .items-table th {
-        border: 1px solid #000;
-        padding: 3mm;
-        text-align: left;
         background: #f8f9fe;
+        color: #2d3748;
+        font-weight: 600;
+        text-align: left;
+        padding: 2mm 3mm;
+        border: 1px solid #e2e8f0;
     }
 
     .items-table td {
-        border: 1px solid #000;
-        padding: 6mm 3mm;
-        height: 10mm;
+        padding: 3mm;
+        border: 1px solid #e2e8f0;
+        height: 7mm;
+    }
+
+    .items-table tr:nth-child(even) td {
+        background: #f8f9fe;
     }
 
     .signature-section {
         display: flex;
         justify-content: space-between;
-        margin-top: 15mm;
+        margin-top: 10mm;
+        page-break-inside: avoid;
     }
 
     .signature-box {
@@ -84,15 +126,55 @@
     }
 
     .signature-line {
-        border-top: 1px solid #000;
+        border-top: 1px solid #4169E1;
         margin-top: 15mm;
         padding-top: 2mm;
         text-align: center;
+        color: #4a5568;
     }
 
     .date-line {
         text-align: right;
-        margin-top: 10mm;
+        margin-top: 5mm;
+        color: #4a5568;
+    }
+
+    .action-buttons {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 1000;
+    }
+
+    .action-button {
+        padding: 0.5rem 1rem;
+        background: #4169E1;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .action-button:hover {
+        background: #3154b4;
+    }
+
+    .manual-input {
+        display: inline-block;
+        min-width: 150px;
+        border-bottom: 1px solid #000;
+        text-align: center;
+    }
+
+    @media print {
+        .manual-input {
+            border-bottom: 1px solid #000;
+        }
     }
 </style>
 {% endblock %}
@@ -102,86 +184,105 @@
     <div class="company-header">
         <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
         <h1>Export Request Form</h1>
-        <p>Waybill #{{ request.waybill_number }}</p>
+        <p>Waybill #<span class="manual-input">{{ export_request.waybill_number or '________________' }}</span></p>
+        <p class="date-line">Date: <span class="manual-input">________________</span></p>
     </div>
 
     <div class="form-section">
-        <div class="section-title">Sender Information</div>
+        <div class="section-title">
+            <i class="fas fa-user-tie"></i> Sender Information
+        </div>
         <div class="input-row">
             <div class="input-label">Name:</div>
-            <div class="input-field">{{ request.sender_name }}</div>
+            <div class="input-field">{{ export_request.sender_name }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Email:</div>
-            <div class="input-field">{{ request.sender_email or '' }}</div>
+            <div class="input-field">{{ export_request.sender_email or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Address:</div>
-            <div class="input-field">{{ request.sender_address or '' }}</div>
+            <div class="input-field">{{ export_request.sender_address or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Business:</div>
-            <div class="input-field">{{ request.sender_business or '' }}</div>
+            <div class="input-field">{{ export_request.sender_business or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Mobile:</div>
-            <div class="input-field">{{ request.sender_mobile }}</div>
+            <div class="input-field">{{ export_request.sender_mobile }}</div>
         </div>
     </div>
 
     <div class="form-section">
-        <div class="section-title">Receiver Information</div>
+        <div class="section-title">
+            <i class="fas fa-user-check"></i> Receiver Information
+        </div>
         <div class="input-row">
             <div class="input-label">Name:</div>
-            <div class="input-field">{{ request.receiver_name }}</div>
+            <div class="input-field">{{ export_request.receiver_name }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Email:</div>
-            <div class="input-field">{{ request.receiver_email or '' }}</div>
+            <div class="input-field">{{ export_request.receiver_email or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Address:</div>
-            <div class="input-field">{{ request.receiver_address or '' }}</div>
+            <div class="input-field">{{ export_request.receiver_address or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Business:</div>
-            <div class="input-field">{{ request.receiver_business or '' }}</div>
+            <div class="input-field">{{ export_request.receiver_business or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Mobile:</div>
-            <div class="input-field">{{ request.receiver_mobile }}</div>
+            <div class="input-field">{{ export_request.receiver_mobile }}</div>
         </div>
     </div>
 
     <div class="form-section">
-        <div class="section-title">Destination Details</div>
+        <div class="section-title">
+            <i class="fas fa-map-marker-alt"></i> Destination Details
+        </div>
         <div class="input-row">
             <div class="input-label">Address:</div>
-            <div class="input-field">{{ request.destination_address or '' }}</div>
+            <div class="input-field">{{ export_request.destination_address or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Country:</div>
-            <div class="input-field">{{ request.destination_country or '' }}</div>
+            <div class="input-field">{{ export_request.destination_country or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Postcode:</div>
-            <div class="input-field">{{ request.destination_postcode or '' }}</div>
+            <div class="input-field">{{ export_request.destination_postcode or '' }}</div>
         </div>
     </div>
 
     <div class="form-section">
-        <div class="section-title">Shipment Items</div>
+        <div class="section-title">
+            <i class="fas fa-box"></i> Shipment Items
+        </div>
         <table class="items-table">
             <thead>
                 <tr>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Value ($)</th>
-                    <th>Weight (kg)</th>
+                    <th width="40%">Description</th>
+                    <th width="20%">Quantity</th>
+                    <th width="20%">Value ($)</th>
+                    <th width="20%">Weight (kg)</th>
                 </tr>
             </thead>
             <tbody>
-                {% for i in range(7) %}
+                {% if export_request.items %}
+                    {% for item in export_request.items %}
+                    <tr>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ "%.2f"|format(item.value) }}</td>
+                        <td>{{ "%.1f"|format(item.weight) }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for i in range(5) %}
                 <tr>
                     <td></td>
                     <td></td>
@@ -189,38 +290,41 @@
                     <td></td>
                 </tr>
                 {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>
 
     <div class="form-section">
-        <div class="section-title">Additional Details</div>
+        <div class="section-title">
+            <i class="fas fa-info-circle"></i> Additional Details
+        </div>
         <div class="input-row">
             <div class="input-label">Collection Required:</div>
-            <div class="input-field">{% if request.is_collection %}☑ Yes □ No{% else %}□ Yes ☑ No{% endif %}</div>
+            <div class="input-field">□ Yes □ No</div>
         </div>
         <div class="input-row">
             <div class="input-label">Customer Group:</div>
-            <div class="input-field">{{ request.customer_group or '' }}</div>
+            <div class="input-field">{{ export_request.customer_group or '' }}</div>
         </div>
         <div class="input-row">
             <div class="input-label">Order Booked By:</div>
-            <div class="input-field">{{ request.order_booked_by or '' }}</div>
+            <div class="input-field">{{ export_request.order_booked_by or '' }}</div>
         </div>
     </div>
 
     <div class="signature-section">
         <div class="signature-box">
-            <div class="signature-line">{{ request.sender_signature or 'Sender\'s Signature' }}</div>
+            <div class="signature-line">Sender's Signature</div>
         </div>
         <div class="signature-box">
-            <div class="signature-line">{{ request.created_at.strftime('%B %d, %Y') }}</div>
+            <div class="signature-line">Authorized Signature</div>
         </div>
     </div>
 </div>
 
 <div class="action-buttons">
-    <button onclick="window.print()" class="action-button primary">
+    <button onclick="window.print()" class="action-button">
         <i class="fas fa-print"></i> Print Form
     </button>
 </div>

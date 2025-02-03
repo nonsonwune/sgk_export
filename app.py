@@ -70,7 +70,7 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
 
 def create_default_admin():
     """Create default admin user if no users exist"""
@@ -450,14 +450,44 @@ def serve_image(filename):
     """Serve uploaded images"""
     return send_from_directory('uploads', filename)
 
+class TemplateExportRequest:
+    def __init__(self, **kwargs):
+        self.waybill_number = kwargs.get('waybill_number', '')  # Empty for manual filling
+        self.created_at = kwargs.get('created_at')
+        self.sender_name = kwargs.get('sender_name', '')  # Empty for manual filling
+        self.sender_email = kwargs.get('sender_email', '')
+        self.sender_address = kwargs.get('sender_address', '')
+        self.sender_business = kwargs.get('sender_business', '')
+        self.sender_mobile = kwargs.get('sender_mobile', '')
+        self.receiver_name = kwargs.get('receiver_name', '')
+        self.receiver_email = kwargs.get('receiver_email', '')
+        self.receiver_address = kwargs.get('receiver_address', '')
+        self.receiver_business = kwargs.get('receiver_business', '')
+        self.receiver_mobile = kwargs.get('receiver_mobile', '')
+        self.destination_address = kwargs.get('destination_address', '')
+        self.destination_country = kwargs.get('destination_country', '')
+        self.destination_postcode = kwargs.get('destination_postcode', '')
+        self.is_collection = kwargs.get('is_collection', False)  # Default to unchecked
+        self.customer_group = kwargs.get('customer_group', '')
+        self.order_booked_by = kwargs.get('order_booked_by', '')
+        self.items = kwargs.get('items', [])
+
 @app.route('/print-form-template')
+@login_required
 def print_form_template():
-    """Route to display an empty printable form template."""
-    return render_template('print_form.html', request={
-        'waybill_number': 'To be assigned',
-        'status': 'new',
-        'created_at': datetime.now()
-    })
+    logger.debug("Preparing data for print form template")
+    
+    # Create template object with empty values for manual filling
+    export_request = TemplateExportRequest(
+        waybill_number='',  # Empty for manual filling
+        created_at=None,  # Set to None so date can be filled by hand
+        items=[]
+    )
+    
+    logger.debug("Created template with empty values for manual filling")
+    logger.debug("Attempting to render print form template")
+    
+    return render_template('print_form.html', export_request=export_request)
 
 # Add new route for printing specific export request
 @app.route('/print-form/<int:id>')
