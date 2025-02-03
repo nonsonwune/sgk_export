@@ -25,12 +25,19 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask and extensions
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{os.environ.get("USER")}@localhost/sgk_export_db'
+
+# Use environment variable for database URL with fallback to local development
+DATABASE_URL = os.environ.get('DATABASE_URL', f'postgresql://{os.environ.get("USER")}@localhost/sgk_export_db')
+
+# If the URL starts with postgres://, replace it with postgresql:// (Render specific fix)
+if DATABASE_URL and DATABASE_URL.startswith('postgres://'):
+    DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Use a fixed SECRET_KEY for consistent session management across workers
-# In production, this should be set via environment variable
-app.config['SECRET_KEY'] = 'your-secure-key-here'  # TODO: Change in production
+# Use environment variable for secret key
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secure-key-here')  # TODO: Change in production
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -652,10 +659,13 @@ def release_lock(lock_file_handle):
 def verify_db_connection():
     """Verify database connection by executing a simple query"""
     try:
+        logger.info(f"Attempting to connect to database: {app.config['SQLALCHEMY_DATABASE_URI']}")
         db.session.execute(text('SELECT 1'))
+        logger.info("Database connection successful")
         return True
     except Exception as e:
         logger.error(f"Database connection failed: {str(e)}")
+        logger.error(f"Database URL: {app.config['SQLALCHEMY_DATABASE_URI']}")
         return False
 
 def init_db():
