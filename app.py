@@ -12,6 +12,8 @@ import base64
 import qrcode
 import io
 from PIL import Image
+import fcntl
+import time
 
 # Configure logging
 logging.basicConfig(
@@ -24,7 +26,10 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///exports.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = os.urandom(24)
+
+# Use a fixed SECRET_KEY for consistent session management across workers
+# In production, this should be set via environment variable
+app.config['SECRET_KEY'] = 'your-secure-key-here'  # TODO: Change in production
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -64,9 +69,13 @@ class User(UserMixin, db.Model):
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
+        logger.debug(f"Password hash set for user {self.username}")
         
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        logger.debug(f"Checking password for user {self.username}")
+        result = check_password_hash(self.password_hash, password)
+        logger.debug(f"Password check result: {result}")
+        return result
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -173,12 +182,21 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        user = User.query.filter_by(username=username).first()
+        logger.debug(f"Login attempt for username: {username}")
         
-        if user and user.check_password(password):
-            login_user(user)
-            return redirect(url_for('new_export'))
+        user = User.query.filter_by(username=username).first()
+        if user:
+            logger.debug(f"User found: {user.username}, is_admin: {user.is_admin}")
+            if user.check_password(password):
+                logger.debug("Password verification successful")
+                login_user(user)
+                logger.debug(f"User {username} logged in successfully")
+                return redirect(url_for('new_export'))
+            else:
+                logger.debug("Password verification failed")
+                flash('Invalid username or password')
         else:
+            logger.debug("User not found")
             flash('Invalid username or password')
     
     return render_template('login.html')
@@ -608,33 +626,83 @@ def delete_user(user_id):
     flash(f'User {username} has been deleted', 'success')
     return redirect(url_for('manage_users'))
 
-# Database initialization functions
+def acquire_lock(lock_file):
+    """Acquire a file lock"""
+    try:
+        f = open(lock_file, 'w')
+        fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return f
+    except IOError:
+        return None
+
+def release_lock(lock_file_handle):
+    """Release the file lock"""
+    if lock_file_handle:
+        fcntl.flock(lock_file_handle, fcntl.LOCK_UN)
+        lock_file_handle.close()
+
 def init_db():
     """Initialize the database and create all tables"""
+    lock_file = "db_init.lock"
+    lock_handle = None
+    
     try:
+        # Try to acquire lock
+        lock_handle = acquire_lock(lock_file)
+        if not lock_handle:
+            logger.info("Another process is initializing the database")
+            # Wait for other process to finish
+            time.sleep(2)
+            return
+        
         logger.info("Starting database initialization")
         with app.app_context():
-            # Check if tables exist
             inspector = db.inspect(db.engine)
             existing_tables = inspector.get_table_names()
             logger.debug(f"Existing tables: {existing_tables}")
             
-            # Create tables if they don't exist
-            db.create_all()
-            logger.info("Database tables created successfully")
+            try:
+                db.create_all()
+                logger.info("Database tables created successfully")
+            except Exception as e:
+                if 'already exists' in str(e):
+                    logger.info("Tables already exist, skipping creation")
+                else:
+                    raise
             
             # Create default admin if user table is empty
             if 'user' in inspector.get_table_names():
-                user_count = User.query.count()
-                logger.debug(f"Current user count: {user_count}")
-                if user_count == 0:
-                    create_default_admin()
-            else:
-                logger.warning("User table not found after creation")
+                try:
+                    # Use SELECT FOR UPDATE to lock the row
+                    with db.session.begin():
+                        user_count = User.query.count()
+                        if user_count == 0:
+                            admin = User(
+                                username='admin',
+                                name='Administrator',
+                                is_admin=True
+                            )
+                            admin.set_password('admin123')
+                            db.session.add(admin)
+                            db.session.commit()
+                            logger.info("Default admin user created")
+                except Exception as e:
+                    if 'UNIQUE constraint' in str(e):
+                        logger.info("Admin user already exists")
+                        db.session.rollback()
+                    else:
+                        raise
                 
     except Exception as e:
         logger.error(f"Error initializing database: {str(e)}")
         raise
+    finally:
+        release_lock(lock_handle)
+        if os.path.exists(lock_file):
+            try:
+                os.remove(lock_file)
+            except:
+                pass
 
 def verify_database():
     """Verify database state and log detailed information"""
@@ -669,17 +737,13 @@ def log_registered_routes():
     for rule in app.url_map.iter_rules():
         logger.info(f"Route: {rule.rule}, Endpoint: {rule.endpoint}, Methods: {rule.methods}")
 
-# Main execution
-if __name__ == '__main__':
-    if not os.path.exists('instance/exports.db'):
-        logger.info("Database file not found, initializing new database")
-        init_db()
-    else:
-        logger.info("Database file exists, checking tables")
-        init_db()
-    
+# Initialize database when app starts
+with app.app_context():
+    init_db()
     verify_database()
-    log_registered_routes()  # Log routes before running the app
+    log_registered_routes()
+
+if __name__ == '__main__':
     app.run(debug=True)
 
 @app.before_request
