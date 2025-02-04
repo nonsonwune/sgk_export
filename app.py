@@ -59,6 +59,22 @@ logger.info(f"Configuring database with URL: {DATABASE_URL.replace(DATABASE_URL.
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Configure SQLAlchemy engine with connection pool and retry settings
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True,  # Enable connection health checks
+    'pool_recycle': 300,    # Recycle connections after 5 minutes
+    'pool_timeout': 30,     # Connection timeout after 30 seconds
+    'pool_size': 10,        # Maximum number of connections in the pool
+    'max_overflow': 5,      # Maximum number of connections that can be created beyond pool_size
+    'connect_args': {
+        'connect_timeout': 10,  # PostgreSQL connection timeout
+        'keepalives': 1,        # Enable TCP keepalive
+        'keepalives_idle': 30,  # Time between keepalive probes
+        'keepalives_interval': 10,  # Time between keepalive probes when no response
+        'keepalives_count': 5    # Number of failed probes before connection is closed
+    }
+}
+
 # Use environment variable for secret key
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secure-key-here')  # TODO: Change in production
 
@@ -142,7 +158,19 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return db.session.get(User, int(user_id))
+    try:
+        return db.session.get(User, int(user_id))
+    except Exception as e:
+        logger.error(f"Error loading user session: {str(e)}")
+        # Force rollback of the session to clear any failed transactions
+        db.session.rollback()
+        try:
+            # Attempt to reconnect and retry the query
+            db.session.remove()
+            return db.session.get(User, int(user_id))
+        except Exception as retry_error:
+            logger.error(f"Retry failed when loading user session: {str(retry_error)}")
+            return None
 
 def create_default_admin():
     """Create default admin user if no users exist"""
