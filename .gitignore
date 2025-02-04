@@ -6,3 +6,4 @@ venv/
 
 .env
 *.sql
+appWrite_bucket_docs.md

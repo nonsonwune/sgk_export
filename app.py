@@ -15,6 +15,9 @@ from PIL import Image
 import fcntl
 import time
 from sqlalchemy import text
+from appwrite.client import Client
+from appwrite.services.storage import Storage
+from appwrite.id import ID
 
 # Configure logging
 logging.basicConfig(
@@ -66,6 +69,21 @@ def ensure_upload_dirs():
 
 # Add this to your app initialization
 ensure_upload_dirs()
+
+# Appwrite configuration
+APPWRITE_ENDPOINT = os.environ.get('APPWRITE_ENDPOINT', 'https://cloud.appwrite.io/v1')
+APPWRITE_PROJECT_ID = os.environ.get('APPWRITE_PROJECT_ID')
+APPWRITE_BUCKET_ID = os.environ.get('APPWRITE_BUCKET_ID')
+
+def init_appwrite():
+    """Initialize Appwrite client"""
+    client = Client()
+    client.set_endpoint(APPWRITE_ENDPOINT)
+    client.set_project(APPWRITE_PROJECT_ID)
+    return Storage(client)
+
+# Initialize Appwrite storage
+storage = init_appwrite()
 
 # Models
 class User(UserMixin, db.Model):
@@ -256,24 +274,30 @@ def submit():
         logger.debug(f'Received form data: {data}')
         
         # Handle signature data
-        signature_filename = None
+        signature_file_id = None
         if data.get('sender_signature'):
             signature_data = data.get('sender_signature')
             if signature_data.startswith('data:image/png;base64,'):
                 # Generate unique filename
-                timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-                signature_filename = f'signature_{timestamp}.png'
-                signature_path = os.path.join('uploads/sender_signature', signature_filename)
-                
-                # Save the signature
                 signature_data = signature_data.split(',')[1]  # Remove data URL prefix
                 signature_bytes = base64.b64decode(signature_data)
-                with open(signature_path, 'wb') as f:
-                    f.write(signature_bytes)
                 
-                # Store the filename in the mutable dictionary
-                data['sender_signature'] = signature_filename
-        
+                # Upload to Appwrite
+                signature_file = io.BytesIO(signature_bytes)
+                signature_file.name = f'signature_{datetime.now().strftime("%Y%m%d%H%M%S")}.png'
+                
+                try:
+                    result = storage.create_file(
+                        bucket_id=APPWRITE_BUCKET_ID,
+                        file_id=ID.unique(),
+                        file=signature_file
+                    )
+                    signature_file_id = result['$id']
+                    data['sender_signature'] = signature_file_id
+                except Exception as e:
+                    logger.error(f'Error uploading signature: {str(e)}')
+                    raise
+
         # Create new export request with logged-in user
         new_request = ExportRequest(
             waybill_number=ExportRequest.generate_waybill_number(),
@@ -344,11 +368,16 @@ def submit():
                 
                 # Handle image upload
                 if i < len(images) and images[i] and images[i].filename:
-                    filename = secure_filename(images[i].filename)
-                    if filename:
-                        logger.debug(f'Saving image for item {i+1}: {filename}')
-                        images[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                        item.image_filename = filename
+                    try:
+                        result = storage.create_file(
+                            bucket_id=APPWRITE_BUCKET_ID,
+                            file_id=ID.unique(),
+                            file=images[i]
+                        )
+                        item.image_filename = result['$id']
+                    except Exception as e:
+                        logger.error(f'Error uploading item image: {str(e)}')
+                        raise
                 
                 new_request.items.append(item)
             except (ValueError, TypeError) as e:
@@ -478,10 +507,18 @@ def get_images(id):
         logger.error(f"Error getting images: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
-@app.route('/uploads/<path:filename>')
-def serve_image(filename):
-    """Serve uploaded images"""
-    return send_from_directory('uploads', filename)
+@app.route('/uploads/<path:file_id>')
+def serve_image(file_id):
+    """Serve uploaded images from Appwrite"""
+    try:
+        result = storage.get_file_view(
+            bucket_id=APPWRITE_BUCKET_ID,
+            file_id=file_id
+        )
+        return redirect(result['href'])
+    except Exception as e:
+        logger.error(f"Error serving image: {str(e)}")
+        return "Image not found", 404
 
 class TemplateExportRequest:
     def __init__(self, **kwargs):
