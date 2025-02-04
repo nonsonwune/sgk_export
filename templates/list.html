@@ -142,6 +142,79 @@
     .action-button.danger:hover {
         background-color: #b91c1c;
     }
+
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .empty-state-icon {
+        font-size: 4rem;
+        color: #a0aec0;
+        margin-bottom: 1.5rem;
+    }
+
+    .empty-state h2 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state p {
+        color: #718096;
+        margin-bottom: 2rem;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+        background-color: #f8fafc;
+        font-weight: 600;
+        color: #4a5568;
+    }
+
+    .actions {
+        white-space: nowrap;
+    }
+
+    .action-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        background-color: #4169E1;
+        color: white;
+    }
+
+    .action-button:hover {
+        background-color: #3154b4;
+    }
 </style>
 {% endblock %}
 
@@ -149,6 +222,7 @@
 <div class="container">
     <h1>Export List</h1>
     
+    {% if exports %}
     <div class="table-container">
         <table>
             <thead>
@@ -183,6 +257,16 @@
             </tbody>
         </table>
     </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="fas fa-file-export"></i>
+        </div>
+        <h2>No Export Documentations</h2>
+        <p>There are currently no export documentations in the system.</p>
+        <a href="{{ url_for('new_export') }}" class="btn btn-primary">Create New Export</a>
+    </div>
+    {% endif %}
 </div>
 
 <!-- Enhanced Image Modal -->
