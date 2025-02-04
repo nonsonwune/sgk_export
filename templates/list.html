@@ -144,7 +144,7 @@
                 <p><strong>Created:</strong> {{ export.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
             </div>
             <div class="export-actions">
-                <a href="{{ url_for('preview', id=export.id) }}" class="action-button">View Details</a>
+                <a href="{{ url_for('preview', request_id=export.id) }}" class="action-button">View Details</a>
                 {% if export.status == 'draft' %}
                 <form action="{{ url_for('save_export', id=export.id) }}" method="POST" style="display: inline;">
                     <button type="submit" class="action-button">Save Export</button>

@@ -19,6 +19,8 @@ from appwrite.client import Client
 from appwrite.services.storage import Storage
 from appwrite.id import ID
 from appwrite.input_file import InputFile
+import tempfile
+import json
 
 # Configure logging
 logging.basicConfig(
@@ -27,16 +29,33 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Load environment variables with error handling
+try:
+    logger.debug("Attempting to load environment variables")
+    from dotenv import load_dotenv
+    load_dotenv()
+    logger.info("Environment variables loaded successfully")
+except ImportError:
+    logger.error("python-dotenv package is not installed. Please run: pip install python-dotenv")
+    raise
+except Exception as e:
+    logger.error(f"Error loading environment variables: {str(e)}")
+    raise
+
 # Initialize Flask and extensions
 app = Flask(__name__)
 
-# Use environment variable for database URL with fallback to local development
-DATABASE_URL = os.environ.get('DATABASE_URL', f'postgresql://{os.environ.get("USER")}@localhost/sgk_export_db')
+# Use environment variable for database URL
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if not DATABASE_URL:
+    logger.error("DATABASE_URL not found in environment variables")
+    raise Exception("DATABASE_URL environment variable is required")
 
 # If the URL starts with postgres://, replace it with postgresql:// (Render specific fix)
-if DATABASE_URL and DATABASE_URL.startswith('postgres://'):
+if DATABASE_URL.startswith('postgres://'):
     DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
 
+logger.info(f"Configuring database with URL: {DATABASE_URL.replace(DATABASE_URL.split('@')[0].split('://')[-1], '****:****')}")
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -427,73 +446,77 @@ def submit():
         logger.error(f'Error in submit route: {str(e)}')
         return render_template('form.html', error="An error occurred while processing your request."), 500
 
-@app.route('/preview/<int:id>')
-def preview(id):
-    logger.debug(f'Accessing preview for export request {id}')
+@app.route('/preview/<int:request_id>')
+def preview(request_id):
     try:
-        request_data = ExportRequest.query.get_or_404(id)
-        logger.debug(f'Found export request: {request_data.waybill_number}')
-
-        # Generate QR code with optimized data format
-        qr_data = f"Waybill: {request_data.waybill_number}, Sender Mobile: {request_data.sender_mobile}, Receiver Mobile: {request_data.receiver_mobile}, Booked By: {request_data.order_booked_by}"
+        app.logger.debug("-------------------------")
+        app.logger.debug(f"Accessing preview for export request {request_id}")
         
-        # Create QR code with optimized settings
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4
-        )
-        qr.add_data(qr_data)
-        qr.make(fit=True)
-        qr_image = qr.make_image(fill_color="black", back_color="white")
+        # Get the export request
+        export_request = ExportRequest.query.get_or_404(request_id)
+        app.logger.debug(f"Found export request: {export_request.waybill_number}")
         
-        # Save QR code to BytesIO
-        qr_buffer = io.BytesIO()
-        qr_image.save(qr_buffer, format='PNG')
-        qr_buffer.seek(0)
-        
+        # Generate QR code with additional data
+        qr_file_id = f"qr_{export_request.waybill_number}"
         try:
-            # Upload QR code to Appwrite
-            qr_file_id = f"qr_{request_data.waybill_number}"
-            result = storage.create_file(
-                bucket_id=APPWRITE_BUCKET_ID,
-                file_id=qr_file_id,
-                file=InputFile.from_bytes(
-                    qr_buffer.getvalue(),
-                    filename=f"{qr_file_id}.png"
-                )
+            app.logger.debug(f"Generating QR code for waybill: {export_request.waybill_number}")
+            qr_img_bytes = generate_qr_code(
+                export_request.waybill_number,
+                export_request.sender_mobile,
+                export_request.receiver_mobile,
+                export_request.order_booked_by
             )
-            qr_file_id = result['$id']
-            logger.debug(f'QR code uploaded with ID: {qr_file_id}')
+            app.logger.debug("QR code generated successfully")
+            
+            try:
+                # Try to delete existing QR code if it exists
+                try:
+                    storage.delete_file(bucket_id=APPWRITE_BUCKET_ID, file_id=qr_file_id)
+                    app.logger.debug("Deleted existing QR code")
+                except Exception as e:
+                    app.logger.debug(f"No existing QR code to delete: {str(e)}")
+                
+                # Create temporary file and upload to Appwrite
+                with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as temp_file:
+                    temp_file.write(qr_img_bytes.getvalue())
+                    temp_file.flush()
+                    
+                    # Upload using InputFile
+                    input_file = InputFile.from_path(temp_file.name)
+                    result = storage.create_file(
+                        bucket_id=APPWRITE_BUCKET_ID,
+                        file_id=qr_file_id,
+                        file=input_file,
+                        permissions=['read("any")']  # Make file publicly readable
+                    )
+                    app.logger.debug(f"QR code uploaded successfully with ID: {qr_file_id}")
+                    
+                    # Clean up temp file
+                    os.unlink(temp_file.name)
+                    app.logger.debug("Temporary QR code file cleaned up")
+                    
+            except Exception as e:
+                app.logger.error(f"Error uploading QR code: {str(e)}")
+                qr_file_id = None
+                
         except Exception as e:
-            logger.error(f'Error uploading QR code: {str(e)}')
+            app.logger.error(f"Error generating QR code: {str(e)}")
             qr_file_id = None
-
+        
         # Calculate totals
-        subtotal = sum([
-            request_data.freight_pricing or 0,
-            request_data.additional_charges or 0,
-            request_data.pickup_charge or 0,
-            request_data.handling_fees or 0,
-            request_data.crating or 0,
-            request_data.insurance_charge or 0
-        ])
-        logger.debug(f'Calculated subtotal: {subtotal}')
-
-        vat = subtotal * 0.07
+        subtotal = calculate_subtotal(export_request)
+        vat = calculate_vat(subtotal)
         total = subtotal + vat
-
-        logger.debug(f'Calculated VAT: {vat}, Total: {total}')
-
+        
         return render_template('preview.html',
-                            request=request_data,
-                            subtotal=subtotal,
-                            vat=vat,
-                            total=total,
-                            qr_code=qr_file_id)
+                             request=export_request,
+                             qr_code=qr_file_id,
+                             subtotal=subtotal,
+                             vat=vat,
+                             total=total)
+                             
     except Exception as e:
-        logger.error(f'Error in preview route: {str(e)}')
+        app.logger.error(f"Error in preview route: {str(e)}")
         raise
 
 @app.route('/download-pdf/<int:id>')
@@ -562,18 +585,29 @@ def serve_image(file_id):
     """Serve uploaded images from Appwrite"""
     try:
         logger.debug(f'Attempting to serve image with ID: {file_id}')
-        result = storage.get_file_view(
-            bucket_id=APPWRITE_BUCKET_ID,
-            file_id=file_id
-        )
-        logger.debug(f'Appwrite response for file {file_id}: {result}')
+        # Remove any file extension from the ID if present
+        clean_file_id = file_id.split('.')[0]
         
-        if isinstance(result, dict) and 'href' in result:
-            logger.debug(f'Redirecting to Appwrite URL: {result["href"]}')
-            return redirect(result['href'])
-        else:
-            logger.error(f'Unexpected response format from Appwrite: {result}')
+        try:
+            # Get the file view URL from Appwrite
+            result = storage.get_file_view(
+                bucket_id=APPWRITE_BUCKET_ID,
+                file_id=clean_file_id
+            )
+            
+            if isinstance(result, bytes):
+                # If result is binary data, serve it directly
+                response = make_response(result)
+                response.headers.set('Content-Type', 'image/png')
+                return response
+            else:
+                # If result is a URL, redirect to it
+                return redirect(result)
+                
+        except Exception as e:
+            logger.error(f"Error getting file from Appwrite: {str(e)}")
             return "Image not found", 404
+            
     except Exception as e:
         logger.error(f"Error serving image {file_id}: {str(e)}")
         return "Image not found", 404
@@ -760,10 +794,14 @@ def verify_db_connection():
             masked_url = db_url.replace(db_url.split('@')[0].split('://')[-1], '****:****')
             logger.info(f"Attempting to connect to database: {masked_url}")
         
-        # Test the connection
-        db.session.execute(text('SELECT 1'))
-        logger.info("Database connection successful")
-        return True
+        # Test the connection with proper error handling
+        try:
+            db.session.execute(text('SELECT 1'))
+            logger.info("Database connection successful")
+            return True
+        except Exception as e:
+            logger.error(f"Database query failed: {str(e)}")
+            return False
     except Exception as e:
         logger.error(f"Database connection failed: {str(e)}")
         return False
@@ -774,7 +812,10 @@ def init_db():
         with app.app_context():
             # Verify connection first
             if not verify_db_connection():
-                raise Exception("Database connection failed")
+                logger.error("Database connection verification failed")
+                logger.error(f"Current DATABASE_URL: {os.environ.get('DATABASE_URL', 'Not set')}")
+                logger.error(f"Current user: {os.environ.get('USER', 'Not set')}")
+                raise Exception("Database connection failed - Please check your database configuration")
             
             # Proceed with initialization
             db.create_all()
@@ -833,3 +874,52 @@ def log_request_info():
     logger.debug(f'Method: {request.method}')
     logger.debug(f'URL: {request.url}')
     logger.debug('-------------------------') 
+
+def calculate_subtotal(export_request):
+    """Calculate subtotal from all pricing components"""
+    return sum([
+        export_request.freight_pricing or 0,
+        export_request.additional_charges or 0,
+        export_request.pickup_charge or 0,
+        export_request.handling_fees or 0,
+        export_request.crating or 0,
+        export_request.insurance_charge or 0
+    ])
+
+def calculate_vat(subtotal):
+    """Calculate VAT (7% of subtotal)"""
+    return subtotal * 0.07
+
+def generate_qr_code(waybill_number, sender_mobile, receiver_mobile, order_booked_by):
+    """Generate QR code with multiple data fields"""
+    try:
+        # Create JSON data structure
+        qr_data = {
+            'waybill': waybill_number,
+            'sender_mobile': sender_mobile,
+            'receiver_mobile': receiver_mobile,
+            'booked_by': order_booked_by
+        }
+        
+        # Convert to JSON string
+        json_data = json.dumps(qr_data)
+        
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(json_data)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        
+        # Convert PIL Image to bytes
+        img_byte_arr = io.BytesIO()
+        img.save(img_byte_arr, format='PNG')
+        img_byte_arr.seek(0)
+        
+        return img_byte_arr
+    except Exception as e:
+        logger.error(f"Error generating QR code: {str(e)}")
+        raise 

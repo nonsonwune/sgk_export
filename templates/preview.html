@@ -372,16 +372,63 @@
         gap: 0.5rem;
     }
 
-    .qr-code-image {
+    .qr-code-container {
+        position: relative;
         width: 150px;
         height: 150px;
-        object-fit: contain;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .qr-code-error {
+        text-align: center;
+        color: #dc3545;
+        display: none;
+    }
+
+    .qr-code-error i {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .qr-code-error span {
+        display: block;
+        font-size: 12px;
+    }
+
+    .qr-code-image {
+        max-width: 100%;
+        height: auto;
+        display: none;
     }
 
     .qr-code-label {
         text-align: center;
         font-size: 0.9rem;
         color: #718096;
+    }
+
+    .signature-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+    }
+
+    .signature-image {
+        max-width: 200px;
+        max-height: 100px;
+        object-fit: contain;
+        border: 1px solid #dee2e6;
+        padding: 0.5rem;
+        background: white;
+        border-radius: 4px;
     }
 </style>
 {% endblock %}
@@ -414,9 +461,19 @@
         </div>
             <div class="qr-code-section">
                 {% if qr_code %}
-                <img src="{{ url_for('serve_image', file_id=qr_code) }}" alt="QR Code" class="qr-code-image">
-                {% endif %}
+                <div class="qr-code-container">
+                    <img src="{{ url_for('serve_image', file_id=qr_code) }}" 
+                         alt="QR Code" 
+                         class="qr-code-image"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                         onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+                    <div class="qr-code-error" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>QR Code not available</span>
+                    </div>
+                </div>
                 <span class="qr-code-label">Scan for details</span>
+                {% endif %}
             </div>
             </div>
         </div>
@@ -611,10 +668,12 @@
                     <span class="label">Sender Signature:</span>
                     <span class="value">
                         {% if request.sender_signature %}
-                            <img src="{{ url_for('serve_image', filename='sender_signature/' + request.sender_signature) }}" 
-                                 alt="Sender's Signature" 
-                                 class="signature-image"
-                                 style="max-width: 200px; border: 1px solid #eef0f3; border-radius: 4px; padding: 5px;">
+                            <div class="signature-container">
+                                <img src="{{ url_for('serve_image', file_id=request.sender_signature) }}" 
+                                     alt="Sender Signature" 
+                                     class="signature-image"
+                                     onerror="this.style.display='none'">
+                            </div>
                         {% else %}
                             N/A
                         {% endif %}
