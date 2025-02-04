@@ -751,15 +751,21 @@ def manage_users():
 @login_required
 def reset_user_password(user_id):
     if not current_user.is_admin:
-        flash('Access denied', 'danger')
+        flash('Access denied', 'error')
         return redirect(url_for('new_export'))
     
     user = User.query.get_or_404(user_id)
+    
+    # Prevent non-superusers from modifying superuser accounts
+    if user.is_superuser and not current_user.is_superuser:
+        flash('Access denied. Only Super Users can modify Super User accounts.', 'error')
+        return redirect(url_for('manage_users'))
+    
     new_password = request.form.get('new_password')
     
     # Validate password strength
     if len(new_password) < 8 or not any(c.isalpha() for c in new_password) or not any(c.isdigit() for c in new_password):
-        flash('Password must be at least 8 characters long and contain both letters and numbers', 'danger')
+        flash('Password must be at least 8 characters long and contain both letters and numbers', 'error')
         return redirect(url_for('manage_users'))
     
     user.set_password(new_password)
@@ -771,19 +777,24 @@ def reset_user_password(user_id):
 @login_required
 def delete_user(user_id):
     if not current_user.is_admin:
-        flash('Access denied', 'danger')
+        flash('Access denied', 'error')
         return redirect(url_for('new_export'))
     
     user = User.query.get_or_404(user_id)
     
+    # Prevent non-superusers from deleting superuser accounts
+    if user.is_superuser and not current_user.is_superuser:
+        flash('Access denied. Only Super Users can delete Super User accounts.', 'error')
+        return redirect(url_for('manage_users'))
+    
     # Prevent deleting the last admin
     if user.is_admin and User.query.filter_by(is_admin=True).count() <= 1:
-        flash('Cannot delete the last admin user', 'danger')
+        flash('Cannot delete the last administrator', 'error')
         return redirect(url_for('manage_users'))
     
     # Prevent self-deletion
     if user.id == current_user.id:
-        flash('Cannot delete your own account', 'danger')
+        flash('Cannot delete your own account', 'error')
         return redirect(url_for('manage_users'))
     
     username = user.username
