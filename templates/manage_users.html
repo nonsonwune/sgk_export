@@ -4,7 +4,12 @@
 
 {% block content %}
 <div class="container">
-    <h1>Manage Users</h1>
+    <div class="header-actions">
+        <h1>Manage Users</h1>
+        <button class="action-button primary" onclick="showAddUserForm()">
+            <i class="fas fa-plus"></i> Add New User
+        </button>
+    </div>
     
     <div class="table-container">
         <table>
@@ -60,6 +65,31 @@
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Reset Password</button>
                 <button type="button" class="btn btn-secondary" onclick="hideResetPasswordForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add User Modal -->
+<div id="addUserModal" class="modal">
+    <div class="modal-content">
+        <h2>Add New User</h2>
+        <form method="POST" action="{{ url_for('create_user') }}">
+            <div class="form-group">
+                <label for="username">Username <span class="required">*</span></label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password <span class="required">*</span></label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create User</button>
+                <button type="button" class="btn btn-secondary" onclick="hideAddUserForm()">Cancel</button>
             </div>
         </form>
     </div>
@@ -223,6 +253,26 @@ th {
 .action-button.danger:hover {
     background-color: #b91c1c;
 }
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.action-button.primary {
+    background-color: #4169E1;
+    color: white;
+}
+
+.action-button.primary:hover {
+    background-color: #3154b4;
+}
+
+.required {
+    color: #dc2626;
+}
 </style>
 
 <script>
@@ -241,6 +291,14 @@ window.onclick = function(event) {
     if (event.target.className === 'modal') {
         event.target.style.display = 'none';
     }
+}
+
+function showAddUserForm() {
+    document.getElementById('addUserModal').style.display = 'block';
+}
+
+function hideAddUserForm() {
+    document.getElementById('addUserModal').style.display = 'none';
 }
 </script>
 {% endblock %} 

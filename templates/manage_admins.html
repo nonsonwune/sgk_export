@@ -4,10 +4,11 @@
 
 {% block content %}
 <div class="container">
-    <h1>Manage Administrators</h1>
-    
-    <div class="admin-actions">
-        <button class="btn btn-primary" onclick="showAddAdminForm()">Add New Administrator</button>
+    <div class="header-actions">
+        <h1>Manage Administrators</h1>
+        <button class="action-button primary" onclick="showAddAdminForm()">
+            <i class="fas fa-plus"></i> Add New Administrator
+        </button>
     </div>
 
     <div class="table-container">
@@ -230,6 +231,22 @@ th {
 
 .action-button.danger:hover {
     background-color: #b91c1c;
+}
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.action-button.primary {
+    background-color: #4169E1;
+    color: white;
+}
+
+.action-button.primary:hover {
+    background-color: #3154b4;
 }
 </style>
 
