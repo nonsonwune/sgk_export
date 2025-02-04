@@ -18,6 +18,7 @@ from sqlalchemy import text
 from appwrite.client import Client
 from appwrite.services.storage import Storage
 from appwrite.id import ID
+from appwrite.input_file import InputFile
 
 # Configure logging
 logging.basicConfig(
@@ -282,21 +283,28 @@ def submit():
                 signature_data = signature_data.split(',')[1]  # Remove data URL prefix
                 signature_bytes = base64.b64decode(signature_data)
                 
-                # Upload to Appwrite
-                signature_file = io.BytesIO(signature_bytes)
-                signature_file.name = f'signature_{datetime.now().strftime("%Y%m%d%H%M%S")}.png'
+                # Create temporary file for signature
+                temp_signature_path = os.path.join('/tmp', f'signature_{datetime.now().strftime("%Y%m%d%H%M%S")}.png')
+                with open(temp_signature_path, 'wb') as f:
+                    f.write(signature_bytes)
                 
                 try:
+                    # Use Appwrite's InputFile
+                    input_file = InputFile.from_path(temp_signature_path)
                     result = storage.create_file(
                         bucket_id=APPWRITE_BUCKET_ID,
                         file_id=ID.unique(),
-                        file=signature_file
+                        file=input_file
                     )
                     signature_file_id = result['$id']
                     data['sender_signature'] = signature_file_id
                 except Exception as e:
                     logger.error(f'Error uploading signature: {str(e)}')
                     raise
+                finally:
+                    # Clean up temporary file
+                    if os.path.exists(temp_signature_path):
+                        os.remove(temp_signature_path)
 
         # Create new export request with logged-in user
         new_request = ExportRequest(
@@ -369,12 +377,21 @@ def submit():
                 # Handle image upload
                 if i < len(images) and images[i] and images[i].filename:
                     try:
+                        # Save uploaded file temporarily
+                        temp_image_path = os.path.join('/tmp', secure_filename(images[i].filename))
+                        images[i].save(temp_image_path)
+                        
+                        # Use Appwrite's InputFile
+                        input_file = InputFile.from_path(temp_image_path)
                         result = storage.create_file(
                             bucket_id=APPWRITE_BUCKET_ID,
                             file_id=ID.unique(),
-                            file=images[i]
+                            file=input_file
                         )
                         item.image_filename = result['$id']
+                        
+                        # Clean up temporary file
+                        os.remove(temp_image_path)
                     except Exception as e:
                         logger.error(f'Error uploading item image: {str(e)}')
                         raise
