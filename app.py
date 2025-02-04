@@ -75,13 +75,29 @@ ensure_upload_dirs()
 APPWRITE_ENDPOINT = os.environ.get('APPWRITE_ENDPOINT', 'https://cloud.appwrite.io/v1')
 APPWRITE_PROJECT_ID = os.environ.get('APPWRITE_PROJECT_ID')
 APPWRITE_BUCKET_ID = os.environ.get('APPWRITE_BUCKET_ID')
+APPWRITE_API_KEY = os.environ.get('APPWRITE_API_KEY')  # Add API key configuration
 
 def init_appwrite():
     """Initialize Appwrite client"""
-    client = Client()
-    client.set_endpoint(APPWRITE_ENDPOINT)
-    client.set_project(APPWRITE_PROJECT_ID)
-    return Storage(client)
+    try:
+        logger.debug("Initializing Appwrite client...")
+        logger.debug(f"Using endpoint: {APPWRITE_ENDPOINT}")
+        logger.debug(f"Project ID: {APPWRITE_PROJECT_ID}")
+        logger.debug(f"Bucket ID: {APPWRITE_BUCKET_ID}")
+        logger.debug("API Key configured: %s", "Yes" if APPWRITE_API_KEY else "No")
+
+        client = Client()
+        client.set_endpoint(APPWRITE_ENDPOINT)
+        client.set_project(APPWRITE_PROJECT_ID)
+        client.set_key(APPWRITE_API_KEY)  # Add API key to client
+
+        # Test connection
+        storage = Storage(client)
+        logger.info("Appwrite client initialized successfully")
+        return storage
+    except Exception as e:
+        logger.error(f"Failed to initialize Appwrite client: {str(e)}")
+        raise
 
 # Initialize Appwrite storage
 storage = init_appwrite()
