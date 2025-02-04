@@ -122,42 +122,66 @@
         color: white;
         font-size: 14px;
     }
+
+    .action-button.warning {
+        background-color: #f59e0b;
+        color: white;
+    }
+
+    .action-button.warning:hover {
+        background-color: #d97706;
+    }
+
+    .action-button.danger {
+        background-color: #dc2626;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .action-button.danger:hover {
+        background-color: #b91c1c;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search by waybill number, sender, or receiver...">
-    </div>
+    <h1>Export List</h1>
     
-    <div class="export-list">
-        {% for export in exports %}
-        <div class="export-item" data-waybill="{{ export.waybill_number }}" data-sender="{{ export.sender_name }}" data-receiver="{{ export.receiver_name }}">
-            <div class="export-header">
-                <h3>Waybill #{{ export.waybill_number }}</h3>
-                <span class="export-status status-{{ export.status }}">{{ export.status|title }}</span>
-            </div>
-            <div class="export-details">
-                <p><strong>Sender:</strong> {{ export.sender_name }}</p>
-                <p><strong>Receiver:</strong> {{ export.receiver_name }}</p>
-                <p><strong>Created:</strong> {{ export.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
-            </div>
-            <div class="export-actions">
-                <a href="{{ url_for('preview', request_id=export.id) }}" class="action-button">View Details</a>
-                {% if export.status == 'draft' %}
-                <form action="{{ url_for('save_export', id=export.id) }}" method="POST" style="display: inline;">
-                    <button type="submit" class="action-button">Save Export</button>
-                </form>
-                {% endif %}
-                {% if export.items|selectattr('image_filename')|list|length > 0 %}
-                <button class="action-button secondary view-images-btn" data-export-id="{{ export.id }}">
-                    <i class="fas fa-images"></i> View Images
-                </button>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Waybill Number</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for export in exports %}
+                <tr>
+                    <td>{{ export.waybill_number }}</td>
+                    <td>{{ export.sender_name }}</td>
+                    <td>{{ export.receiver_name }}</td>
+                    <td>{{ export.status }}</td>
+                    <td>{{ export.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td class="actions">
+                        <a href="{{ url_for('preview', request_id=export.id) }}" class="action-button">View</a>
+                        {% if current_user.is_superuser %}
+                            <a href="{{ url_for('modify_export', export_id=export.id) }}" class="action-button warning">Modify</a>
+                            <form method="POST" action="{{ url_for('delete_export', export_id=export.id) }}" style="display: inline;">
+                                <button type="submit" class="action-button danger" onclick="return confirm('Are you sure you want to delete this export? This action cannot be undone.')">Delete</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 

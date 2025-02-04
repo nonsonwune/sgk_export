@@ -128,6 +128,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    is_superuser = db.Column(db.Boolean, default=False)  # New field for superuser
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -161,6 +162,27 @@ def create_default_admin():
             logger.info('Admin user already exists')
     except Exception as e:
         logger.error(f'Error creating default admin: {str(e)}')
+        db.session.rollback()
+
+def create_default_superuser():
+    """Create default superuser if no superuser exists"""
+    try:
+        superuser = User.query.filter_by(username='superuser').first()
+        if not superuser:
+            superuser = User(
+                username='superuser',
+                name='Super User',
+                is_admin=True,
+                is_superuser=True
+            )
+            superuser.set_password('superuser123')
+            db.session.add(superuser)
+            db.session.commit()
+            logger.info('Default superuser created')
+        else:
+            logger.info('Superuser already exists')
+    except Exception as e:
+        logger.error(f'Error creating default superuser: {str(e)}')
         db.session.rollback()
 
 class ItemDetail(db.Model):
@@ -340,7 +362,7 @@ def submit():
                     # Clean up temporary file
                     if os.path.exists(temp_signature_path):
                         os.remove(temp_signature_path)
-
+        
         # Create new export request with logged-in user
         new_request = ExportRequest(
             waybill_number=ExportRequest.generate_waybill_number(),
@@ -507,12 +529,12 @@ def preview(request_id):
         subtotal = calculate_subtotal(export_request)
         vat = calculate_vat(subtotal)
         total = subtotal + vat
-        
+
         return render_template('preview.html',
                              request=export_request,
                              qr_code=qr_file_id,
-                             subtotal=subtotal,
-                             vat=vat,
+                            subtotal=subtotal,
+                            vat=vat,
                              total=total)
                              
     except Exception as e:
@@ -770,6 +792,115 @@ def delete_user(user_id):
     flash(f'User {username} has been deleted', 'success')
     return redirect(url_for('manage_users'))
 
+@app.route('/admin/delete-export/<int:export_id>', methods=['POST'])
+@login_required
+def delete_export(export_id):
+    # Check if user is superuser
+    if not current_user.is_superuser:
+        flash('Access denied. Superuser privileges required.', 'error')
+        return redirect(url_for('list_exports'))
+    
+    # Get the export
+    export = ExportRequest.query.get_or_404(export_id)
+    
+    try:
+        # Delete associated items first
+        for item in export.items:
+            # Delete item images from storage if they exist
+            if item.image_filename:
+                try:
+                    storage.delete_file(bucket_id=APPWRITE_BUCKET_ID, file_id=item.image_filename)
+                except Exception as e:
+                    app.logger.error(f"Error deleting image {item.image_filename}: {str(e)}")
+            
+            # Delete the item from database
+            db.session.delete(item)
+        
+        # Delete signature image if it exists
+        if export.sender_signature:
+            try:
+                storage.delete_file(bucket_id=APPWRITE_BUCKET_ID, file_id=export.sender_signature)
+            except Exception as e:
+                app.logger.error(f"Error deleting signature {export.sender_signature}: {str(e)}")
+        
+        # Delete QR code if it exists
+        qr_file_id = f"qr_{export.waybill_number}"
+        try:
+            storage.delete_file(bucket_id=APPWRITE_BUCKET_ID, file_id=qr_file_id)
+        except Exception as e:
+            app.logger.error(f"Error deleting QR code {qr_file_id}: {str(e)}")
+        
+        # Delete the export request
+        db.session.delete(export)
+        db.session.commit()
+        
+        flash('Export documentation deleted successfully.', 'success')
+        
+    except Exception as e:
+        db.session.rollback()
+        app.logger.error(f"Error deleting export: {str(e)}")
+        flash(f'Error deleting export documentation: {str(e)}', 'error')
+    
+    return redirect(url_for('list_exports'))
+
+@app.route('/admin/modify-export/<int:export_id>', methods=['GET', 'POST'])
+@login_required
+def modify_export(export_id):
+    # Check if user is superuser
+    if not current_user.is_superuser:
+        flash('Access denied. Superuser privileges required.', 'error')
+        return redirect(url_for('list_exports'))
+    
+    # Get the export
+    export = ExportRequest.query.get_or_404(export_id)
+    
+    if request.method == 'POST':
+        try:
+            # Update export details
+            export.sender_name = request.form.get('sender_name')
+            export.sender_email = request.form.get('sender_email')
+            export.sender_address = request.form.get('sender_address')
+            export.sender_business = request.form.get('sender_business')
+            export.sender_mobile = request.form.get('sender_mobile')
+            
+            export.receiver_name = request.form.get('receiver_name')
+            export.receiver_email = request.form.get('receiver_email')
+            export.receiver_address = request.form.get('receiver_address')
+            export.receiver_business = request.form.get('receiver_business')
+            export.receiver_mobile = request.form.get('receiver_mobile')
+            
+            export.destination_address = request.form.get('destination_address')
+            export.destination_country = request.form.get('destination_country')
+            export.destination_postcode = request.form.get('destination_postcode')
+            
+            export.freight_pricing = float(request.form.get('freight_pricing', 0))
+            export.additional_charges = float(request.form.get('additional_charges', 0))
+            export.pickup_charge = float(request.form.get('pickup_charge', 0))
+            export.handling_fees = float(request.form.get('handling_fees', 0))
+            export.crating = float(request.form.get('crating', 0))
+            export.insurance_charge = float(request.form.get('insurance_charge', 0))
+            
+            export.is_collection = 'is_collection' in request.form
+            export.customer_group = request.form.get('customer_group')
+            export.order_booked_by = request.form.get('order_booked_by')
+            
+            # Update the modified timestamp
+            export.modified_at = datetime.utcnow()
+            export.modified_by = current_user.id
+            
+            db.session.commit()
+            
+            flash('Export documentation updated successfully.', 'success')
+            return redirect(url_for('preview', request_id=export.id))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error updating export documentation: {str(e)}', 'error')
+            return render_template('modify_export.html', export=export)
+    
+    # GET request - display the form
+    return render_template('modify_export.html', export=export)
+
 def acquire_lock(lock_file):
     """Acquire a file lock"""
     try:
@@ -820,6 +951,7 @@ def init_db():
             # Proceed with initialization
             db.create_all()
             create_default_admin()
+            create_default_superuser()  # Add superuser creation
             logger.info("Database initialized successfully")
     except Exception as e:
         logger.error(f"Database initialization error: {str(e)}")
@@ -923,3 +1055,133 @@ def generate_qr_code(waybill_number, sender_mobile, receiver_mobile, order_booke
     except Exception as e:
         logger.error(f"Error generating QR code: {str(e)}")
         raise 
+
+@app.route('/admin/manage-admins')
+@login_required
+def manage_admins():
+    if not current_user.is_superuser:
+        flash('Access denied. Superuser privileges required.', 'error')
+        return redirect(url_for('list_exports'))
+    
+    users = User.query.all()
+    return render_template('manage_admins.html', users=users)
+
+@app.route('/admin/add-admin', methods=['POST'])
+@login_required
+def add_admin():
+    if not current_user.is_superuser:
+        flash('Access denied. Superuser privileges required.', 'error')
+        return redirect(url_for('list_exports'))
+    
+    try:
+        username = request.form.get('username')
+        name = request.form.get('name')
+        password = request.form.get('password')
+        
+        # Validate input
+        if not username or not name or not password:
+            flash('All fields are required.', 'error')
+            return redirect(url_for('manage_admins'))
+        
+        # Check if username already exists
+        if User.query.filter_by(username=username).first():
+            flash('Username already exists.', 'error')
+            return redirect(url_for('manage_admins'))
+        
+        # Create new admin user
+        new_admin = User(
+            username=username,
+            name=name,
+            is_admin=True,
+            is_superuser=False
+        )
+        new_admin.set_password(password)
+        
+        db.session.add(new_admin)
+        db.session.commit()
+        
+        flash('Administrator added successfully.', 'success')
+        
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Error adding admin: {str(e)}")
+        flash('Error adding administrator.', 'error')
+    
+    return redirect(url_for('manage_admins'))
+
+@app.route('/admin/modify-admin', methods=['POST'])
+@login_required
+def modify_admin():
+    if not current_user.is_superuser:
+        flash('Access denied. Superuser privileges required.', 'error')
+        return redirect(url_for('list_exports'))
+    
+    try:
+        user_id = request.form.get('user_id')
+        username = request.form.get('username')
+        name = request.form.get('name')
+        password = request.form.get('password')
+        
+        admin = User.query.get_or_404(user_id)
+        
+        # Prevent modifying superuser
+        if admin.is_superuser:
+            flash('Cannot modify superuser account.', 'error')
+            return redirect(url_for('manage_admins'))
+        
+        # Check if new username already exists (if changed)
+        if username != admin.username:
+            existing_user = User.query.filter_by(username=username).first()
+            if existing_user and existing_user.id != admin.id:
+                flash('Username already exists.', 'error')
+                return redirect(url_for('manage_admins'))
+        
+        # Update user details
+        admin.username = username
+        admin.name = name
+        if password:  # Only update password if provided
+            admin.set_password(password)
+        
+        db.session.commit()
+        flash('Administrator updated successfully.', 'success')
+        
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Error modifying admin: {str(e)}")
+        flash('Error updating administrator.', 'error')
+    
+    return redirect(url_for('manage_admins'))
+
+@app.route('/admin/delete-admin/<int:user_id>', methods=['POST'])
+@login_required
+def delete_admin(user_id):
+    if not current_user.is_superuser:
+        flash('Access denied. Superuser privileges required.', 'error')
+        return redirect(url_for('list_exports'))
+    
+    try:
+        admin = User.query.get_or_404(user_id)
+        
+        # Prevent deleting superuser
+        if admin.is_superuser:
+            flash('Cannot delete superuser account.', 'error')
+            return redirect(url_for('manage_admins'))
+        
+        # Prevent deleting the last admin
+        admin_count = User.query.filter_by(is_admin=True).count()
+        if admin_count <= 1:
+            flash('Cannot delete the last administrator.', 'error')
+            return redirect(url_for('manage_admins'))
+        
+        username = admin.username
+        db.session.delete(admin)
+        db.session.commit()
+        
+        flash(f'Administrator {username} deleted successfully.', 'success')
+        
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Error deleting admin: {str(e)}")
+        flash('Error deleting administrator.', 'error')
+    
+    return redirect(url_for('manage_admins')) 

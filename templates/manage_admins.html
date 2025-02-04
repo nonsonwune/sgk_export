@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Administrators - SGK Global Shipping{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Manage Administrators</h1>
+    
+    <div class="admin-actions">
+        <button class="btn btn-primary" onclick="showAddAdminForm()">Add New Administrator</button>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                {% if user.is_admin and not user.is_superuser %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>Administrator</td>
+                    <td class="actions">
+                        <button class="action-button warning" onclick="showEditAdminForm('{{ user.id }}', '{{ user.username }}', '{{ user.name }}')">Modify</button>
+                        <form method="POST" action="{{ url_for('delete_admin', user_id=user.id) }}" style="display: inline;">
+                            <button type="submit" class="action-button danger" onclick="return confirm('Are you sure you want to remove this administrator? This action cannot be undone.')">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Add Admin Modal -->
+<div id="addAdminModal" class="modal">
+    <div class="modal-content">
+        <h2>Add New Administrator</h2>
+        <form method="POST" action="{{ url_for('add_admin') }}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Administrator</button>
+                <button type="button" class="btn btn-secondary" onclick="hideAddAdminForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Admin Modal -->
+<div id="editAdminModal" class="modal">
+    <div class="modal-content">
+        <h2>Modify Administrator</h2>
+        <form method="POST" action="{{ url_for('modify_admin') }}">
+            <input type="hidden" id="edit_user_id" name="user_id">
+            <div class="form-group">
+                <label for="edit_username">Username</label>
+                <input type="text" id="edit_username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="edit_name">Full Name</label>
+                <input type="text" id="edit_name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="edit_password">New Password (leave blank to keep current)</label>
+                <input type="password" id="edit_password" name="password">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-secondary" onclick="hideEditAdminForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.admin-actions {
+    margin-bottom: 2rem;
+}
+
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.actions {
+    white-space: nowrap;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    position: relative;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #4169E1;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3154b4;
+}
+
+.btn-secondary {
+    background-color: #718096;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #4a5568;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.action-button.warning {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.action-button.warning:hover {
+    background-color: #d97706;
+}
+
+.action-button.danger {
+    background-color: #dc2626;
+    color: white;
+}
+
+.action-button.danger:hover {
+    background-color: #b91c1c;
+}
+</style>
+
+<script>
+function showAddAdminForm() {
+    document.getElementById('addAdminModal').style.display = 'block';
+}
+
+function hideAddAdminForm() {
+    document.getElementById('addAdminModal').style.display = 'none';
+}
+
+function showEditAdminForm(userId, username, name) {
+    document.getElementById('edit_user_id').value = userId;
+    document.getElementById('edit_username').value = username;
+    document.getElementById('edit_name').value = name;
+    document.getElementById('editAdminModal').style.display = 'block';
+}
+
+function hideEditAdminForm() {
+    document.getElementById('editAdminModal').style.display = 'none';
+}
+
+// Close modals when clicking outside
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = 'none';
+    }
+}
+</script>
+{% endblock %} 
