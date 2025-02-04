@@ -441,7 +441,7 @@ def submit():
         db.session.commit()
         logger.debug(f'Successfully saved export request {new_request.id}')
         
-        return redirect(url_for('preview', id=new_request.id))
+        return redirect(url_for('preview', request_id=new_request.id))
     except Exception as e:
         logger.error(f'Error in submit route: {str(e)}')
         return render_template('form.html', error="An error occurred while processing your request."), 500
