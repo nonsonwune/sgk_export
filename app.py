@@ -269,11 +269,11 @@ class ExportRequest(db.Model):
         """Generate the next waybill number in sequence"""
         last_request = cls.query.order_by(cls.id.desc()).first()
         if not last_request:
-            return 'WR00001'
+            return 'EX000001'
         
         last_number = int(last_request.waybill_number[2:])
         next_number = last_number + 1
-        return f'WR{next_number:05d}'
+        return f'EX{next_number:06d}'
 
 # Routes
 @app.route('/')
