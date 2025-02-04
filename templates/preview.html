@@ -413,7 +413,9 @@
                 </div>
         </div>
             <div class="qr-code-section">
-                <img src="{{ url_for('serve_image', filename=qr_code) }}" alt="QR Code" class="qr-code-image">
+                {% if qr_code %}
+                <img src="{{ url_for('serve_image', file_id=qr_code) }}" alt="QR Code" class="qr-code-image">
+                {% endif %}
                 <span class="qr-code-label">Scan for details</span>
             </div>
             </div>

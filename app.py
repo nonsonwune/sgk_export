@@ -448,10 +448,27 @@ def preview(id):
         qr.make(fit=True)
         qr_image = qr.make_image(fill_color="black", back_color="white")
         
-        # Save QR code
-        qr_filename = f"qr_{request_data.waybill_number}.png"
-        qr_path = os.path.join(app.config['UPLOAD_FOLDER'], qr_filename)
-        qr_image.save(qr_path)
+        # Save QR code to BytesIO
+        qr_buffer = io.BytesIO()
+        qr_image.save(qr_buffer, format='PNG')
+        qr_buffer.seek(0)
+        
+        try:
+            # Upload QR code to Appwrite
+            qr_file_id = f"qr_{request_data.waybill_number}"
+            result = storage.create_file(
+                bucket_id=APPWRITE_BUCKET_ID,
+                file_id=qr_file_id,
+                file=InputFile.from_bytes(
+                    qr_buffer.getvalue(),
+                    filename=f"{qr_file_id}.png"
+                )
+            )
+            qr_file_id = result['$id']
+            logger.debug(f'QR code uploaded with ID: {qr_file_id}')
+        except Exception as e:
+            logger.error(f'Error uploading QR code: {str(e)}')
+            qr_file_id = None
 
         # Calculate totals
         subtotal = sum([
@@ -474,7 +491,7 @@ def preview(id):
                             subtotal=subtotal,
                             vat=vat,
                             total=total,
-                            qr_code=qr_filename)
+                            qr_code=qr_file_id)
     except Exception as e:
         logger.error(f'Error in preview route: {str(e)}')
         raise
@@ -544,13 +561,21 @@ def get_images(id):
 def serve_image(file_id):
     """Serve uploaded images from Appwrite"""
     try:
+        logger.debug(f'Attempting to serve image with ID: {file_id}')
         result = storage.get_file_view(
             bucket_id=APPWRITE_BUCKET_ID,
             file_id=file_id
         )
-        return redirect(result['href'])
+        logger.debug(f'Appwrite response for file {file_id}: {result}')
+        
+        if isinstance(result, dict) and 'href' in result:
+            logger.debug(f'Redirecting to Appwrite URL: {result["href"]}')
+            return redirect(result['href'])
+        else:
+            logger.error(f'Unexpected response format from Appwrite: {result}')
+            return "Image not found", 404
     except Exception as e:
-        logger.error(f"Error serving image: {str(e)}")
+        logger.error(f"Error serving image {file_id}: {str(e)}")
         return "Image not found", 404
 
 class TemplateExportRequest:
