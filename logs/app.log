@@ -1,0 +1,384 @@
+2025-02-07 13:06:10 [INFO] [app:100] Environment variables loaded successfully
+2025-02-07 13:06:10 [INFO] [app:100] Environment variables loaded successfully
+2025-02-07 13:06:10 [INFO] [app:100] Environment variables loaded successfully
+2025-02-07 13:06:10 [INFO] [app:121] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:06:10 [INFO] [app:121] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:06:10 [INFO] [app:121] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:06:10 [INFO] [app:194] Appwrite client initialized successfully
+2025-02-07 13:06:10 [INFO] [app:194] Appwrite client initialized successfully
+2025-02-07 13:06:10 [INFO] [app:194] Appwrite client initialized successfully
+2025-02-07 13:06:10 [INFO] [app:1027] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:06:10 [INFO] [app:1027] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:06:10 [INFO] [app:1027] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:06:11 [INFO] [app:1031] Database connection successful
+2025-02-07 13:06:11 [INFO] [app:1031] Database connection successful
+2025-02-07 13:06:11 [INFO] [app:1031] Database connection successful
+2025-02-07 13:06:11 [INFO] [app:253] Admin user already exists
+2025-02-07 13:06:11 [INFO] [app:253] Admin user already exists
+2025-02-07 13:06:11 [INFO] [app:253] Admin user already exists
+2025-02-07 13:06:11 [INFO] [app:274] Superuser already exists
+2025-02-07 13:06:11 [INFO] [app:274] Superuser already exists
+2025-02-07 13:06:11 [INFO] [app:274] Superuser already exists
+2025-02-07 13:06:11 [INFO] [app:1055] Database initialized successfully
+2025-02-07 13:06:11 [INFO] [app:1055] Database initialized successfully
+2025-02-07 13:06:11 [INFO] [app:1055] Database initialized successfully
+2025-02-07 13:06:11 [INFO] [app:1066] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:06:11 [INFO] [app:1066] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:06:11 [INFO] [app:1066] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:06:11 [INFO] [app:1071] User table exists with 2 users
+2025-02-07 13:06:11 [INFO] [app:1071] User table exists with 2 users
+2025-02-07 13:06:11 [INFO] [app:1071] User table exists with 2 users
+2025-02-07 13:06:11 [INFO] [app:1089] Registered Routes:
+2025-02-07 13:06:11 [INFO] [app:1089] Registered Routes:
+2025-02-07 13:06:11 [INFO] [app:1089] Registered Routes:
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /list, Endpoint: list_exports, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /list, Endpoint: list_exports, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /list, Endpoint: list_exports, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /login, Endpoint: login, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /login, Endpoint: login, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /login, Endpoint: login, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /logout, Endpoint: logout, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /logout, Endpoint: logout, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /logout, Endpoint: logout, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /submit, Endpoint: submit, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /submit, Endpoint: submit, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /submit, Endpoint: submit, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /save/<int:id>, Endpoint: save_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /save/<int:id>, Endpoint: save_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /save/<int:id>, Endpoint: save_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:06:11 [INFO] [app:1091] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'HEAD', 'OPTIONS', 'POST'}
+2025-02-07 13:07:34 [INFO] [gunicorn.error:278] Worker exiting (pid: 61754)
+2025-02-07 13:07:34 [INFO] [gunicorn.error:278] Worker exiting (pid: 61753)
+2025-02-07 13:07:34 [INFO] [gunicorn.error:278] Worker exiting (pid: 61755)
+2025-02-07 13:07:34 [INFO] [gunicorn.error:278] Worker exiting (pid: 61755)
+2025-02-07 13:07:34 [INFO] [gunicorn.error:278] Worker exiting (pid: 61754)
+2025-02-07 13:07:34 [INFO] [gunicorn.error:278] Worker exiting (pid: 61753)
+2025-02-07 13:08:14 [INFO] [PID:62266] [app:131] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:08:14 [INFO] [PID:62266] [app:204] Appwrite client initialized successfully
+2025-02-07 13:08:14 [INFO] [PID:62266] [app:1037] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1041] Database connection successful
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:263] Admin user already exists
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:284] Superuser already exists
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1065] Database initialized successfully
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1076] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1081] User table exists with 2 users
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1099] Registered Routes:
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /static/<path:filename>, Endpoint: static, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /new-export, Endpoint: new_export, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /, Endpoint: new_export, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /list, Endpoint: list_exports, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /login, Endpoint: login, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /logout, Endpoint: logout, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/create-user, Endpoint: create_user, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /print-form-template, Endpoint: print_form_template, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /change-password, Endpoint: change_password, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/users, Endpoint: manage_users, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1123] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1037] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1041] Database connection successful
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:263] Admin user already exists
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:284] Superuser already exists
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1065] Database initialized successfully
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1076] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1081] User table exists with 2 users
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1099] Registered Routes:
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /static/<path:filename>, Endpoint: static, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /new-export, Endpoint: new_export, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /, Endpoint: new_export, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /list, Endpoint: list_exports, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /login, Endpoint: login, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /logout, Endpoint: logout, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/create-user, Endpoint: create_user, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /print-form-template, Endpoint: print_form_template, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /change-password, Endpoint: change_password, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/users, Endpoint: manage_users, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'POST', 'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/manage-admins, Endpoint: manage_admins, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/add-admin, Endpoint: add_admin, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/modify-admin, Endpoint: modify_admin, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62266] [app:1101] Route: /admin/delete-admin/<int:user_id>, Endpoint: delete_admin, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:08:15 [INFO] [PID:62280] [gunicorn.error:278] Booting worker with pid: 62280
+2025-02-07 13:08:15 [INFO] [PID:62280] [gunicorn.error:278] Booting worker with pid: 62280
+2025-02-07 13:08:15 [INFO] [PID:62280] [app:1115] Worker 62280 initialized
+2025-02-07 13:08:15 [INFO] [PID:62281] [gunicorn.error:278] Booting worker with pid: 62281
+2025-02-07 13:08:15 [INFO] [PID:62281] [gunicorn.error:278] Booting worker with pid: 62281
+2025-02-07 13:08:15 [INFO] [PID:62281] [app:1115] Worker 62281 initialized
+2025-02-07 13:08:15 [INFO] [PID:62282] [gunicorn.error:278] Booting worker with pid: 62282
+2025-02-07 13:08:15 [INFO] [PID:62282] [gunicorn.error:278] Booting worker with pid: 62282
+2025-02-07 13:08:15 [INFO] [PID:62282] [app:1115] Worker 62282 initialized
+2025-02-07 13:08:42 [INFO] [PID:62266] [gunicorn.error:278] Handling signal: int
+2025-02-07 13:08:42 [INFO] [PID:62266] [gunicorn.error:278] Handling signal: int
+2025-02-07 13:08:42 [INFO] [PID:62282] [gunicorn.error:278] Worker exiting (pid: 62282)
+2025-02-07 13:08:42 [INFO] [PID:62281] [gunicorn.error:278] Worker exiting (pid: 62281)
+2025-02-07 13:08:42 [INFO] [PID:62280] [gunicorn.error:278] Worker exiting (pid: 62280)
+2025-02-07 13:08:42 [INFO] [PID:62282] [gunicorn.error:278] Worker exiting (pid: 62282)
+2025-02-07 13:08:42 [INFO] [PID:62280] [gunicorn.error:278] Worker exiting (pid: 62280)
+2025-02-07 13:08:42 [INFO] [PID:62281] [gunicorn.error:278] Worker exiting (pid: 62281)
+2025-02-07 13:08:43 [INFO] [PID:62266] [gunicorn.error:278] Shutting down: Master
+2025-02-07 13:08:43 [INFO] [PID:62266] [gunicorn.error:278] Shutting down: Master
+2025-02-07 13:09:35 [INFO] [PID:62414] [app:131] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:204] Appwrite client initialized successfully
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1037] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1041] Database connection successful
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:263] Admin user already exists
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:284] Superuser already exists
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1065] Database initialized successfully
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1076] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1081] User table exists with 2 users
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1099] Registered Routes:
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /list, Endpoint: list_exports, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /login, Endpoint: login, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /logout, Endpoint: logout, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1123] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1037] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1041] Database connection successful
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:263] Admin user already exists
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:284] Superuser already exists
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1065] Database initialized successfully
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1076] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1081] User table exists with 2 users
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1099] Registered Routes:
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /list, Endpoint: list_exports, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /login, Endpoint: login, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /logout, Endpoint: logout, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/manage-admins, Endpoint: manage_admins, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/add-admin, Endpoint: add_admin, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/modify-admin, Endpoint: modify_admin, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62414] [app:1101] Route: /admin/delete-admin/<int:user_id>, Endpoint: delete_admin, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:09:36 [INFO] [PID:62420] [gunicorn.error:278] Booting worker with pid: 62420
+2025-02-07 13:09:36 [INFO] [PID:62420] [gunicorn.error:278] Booting worker with pid: 62420
+2025-02-07 13:09:36 [INFO] [PID:62420] [app:1115] Worker 62420 initialized
+2025-02-07 13:09:36 [INFO] [PID:62422] [gunicorn.error:278] Booting worker with pid: 62422
+2025-02-07 13:09:36 [INFO] [PID:62422] [gunicorn.error:278] Booting worker with pid: 62422
+2025-02-07 13:09:36 [INFO] [PID:62422] [app:1115] Worker 62422 initialized
+2025-02-07 13:09:36 [INFO] [PID:62423] [gunicorn.error:278] Booting worker with pid: 62423
+2025-02-07 13:09:36 [INFO] [PID:62423] [gunicorn.error:278] Booting worker with pid: 62423
+2025-02-07 13:09:36 [INFO] [PID:62423] [app:1115] Worker 62423 initialized
+2025-02-07 13:09:36 [INFO] [PID:62424] [gunicorn.error:278] Booting worker with pid: 62424
+2025-02-07 13:09:36 [INFO] [PID:62424] [gunicorn.error:278] Booting worker with pid: 62424
+2025-02-07 13:09:36 [INFO] [PID:62425] [gunicorn.error:278] Booting worker with pid: 62425
+2025-02-07 13:09:36 [INFO] [PID:62425] [gunicorn.error:278] Booting worker with pid: 62425
+2025-02-07 13:09:36 [INFO] [PID:62424] [app:1115] Worker 62424 initialized
+2025-02-07 13:09:36 [INFO] [PID:62425] [app:1115] Worker 62425 initialized
+2025-02-07 13:09:36 [INFO] [PID:62426] [gunicorn.error:278] Booting worker with pid: 62426
+2025-02-07 13:09:36 [INFO] [PID:62426] [gunicorn.error:278] Booting worker with pid: 62426
+2025-02-07 13:09:36 [INFO] [PID:62427] [gunicorn.error:278] Booting worker with pid: 62427
+2025-02-07 13:09:36 [INFO] [PID:62427] [gunicorn.error:278] Booting worker with pid: 62427
+2025-02-07 13:09:36 [INFO] [PID:62426] [app:1115] Worker 62426 initialized
+2025-02-07 13:09:36 [INFO] [PID:62427] [app:1115] Worker 62427 initialized
+2025-02-07 13:09:36 [INFO] [PID:62428] [gunicorn.error:278] Booting worker with pid: 62428
+2025-02-07 13:09:36 [INFO] [PID:62428] [gunicorn.error:278] Booting worker with pid: 62428
+2025-02-07 13:09:36 [INFO] [PID:62428] [app:1115] Worker 62428 initialized
+2025-02-07 13:09:36 [INFO] [PID:62429] [gunicorn.error:278] Booting worker with pid: 62429
+2025-02-07 13:09:36 [INFO] [PID:62429] [gunicorn.error:278] Booting worker with pid: 62429
+2025-02-07 13:09:36 [INFO] [PID:62429] [app:1115] Worker 62429 initialized
+2025-02-07 13:09:36 [INFO] [PID:62430] [gunicorn.error:278] Booting worker with pid: 62430
+2025-02-07 13:09:36 [INFO] [PID:62430] [gunicorn.error:278] Booting worker with pid: 62430
+2025-02-07 13:09:36 [INFO] [PID:62430] [app:1115] Worker 62430 initialized
+2025-02-07 13:09:36 [INFO] [PID:62431] [gunicorn.error:278] Booting worker with pid: 62431
+2025-02-07 13:09:36 [INFO] [PID:62431] [gunicorn.error:278] Booting worker with pid: 62431
+2025-02-07 13:09:36 [INFO] [PID:62431] [app:1115] Worker 62431 initialized
+2025-02-07 13:09:36 [INFO] [PID:62432] [gunicorn.error:278] Booting worker with pid: 62432
+2025-02-07 13:09:36 [INFO] [PID:62432] [gunicorn.error:278] Booting worker with pid: 62432
+2025-02-07 13:09:36 [INFO] [PID:62432] [app:1115] Worker 62432 initialized
+2025-02-07 13:09:36 [INFO] [PID:62433] [gunicorn.error:278] Booting worker with pid: 62433
+2025-02-07 13:09:36 [INFO] [PID:62433] [gunicorn.error:278] Booting worker with pid: 62433
+2025-02-07 13:09:36 [INFO] [PID:62433] [app:1115] Worker 62433 initialized
+2025-02-07 13:09:36 [INFO] [PID:62434] [gunicorn.error:278] Booting worker with pid: 62434
+2025-02-07 13:09:36 [INFO] [PID:62434] [gunicorn.error:278] Booting worker with pid: 62434
+2025-02-07 13:09:36 [INFO] [PID:62434] [app:1115] Worker 62434 initialized
+2025-02-07 13:09:36 [INFO] [PID:62435] [gunicorn.error:278] Booting worker with pid: 62435
+2025-02-07 13:09:36 [INFO] [PID:62435] [gunicorn.error:278] Booting worker with pid: 62435
+2025-02-07 13:09:36 [INFO] [PID:62435] [app:1115] Worker 62435 initialized
+2025-02-07 13:09:37 [INFO] [PID:62436] [gunicorn.error:278] Booting worker with pid: 62436
+2025-02-07 13:09:37 [INFO] [PID:62436] [gunicorn.error:278] Booting worker with pid: 62436
+2025-02-07 13:09:37 [INFO] [PID:62436] [app:1115] Worker 62436 initialized
+2025-02-07 13:09:37 [INFO] [PID:62437] [gunicorn.error:278] Booting worker with pid: 62437
+2025-02-07 13:09:37 [INFO] [PID:62437] [gunicorn.error:278] Booting worker with pid: 62437
+2025-02-07 13:09:37 [INFO] [PID:62437] [app:1115] Worker 62437 initialized
+2025-02-07 13:13:45 [INFO] [PID:62414] [gunicorn.error:278] Handling signal: int
+2025-02-07 13:13:45 [INFO] [PID:62414] [gunicorn.error:278] Handling signal: int
+2025-02-07 13:13:45 [INFO] [PID:62424] [gunicorn.error:278] Worker exiting (pid: 62424)
+2025-02-07 13:13:45 [INFO] [PID:62425] [gunicorn.error:278] Worker exiting (pid: 62425)
+2025-02-07 13:13:45 [INFO] [PID:62437] [gunicorn.error:278] Worker exiting (pid: 62437)
+2025-02-07 13:13:45 [INFO] [PID:62426] [gunicorn.error:278] Worker exiting (pid: 62426)
+2025-02-07 13:13:45 [INFO] [PID:62422] [gunicorn.error:278] Worker exiting (pid: 62422)
+2025-02-07 13:13:45 [INFO] [PID:62430] [gunicorn.error:278] Worker exiting (pid: 62430)
+2025-02-07 13:13:45 [INFO] [PID:62425] [gunicorn.error:278] Worker exiting (pid: 62425)
+2025-02-07 13:13:45 [INFO] [PID:62437] [gunicorn.error:278] Worker exiting (pid: 62437)
+2025-02-07 13:13:45 [INFO] [PID:62423] [gunicorn.error:278] Worker exiting (pid: 62423)
+2025-02-07 13:13:45 [INFO] [PID:62428] [gunicorn.error:278] Worker exiting (pid: 62428)
+2025-02-07 13:13:45 [INFO] [PID:62424] [gunicorn.error:278] Worker exiting (pid: 62424)
+2025-02-07 13:13:45 [INFO] [PID:62435] [gunicorn.error:278] Worker exiting (pid: 62435)
+2025-02-07 13:13:45 [INFO] [PID:62422] [gunicorn.error:278] Worker exiting (pid: 62422)
+2025-02-07 13:13:45 [INFO] [PID:62431] [gunicorn.error:278] Worker exiting (pid: 62431)
+2025-02-07 13:13:45 [INFO] [PID:62428] [gunicorn.error:278] Worker exiting (pid: 62428)
+2025-02-07 13:13:45 [INFO] [PID:62435] [gunicorn.error:278] Worker exiting (pid: 62435)
+2025-02-07 13:13:45 [INFO] [PID:62431] [gunicorn.error:278] Worker exiting (pid: 62431)
+2025-02-07 13:13:45 [INFO] [PID:62426] [gunicorn.error:278] Worker exiting (pid: 62426)
+2025-02-07 13:13:45 [INFO] [PID:62436] [gunicorn.error:278] Worker exiting (pid: 62436)
+2025-02-07 13:13:45 [INFO] [PID:62430] [gunicorn.error:278] Worker exiting (pid: 62430)
+2025-02-07 13:13:45 [INFO] [PID:62436] [gunicorn.error:278] Worker exiting (pid: 62436)
+2025-02-07 13:13:45 [INFO] [PID:62423] [gunicorn.error:278] Worker exiting (pid: 62423)
+2025-02-07 13:13:45 [INFO] [PID:62420] [gunicorn.error:278] Worker exiting (pid: 62420)
+2025-02-07 13:13:45 [INFO] [PID:62427] [gunicorn.error:278] Worker exiting (pid: 62427)
+2025-02-07 13:13:45 [INFO] [PID:62427] [gunicorn.error:278] Worker exiting (pid: 62427)
+2025-02-07 13:13:45 [INFO] [PID:62429] [gunicorn.error:278] Worker exiting (pid: 62429)
+2025-02-07 13:13:45 [INFO] [PID:62429] [gunicorn.error:278] Worker exiting (pid: 62429)
+2025-02-07 13:13:45 [INFO] [PID:62420] [gunicorn.error:278] Worker exiting (pid: 62420)
+2025-02-07 13:13:45 [INFO] [PID:62432] [gunicorn.error:278] Worker exiting (pid: 62432)
+2025-02-07 13:13:45 [INFO] [PID:62432] [gunicorn.error:278] Worker exiting (pid: 62432)
+2025-02-07 13:13:45 [INFO] [PID:62433] [gunicorn.error:278] Worker exiting (pid: 62433)
+2025-02-07 13:13:45 [INFO] [PID:62433] [gunicorn.error:278] Worker exiting (pid: 62433)
+2025-02-07 13:13:45 [INFO] [PID:62434] [gunicorn.error:278] Worker exiting (pid: 62434)
+2025-02-07 13:13:45 [INFO] [PID:62434] [gunicorn.error:278] Worker exiting (pid: 62434)
+2025-02-07 13:13:47 [INFO] [PID:62414] [gunicorn.error:278] Shutting down: Master
+2025-02-07 13:13:47 [INFO] [PID:62414] [gunicorn.error:278] Shutting down: Master
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Appwrite client initialized successfully
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Database connection successful
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Admin user already exists
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Superuser already exists
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Database initialized successfully
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] User table exists with 2 users
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Registered Routes:
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /new-export, Endpoint: new_export, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /, Endpoint: new_export, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /list, Endpoint: list_exports, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /login, Endpoint: login, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /logout, Endpoint: logout, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'HEAD', 'GET', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Database connection successful
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Admin user already exists
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Superuser already exists
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Database initialized successfully
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] User table exists with 2 users
+2025-02-07 13:13:53 [INFO] [PID:62812] [app] Application initialized successfully
+2025-02-07 13:13:53 [INFO] [PID:62821] [app] Worker 62821 initialized
+2025-02-07 13:13:53 [INFO] [PID:62822] [app] Worker 62822 initialized
+2025-02-07 13:13:53 [INFO] [PID:62823] [app] Worker 62823 initialized
+2025-02-07 13:13:53 [INFO] [PID:62824] [app] Worker 62824 initialized

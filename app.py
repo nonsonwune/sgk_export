@@ -4,10 +4,11 @@ from weasyprint import HTML, CSS
 from weasyprint.urls import URLFetchingError
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
-import logging
 from werkzeug.utils import secure_filename
 from datetime import datetime
+import os
+import logging.config
+import logging.handlers
 import base64
 import qrcode
 import io
@@ -23,24 +24,78 @@ import tempfile
 import json
 
 # Configure logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+import logging.config
+import logging.handlers
+import os
 
-# Load environment variables with error handling
-try:
-    logger.debug("Attempting to load environment variables")
-    from dotenv import load_dotenv
-    load_dotenv()
-    logger.info("Environment variables loaded successfully")
-except ImportError:
-    logger.error("python-dotenv package is not installed. Please run: pip install python-dotenv")
-    raise
-except Exception as e:
-    logger.error(f"Error loading environment variables: {str(e)}")
-    raise
+# Logging configuration
+LOGGING_CONFIG = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_main_process': {
+            '()': 'app.MainProcessFilter'
+        }
+    },
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] [PID:%(process)d] [%(name)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'formatter': 'standard',
+            'class': 'logging.StreamHandler',
+            'stream': 'ext://sys.stdout'
+        },
+        'file': {
+            'level': 'INFO',
+            'formatter': 'standard',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/app.log',
+            'maxBytes': 10485760,  # 10MB
+            'backupCount': 5
+        },
+        'init_console': {
+            'level': 'INFO',
+            'formatter': 'standard',
+            'class': 'logging.StreamHandler',
+            'filters': ['require_main_process'],
+            'stream': 'ext://sys.stdout'
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        'app.init': {
+            'handlers': ['init_console', 'file'],
+            'level': 'INFO',
+            'propagate': False
+        }
+    }
+}
+
+# Create logs directory if it doesn't exist
+os.makedirs('logs', exist_ok=True)
+
+# Custom filter for main process logs
+class MainProcessFilter(logging.Filter):
+    def filter(self, record):
+        return os.environ.get('GUNICORN_WORKER_PROCESS') != 'true'
+
+# Apply logging configuration
+logging.config.dictConfig(LOGGING_CONFIG)
+logger = logging.getLogger(__name__)
+init_logger = logging.getLogger('app.init')
+
+# Function to check if current process is the main Gunicorn process
+def is_main_process():
+    return os.environ.get('GUNICORN_WORKER_PROCESS') != 'true'
 
 # Initialize Flask and extensions
 app = Flask(__name__)
@@ -958,22 +1013,20 @@ def release_lock(lock_file_handle):
 def verify_db_connection():
     """Verify database connection by executing a simple query"""
     try:
-        # Log the database URL (with password masked)
         db_url = app.config['SQLALCHEMY_DATABASE_URI']
         if 'postgresql://' in db_url:
             masked_url = db_url.replace(db_url.split('@')[0].split('://')[-1], '****:****')
-            logger.info(f"Attempting to connect to database: {masked_url}")
+            logger.info(f"Connecting to database: {masked_url}")
         
-        # Test the connection with proper error handling
         try:
             db.session.execute(text('SELECT 1'))
             logger.info("Database connection successful")
             return True
         except Exception as e:
-            logger.error(f"Database query failed: {str(e)}")
+            logger.error(f"Database connection failed: {str(e)}")
             return False
     except Exception as e:
-        logger.error(f"Database connection failed: {str(e)}")
+        logger.error(f"Database configuration error: {str(e)}")
         return False
 
 def init_db():
@@ -1029,6 +1082,30 @@ def log_registered_routes():
     for rule in app.url_map.iter_rules():
         logger.info(f"Route: {rule.rule}, Endpoint: {rule.endpoint}, Methods: {rule.methods}")
 
+# Move the initialization code to a function that will be called in the post_worker_init hook
+def initialize_application():
+    """Initialize the application (database, etc.)"""
+    if is_main_process():
+        with app.app_context():
+            init_db()
+            verify_database()
+            # Remove redundant route logging
+            logger.info("Application initialized successfully")
+
+# Move the initialization code to a function that will be called in the post_worker_init hook
+def worker_init(worker):
+    os.environ['GUNICORN_WORKER_PROCESS'] = 'true'
+    logger.info(f"Worker {worker.pid} initialized")
+
+# Add Gunicorn hooks
+def post_worker_init(worker):
+    worker_init(worker)
+
+def when_ready(server):
+    """Called just after the server is started."""
+    logger.info("Gunicorn server is ready. Starting application initialization...")
+    initialize_application()
+
 # Initialize database when app starts
 with app.app_context():
     init_db()
@@ -1040,11 +1117,9 @@ if __name__ == '__main__':
 
 @app.before_request
 def log_request_info():
-    logger.debug('-------------------------')
-    logger.debug(f'Endpoint: {request.endpoint}')
-    logger.debug(f'Method: {request.method}')
-    logger.debug(f'URL: {request.url}')
-    logger.debug('-------------------------') 
+    """Log only non-static requests at INFO level"""
+    if not request.path.startswith('/static/'):
+        logger.info(f"{request.method} {request.path}")
 
 def calculate_subtotal(export_request):
     """Calculate subtotal from all pricing components"""
