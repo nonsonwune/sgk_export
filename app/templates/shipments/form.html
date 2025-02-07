@@ -1,0 +1,466 @@
+{% extends "base.html" %}
+{# DEBUG: Start of template #}
+
+{% block title %}New Export Form - SGK Global Shipping{% endblock %}
+{# DEBUG: Title block end #}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<style>
+    .signature-pad-container {
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        background: #f8f9fa;
+        margin-bottom: 1rem;
+    }
+
+    .signature-pad {
+        width: 100%;
+        height: 200px;
+        background: #fff;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .signature-pad-controls {
+        padding: 0.5rem;
+        border-top: 1px solid #dee2e6;
+        text-align: right;
+        background: #f8f9fa;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .btn-clear {
+        padding: 0.375rem 0.75rem;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+
+    .btn-clear:hover {
+        background-color: #5a6268;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{# DEBUG: Content block start #}
+<form method="POST" action="{{ url_for('shipments.submit_shipment') }}" enctype="multipart/form-data" class="export-form" novalidate>
+<form action="{{ url_for('shipments.submit_shipment') }}" method="POST" enctype="multipart/form-data" class="export-form" novalidate>
+    <div class="form-container">
+        {# DEBUG: Form container start #}
+        <div class="form-header">
+        <div class="form-title">
+                <i class="fas fa-file-export"></i>
+                <h1>Export Documentation Form</h1>
+            </div>
+            <p class="required-note"><span class="required-star">*</span> Required fields</p>
+        </div>
+
+        <div class="form-card">
+            <div class="form-card-header">
+                <i class="fas fa-hashtag"></i>
+                <h2>Reference Information</h2>
+            </div>
+        <div class="form-group">
+            <label for="waybill_number">Waybill Number</label>
+                <input type="text" id="waybill_number" name="waybill_number" value="Auto-generated" readonly class="readonly-input" aria-label="Auto-generated waybill number">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-card flex-1">
+                <div class="form-card-header">
+                    <i class="fas fa-user-tie"></i>
+                    <h2>Sender Information</h2>
+                </div>
+                <div class="form-group">
+                    <label for="sender_name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="sender_name" name="sender_name" value="{{ contact_data.sender_name|default('') }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="sender_email">Email</label>
+                    <input type="email" id="sender_email" name="sender_email" value="{{ contact_data.sender_email|default('') }}">
+                </div>
+                <div class="form-group">
+                    <label for="sender_address">Address</label>
+                    <input type="text" id="sender_address" name="sender_address" value="{{ contact_data.sender_address|default('') }}">
+                </div>
+                <div class="form-group">
+                    <label for="sender_business">Business</label>
+                    <input type="text" id="sender_business" name="sender_business" value="{{ contact_data.sender_business|default('') }}">
+                </div>
+                <div class="form-group">
+                    <label for="sender_mobile">Mobile <span class="required-star">*</span></label>
+                    <input type="tel" id="sender_mobile" name="sender_mobile" value="{{ contact_data.sender_mobile|default('') }}" required>
+                </div>
+            </div>
+
+            <div class="form-card flex-1">
+                <div class="form-card-header">
+                    <i class="fas fa-user-check"></i>
+                    <h2>Receiver Information</h2>
+                </div>
+                <div class="form-group">
+                    <label for="receiver_name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="receiver_name" name="receiver_name" value="{{ contact_data.receiver_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="receiver_email">Email</label>
+                    <input type="email" id="receiver_email" name="receiver_email" value="{{ contact_data.receiver_email }}">
+                </div>
+                <div class="form-group">
+                    <label for="receiver_address">Address</label>
+                    <input type="text" id="receiver_address" name="receiver_address" value="{{ contact_data.receiver_address }}">
+                </div>
+                <div class="form-group">
+                    <label for="receiver_business">Business</label>
+                    <input type="text" id="receiver_business" name="receiver_business" value="{{ contact_data.receiver_business }}">
+                </div>
+                <div class="form-group">
+                    <label for="receiver_mobile">Mobile <span class="required-star">*</span></label>
+                    <input type="tel" id="receiver_mobile" name="receiver_mobile" value="{{ contact_data.receiver_mobile }}" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>📍 Destination Details</h3>
+            <div class="form-card">
+                <div class="form-card-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h2>Destination Details</h2>
+                </div>
+            <div class="form-row">
+                <div class="form-group">
+                        <label for="destination_address">Address<span class="required-star">*</span></label>
+                        <input type="text" id="destination_address" name="destination_address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                        <label for="destination_country">Country<span class="required-star">*</span></label>
+                        <input type="text" id="destination_country" name="destination_country" class="form-control" required>
+                </div>
+                <div class="form-group">
+                        <label for="destination_postcode">Postcode/Zipcode<span class="required-star">*</span></label>
+                        <input type="text" id="destination_postcode" name="destination_postcode" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-card">
+                <div class="form-card-header">
+                    <i class="fas fa-box"></i>
+                    <h2>Item Details</h2>
+                </div>
+            <div id="items-container">
+                <div class="item-entry">
+                    <div class="form-row">
+                        <div class="form-group">
+                                <label for="description_0">Description <span class="required-star">*</span></label>
+                            <input type="text" id="description_0" name="description[]" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="value_0">Value <span class="required-star">*</span></label>
+                                <input type="number" id="value_0" name="value[]" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="quantity_0">Quantity <span class="required-star">*</span></label>
+                            <input type="number" id="quantity_0" name="quantity[]" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="weight_0">Weight (kg) <span class="required-star">*</span></label>
+                            <input type="number" id="weight_0" name="weight[]" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item_image_0">Item Image</label>
+                            <input type="file" id="item_image_0" name="item_image[]" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <button type="button" class="add-item-btn" onclick="addItemEntry()">
+                    <i class="fas fa-plus"></i> Add Another Item
+                </button>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-card">
+                <div class="form-card-header">
+                    <i class="fas fa-calculator"></i>
+                    <h2>Pricing Details</h2>
+                </div>
+            <div class="pricing-grid">
+                <div class="form-group">
+                    <label for="freight">Freight Pricing</label>
+                        <input type="number" id="freight" name="freight" value="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="additional">Additional Charges</label>
+                        <input type="number" id="additional" name="additional" value="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="pickup">Pick Up Charge</label>
+                        <input type="number" id="pickup" name="pickup" value="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="handling">Handling Fees</label>
+                        <input type="number" id="handling" name="handling" value="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="crating">Crating</label>
+                        <input type="number" id="crating" name="crating" value="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="insurance">Insurance Charge</label>
+                        <input type="number" id="insurance" name="insurance" value="0" step="0.01">
+                </div>
+            </div>
+            <div class="total-section">
+                <div class="total-row">
+                    <div>Subtotal</div>
+                    <div id="subtotal">$0.00</div>
+                </div>
+                <div class="total-row">
+                    <div>VAT (7%)</div>
+                    <div id="vat">$0.00</div>
+                </div>
+                <div class="total-row final">
+                    <div>Total Amount</div>
+                    <div id="total">$0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-card">
+                <div class="form-card-header">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h2>Additional Details</h2>
+                </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="is_collection" name="is_collection">
+                <label for="is_collection">Is Collection?</label>
+            </div>
+            <div class="form-group">
+                <label for="customer_group">Customer Group</label>
+                <select id="customer_group" name="customer_group" class="form-select" required>
+                    <option value="">Select Customer Group</option>
+                    <option value="Walk In">Walk In - New Customers</option>
+                    <option value="Returning">Returning - Established Customers</option>
+                    <option value="Referred">Referred - Recommended Customers</option>
+                    <option value="Corporate">Corporate - Business Accounts</option>
+                    <option value="Online">Online - Digital Channel Customers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="order_booked_by">Order Booked By</label>
+                <input type="text" id="order_booked_by" name="order_booked_by" value="{{ current_user.name }}" class="form-control" readonly style="background-color: #f8f9fa; border-color: #dee2e6;">
+            </div>
+            <div class="form-group">
+                <label for="signature-pad">Sender Signature <span class="required-star">*</span></label>
+                <div class="signature-pad-container">
+                    <canvas id="signature-pad" class="signature-pad"></canvas>
+                    <div class="signature-pad-controls">
+                        <button type="button" class="btn-clear">
+                            <i class="fas fa-eraser"></i> Clear Signature
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="sender_signature" id="signature-input" required>
+                <div class="error-message" aria-live="polite"></div>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I accept the terms and conditions</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Submit Export Form
+            </button>
+        </div>
+    </div>
+</form>
+{# DEBUG: Content block end #}
+{% endblock %}
+
+{% block scripts %}
+{# DEBUG: Scripts block start #}
+<script>
+// Initialize item counter
+let itemCounter = 0;
+
+function addItemEntry() {
+    itemCounter++;
+    const container = document.getElementById('items-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'item-entry';
+    
+    newEntry.innerHTML = `
+        <div class="form-row">
+            <div class="form-group">
+                <label for="description_${itemCounter}">Description <span class="required-star">*</span></label>
+                <input type="text" id="description_${itemCounter}" name="description[]" required>
+            </div>
+            <div class="form-group">
+                <label for="value_${itemCounter}">Value <span class="required-star">*</span></label>
+                <input type="number" id="value_${itemCounter}" name="value[]" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity_${itemCounter}">Quantity <span class="required-star">*</span></label>
+                <input type="number" id="quantity_${itemCounter}" name="quantity[]" required>
+            </div>
+            <div class="form-group">
+                <label for="weight_${itemCounter}">Weight (kg) <span class="required-star">*</span></label>
+                <input type="number" id="weight_${itemCounter}" name="weight[]" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="item_image_${itemCounter}">Item Image</label>
+                <input type="file" id="item_image_${itemCounter}" name="item_image[]" accept="image/*">
+            </div>
+        </div>
+        <button type="button" class="remove-item-btn" onclick="removeItemEntry(this)">
+            <i class="fas fa-trash"></i> Remove Item
+        </button>
+    `;
+    
+    container.appendChild(newEntry);
+}
+
+function removeItemEntry(button) {
+    button.closest('.item-entry').remove();
+}
+
+// Initialize pricing calculations
+document.addEventListener('DOMContentLoaded', function() {
+    const pricingInputs = document.querySelectorAll('#freight, #additional, #pickup, #handling, #crating, #insurance');
+    
+    function calculateTotals() {
+        let subtotal = 0;
+        pricingInputs.forEach(input => {
+            subtotal += parseFloat(input.value || 0);
+        });
+        
+        const vat = subtotal * 0.07;
+        const total = subtotal + vat;
+        
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('vat').textContent = `$${vat.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+    
+    pricingInputs.forEach(input => {
+        input.addEventListener('input', calculateTotals);
+    });
+    
+    calculateTotals();
+});
+
+$(document).ready(function() {
+    // Existing form validation
+    $('form').on('submit', function(e) {
+        let isValid = true;
+        
+        // Validate sender and receiver fields
+        const requiredFields = [
+            'sender_name', 'sender_mobile',
+            'receiver_name', 'receiver_mobile',
+            'destination_address', 'destination_country', 'destination_postcode'
+        ];
+        
+        requiredFields.forEach(field => {
+            const input = $(`#${field}`);
+            if (!input.val().trim()) {
+                isValid = false;
+                input.addClass('is-invalid');
+                const fieldName = field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                input.next('.invalid-feedback').remove();
+                input.after(`<div class="invalid-feedback">${fieldName} is required</div>`);
+            } else {
+                input.removeClass('is-invalid');
+                input.next('.invalid-feedback').remove();
+            }
+        });
+
+        // Validate at least one item
+        if ($('.item-entry').length === 0) {
+            isValid = false;
+            $('#addItemBtn').addClass('btn-danger').removeClass('btn-primary');
+            if (!$('#itemError').length) {
+                $('#addItemBtn').after('<div id="itemError" class="text-danger mt-2">Please add at least one item</div>');
+            }
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+            // Scroll to first error
+            const firstError = $('.is-invalid').first();
+            if (firstError.length) {
+                $('html, body').animate({
+                    scrollTop: firstError.offset().top - 100
+                }, 500);
+            }
+        }
+    });
+
+    // Remove validation styling on input
+    $('input').on('input', function() {
+        $(this).removeClass('is-invalid');
+        $(this).next('.invalid-feedback').remove();
+    });
+});
+
+let signaturePad;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('signature-pad');
+    signaturePad = new SignaturePad(canvas, {
+        backgroundColor: 'rgb(255, 255, 255)',
+        penColor: 'rgb(0, 0, 0)'
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Clear button
+    document.querySelector('.btn-clear').addEventListener('click', () => {
+        signaturePad.clear();
+        document.getElementById('signature-input').value = '';
+    });
+
+    // Form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (signaturePad.isEmpty()) {
+            e.preventDefault();
+            const container = document.querySelector('.signature-pad-container');
+            container.style.borderColor = '#dc3545';
+            // Show error message
+            document.querySelector('.error-message').textContent = 'Please provide a signature';
+            return;
+        }
+        // Convert to PNG and set hidden input value
+        const signatureData = signaturePad.toDataURL();
+        document.getElementById('signature-input').value = signatureData;
+    });
+});
+
+function resizeCanvas() {
+    const canvas = document.getElementById('signature-pad');
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext('2d').scale(ratio, ratio);
+    signaturePad.clear();
+}
+</script>
+{# DEBUG: Scripts block end #}
+{% endblock %} 

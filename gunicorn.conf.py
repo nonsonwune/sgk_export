@@ -77,15 +77,4 @@ tmp_upload_dir = None
 
 # SSL
 keyfile = None
-certfile = None
-
-# Hook functions
-def post_worker_init(worker):
-    """Called just after a worker has been initialized."""
-    from app import post_worker_init
-    post_worker_init(worker)
-
-def when_ready(server):
-    """Called just after the server is started."""
-    from app import when_ready
-    when_ready(server) 
+certfile = None 

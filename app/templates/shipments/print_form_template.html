@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Print Form Template - SGK Global Shipping{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-print"></i> Print Form Template</h2>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> This is a template for printing shipping forms. Select a shipment to print its form.
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="{{ url_for('main.print_form_template') }}" method="GET" class="mb-4">
+                        <div class="form-group">
+                            <label for="shipment_id">Select Shipment</label>
+                            <select name="shipment_id" id="shipment_id" class="form-control" required>
+                                <option value="">-- Select a Shipment --</option>
+                                {% for shipment in shipments %}
+                                <option value="{{ shipment.id }}">
+                                    {{ shipment.waybill_number }} - {{ shipment.sender_name }} to {{ shipment.receiver_name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-print"></i> Print Form
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

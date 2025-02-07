@@ -1,0 +1,879 @@
+{% extends "base.html" %}
+
+{% block title %}Export Request Preview - SGK Global Shipping{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Enhanced Preview Styles */
+    .preview-container {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        overflow: hidden;
+        margin: 2rem auto;
+        max-width: 1200px;
+    }
+
+    .document-header {
+        color: white;
+        padding: 2rem 3rem;
+        position: relative;
+    }
+
+    .company-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .company-logo {
+        width: 140px;
+        height: auto;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .company-info h1 {
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+    }
+
+    .document-meta {
+        display: flex;
+        gap: 2.5rem;
+        background: rgba(64, 0, 255, 0.119);
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: rgba(0, 0, 0, 0.483);
+    }
+
+    .status-badge {
+        padding: 0.35rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .status-draft { background: #FFD700; color: #724d00; }
+    .status-saved { background: #28a745; color: white; }
+
+    .info-section {
+        padding: 2rem 3rem;
+    }
+
+    .info-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-card {
+        background: #ffffff;
+        border: 1px solid #eef0f3;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-header {
+        background: #f8f9fe;
+        padding: 1.25rem;
+        border-bottom: 1px solid #eef0f3;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .card-header i {
+        font-size: 1.4rem;
+        color: #4169E1;
+    }
+
+    .card-header h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    .info-content {
+        padding: 1.5rem;
+    }
+
+    .info-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f5f6f8;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .label {
+        color: #718096;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .value {
+        color: #2d3748;
+        font-weight: 500;
+    }
+
+    .items-table {
+        border: 1px solid #eef0f3;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1.5rem;
+    }
+
+    .items-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .items-table th {
+        background: #f8f9fe;
+        padding: 1rem;
+        text-align: left;
+        color: #4169E1;
+        font-weight: 600;
+        border-bottom: 2px solid #eef0f3;
+    }
+
+    .items-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #eef0f3;
+        vertical-align: top;
+    }
+
+    .items-table tr:nth-child(even) {
+        background: #fafbff;
+    }
+
+    .pricing-summary {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 3rem;
+        padding: 1.5rem;
+    }
+
+    .pricing-details {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .total-section {
+        background: #f8f9fe;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid #eef0f3;
+    }
+
+    .total-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        color: #2d3748;
+    }
+
+    .total-row.final {
+        font-size: 1.3rem;
+        font-weight: 600;
+        padding-top: 1rem;
+        margin-top: 1rem;
+        border-top: 2px solid #eef0f3;
+    }
+
+    .view-images-btn {
+        padding: 0.5rem 0.75rem;
+        background: rgba(65, 105, 225, 0.1);
+        color: #4169E1;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .view-images-btn:hover {
+        background: #4169E1;
+        color: white;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        padding: 2rem 3rem;
+        background: #f8f9fe;
+        border-top: 1px solid #eef0f3;
+    }
+
+    .action-button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+    }
+
+    .action-button.primary {
+        background: #4169E1;
+        color: white;
+        border: none;
+    }
+
+    .action-button.primary:hover {
+        background: #3154b4;
+    }
+
+    .action-button.secondary {
+        background: #718096;
+        color: white;
+        border: none;
+    }
+
+    .action-button.secondary:hover {
+        background: #4a5568;
+    }
+
+    /* Enhanced Modal */
+    .image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        max-height: 90vh;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+    }
+
+    #imageError {
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #imageError i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .close-modal {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+    }
+
+    .close-modal:hover {
+        opacity: 1;
+    }
+
+    @media print {
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 12pt;
+            line-height: 1.3;
+        }
+
+        .main-nav,
+        .action-buttons,
+        .view-images-btn,
+        .no-print,
+        th.no-print,
+        td.no-print {
+            display: none !important;
+        }
+
+        .preview-container {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
+
+        .document-header { 
+            background: white !important; 
+            color: #000 !important;
+            padding: 1rem !important;
+            page-break-after: avoid;
+        }
+
+        .company-header {
+            margin-bottom: 1rem !important;
+        }
+
+        .company-logo {
+            width: 100px !important;
+            height: auto !important;
+        }
+
+        .info-section {
+            padding: 0.5rem !important;
+        }
+
+        .document-meta {
+            background: none !important;
+            padding: 0.5rem 0 !important;
+            color: #000 !important;
+        }
+
+        .info-cards-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.5rem !important;
+            page-break-inside: avoid;
+        }
+
+        .info-card {
+            break-inside: avoid;
+            border: 1px solid #ddd !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .card-header {
+            background: #f8f9fa !important;
+            padding: 0.5rem !important;
+        }
+
+        .info-content {
+            padding: 0.5rem !important;
+        }
+
+        .items-table {
+            margin: 0.5rem 0 !important;
+            width: 100% !important;
+            page-break-inside: auto;
+        }
+
+        .items-table th {
+            background: #f8f9fa !important;
+            color: #000 !important;
+        }
+
+        .items-table tr {
+            page-break-inside: avoid;
+        }
+
+        .pricing-summary {
+            display: grid !important;
+            grid-template-columns: 1fr 300px !important;
+            gap: 1rem !important;
+            page-break-inside: avoid;
+        }
+
+        .total-section {
+            background: #f8f9fa !important;
+            border: 1px solid #ddd !important;
+        }
+
+        .qr-code-section {
+            margin: 1rem 0 !important;
+            page-break-inside: avoid;
+        }
+
+        .qr-code-container {
+            width: 120px !important;
+            height: 120px !important;
+        }
+
+        .signature-container {
+            margin-top: 1rem !important;
+            page-break-inside: avoid;
+        }
+
+        .signature-image {
+            max-width: 150px !important;
+            border: 1px solid #ddd !important;
+        }
+
+        /* Ensure page breaks don't occur in the middle of sections */
+        .info-card,
+        .items-table thead,
+        .pricing-summary,
+        .signature-container {
+            page-break-inside: avoid;
+        }
+    }
+
+    .company-info-section {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .qr-code-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .qr-code-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .qr-code-error {
+        text-align: center;
+        color: #dc3545;
+        display: none;
+    }
+
+    .qr-code-error i {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .qr-code-error span {
+        display: block;
+        font-size: 12px;
+    }
+
+    .qr-code-image {
+        max-width: 100%;
+        height: auto;
+        display: none;
+    }
+
+    .qr-code-label {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #718096;
+    }
+
+    .signature-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+    }
+
+    .signature-image {
+        max-width: 200px;
+        max-height: 100px;
+        object-fit: contain;
+        border: 1px solid #dee2e6;
+        padding: 0.5rem;
+        background: white;
+        border-radius: 4px;
+    }
+
+    /* Status Update Button Styles */
+    .btn-success.btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        transition: all 0.2s ease-in-out;
+        margin-left: 0.5rem;
+    }
+    
+    .btn-success.btn-sm:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+    
+    .btn-success.btn-sm i {
+        margin-right: 0.25rem;
+    }
+    
+    /* Status Badge Styles */
+    .status-badge.status-pending {
+        background-color: #ffc107;
+        color: #000;
+    }
+    
+    .status-badge.status-saved {
+        background-color: #28a745;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="preview-container">
+    <div class="document-header">
+        <div class="company-header">
+            <div class="company-info-section">
+            <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
+                <div class="company-info">
+                    <h1>Export Documentation</h1>
+                    <div class="document-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Waybill #{{ shipment.waybill_number }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="status-badge status-{{ shipment.status }}">
+                                <i class="fas fa-{{ 'check-circle' if shipment.status == 'saved' else 'edit' }}"></i>
+                                {{ shipment.status|title }}
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>{{ shipment.created_at.strftime('%B %d, %Y') }}</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <div class="qr-code-section">
+                {% if shipment.qr_code %}
+                <div class="qr-code-container">
+                    <img src="{{ shipment.qr_code }}" 
+                         alt="QR Code" 
+                         class="qr-code-image"
+                         onerror="if(this.nextElementSibling) { this.style.display='none'; this.nextElementSibling.style.display='block'; }"
+                         onload="if(this.nextElementSibling) { this.style.display='block'; this.nextElementSibling.style.display='none'; }">
+                    <div class="qr-code-error" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>QR Code not available</span>
+                    </div>
+                </div>
+                <span class="qr-code-label">Scan for details</span>
+                {% endif %}
+            </div>
+            </div>
+        </div>
+
+    <div class="info-section">
+        <div class="info-cards-grid">
+            <div class="info-card">
+                <div class="card-header">
+                    <i class="fas fa-user-tie"></i>
+                    <h2>Sender Information</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-row">
+                        <span class="label">Name:</span>
+                        <span class="value">{{ shipment.sender_name }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value">{{ shipment.sender_email or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Address:</span>
+                        <span class="value">{{ shipment.sender_address or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Business:</span>
+                        <span class="value">{{ shipment.sender_business or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Mobile:</span>
+                        <span class="value">{{ shipment.sender_mobile }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <i class="fas fa-user-check"></i>
+                    <h2>Receiver Information</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-row">
+                        <span class="label">Name:</span>
+                        <span class="value">{{ shipment.receiver_name }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value">{{ shipment.receiver_email or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Address:</span>
+                        <span class="value">{{ shipment.receiver_address or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Business:</span>
+                        <span class="value">{{ shipment.receiver_business or 'N/A' }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Mobile:</span>
+                        <span class="value">{{ shipment.receiver_mobile }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-map-marker-alt"></i>
+                <h2>Destination Details</h2>
+            </div>
+            <div class="info-content">
+                <div class="info-row">
+                    <span class="label">Address:</span>
+                    <span class="value">{{ shipment.destination_address }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Country:</span>
+                    <span class="value">{{ shipment.destination_country }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Postcode:</span>
+                    <span class="value">{{ shipment.destination_postcode }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-box-open"></i>
+                <h2>Shipment Items</h2>
+            </div>
+            <div class="items-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Value</th>
+                            <th>Weight (kg)</th>
+                            <th class="no-print">Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in shipment.items %}
+                        <tr>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ "%.2f"|format(item.value) }}</td>
+                            <td>{{ "%.1f"|format(item.weight) }}</td>
+                            <td class="no-print">
+                                {% if item.image_file_id %}
+                                <button class="view-images-btn" data-image="{{ url_for('main.serve_image', file_id=item.image_file_id) }}">
+                                    <i class="fas fa-expand"></i> View
+                                </button>
+                                {% else %}
+                                <span class="text-muted">No image</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-receipt"></i>
+                <h2>Financial Summary</h2>
+            </div>
+            <div class="pricing-summary">
+                <div class="pricing-details">
+                    <div class="info-row">
+                        <span class="label">Freight Pricing:</span>
+                        <span class="value">${{ "%.2f"|format(shipment.freight_pricing) }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Additional Charges:</span>
+                        <span class="value">${{ "%.2f"|format(shipment.additional_charges) }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Pick Up Charge:</span>
+                        <span class="value">${{ "%.2f"|format(shipment.pickup_charge) }}</span>
+                </div>
+                <div class="info-row">
+                        <span class="label">Handling Fees:</span>
+                        <span class="value">${{ "%.2f"|format(shipment.handling_fees) }}</span>
+                </div>
+                <div class="info-row">
+                        <span class="label">Crating:</span>
+                        <span class="value">${{ "%.2f"|format(shipment.crating) }}</span>
+                </div>
+                <div class="info-row">
+                        <span class="label">Insurance Charge:</span>
+                        <span class="value">${{ "%.2f"|format(shipment.insurance_charge) }}</span>
+                    </div>
+                </div>
+            <div class="total-section">
+                <div class="total-row">
+                        <span>Subtotal</span>
+                        <span>${{ "%.2f"|format(subtotal) }}</span>
+                </div>
+                <div class="total-row">
+                        <span>VAT (7%)</span>
+                        <span>${{ "%.2f"|format(vat) }}</span>
+                </div>
+                <div class="total-row final">
+                        <span>Total Amount</span>
+                        <span>${{ "%.2f"|format(total) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <i class="fas fa-clipboard-list"></i>
+                <h2>Additional Details</h2>
+            </div>
+            <div class="info-content">
+                <div class="info-row">
+                    <span class="label">Collection Status:</span>
+                    <span class="value">{{ "Yes" if shipment.is_collection else "No" }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Customer Group:</span>
+                    <span class="value">{{ shipment.customer_group }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Order Booked By:</span>
+                    <span class="value">{{ shipment.order_booked_by }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Sender Signature:</span>
+                    <span class="value">
+                        {% if shipment.sender_signature %}
+                            <div class="signature-container">
+                                <img src="{{ shipment.sender_signature if shipment.sender_signature.startswith('data:') else url_for('main.serve_image', file_id=shipment.sender_signature) }}" 
+                                     alt="Sender's Signature" 
+                                     class="signature-image"
+                                     onerror="if(this.parentElement.querySelector('.signature-error')) { this.style.display='none'; this.parentElement.querySelector('.signature-error').style.display='block'; }"
+                                     onload="if(this.parentElement.querySelector('.signature-error')) { this.style.display='block'; this.parentElement.querySelector('.signature-error').style.display='none'; }">
+                                <div class="signature-error" style="display: none;">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Signature not available</span>
+                                </div>
+                            </div>
+                        {% else %}
+                            <span class="text-muted">No signature provided</span>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            {% if shipment.status == 'pending' %}
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" style="display: inline;">
+                <input type="hidden" name="status" value="saved">
+                <button type="submit" class="action-button primary">
+                    <i class="fas fa-check"></i> Mark as Saved
+                </button>
+            </form>
+            {% endif %}
+            <button onclick="window.print()" class="action-button secondary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-image" src="" alt="Item Image" 
+             onerror="this.style.display='none'; document.getElementById('imageError').style.display='block';"
+             onload="this.style.display='block'; document.getElementById('imageError').style.display='none';">
+        <div id="imageError" style="display:none; color: #dc3545; text-align: center;">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>Image not available</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('.view-images-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const imageUrl = this.getAttribute('data-image');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        
+        console.log('Loading image:', imageUrl);
+        modalImage.src = imageUrl;
+        modal.style.display = 'block';
+    });
+});
+
+document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('imageModal').style.display = 'none';
+});
+
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('imageModal');
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+</script>
+{% endblock %} 

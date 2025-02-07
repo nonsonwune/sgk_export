@@ -3,7 +3,8 @@ uploads/
 __pycache__/
 venv/
 /venv
-
+migrate_to_render.txt
 .env
 *.sql
+
 appWrite_bucket_docs.md

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}View Shipment - {{ shipment.waybill_number }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2>Shipment Details - {{ shipment.waybill_number }}</h2>
+            <div>
+                <a href="{{ url_for('shipments.edit_shipment', shipment_id=shipment.id) }}" class="btn btn-warning">Edit</a>
+                <a href="{{ url_for('shipments.list_shipments') }}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Sender Information -->
+                <div class="col-md-6">
+                    <h4>Sender Information</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{ shipment.sender_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ shipment.sender_email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mobile:</th>
+                            <td>{{ shipment.sender_mobile }}</td>
+                        </tr>
+                        <tr>
+                            <th>Business:</th>
+                            <td>{{ shipment.sender_business }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address:</th>
+                            <td>{{ shipment.sender_address }}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Receiver Information -->
+                <div class="col-md-6">
+                    <h4>Receiver Information</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{ shipment.receiver_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ shipment.receiver_email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mobile:</th>
+                            <td>{{ shipment.receiver_mobile }}</td>
+                        </tr>
+                        <tr>
+                            <th>Business:</th>
+                            <td>{{ shipment.receiver_business }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address:</th>
+                            <td>{{ shipment.receiver_address }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Shipment Details -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h4>Shipment Details</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Status:</th>
+                            <td>
+                                <span class="badge bg-{{ 'success' if shipment.status == 'completed' else 'warning' }}">
+                                    {{ shipment.status }}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Created At:</th>
+                            <td>{{ shipment.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Destination Address:</th>
+                            <td>{{ shipment.destination_address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Destination Country:</th>
+                            <td>{{ shipment.destination_country }}</td>
+                        </tr>
+                        <tr>
+                            <th>Destination Postcode:</th>
+                            <td>{{ shipment.destination_postcode }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pricing Information -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h4>Pricing Details</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Freight Pricing:</th>
+                            <td>${{ "%.2f"|format(shipment.freight_pricing or 0) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Additional Charges:</th>
+                            <td>${{ "%.2f"|format(shipment.additional_charges or 0) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pickup Charge:</th>
+                            <td>${{ "%.2f"|format(shipment.pickup_charge or 0) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Handling Fees:</th>
+                            <td>${{ "%.2f"|format(shipment.handling_fees or 0) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Crating:</th>
+                            <td>${{ "%.2f"|format(shipment.crating or 0) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Insurance Charge:</th>
+                            <td>${{ "%.2f"|format(shipment.insurance_charge or 0) }}</td>
+                        </tr>
+                        <tr class="table-primary">
+                            <th>Total:</th>
+                            <td>${{ "%.2f"|format(shipment.total or 0) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Items -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h4>Items</h4>
+                    {% if shipment.items %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Value</th>
+                                <th>Quantity</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in shipment.items %}
+                            <tr>
+                                <td>{{ item.description }}</td>
+                                <td>${{ "%.2f"|format(item.value or 0) }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.weight }} kg</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p>No items added to this shipment.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

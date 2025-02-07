@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        An error occurred while loading the dashboard. Please try again later.
+    </div>
+    {% else %}
+    <h2>Dashboard</h2>
+    
+    <!-- Recent Shipments -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Recent Shipments</h5>
+        </div>
+        <div class="card-body">
+            {% if recent_shipments %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Waybill</th>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for shipment in recent_shipments %}
+                        <tr>
+                            <td><a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}">{{ shipment.waybill_number }}</a></td>
+                            <td>{{ shipment.sender_name }}</td>
+                            <td>{{ shipment.receiver_name }}</td>
+                            <td><span class="badge bg-{{ shipment.status|lower }}">{{ shipment.status }}</span></td>
+                            <td>{{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted">No recent shipments found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Monthly Statistics -->
+    {% if monthly_stats %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Monthly Statistics</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h6>Total Shipments</h6>
+                        <p class="h3">{{ monthly_stats.total_shipments }}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h6>Total Revenue</h6>
+                        <p class="h3">${{ "%.2f"|format(monthly_stats.total_revenue or 0) }}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h6>Delivered Shipments</h6>
+                        <p class="h3">{{ monthly_stats.delivered_shipments }}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h6>Active Shipments</h6>
+                        <p class="h3">{{ monthly_stats.active_shipments }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %} 
