@@ -72,32 +72,28 @@
         <div class="form-row">
             <div class="form-card flex-1">
                 <div class="form-card-header">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-user-tie"></i>
                     <h2>Sender Information</h2>
                 </div>
                 <div class="form-group">
                     <label for="sender_name">Name <span class="required-star">*</span></label>
-                    <input type="text" id="sender_name" name="sender_name" required 
-                           class="form-control" aria-required="true">
-                    <div class="error-message" aria-live="polite"></div>
+                    <input type="text" id="sender_name" name="sender_name" value="{{ contact_data.sender_name }}" required>
                 </div>
                 <div class="form-group">
                     <label for="sender_email">Email</label>
-                    <input type="email" id="sender_email" name="sender_email" 
-                           class="form-control" aria-describedby="sender_email_help">
-                    <small id="sender_email_help" class="help-text">For shipping updates and notifications</small>
+                    <input type="email" id="sender_email" name="sender_email" value="{{ contact_data.sender_email }}">
                 </div>
                 <div class="form-group">
                     <label for="sender_address">Address</label>
-                    <textarea id="sender_address" name="sender_address" rows="3"></textarea>
+                    <input type="text" id="sender_address" name="sender_address" value="{{ contact_data.sender_address }}">
                 </div>
                 <div class="form-group">
-                    <label for="sender_business">Business Name</label>
-                    <input type="text" id="sender_business" name="sender_business">
+                    <label for="sender_business">Business</label>
+                    <input type="text" id="sender_business" name="sender_business" value="{{ contact_data.sender_business }}">
                 </div>
                 <div class="form-group">
-                    <label for="sender_mobile">Mobile Number</label>
-                    <input type="text" id="sender_mobile" name="sender_mobile" required>
+                    <label for="sender_mobile">Mobile <span class="required-star">*</span></label>
+                    <input type="tel" id="sender_mobile" name="sender_mobile" value="{{ contact_data.sender_mobile }}" required>
                 </div>
             </div>
 
@@ -107,24 +103,24 @@
                     <h2>Receiver Information</h2>
                 </div>
                 <div class="form-group">
-                    <label for="receiver_name">Name</label>
-                    <input type="text" id="receiver_name" name="receiver_name" required>
+                    <label for="receiver_name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="receiver_name" name="receiver_name" value="{{ contact_data.receiver_name }}" required>
                 </div>
                 <div class="form-group">
                     <label for="receiver_email">Email</label>
-                    <input type="email" id="receiver_email" name="receiver_email">
+                    <input type="email" id="receiver_email" name="receiver_email" value="{{ contact_data.receiver_email }}">
                 </div>
                 <div class="form-group">
                     <label for="receiver_address">Address</label>
-                    <textarea id="receiver_address" name="receiver_address" rows="3"></textarea>
+                    <input type="text" id="receiver_address" name="receiver_address" value="{{ contact_data.receiver_address }}">
                 </div>
                 <div class="form-group">
-                    <label for="receiver_business">Business Name</label>
-                    <input type="text" id="receiver_business" name="receiver_business">
+                    <label for="receiver_business">Business</label>
+                    <input type="text" id="receiver_business" name="receiver_business" value="{{ contact_data.receiver_business }}">
                 </div>
                 <div class="form-group">
-                    <label for="receiver_mobile">Mobile Number</label>
-                    <input type="text" id="receiver_mobile" name="receiver_mobile" required>
+                    <label for="receiver_mobile">Mobile <span class="required-star">*</span></label>
+                    <input type="tel" id="receiver_mobile" name="receiver_mobile" value="{{ contact_data.receiver_mobile }}" required>
                 </div>
             </div>
         </div>

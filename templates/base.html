@@ -25,6 +25,29 @@
             <a href="{{ url_for('list_exports') }}" class="nav-link {% if request.endpoint == 'list_exports' %}active{% endif %}">
                 <i class="fas fa-list"></i> Export List
             </a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-address-book"></i> Contacts
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('list_senders') }}">
+                            <i class="fas fa-user-tie"></i> Senders
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('list_receivers') }}">
+                            <i class="fas fa-user-check"></i> Receivers
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('list_all_contacts') }}">
+                            <i class="fas fa-users"></i> All Contacts
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <a href="{{ url_for('print_form_template') }}" class="nav-link">
                 <i class="fas fa-pen"></i> Print Form
             </a>

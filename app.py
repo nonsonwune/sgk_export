@@ -339,8 +339,21 @@ def new_export():
     logger.debug(f'Request path: {request.path}')
     logger.debug(f'Request endpoint: {request.endpoint}')
     try:
-        logger.debug('Attempting to render form.html template')
-        return render_template('form.html')
+        # Get contact information from query parameters
+        contact_data = {
+            'sender_name': request.args.get('sender_name', ''),
+            'sender_email': request.args.get('sender_email', ''),
+            'sender_mobile': request.args.get('sender_mobile', ''),
+            'sender_business': request.args.get('sender_business', ''),
+            'sender_address': request.args.get('sender_address', ''),
+            'receiver_name': request.args.get('receiver_name', ''),
+            'receiver_email': request.args.get('receiver_email', ''),
+            'receiver_mobile': request.args.get('receiver_mobile', ''),
+            'receiver_business': request.args.get('receiver_business', ''),
+            'receiver_address': request.args.get('receiver_address', '')
+        }
+        logger.debug('Attempting to render form.html template with contact data')
+        return render_template('form.html', contact_data=contact_data)
     except Exception as e:
         logger.error(f'Error rendering form.html: {str(e)}')
         raise
@@ -1298,4 +1311,238 @@ def delete_admin(user_id):
         logger.error(f"Error deleting admin: {str(e)}")
         flash('Error deleting administrator.', 'error')
     
-    return redirect(url_for('manage_admins')) 
+    return redirect(url_for('manage_admins'))
+
+@app.route('/contacts/senders')
+@login_required
+def list_senders():
+    logger.debug('Accessing senders list')
+    try:
+        page = request.args.get('page', 1, type=int)
+        per_page = 12  # Number of contacts per page
+        
+        # Get unique senders from export requests with pagination
+        senders = db.session.query(
+            ExportRequest.sender_name,
+            ExportRequest.sender_email,
+            ExportRequest.sender_mobile,
+            ExportRequest.sender_business,
+            ExportRequest.sender_address,
+            ExportRequest.customer_group
+        ).distinct()
+        
+        # Get total count for pagination
+        total = senders.count()
+        logger.debug(f'Total senders found: {total}')
+        
+        # Apply pagination
+        senders = senders.limit(per_page).offset((page - 1) * per_page).all()
+        
+        logger.debug(f'Found {len(senders)} senders for page {page}')
+        
+        # Convert to list of dictionaries for template
+        contacts = [{
+            'name': s.sender_name,
+            'email': s.sender_email,
+            'mobile': s.sender_mobile,
+            'business': s.sender_business,
+            'address': s.sender_address,
+            'customer_group': s.customer_group
+        } for s in senders]
+        
+        # Calculate pagination values
+        total_pages = (total + per_page - 1) // per_page
+        has_prev = page > 1
+        has_next = page < total_pages
+        
+        # Calculate start and end indices
+        start_index = (page - 1) * per_page + 1
+        end_index = min(page * per_page, total)
+        
+        logger.debug(f'Pagination: page={page}, total_pages={total_pages}, start_index={start_index}, end_index={end_index}')
+        
+        # Create pagination object
+        pagination = {
+            'page': page,
+            'per_page': per_page,
+            'total': total,
+            'total_pages': total_pages,
+            'has_prev': has_prev,
+            'has_next': has_next,
+            'prev_page': page - 1 if has_prev else None,
+            'next_page': page + 1 if has_next else None,
+            'start_index': start_index,
+            'end_index': end_index
+        }
+        
+        return render_template('contacts.html', 
+                             contacts=contacts, 
+                             contact_type='sender',
+                             pagination=pagination)
+    except Exception as e:
+        logger.error(f'Error in list_senders: {str(e)}')
+        flash('Error loading sender list', 'error')
+        return redirect(url_for('new_export'))
+
+@app.route('/contacts/receivers')
+@login_required
+def list_receivers():
+    logger.debug('Accessing receivers list')
+    try:
+        page = request.args.get('page', 1, type=int)
+        per_page = 12  # Number of contacts per page
+        
+        # Get unique receivers from export requests with pagination
+        receivers = db.session.query(
+            ExportRequest.receiver_name,
+            ExportRequest.receiver_email,
+            ExportRequest.receiver_mobile,
+            ExportRequest.receiver_business,
+            ExportRequest.receiver_address,
+            ExportRequest.customer_group
+        ).distinct()
+        
+        # Get total count for pagination
+        total = receivers.count()
+        logger.debug(f'Total receivers found: {total}')
+        
+        # Apply pagination
+        receivers = receivers.limit(per_page).offset((page - 1) * per_page).all()
+        
+        logger.debug(f'Found {len(receivers)} receivers for page {page}')
+        
+        # Convert to list of dictionaries for template
+        contacts = [{
+            'name': r.receiver_name,
+            'email': r.receiver_email,
+            'mobile': r.receiver_mobile,
+            'business': r.receiver_business,
+            'address': r.receiver_address,
+            'customer_group': r.customer_group
+        } for r in receivers]
+        
+        # Calculate pagination values
+        total_pages = (total + per_page - 1) // per_page
+        has_prev = page > 1
+        has_next = page < total_pages
+        
+        # Calculate start and end indices
+        start_index = (page - 1) * per_page + 1
+        end_index = min(page * per_page, total)
+        
+        logger.debug(f'Pagination: page={page}, total_pages={total_pages}, start_index={start_index}, end_index={end_index}')
+        
+        # Create pagination object
+        pagination = {
+            'page': page,
+            'per_page': per_page,
+            'total': total,
+            'total_pages': total_pages,
+            'has_prev': has_prev,
+            'has_next': has_next,
+            'prev_page': page - 1 if has_prev else None,
+            'next_page': page + 1 if has_next else None,
+            'start_index': start_index,
+            'end_index': end_index
+        }
+        
+        return render_template('contacts.html', 
+                             contacts=contacts, 
+                             contact_type='receiver',
+                             pagination=pagination)
+    except Exception as e:
+        logger.error(f'Error in list_receivers: {str(e)}')
+        flash('Error loading receiver list', 'error')
+        return redirect(url_for('new_export'))
+
+@app.route('/contacts/all')
+@login_required
+def list_all_contacts():
+    logger.debug('Accessing all contacts list')
+    try:
+        page = request.args.get('page', 1, type=int)
+        per_page = 12  # Number of contacts per page
+        
+        # Get both senders and receivers
+        senders = db.session.query(
+            ExportRequest.sender_name.label('name'),
+            ExportRequest.sender_email.label('email'),
+            ExportRequest.sender_mobile.label('mobile'),
+            ExportRequest.sender_business.label('business'),
+            ExportRequest.sender_address.label('address'),
+            ExportRequest.customer_group,
+            db.literal('sender').label('type')
+        ).distinct()
+        
+        receivers = db.session.query(
+            ExportRequest.receiver_name.label('name'),
+            ExportRequest.receiver_email.label('email'),
+            ExportRequest.receiver_mobile.label('mobile'),
+            ExportRequest.receiver_business.label('business'),
+            ExportRequest.receiver_address.label('address'),
+            ExportRequest.customer_group,
+            db.literal('receiver').label('type')
+        ).distinct()
+        
+        # Combine queries
+        all_contacts = senders.union(receivers)
+        
+        # Get total count for pagination
+        total = all_contacts.count()
+        logger.debug(f'Total contacts found: {total}')
+        
+        # Apply pagination
+        all_contacts = all_contacts.limit(per_page).offset((page - 1) * per_page).all()
+        
+        logger.debug(f'Found {len(all_contacts)} contacts for page {page}')
+        
+        # Convert to list of dictionaries
+        contacts = [{
+            'name': c.name,
+            'email': c.email,
+            'mobile': c.mobile,
+            'business': c.business,
+            'address': c.address,
+            'customer_group': c.customer_group,
+            'type': c.type
+        } for c in all_contacts]
+        
+        # Calculate pagination values
+        total_pages = (total + per_page - 1) // per_page
+        has_prev = page > 1
+        has_next = page < total_pages
+        
+        # Calculate start and end indices
+        start_index = (page - 1) * per_page + 1
+        end_index = min(page * per_page, total)
+        
+        logger.debug(f'Pagination: page={page}, total_pages={total_pages}, start_index={start_index}, end_index={end_index}')
+        
+        # Create pagination object
+        pagination = {
+            'page': page,
+            'per_page': per_page,
+            'total': total,
+            'total_pages': total_pages,
+            'has_prev': has_prev,
+            'has_next': has_next,
+            'prev_page': page - 1 if has_prev else None,
+            'next_page': page + 1 if has_next else None,
+            'start_index': start_index,
+            'end_index': end_index
+        }
+        
+        return render_template('contacts.html', 
+                             contacts=contacts, 
+                             contact_type='all',
+                             pagination=pagination)
+    except Exception as e:
+        logger.error(f'Error in list_all_contacts: {str(e)}')
+        flash('Error loading contacts list', 'error')
+        return redirect(url_for('new_export'))
+
+# Update the template rendering error handling
+@app.errorhandler(500)
+def internal_error(error):
+    logger.error(f'Internal Server Error: {str(error)}')
+    return render_template('error.html', error=error), 500 

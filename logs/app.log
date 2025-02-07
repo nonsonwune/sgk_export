@@ -382,3 +382,484 @@
 2025-02-07 13:13:53 [INFO] [PID:62822] [app] Worker 62822 initialized
 2025-02-07 13:13:53 [INFO] [PID:62823] [app] Worker 62823 initialized
 2025-02-07 13:13:53 [INFO] [PID:62824] [app] Worker 62824 initialized
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Appwrite client initialized successfully
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Database connection successful
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Admin user already exists
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Superuser already exists
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Database initialized successfully
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] User table exists with 2 users
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Registered Routes:
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /list, Endpoint: list_exports, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /login, Endpoint: login, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /logout, Endpoint: logout, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /submit, Endpoint: submit, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Database connection successful
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Admin user already exists
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Superuser already exists
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Database initialized successfully
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] User table exists with 2 users
+2025-02-07 13:23:04 [INFO] [PID:64127] [app] Application initialized successfully
+2025-02-07 13:23:04 [INFO] [PID:64133] [app] Worker 64133 initialized
+2025-02-07 13:23:04 [INFO] [PID:64134] [app] Worker 64134 initialized
+2025-02-07 13:23:05 [INFO] [PID:64135] [app] Worker 64135 initialized
+2025-02-07 13:23:05 [INFO] [PID:64136] [app] Worker 64136 initialized
+2025-02-07 13:23:10 [INFO] [PID:64136] [app] GET /admin/manage-admins
+2025-02-07 13:23:10 [ERROR] [PID:64136] [app] Exception on /admin/manage-admins [GET]
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app.py", line 1181, in manage_admins
+    return render_template('manage_admins.html', users=users)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/templates/manage_admins.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/templates/base.html", line 34, in top-level template code
+    <a class="dropdown-item" href="{{ url_for('list_senders') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'list_senders'. Did you mean 'list_exports' instead?
+2025-02-07 13:23:14 [INFO] [PID:64136] [app] GET /
+2025-02-07 13:23:14 [ERROR] [PID:64136] [app] Error rendering form.html: Could not build url for endpoint 'list_senders'. Did you mean 'list_exports' instead?
+2025-02-07 13:23:14 [ERROR] [PID:64136] [app] Exception on / [GET]
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app.py", line 343, in new_export
+    return render_template('form.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/templates/form.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/templates/base.html", line 34, in top-level template code
+    <a class="dropdown-item" href="{{ url_for('list_senders') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'list_senders'. Did you mean 'list_exports' instead?
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Appwrite client initialized successfully
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Database connection successful
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Admin user already exists
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Superuser already exists
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Database initialized successfully
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] User table exists with 2 users
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Registered Routes:
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /new-export, Endpoint: new_export, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /, Endpoint: new_export, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /list, Endpoint: list_exports, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /login, Endpoint: login, Methods: {'HEAD', 'OPTIONS', 'GET', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /logout, Endpoint: logout, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'HEAD', 'OPTIONS', 'GET', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /submit, Endpoint: submit, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /change-password, Endpoint: change_password, Methods: {'HEAD', 'OPTIONS', 'GET', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'HEAD', 'OPTIONS', 'GET'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'HEAD', 'OPTIONS', 'GET', 'POST'}
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Database connection successful
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Admin user already exists
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Superuser already exists
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Database initialized successfully
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] User table exists with 2 users
+2025-02-07 13:23:30 [INFO] [PID:64466] [app] Application initialized successfully
+2025-02-07 13:23:30 [INFO] [PID:64472] [app] Worker 64472 initialized
+2025-02-07 13:23:30 [INFO] [PID:64473] [app] Worker 64473 initialized
+2025-02-07 13:23:30 [INFO] [PID:64474] [app] Worker 64474 initialized
+2025-02-07 13:23:30 [INFO] [PID:64475] [app] Worker 64475 initialized
+2025-02-07 13:23:34 [INFO] [PID:64474] [app] GET /
+2025-02-07 13:23:34 [ERROR] [PID:64474] [app] Error rendering form.html: Could not build url for endpoint 'list_senders'. Did you mean 'list_exports' instead?
+2025-02-07 13:23:34 [ERROR] [PID:64474] [app] Exception on / [GET]
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app.py", line 343, in new_export
+    return render_template('form.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/templates/form.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/templates/base.html", line 34, in top-level template code
+    <a class="dropdown-item" href="{{ url_for('list_senders') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'list_senders'. Did you mean 'list_exports' instead?
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Appwrite client initialized successfully
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Database connection successful
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Admin user already exists
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Superuser already exists
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Database initialized successfully
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] User table exists with 2 users
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Registered Routes:
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /, Endpoint: new_export, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /list, Endpoint: list_exports, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /login, Endpoint: login, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /logout, Endpoint: logout, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'HEAD', 'POST', 'OPTIONS'}
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Database connection successful
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Admin user already exists
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Superuser already exists
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Database initialized successfully
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] User table exists with 2 users
+2025-02-07 13:25:34 [INFO] [PID:64599] [app] Application initialized successfully
+2025-02-07 13:25:34 [INFO] [PID:64611] [app] Worker 64611 initialized
+2025-02-07 13:25:35 [INFO] [PID:64612] [app] Worker 64612 initialized
+2025-02-07 13:25:35 [INFO] [PID:64613] [app] Worker 64613 initialized
+2025-02-07 13:25:35 [INFO] [PID:64614] [app] Worker 64614 initialized
+2025-02-07 13:25:38 [INFO] [PID:64614] [app] GET /
+2025-02-07 13:25:46 [INFO] [PID:64613] [app] GET /logout
+2025-02-07 13:25:46 [INFO] [PID:64614] [app] GET /login
+2025-02-07 13:25:56 [INFO] [PID:64611] [app] POST /login
+2025-02-07 13:25:56 [INFO] [PID:64611] [app] GET /new-export
+2025-02-07 13:26:01 [INFO] [PID:64613] [app] GET /contacts/senders
+2025-02-07 13:26:01 [ERROR] [PID:64613] [app] Error in list_senders: 'pagination' is undefined
+2025-02-07 13:26:01 [INFO] [PID:64612] [app] GET /new-export
+2025-02-07 13:26:04 [INFO] [PID:64614] [app] GET /contacts/receivers
+2025-02-07 13:26:04 [ERROR] [PID:64614] [app] Error in list_receivers: 'pagination' is undefined
+2025-02-07 13:26:04 [INFO] [PID:64612] [app] GET /new-export
+2025-02-07 13:26:07 [INFO] [PID:64612] [app] GET /contacts/all
+2025-02-07 13:26:07 [ERROR] [PID:64612] [app] Error in list_all_contacts: 'pagination' is undefined
+2025-02-07 13:26:07 [INFO] [PID:64611] [app] GET /new-export
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Appwrite client initialized successfully
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Database connection successful
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Admin user already exists
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Superuser already exists
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Database initialized successfully
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] User table exists with 2 users
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Registered Routes:
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /new-export, Endpoint: new_export, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /, Endpoint: new_export, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /list, Endpoint: list_exports, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /login, Endpoint: login, Methods: {'POST', 'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /logout, Endpoint: logout, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'POST', 'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /change-password, Endpoint: change_password, Methods: {'POST', 'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'OPTIONS', 'GET', 'HEAD'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'POST', 'GET', 'HEAD', 'OPTIONS'}
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Database connection successful
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Admin user already exists
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Superuser already exists
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Database initialized successfully
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] User table exists with 2 users
+2025-02-07 13:28:29 [INFO] [PID:64962] [app] Application initialized successfully
+2025-02-07 13:28:29 [INFO] [PID:64975] [app] Worker 64975 initialized
+2025-02-07 13:28:29 [INFO] [PID:64976] [app] Worker 64976 initialized
+2025-02-07 13:28:29 [INFO] [PID:64977] [app] Worker 64977 initialized
+2025-02-07 13:28:30 [INFO] [PID:64978] [app] Worker 64978 initialized
+2025-02-07 13:28:38 [INFO] [PID:64976] [app] GET /new-export
+2025-02-07 13:28:41 [INFO] [PID:64978] [app] GET /contacts/senders
+2025-02-07 13:28:41 [ERROR] [PID:64978] [app] Error in list_senders: 'min' is undefined
+2025-02-07 13:28:41 [INFO] [PID:64975] [app] GET /new-export
+2025-02-07 13:28:44 [INFO] [PID:64977] [app] GET /contacts/receivers
+2025-02-07 13:28:44 [ERROR] [PID:64977] [app] Error in list_receivers: 'min' is undefined
+2025-02-07 13:28:44 [INFO] [PID:64975] [app] GET /new-export
+2025-02-07 13:28:47 [INFO] [PID:64976] [app] GET /contacts/all
+2025-02-07 13:28:47 [ERROR] [PID:64976] [app] Error in list_all_contacts: 'min' is undefined
+2025-02-07 13:28:47 [INFO] [PID:64976] [app] GET /new-export
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Appwrite client initialized successfully
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Database connection successful
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Admin user already exists
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Superuser already exists
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Database initialized successfully
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] User table exists with 2 users
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Registered Routes:
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /new-export, Endpoint: new_export, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /, Endpoint: new_export, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /list, Endpoint: list_exports, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /login, Endpoint: login, Methods: {'POST', 'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /logout, Endpoint: logout, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'POST', 'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /change-password, Endpoint: change_password, Methods: {'POST', 'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'POST', 'OPTIONS', 'HEAD', 'GET'}
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:31:03 [INFO] [PID:65206] [app] Database connection successful
+2025-02-07 13:31:04 [INFO] [PID:65206] [app] Admin user already exists
+2025-02-07 13:31:04 [INFO] [PID:65206] [app] Superuser already exists
+2025-02-07 13:31:04 [INFO] [PID:65206] [app] Database initialized successfully
+2025-02-07 13:31:04 [INFO] [PID:65206] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:31:04 [INFO] [PID:65206] [app] User table exists with 2 users
+2025-02-07 13:31:04 [INFO] [PID:65206] [app] Application initialized successfully
+2025-02-07 13:31:04 [INFO] [PID:65215] [app] Worker 65215 initialized
+2025-02-07 13:31:04 [INFO] [PID:65216] [app] Worker 65216 initialized
+2025-02-07 13:31:04 [INFO] [PID:65217] [app] Worker 65217 initialized
+2025-02-07 13:31:04 [INFO] [PID:65218] [app] Worker 65218 initialized
+2025-02-07 13:31:10 [INFO] [PID:65217] [app] GET /new-export
+2025-02-07 13:31:13 [INFO] [PID:65218] [app] GET /contacts/senders
+2025-02-07 13:31:18 [INFO] [PID:65217] [app] GET /list
+2025-02-07 13:31:22 [INFO] [PID:65215] [app] GET /contacts/all
+2025-02-07 13:34:04 [INFO] [PID:65512] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:34:04 [INFO] [PID:65512] [app] Appwrite client initialized successfully
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Database connection successful
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Admin user already exists
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Superuser already exists
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Database initialized successfully
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] User table exists with 2 users
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Registered Routes:
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /list, Endpoint: list_exports, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /login, Endpoint: login, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /logout, Endpoint: logout, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /submit, Endpoint: submit, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'OPTIONS', 'POST'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'OPTIONS', 'POST', 'HEAD'}
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Database connection successful
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Admin user already exists
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Superuser already exists
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Database initialized successfully
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] User table exists with 2 users
+2025-02-07 13:34:05 [INFO] [PID:65512] [app] Application initialized successfully
+2025-02-07 13:34:05 [INFO] [PID:65519] [app] Worker 65519 initialized
+2025-02-07 13:34:05 [INFO] [PID:65520] [app] Worker 65520 initialized
+2025-02-07 13:34:05 [INFO] [PID:65521] [app] Worker 65521 initialized
+2025-02-07 13:34:05 [INFO] [PID:65522] [app] Worker 65522 initialized
+2025-02-07 13:34:08 [INFO] [PID:65522] [app] GET /contacts/all
+2025-02-07 13:34:13 [INFO] [PID:65522] [app] GET /list
+2025-02-07 13:34:17 [INFO] [PID:65521] [app] GET /contacts/all
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Configuring database with URL: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Appwrite client initialized successfully
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Database connection successful
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Admin user already exists
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Superuser already exists
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Database initialized successfully
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] User table exists with 2 users
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Registered Routes:
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /static/<path:filename>, Endpoint: static, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /new-export, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /, Endpoint: new_export, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /list, Endpoint: list_exports, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /login, Endpoint: login, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /logout, Endpoint: logout, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /admin/create-user, Endpoint: create_user, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /submit, Endpoint: submit, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /preview/<int:request_id>, Endpoint: preview, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /download-pdf/<int:id>, Endpoint: download_pdf, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /save/<int:id>, Endpoint: save_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /get-images/<int:id>, Endpoint: get_images, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /uploads/<path:file_id>, Endpoint: serve_image, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /print-form-template, Endpoint: print_form_template, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /print-form/<int:id>, Endpoint: print_form, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /change-password, Endpoint: change_password, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /admin/users, Endpoint: manage_users, Methods: {'GET', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /admin/reset-password/<int:user_id>, Endpoint: reset_user_password, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /admin/delete-user/<int:user_id>, Endpoint: delete_user, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /admin/delete-export/<int:export_id>, Endpoint: delete_export, Methods: {'POST', 'OPTIONS'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Route: /admin/modify-export/<int:export_id>, Endpoint: modify_export, Methods: {'GET', 'POST', 'OPTIONS', 'HEAD'}
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Gunicorn server is ready. Starting application initialization...
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Connecting to database: postgresql://****:****@localhost/sgk_export_db
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Database connection successful
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Admin user already exists
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Superuser already exists
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Database initialized successfully
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Current database tables: ['export_request', 'item_detail', 'user']
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] User table exists with 2 users
+2025-02-07 13:36:42 [INFO] [PID:65875] [app] Application initialized successfully
+2025-02-07 13:36:42 [INFO] [PID:65881] [app] Worker 65881 initialized
+2025-02-07 13:36:42 [INFO] [PID:65882] [app] Worker 65882 initialized
+2025-02-07 13:36:42 [INFO] [PID:65883] [app] Worker 65883 initialized
+2025-02-07 13:36:42 [INFO] [PID:65884] [app] Worker 65884 initialized
+2025-02-07 13:36:46 [INFO] [PID:65884] [app] GET /contacts/all
+2025-02-07 13:36:48 [INFO] [PID:65881] [app] GET /new-export
+2025-02-07 13:36:58 [INFO] [PID:65881] [app] GET /contacts/all
+2025-02-07 13:37:00 [INFO] [PID:65883] [app] GET /new-export
+2025-02-07 13:37:07 [INFO] [PID:65883] [app] GET /new-export
