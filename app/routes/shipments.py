@@ -222,145 +222,54 @@ def view_shipment(shipment_id):
 @bp.route('/<int:shipment_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_shipment(shipment_id):
-    shipment = Shipment.query.get_or_404(shipment_id)
-    
-    if request.method == 'POST':
-        logger.debug(f'Processing edit submission for shipment {shipment_id}')
-        try:
-            data = request.form.to_dict()
-            
-            # Update shipment details
-            shipment.sender_name = data['sender_name']
-            shipment.sender_email = data['sender_email']
-            shipment.sender_mobile = data['sender_mobile']
-            shipment.sender_business = data.get('sender_business')
-            shipment.sender_address = data['sender_address']
-            shipment.receiver_name = data['receiver_name']
-            shipment.receiver_email = data['receiver_email']
-            shipment.receiver_mobile = data['receiver_mobile']
-            shipment.receiver_business = data.get('receiver_business')
-            shipment.receiver_address = data['receiver_address']
-            shipment.destination = data['destination']
-            shipment.shipping_cost = float(data.get('shipping_cost', 0))
-            shipment.insurance_cost = float(data.get('insurance_cost', 0))
-            shipment.packaging_cost = float(data.get('packaging_cost', 0))
-            shipment.other_charges = float(data.get('other_charges', 0))
-            shipment.customer_group = data.get('customer_group', 'regular')
-            shipment.notes = data.get('notes')
-            
-            # Recalculate totals
-            shipment.subtotal = calculate_subtotal(
-                shipment.shipping_cost,
-                shipment.insurance_cost,
-                shipment.packaging_cost,
-                shipment.other_charges
-            )
-            shipment.vat = calculate_vat(shipment.subtotal)
-            shipment.total = shipment.subtotal + shipment.vat
-            
-            # Update existing items and add new ones
-            current_items = {item.id: item for item in shipment.items}
-            updated_items = set()
-            
-            items_data = zip(
-                request.form.getlist('item_id'),
-                request.form.getlist('item_description'),
-                request.form.getlist('item_value'),
-                request.form.getlist('item_quantity'),
-                request.form.getlist('item_weight'),
-                request.files.getlist('item_image')
-            )
-            
-            for item_id, desc, value, qty, weight, image in items_data:
-                if desc and value and qty and weight:
-                    if item_id and item_id.isdigit():  # Existing item
-                        item = current_items.get(int(item_id))
-                        if item:
-                            item.description = desc
-                            item.value = float(value)
-                            item.quantity = int(qty)
-                            item.weight = float(weight)
-                            updated_items.add(item.id)
-                            
-                            if image and image.filename:
-                                # Delete old image if exists
-                                if item.image_file_id:
-                                    try:
-                                        delete_file(item.image_file_id)
-                                    except Exception as e:
-                                        logger.error(f'Error deleting old item image: {str(e)}')
-                                
-                                try:
-                                    filename = secure_filename(image.filename)
-                                    unique_filename = f"{shipment.id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
-                                    
-                                    file_id = upload_file(image, unique_filename)
-                                    if file_id:
-                                        item.image_filename = unique_filename
-                                        item.image_file_id = file_id
-                                except Exception as e:
-                                    logger.error(f'Error uploading new item image: {str(e)}')
-                    else:  # New item
-                        item = ShipmentItem(
-                            shipment_id=shipment.id,
-                            description=desc,
-                            value=float(value),
-                            quantity=int(qty),
-                            weight=float(weight)
-                        )
-                        
-                        if image and image.filename:
-                            try:
-                                filename = secure_filename(image.filename)
-                                unique_filename = f"{shipment.id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
-                                
-                                file_id = upload_file(image, unique_filename)
-                                if file_id:
-                                    item.image_filename = unique_filename
-                                    item.image_file_id = file_id
-                            except Exception as e:
-                                logger.error(f'Error uploading new item image: {str(e)}')
-                        
-                        db.session.add(item)
-            
-            # Delete items that weren't updated
-            for item_id, item in current_items.items():
-                if item_id not in updated_items:
-                    if item.image_file_id:
-                        try:
-                            delete_file(item.image_file_id)
-                        except Exception as e:
-                            logger.error(f'Error deleting removed item image: {str(e)}')
-                    db.session.delete(item)
-            
-            # Update QR code
+    logger.debug(f'Accessing edit form for shipment {shipment_id}')
+    try:
+        shipment = Shipment.query.get_or_404(shipment_id)
+        logger.debug(f'Found shipment with waybill: {shipment.waybill_number}')
+        
+        if request.method == 'POST':
+            logger.debug(f'Processing edit submission for shipment {shipment_id}')
             try:
-                qr_data = {
-                    'waybill': shipment.waybill_number,
-                    'sender': shipment.sender_name,
-                    'sender_mobile': shipment.sender_mobile,
-                    'receiver': shipment.receiver_name,
-                    'receiver_mobile': shipment.receiver_mobile,
-                    'destination': shipment.destination,
-                    'total': str(shipment.total),
-                    'order_booked_by': shipment.order_booked_by
-                }
-                qr_code = generate_qr_code(qr_data, shipment.sender_mobile, shipment.receiver_mobile, shipment.order_booked_by)
-                if qr_code:
-                    shipment.qr_code = qr_code
+                data = request.form.to_dict()
+                logger.debug(f'Received form data: {data}')
+                
+                # Update shipment details
+                shipment.sender_name = data['sender_name']
+                shipment.sender_email = data['sender_email']
+                shipment.sender_mobile = data['sender_mobile']
+                shipment.sender_business = data.get('sender_business')
+                shipment.sender_address = data['sender_address']
+                shipment.receiver_name = data['receiver_name']
+                shipment.receiver_email = data['receiver_email']
+                shipment.receiver_mobile = data['receiver_mobile']
+                shipment.receiver_business = data.get('receiver_business')
+                shipment.receiver_address = data['receiver_address']
+                shipment.destination = data['destination']
+                shipment.shipping_cost = float(data.get('shipping_cost', 0))
+                shipment.insurance_cost = float(data.get('insurance_cost', 0))
+                shipment.packaging_cost = float(data.get('packaging_cost', 0))
+                shipment.other_charges = float(data.get('other_charges', 0))
+                shipment.customer_group = data.get('customer_group', 'regular')
+                shipment.notes = data.get('notes')
+                
+                logger.debug('Updated shipment details successfully')
+                
+                db.session.commit()
+                flash('Shipment updated successfully', 'success')
+                return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
+                
             except Exception as e:
-                logger.error(f'Error updating QR code: {str(e)}')
-            
-            db.session.commit()
-            flash('Shipment updated successfully', 'success')
-            return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
-            
-        except Exception as e:
-            db.session.rollback()
-            logger.error(f'Error updating shipment {shipment_id}: {str(e)}')
-            flash('Error updating shipment', 'error')
-    
-    return render_template('shipments/edit.html', shipment=shipment)
+                db.session.rollback()
+                logger.error(f'Error updating shipment {shipment_id}: {str(e)}', exc_info=True)
+                flash('Error updating shipment', 'error')
+        
+        logger.debug('Rendering modify_export.html template')
+        return render_template('shipments/modify_export.html', shipment=shipment)
+        
+    except Exception as e:
+        logger.error(f'Error accessing edit form for shipment {shipment_id}: {str(e)}', exc_info=True)
+        flash('Error accessing edit form', 'error')
+        return redirect(url_for('shipments.list_shipments'))
 
 @bp.route('/delete/<int:shipment_id>', methods=['POST'])
 @login_required

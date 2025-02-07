@@ -294,19 +294,28 @@
         max-width: 100%;
         max-height: 80vh;
         object-fit: contain;
+        display: none; /* Hide image initially */
     }
 
-    #imageError {
+    .image-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 2rem;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    #imageError i {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        display: block;
+    .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #4169E1;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     .close-modal {
@@ -841,8 +850,11 @@
     <span class="close-modal">&times;</span>
     <div class="modal-content">
         <img id="modalImage" class="modal-image" src="" alt="Item Image" 
-             onerror="this.style.display='none'; document.getElementById('imageError').style.display='block';"
-             onload="this.style.display='block'; document.getElementById('imageError').style.display='none';">
+             onerror="this.style.display='none'; document.getElementById('imageError').style.display='block'; document.getElementById('imageLoading').style.display='none';"
+             onload="this.style.display='block'; document.getElementById('imageError').style.display='none'; document.getElementById('imageLoading').style.display='none';">
+        <div id="imageLoading" class="image-loading">
+            <div class="spinner"></div>
+        </div>
         <div id="imageError" style="display:none; color: #dc3545; text-align: center;">
             <i class="fas fa-exclamation-circle"></i>
             <span>Image not available</span>
@@ -858,8 +870,13 @@ document.querySelectorAll('.view-images-btn').forEach(button => {
         const imageUrl = this.getAttribute('data-image');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
+        const imageLoading = document.getElementById('imageLoading');
+        const imageError = document.getElementById('imageError');
         
         console.log('Loading image:', imageUrl);
+        modalImage.style.display = 'none';
+        imageLoading.style.display = 'flex';
+        imageError.style.display = 'none';
         modalImage.src = imageUrl;
         modal.style.display = 'block';
     });
