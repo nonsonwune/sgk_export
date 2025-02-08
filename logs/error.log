@@ -37,3 +37,775 @@
 2025-02-08 06:48:01 [52701] [ERROR] Worker (pid:52703) was sent SIGINT!
 2025-02-08 06:48:01 [52701] [ERROR] Worker (pid:52702) was sent SIGINT!
 2025-02-08 06:48:01 [52701] [INFO] Shutting down: Master
+2025-02-08 06:59:22 [54248] [INFO] Starting gunicorn 21.2.0
+2025-02-08 06:59:22 [54248] [INFO] Listening at: http://0.0.0.0:8000 (54248)
+2025-02-08 06:59:22 [54248] [INFO] Using worker: sync
+2025-02-08 06:59:22 [54249] [INFO] Booting worker with pid: 54249
+2025-02-08 06:59:22 [54250] [INFO] Booting worker with pid: 54250
+2025-02-08 06:59:22 [54251] [INFO] Booting worker with pid: 54251
+2025-02-08 06:59:22 [54252] [INFO] Booting worker with pid: 54252
+2025-02-08 07:03:49 [54248] [CRITICAL] WORKER TIMEOUT (pid:54249)
+2025-02-08 07:03:51 [54248] [CRITICAL] WORKER TIMEOUT (pid:54250)
+2025-02-08 07:03:51 [54248] [CRITICAL] WORKER TIMEOUT (pid:54251)
+2025-02-08 07:03:51 [54248] [CRITICAL] WORKER TIMEOUT (pid:54252)
+2025-02-08 07:03:52 [54248] [ERROR] Worker (pid:54252) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 07:03:52 [54248] [ERROR] Worker (pid:54249) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 07:03:52 [54647] [INFO] Booting worker with pid: 54647
+2025-02-08 07:03:52 [54248] [ERROR] Worker (pid:54251) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 07:03:52 [54248] [ERROR] Worker (pid:54250) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 07:03:53 [54651] [INFO] Booting worker with pid: 54651
+2025-02-08 07:03:53 [54652] [INFO] Booting worker with pid: 54652
+2025-02-08 07:03:53 [54653] [INFO] Booting worker with pid: 54653
+2025-02-08 07:04:54 [54248] [INFO] Handling signal: int
+2025-02-08 07:04:55 [54248] [INFO] Shutting down: Master
+2025-02-08 07:08:45 [56177] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:08:45 [56177] [INFO] Listening at: http://0.0.0.0:8000 (56177)
+2025-02-08 07:08:45 [56177] [INFO] Using worker: sync
+2025-02-08 07:08:45 [56178] [INFO] Booting worker with pid: 56178
+2025-02-08 07:08:45 [56179] [INFO] Booting worker with pid: 56179
+2025-02-08 07:08:45 [56180] [INFO] Booting worker with pid: 56180
+2025-02-08 07:08:45 [56181] [INFO] Booting worker with pid: 56181
+2025-02-08 07:10:44 [56177] [INFO] Handling signal: int
+2025-02-08 07:10:44 [56177] [ERROR] Worker (pid:56179) was sent SIGINT!
+2025-02-08 07:10:44 [56177] [ERROR] Worker (pid:56180) was sent SIGINT!
+2025-02-08 07:10:44 [56177] [ERROR] Worker (pid:56178) was sent SIGINT!
+2025-02-08 07:10:44 [56177] [ERROR] Worker (pid:56181) was sent SIGINT!
+2025-02-08 07:10:44 [56177] [INFO] Shutting down: Master
+2025-02-08 07:12:33 [56729] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:12:33 [56729] [INFO] Listening at: http://0.0.0.0:8000 (56729)
+2025-02-08 07:12:33 [56729] [INFO] Using worker: sync
+2025-02-08 07:12:33 [56730] [INFO] Booting worker with pid: 56730
+2025-02-08 07:12:33 [56731] [INFO] Booting worker with pid: 56731
+2025-02-08 07:12:33 [56732] [INFO] Booting worker with pid: 56732
+2025-02-08 07:12:33 [56733] [INFO] Booting worker with pid: 56733
+2025-02-08 07:15:29 [56729] [INFO] Handling signal: int
+2025-02-08 07:15:30 [56729] [ERROR] Worker (pid:56732) was sent SIGINT!
+2025-02-08 07:15:30 [56729] [ERROR] Worker (pid:56730) was sent SIGINT!
+2025-02-08 07:15:30 [56729] [ERROR] Worker (pid:56731) was sent SIGINT!
+2025-02-08 07:15:30 [56729] [ERROR] Worker (pid:56733) was sent SIGINT!
+2025-02-08 07:15:30 [56729] [INFO] Shutting down: Master
+2025-02-08 07:15:31 [56945] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:15:31 [56945] [INFO] Listening at: http://0.0.0.0:8000 (56945)
+2025-02-08 07:15:31 [56945] [INFO] Using worker: sync
+2025-02-08 07:15:31 [56946] [INFO] Booting worker with pid: 56946
+2025-02-08 07:15:31 [56947] [INFO] Booting worker with pid: 56947
+2025-02-08 07:15:31 [56949] [INFO] Booting worker with pid: 56949
+2025-02-08 07:15:31 [56950] [INFO] Booting worker with pid: 56950
+2025-02-08 07:19:02 [56945] [INFO] Handling signal: int
+2025-02-08 07:19:03 [56945] [ERROR] Worker (pid:56949) was sent SIGINT!
+2025-02-08 07:19:03 [56945] [ERROR] Worker (pid:56947) was sent SIGINT!
+2025-02-08 07:19:03 [56945] [ERROR] Worker (pid:56946) was sent SIGINT!
+2025-02-08 07:19:03 [56945] [ERROR] Worker (pid:56950) was sent SIGINT!
+2025-02-08 07:19:03 [56945] [INFO] Shutting down: Master
+2025-02-08 07:19:05 [57279] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:19:05 [57279] [INFO] Listening at: http://0.0.0.0:8000 (57279)
+2025-02-08 07:19:05 [57279] [INFO] Using worker: sync
+2025-02-08 07:19:05 [57281] [INFO] Booting worker with pid: 57281
+2025-02-08 07:19:05 [57282] [INFO] Booting worker with pid: 57282
+2025-02-08 07:19:05 [57283] [INFO] Booting worker with pid: 57283
+2025-02-08 07:19:05 [57284] [INFO] Booting worker with pid: 57284
+2025-02-08 07:22:24 [57279] [INFO] Handling signal: int
+2025-02-08 07:22:25 [57279] [ERROR] Worker (pid:57284) was sent SIGINT!
+2025-02-08 07:22:25 [57279] [ERROR] Worker (pid:57281) was sent SIGINT!
+2025-02-08 07:22:25 [57279] [ERROR] Worker (pid:57282) was sent SIGINT!
+2025-02-08 07:22:25 [57279] [ERROR] Worker (pid:57283) was sent SIGINT!
+2025-02-08 07:22:25 [57279] [INFO] Shutting down: Master
+2025-02-08 07:22:26 [57456] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:22:26 [57456] [INFO] Listening at: http://0.0.0.0:8000 (57456)
+2025-02-08 07:22:26 [57456] [INFO] Using worker: sync
+2025-02-08 07:22:26 [57457] [INFO] Booting worker with pid: 57457
+2025-02-08 07:22:26 [57458] [INFO] Booting worker with pid: 57458
+2025-02-08 07:22:26 [57459] [INFO] Booting worker with pid: 57459
+2025-02-08 07:22:27 [57460] [INFO] Booting worker with pid: 57460
+2025-02-08 07:30:49 [57456] [INFO] Handling signal: int
+2025-02-08 07:30:50 [57456] [INFO] Shutting down: Master
+2025-02-08 07:31:58 [58327] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:31:58 [58327] [INFO] Listening at: http://0.0.0.0:8000 (58327)
+2025-02-08 07:31:58 [58327] [INFO] Using worker: sync
+2025-02-08 07:31:58 [58328] [INFO] Booting worker with pid: 58328
+2025-02-08 07:31:58 [58329] [INFO] Booting worker with pid: 58329
+2025-02-08 07:31:58 [58330] [INFO] Booting worker with pid: 58330
+2025-02-08 07:31:58 [58331] [INFO] Booting worker with pid: 58331
+2025-02-08 07:37:18 [58327] [INFO] Handling signal: int
+2025-02-08 07:37:18 [58327] [ERROR] Worker (pid:58331) was sent SIGINT!
+2025-02-08 07:37:18 [58327] [ERROR] Worker (pid:58328) was sent SIGINT!
+2025-02-08 07:37:18 [58327] [ERROR] Worker (pid:58329) was sent SIGINT!
+2025-02-08 07:37:18 [58327] [ERROR] Worker (pid:58330) was sent SIGINT!
+2025-02-08 07:37:18 [58327] [INFO] Shutting down: Master
+2025-02-08 07:37:20 [58711] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:37:20 [58711] [INFO] Listening at: http://0.0.0.0:8000 (58711)
+2025-02-08 07:37:20 [58711] [INFO] Using worker: sync
+2025-02-08 07:37:20 [58715] [INFO] Booting worker with pid: 58715
+2025-02-08 07:37:20 [58716] [INFO] Booting worker with pid: 58716
+2025-02-08 07:37:20 [58717] [INFO] Booting worker with pid: 58717
+2025-02-08 07:37:20 [58718] [INFO] Booting worker with pid: 58718
+2025-02-08 07:43:51 [58711] [INFO] Handling signal: int
+2025-02-08 07:43:51 [58711] [ERROR] Worker (pid:58718) was sent SIGINT!
+2025-02-08 07:43:51 [58711] [ERROR] Worker (pid:58716) was sent SIGINT!
+2025-02-08 07:43:51 [58711] [ERROR] Worker (pid:58715) was sent SIGINT!
+2025-02-08 07:43:51 [58711] [ERROR] Worker (pid:58717) was sent SIGINT!
+2025-02-08 07:43:51 [58711] [INFO] Shutting down: Master
+2025-02-08 07:43:55 [59381] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:43:55 [59381] [INFO] Listening at: http://0.0.0.0:8000 (59381)
+2025-02-08 07:43:55 [59381] [INFO] Using worker: sync
+2025-02-08 07:43:55 [59382] [INFO] Booting worker with pid: 59382
+2025-02-08 07:43:55 [59383] [INFO] Booting worker with pid: 59383
+2025-02-08 07:43:55 [59384] [INFO] Booting worker with pid: 59384
+2025-02-08 07:43:55 [59385] [INFO] Booting worker with pid: 59385
+2025-02-08 07:46:30 [59381] [INFO] Handling signal: int
+2025-02-08 07:46:30 [59381] [ERROR] Worker (pid:59385) was sent SIGINT!
+2025-02-08 07:46:30 [59381] [ERROR] Worker (pid:59382) was sent SIGINT!
+2025-02-08 07:46:30 [59381] [ERROR] Worker (pid:59383) was sent SIGINT!
+2025-02-08 07:46:30 [59381] [ERROR] Worker (pid:59384) was sent SIGINT!
+2025-02-08 07:46:30 [59381] [INFO] Shutting down: Master
+2025-02-08 07:46:39 [59689] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:46:39 [59689] [INFO] Listening at: http://0.0.0.0:8000 (59689)
+2025-02-08 07:46:39 [59689] [INFO] Using worker: sync
+2025-02-08 07:46:39 [59690] [INFO] Booting worker with pid: 59690
+2025-02-08 07:46:40 [59692] [INFO] Booting worker with pid: 59692
+2025-02-08 07:46:40 [59693] [INFO] Booting worker with pid: 59693
+2025-02-08 07:46:40 [59694] [INFO] Booting worker with pid: 59694
+2025-02-08 07:48:00 [59689] [INFO] Handling signal: int
+2025-02-08 07:48:00 [59689] [ERROR] Worker (pid:59692) was sent SIGINT!
+2025-02-08 07:48:00 [59689] [ERROR] Worker (pid:59690) was sent SIGINT!
+2025-02-08 07:48:00 [59689] [ERROR] Worker (pid:59693) was sent SIGINT!
+2025-02-08 07:48:00 [59689] [ERROR] Worker (pid:59694) was sent SIGINT!
+2025-02-08 07:48:00 [59689] [INFO] Shutting down: Master
+2025-02-08 07:51:41 [61416] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:51:41 [61416] [INFO] Listening at: http://0.0.0.0:8000 (61416)
+2025-02-08 07:51:41 [61416] [INFO] Using worker: sync
+2025-02-08 07:51:41 [61417] [INFO] Booting worker with pid: 61417
+2025-02-08 07:51:41 [61418] [INFO] Booting worker with pid: 61418
+2025-02-08 07:51:41 [61419] [INFO] Booting worker with pid: 61419
+2025-02-08 07:51:41 [61420] [INFO] Booting worker with pid: 61420
+2025-02-08 07:53:25 [61416] [INFO] Handling signal: int
+2025-02-08 07:53:25 [61416] [INFO] Shutting down: Master
+2025-02-08 07:57:00 [61895] [INFO] Starting gunicorn 21.2.0
+2025-02-08 07:57:00 [61895] [INFO] Listening at: http://0.0.0.0:8000 (61895)
+2025-02-08 07:57:00 [61895] [INFO] Using worker: sync
+2025-02-08 07:57:00 [61896] [INFO] Booting worker with pid: 61896
+2025-02-08 07:57:00 [61897] [INFO] Booting worker with pid: 61897
+2025-02-08 07:57:00 [61898] [INFO] Booting worker with pid: 61898
+2025-02-08 07:57:00 [61899] [INFO] Booting worker with pid: 61899
+2025-02-08 08:03:14 [61895] [INFO] Handling signal: int
+2025-02-08 08:03:14 [61895] [ERROR] Worker (pid:61897) was sent SIGINT!
+2025-02-08 08:03:14 [61895] [ERROR] Worker (pid:61898) was sent SIGINT!
+2025-02-08 08:03:14 [61895] [ERROR] Worker (pid:61896) was sent SIGINT!
+2025-02-08 08:03:14 [61895] [ERROR] Worker (pid:61899) was sent SIGINT!
+2025-02-08 08:03:15 [61895] [INFO] Shutting down: Master
+2025-02-08 08:03:16 [62335] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:03:16 [62335] [INFO] Listening at: http://0.0.0.0:8000 (62335)
+2025-02-08 08:03:16 [62335] [INFO] Using worker: sync
+2025-02-08 08:03:16 [62336] [INFO] Booting worker with pid: 62336
+2025-02-08 08:03:16 [62337] [INFO] Booting worker with pid: 62337
+2025-02-08 08:03:17 [62338] [INFO] Booting worker with pid: 62338
+2025-02-08 08:03:17 [62339] [INFO] Booting worker with pid: 62339
+2025-02-08 08:03:18 [62335] [INFO] Handling signal: int
+2025-02-08 08:03:18 [62335] [ERROR] Worker (pid:62337) was sent SIGINT!
+2025-02-08 08:03:18 [62335] [ERROR] Worker (pid:62336) was sent SIGINT!
+2025-02-08 08:03:18 [62335] [ERROR] Worker (pid:62338) was sent SIGINT!
+2025-02-08 08:03:18 [62335] [ERROR] Worker (pid:62339) was sent SIGINT!
+2025-02-08 08:03:18 [62335] [INFO] Shutting down: Master
+2025-02-08 08:05:58 [62469] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:05:58 [62469] [INFO] Listening at: http://0.0.0.0:8000 (62469)
+2025-02-08 08:05:58 [62469] [INFO] Using worker: sync
+2025-02-08 08:05:58 [62470] [INFO] Booting worker with pid: 62470
+2025-02-08 08:05:58 [62471] [INFO] Booting worker with pid: 62471
+2025-02-08 08:05:58 [62472] [INFO] Booting worker with pid: 62472
+2025-02-08 08:05:58 [62473] [INFO] Booting worker with pid: 62473
+2025-02-08 08:07:38 [62469] [INFO] Handling signal: int
+2025-02-08 08:07:38 [62469] [ERROR] Worker (pid:62472) was sent SIGINT!
+2025-02-08 08:07:38 [62469] [ERROR] Worker (pid:62470) was sent SIGINT!
+2025-02-08 08:07:38 [62469] [ERROR] Worker (pid:62471) was sent SIGINT!
+2025-02-08 08:07:38 [62469] [ERROR] Worker (pid:62473) was sent SIGINT!
+2025-02-08 08:07:38 [62469] [INFO] Shutting down: Master
+2025-02-08 08:09:23 [62883] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:09:23 [62883] [INFO] Listening at: http://0.0.0.0:8000 (62883)
+2025-02-08 08:09:23 [62883] [INFO] Using worker: sync
+2025-02-08 08:09:23 [62884] [INFO] Booting worker with pid: 62884
+2025-02-08 08:09:23 [62885] [INFO] Booting worker with pid: 62885
+2025-02-08 08:09:23 [62886] [INFO] Booting worker with pid: 62886
+2025-02-08 08:09:23 [62887] [INFO] Booting worker with pid: 62887
+2025-02-08 08:10:07 [62883] [INFO] Handling signal: int
+2025-02-08 08:10:07 [62883] [ERROR] Worker (pid:62887) was sent SIGINT!
+2025-02-08 08:10:07 [62883] [ERROR] Worker (pid:62886) was sent SIGINT!
+2025-02-08 08:10:07 [62883] [ERROR] Worker (pid:62884) was sent SIGINT!
+2025-02-08 08:10:07 [62883] [ERROR] Worker (pid:62885) was sent SIGINT!
+2025-02-08 08:10:07 [62883] [INFO] Shutting down: Master
+2025-02-08 08:14:07 [63390] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:14:07 [63390] [INFO] Listening at: http://0.0.0.0:8000 (63390)
+2025-02-08 08:14:07 [63390] [INFO] Using worker: sync
+2025-02-08 08:14:07 [63391] [INFO] Booting worker with pid: 63391
+2025-02-08 08:14:07 [63392] [INFO] Booting worker with pid: 63392
+2025-02-08 08:14:07 [63393] [INFO] Booting worker with pid: 63393
+2025-02-08 08:14:07 [63394] [INFO] Booting worker with pid: 63394
+2025-02-08 08:16:57 [63390] [INFO] Handling signal: int
+2025-02-08 08:16:57 [63390] [ERROR] Worker (pid:63391) was sent SIGINT!
+2025-02-08 08:16:57 [63390] [ERROR] Worker (pid:63394) was sent SIGINT!
+2025-02-08 08:16:57 [63390] [ERROR] Worker (pid:63392) was sent SIGINT!
+2025-02-08 08:16:57 [63390] [ERROR] Worker (pid:63393) was sent SIGINT!
+2025-02-08 08:16:57 [63390] [INFO] Shutting down: Master
+2025-02-08 08:17:07 [63715] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:17:07 [63715] [INFO] Listening at: http://0.0.0.0:8000 (63715)
+2025-02-08 08:17:07 [63715] [INFO] Using worker: sync
+2025-02-08 08:17:07 [63716] [INFO] Booting worker with pid: 63716
+2025-02-08 08:17:07 [63717] [INFO] Booting worker with pid: 63717
+2025-02-08 08:17:07 [63718] [INFO] Booting worker with pid: 63718
+2025-02-08 08:17:07 [63719] [INFO] Booting worker with pid: 63719
+2025-02-08 08:18:08 [63715] [INFO] Handling signal: int
+2025-02-08 08:18:08 [63715] [ERROR] Worker (pid:63718) was sent SIGINT!
+2025-02-08 08:18:08 [63715] [ERROR] Worker (pid:63717) was sent SIGINT!
+2025-02-08 08:18:08 [63715] [ERROR] Worker (pid:63716) was sent SIGINT!
+2025-02-08 08:18:08 [63715] [ERROR] Worker (pid:63719) was sent SIGINT!
+2025-02-08 08:18:08 [63715] [INFO] Shutting down: Master
+2025-02-08 08:18:11 [63870] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:18:11 [63870] [INFO] Listening at: http://0.0.0.0:8000 (63870)
+2025-02-08 08:18:11 [63870] [INFO] Using worker: sync
+2025-02-08 08:18:11 [63871] [INFO] Booting worker with pid: 63871
+2025-02-08 08:18:11 [63872] [INFO] Booting worker with pid: 63872
+2025-02-08 08:18:11 [63873] [INFO] Booting worker with pid: 63873
+2025-02-08 08:18:11 [63874] [INFO] Booting worker with pid: 63874
+2025-02-08 08:20:45 [63870] [INFO] Handling signal: int
+2025-02-08 08:20:45 [63870] [ERROR] Worker (pid:63872) was sent SIGINT!
+2025-02-08 08:20:45 [63870] [ERROR] Worker (pid:63871) was sent SIGINT!
+2025-02-08 08:20:45 [63870] [ERROR] Worker (pid:63874) was sent SIGINT!
+2025-02-08 08:20:45 [63870] [ERROR] Worker (pid:63873) was sent SIGINT!
+2025-02-08 08:20:45 [63870] [INFO] Shutting down: Master
+2025-02-08 08:21:20 [64136] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:21:20 [64136] [INFO] Listening at: http://0.0.0.0:8000 (64136)
+2025-02-08 08:21:20 [64136] [INFO] Using worker: sync
+2025-02-08 08:21:20 [64137] [INFO] Booting worker with pid: 64137
+2025-02-08 08:21:20 [64138] [INFO] Booting worker with pid: 64138
+2025-02-08 08:21:20 [64139] [INFO] Booting worker with pid: 64139
+2025-02-08 08:21:20 [64140] [INFO] Booting worker with pid: 64140
+2025-02-08 08:22:45 [64136] [INFO] Handling signal: int
+2025-02-08 08:22:45 [64136] [ERROR] Worker (pid:64139) was sent SIGINT!
+2025-02-08 08:22:45 [64136] [ERROR] Worker (pid:64138) was sent SIGINT!
+2025-02-08 08:22:45 [64136] [ERROR] Worker (pid:64137) was sent SIGINT!
+2025-02-08 08:22:45 [64136] [ERROR] Worker (pid:64140) was sent SIGINT!
+2025-02-08 08:22:45 [64136] [INFO] Shutting down: Master
+2025-02-08 08:26:31 [64577] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:26:31 [64577] [INFO] Listening at: http://0.0.0.0:8000 (64577)
+2025-02-08 08:26:31 [64577] [INFO] Using worker: sync
+2025-02-08 08:26:31 [64578] [INFO] Booting worker with pid: 64578
+2025-02-08 08:26:31 [64579] [INFO] Booting worker with pid: 64579
+2025-02-08 08:26:32 [64580] [INFO] Booting worker with pid: 64580
+2025-02-08 08:26:32 [64581] [INFO] Booting worker with pid: 64581
+2025-02-08 08:27:22 [64577] [INFO] Handling signal: int
+2025-02-08 08:27:22 [64577] [ERROR] Worker (pid:64581) was sent SIGINT!
+2025-02-08 08:27:22 [64577] [ERROR] Worker (pid:64580) was sent SIGINT!
+2025-02-08 08:27:22 [64577] [ERROR] Worker (pid:64579) was sent SIGINT!
+2025-02-08 08:27:22 [64577] [ERROR] Worker (pid:64578) was sent SIGINT!
+2025-02-08 08:27:22 [64577] [INFO] Shutting down: Master
+2025-02-08 08:35:42 [65098] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:35:42 [65098] [INFO] Listening at: http://0.0.0.0:8000 (65098)
+2025-02-08 08:35:42 [65098] [INFO] Using worker: sync
+2025-02-08 08:35:42 [65099] [INFO] Booting worker with pid: 65099
+2025-02-08 08:35:42 [65100] [INFO] Booting worker with pid: 65100
+2025-02-08 08:35:42 [65101] [INFO] Booting worker with pid: 65101
+2025-02-08 08:35:42 [65102] [INFO] Booting worker with pid: 65102
+2025-02-08 08:37:30 [65098] [INFO] Handling signal: int
+2025-02-08 08:37:31 [65098] [ERROR] Worker (pid:65102) was sent SIGINT!
+2025-02-08 08:37:31 [65098] [ERROR] Worker (pid:65099) was sent SIGINT!
+2025-02-08 08:37:31 [65098] [ERROR] Worker (pid:65100) was sent SIGINT!
+2025-02-08 08:37:31 [65098] [ERROR] Worker (pid:65101) was sent SIGINT!
+2025-02-08 08:37:31 [65098] [INFO] Shutting down: Master
+2025-02-08 08:39:51 [65561] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:39:51 [65561] [INFO] Listening at: http://0.0.0.0:8000 (65561)
+2025-02-08 08:39:51 [65561] [INFO] Using worker: sync
+2025-02-08 08:39:51 [65562] [INFO] Booting worker with pid: 65562
+2025-02-08 08:39:51 [65563] [INFO] Booting worker with pid: 65563
+2025-02-08 08:39:51 [65564] [INFO] Booting worker with pid: 65564
+2025-02-08 08:39:51 [65565] [INFO] Booting worker with pid: 65565
+2025-02-08 08:42:09 [65561] [INFO] Handling signal: int
+2025-02-08 08:42:09 [65561] [ERROR] Worker (pid:65564) was sent SIGINT!
+2025-02-08 08:42:09 [65561] [ERROR] Worker (pid:65563) was sent SIGINT!
+2025-02-08 08:42:09 [65561] [ERROR] Worker (pid:65562) was sent SIGINT!
+2025-02-08 08:42:09 [65561] [ERROR] Worker (pid:65565) was sent SIGINT!
+2025-02-08 08:42:09 [65561] [INFO] Shutting down: Master
+2025-02-08 08:42:11 [65705] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:42:11 [65705] [INFO] Listening at: http://0.0.0.0:8000 (65705)
+2025-02-08 08:42:11 [65705] [INFO] Using worker: sync
+2025-02-08 08:42:11 [65707] [INFO] Booting worker with pid: 65707
+2025-02-08 08:42:11 [65708] [INFO] Booting worker with pid: 65708
+2025-02-08 08:42:11 [65709] [INFO] Booting worker with pid: 65709
+2025-02-08 08:42:11 [65710] [INFO] Booting worker with pid: 65710
+2025-02-08 08:44:24 [65705] [INFO] Handling signal: int
+2025-02-08 08:44:24 [65705] [ERROR] Worker (pid:65708) was sent SIGINT!
+2025-02-08 08:44:24 [65705] [ERROR] Worker (pid:65707) was sent SIGINT!
+2025-02-08 08:44:24 [65705] [ERROR] Worker (pid:65710) was sent SIGINT!
+2025-02-08 08:44:24 [65705] [ERROR] Worker (pid:65709) was sent SIGINT!
+2025-02-08 08:44:25 [65705] [INFO] Shutting down: Master
+2025-02-08 08:44:32 [66019] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:44:32 [66019] [INFO] Listening at: http://0.0.0.0:8000 (66019)
+2025-02-08 08:44:32 [66019] [INFO] Using worker: sync
+2025-02-08 08:44:32 [66020] [INFO] Booting worker with pid: 66020
+2025-02-08 08:44:32 [66021] [INFO] Booting worker with pid: 66021
+2025-02-08 08:44:32 [66022] [INFO] Booting worker with pid: 66022
+2025-02-08 08:44:32 [66023] [INFO] Booting worker with pid: 66023
+2025-02-08 08:46:48 [66019] [INFO] Handling signal: int
+2025-02-08 08:46:49 [66019] [ERROR] Worker (pid:66022) was sent SIGINT!
+2025-02-08 08:46:49 [66019] [ERROR] Worker (pid:66020) was sent SIGINT!
+2025-02-08 08:46:49 [66019] [ERROR] Worker (pid:66023) was sent SIGINT!
+2025-02-08 08:46:49 [66019] [ERROR] Worker (pid:66021) was sent SIGINT!
+2025-02-08 08:46:49 [66019] [INFO] Shutting down: Master
+2025-02-08 08:46:51 [66326] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:46:51 [66326] [INFO] Listening at: http://0.0.0.0:8000 (66326)
+2025-02-08 08:46:51 [66326] [INFO] Using worker: sync
+2025-02-08 08:46:51 [66329] [INFO] Booting worker with pid: 66329
+2025-02-08 08:46:51 [66330] [INFO] Booting worker with pid: 66330
+2025-02-08 08:46:51 [66331] [INFO] Booting worker with pid: 66331
+2025-02-08 08:46:51 [66332] [INFO] Booting worker with pid: 66332
+2025-02-08 08:49:52 [66326] [INFO] Handling signal: int
+2025-02-08 08:49:52 [66326] [ERROR] Worker (pid:66330) was sent SIGINT!
+2025-02-08 08:49:52 [66326] [ERROR] Worker (pid:66332) was sent SIGINT!
+2025-02-08 08:49:52 [66326] [ERROR] Worker (pid:66329) was sent SIGINT!
+2025-02-08 08:49:52 [66326] [ERROR] Worker (pid:66331) was sent SIGINT!
+2025-02-08 08:49:52 [66326] [INFO] Shutting down: Master
+2025-02-08 08:49:55 [66567] [INFO] Starting gunicorn 21.2.0
+2025-02-08 08:49:55 [66567] [INFO] Listening at: http://0.0.0.0:8000 (66567)
+2025-02-08 08:49:55 [66567] [INFO] Using worker: sync
+2025-02-08 08:49:55 [66568] [INFO] Booting worker with pid: 66568
+2025-02-08 08:49:55 [66569] [INFO] Booting worker with pid: 66569
+2025-02-08 08:49:55 [66570] [INFO] Booting worker with pid: 66570
+2025-02-08 08:49:55 [66571] [INFO] Booting worker with pid: 66571
+2025-02-08 08:56:37 [66567] [INFO] Handling signal: int
+2025-02-08 08:56:37 [66567] [ERROR] Worker (pid:66570) was sent SIGINT!
+2025-02-08 08:56:37 [66567] [ERROR] Worker (pid:66569) was sent SIGINT!
+2025-02-08 08:56:37 [66567] [ERROR] Worker (pid:66568) was sent SIGINT!
+2025-02-08 08:56:37 [66567] [ERROR] Worker (pid:66571) was sent SIGINT!
+2025-02-08 08:56:37 [66567] [INFO] Shutting down: Master
+2025-02-08 09:03:08 [67437] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:03:08 [67437] [INFO] Listening at: http://0.0.0.0:8000 (67437)
+2025-02-08 09:03:08 [67437] [INFO] Using worker: sync
+2025-02-08 09:03:08 [67438] [INFO] Booting worker with pid: 67438
+2025-02-08 09:03:08 [67439] [INFO] Booting worker with pid: 67439
+2025-02-08 09:03:08 [67440] [INFO] Booting worker with pid: 67440
+2025-02-08 09:03:08 [67441] [INFO] Booting worker with pid: 67441
+2025-02-08 09:07:03 [67437] [INFO] Handling signal: int
+2025-02-08 09:07:04 [67437] [INFO] Shutting down: Master
+2025-02-08 09:07:58 [67825] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:07:58 [67825] [INFO] Listening at: http://0.0.0.0:8000 (67825)
+2025-02-08 09:07:58 [67825] [INFO] Using worker: sync
+2025-02-08 09:07:58 [67826] [INFO] Booting worker with pid: 67826
+2025-02-08 09:07:59 [67827] [INFO] Booting worker with pid: 67827
+2025-02-08 09:07:59 [67828] [INFO] Booting worker with pid: 67828
+2025-02-08 09:07:59 [67829] [INFO] Booting worker with pid: 67829
+2025-02-08 09:11:32 [67825] [INFO] Handling signal: int
+2025-02-08 09:11:33 [67825] [ERROR] Worker (pid:67829) was sent SIGINT!
+2025-02-08 09:11:33 [67825] [ERROR] Worker (pid:67827) was sent SIGINT!
+2025-02-08 09:11:33 [67825] [ERROR] Worker (pid:67826) was sent SIGINT!
+2025-02-08 09:11:33 [67825] [ERROR] Worker (pid:67828) was sent SIGINT!
+2025-02-08 09:11:33 [67825] [INFO] Shutting down: Master
+2025-02-08 09:11:37 [68120] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:11:37 [68120] [INFO] Listening at: http://0.0.0.0:8000 (68120)
+2025-02-08 09:11:37 [68120] [INFO] Using worker: sync
+2025-02-08 09:11:37 [68121] [INFO] Booting worker with pid: 68121
+2025-02-08 09:11:37 [68122] [INFO] Booting worker with pid: 68122
+2025-02-08 09:11:37 [68123] [INFO] Booting worker with pid: 68123
+2025-02-08 09:11:37 [68124] [INFO] Booting worker with pid: 68124
+2025-02-08 09:14:20 [68120] [INFO] Handling signal: int
+2025-02-08 09:14:21 [68120] [INFO] Shutting down: Master
+2025-02-08 09:14:23 [68506] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:14:23 [68506] [INFO] Listening at: http://0.0.0.0:8000 (68506)
+2025-02-08 09:14:23 [68506] [INFO] Using worker: sync
+2025-02-08 09:14:23 [68507] [INFO] Booting worker with pid: 68507
+2025-02-08 09:14:23 [68508] [INFO] Booting worker with pid: 68508
+2025-02-08 09:14:23 [68509] [INFO] Booting worker with pid: 68509
+2025-02-08 09:14:23 [68510] [INFO] Booting worker with pid: 68510
+2025-02-08 09:16:03 [68506] [INFO] Handling signal: int
+2025-02-08 09:16:04 [68506] [INFO] Shutting down: Master
+2025-02-08 09:17:18 [68719] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:17:18 [68719] [INFO] Listening at: http://0.0.0.0:8000 (68719)
+2025-02-08 09:17:18 [68719] [INFO] Using worker: sync
+2025-02-08 09:17:18 [68720] [INFO] Booting worker with pid: 68720
+2025-02-08 09:17:18 [68721] [INFO] Booting worker with pid: 68721
+2025-02-08 09:17:18 [68722] [INFO] Booting worker with pid: 68722
+2025-02-08 09:17:18 [68723] [INFO] Booting worker with pid: 68723
+2025-02-08 09:18:47 [68719] [INFO] Handling signal: int
+2025-02-08 09:18:48 [68719] [INFO] Shutting down: Master
+2025-02-08 09:19:50 [68999] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:19:50 [68999] [INFO] Listening at: http://0.0.0.0:8000 (68999)
+2025-02-08 09:19:50 [68999] [INFO] Using worker: sync
+2025-02-08 09:19:50 [69000] [INFO] Booting worker with pid: 69000
+2025-02-08 09:19:50 [69001] [INFO] Booting worker with pid: 69001
+2025-02-08 09:19:51 [69002] [INFO] Booting worker with pid: 69002
+2025-02-08 09:19:51 [69003] [INFO] Booting worker with pid: 69003
+2025-02-08 09:21:51 [68999] [INFO] Handling signal: int
+2025-02-08 09:21:51 [68999] [ERROR] Worker (pid:69001) was sent SIGINT!
+2025-02-08 09:21:51 [68999] [ERROR] Worker (pid:69000) was sent SIGINT!
+2025-02-08 09:21:51 [68999] [ERROR] Worker (pid:69002) was sent SIGINT!
+2025-02-08 09:21:51 [68999] [ERROR] Worker (pid:69003) was sent SIGINT!
+2025-02-08 09:21:51 [68999] [INFO] Shutting down: Master
+2025-02-08 09:21:53 [69360] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:21:53 [69360] [INFO] Listening at: http://0.0.0.0:8000 (69360)
+2025-02-08 09:21:53 [69360] [INFO] Using worker: sync
+2025-02-08 09:21:53 [69361] [INFO] Booting worker with pid: 69361
+2025-02-08 09:21:53 [69366] [INFO] Booting worker with pid: 69366
+2025-02-08 09:21:53 [69367] [INFO] Booting worker with pid: 69367
+2025-02-08 09:21:54 [69370] [INFO] Booting worker with pid: 69370
+2025-02-08 09:23:43 [69360] [INFO] Handling signal: int
+2025-02-08 09:23:43 [69360] [INFO] Shutting down: Master
+2025-02-08 09:24:18 [69611] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:24:18 [69611] [INFO] Listening at: http://0.0.0.0:8000 (69611)
+2025-02-08 09:24:18 [69611] [INFO] Using worker: sync
+2025-02-08 09:24:18 [69612] [INFO] Booting worker with pid: 69612
+2025-02-08 09:24:18 [69613] [INFO] Booting worker with pid: 69613
+2025-02-08 09:24:18 [69614] [INFO] Booting worker with pid: 69614
+2025-02-08 09:24:18 [69615] [INFO] Booting worker with pid: 69615
+2025-02-08 09:26:47 [69611] [INFO] Handling signal: int
+2025-02-08 09:26:47 [69611] [ERROR] Worker (pid:69614) was sent SIGINT!
+2025-02-08 09:26:47 [69611] [ERROR] Worker (pid:69612) was sent SIGINT!
+2025-02-08 09:26:47 [69611] [ERROR] Worker (pid:69613) was sent SIGINT!
+2025-02-08 09:26:47 [69611] [ERROR] Worker (pid:69615) was sent SIGINT!
+2025-02-08 09:26:47 [69611] [INFO] Shutting down: Master
+2025-02-08 09:27:32 [69858] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:27:32 [69858] [INFO] Listening at: http://0.0.0.0:8000 (69858)
+2025-02-08 09:27:32 [69858] [INFO] Using worker: sync
+2025-02-08 09:27:32 [69859] [INFO] Booting worker with pid: 69859
+2025-02-08 09:27:32 [69860] [INFO] Booting worker with pid: 69860
+2025-02-08 09:27:32 [69861] [INFO] Booting worker with pid: 69861
+2025-02-08 09:27:33 [69862] [INFO] Booting worker with pid: 69862
+2025-02-08 09:33:42 [69858] [INFO] Handling signal: int
+2025-02-08 09:33:42 [69858] [ERROR] Worker (pid:69862) was sent SIGINT!
+2025-02-08 09:33:42 [69858] [ERROR] Worker (pid:69859) was sent SIGINT!
+2025-02-08 09:33:42 [69858] [ERROR] Worker (pid:69860) was sent SIGINT!
+2025-02-08 09:33:42 [69858] [ERROR] Worker (pid:69861) was sent SIGINT!
+2025-02-08 09:33:42 [69858] [INFO] Shutting down: Master
+2025-02-08 09:34:29 [70448] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:34:29 [70448] [INFO] Listening at: http://0.0.0.0:8000 (70448)
+2025-02-08 09:34:29 [70448] [INFO] Using worker: sync
+2025-02-08 09:34:29 [70449] [INFO] Booting worker with pid: 70449
+2025-02-08 09:34:29 [70450] [INFO] Booting worker with pid: 70450
+2025-02-08 09:34:29 [70451] [INFO] Booting worker with pid: 70451
+2025-02-08 09:34:29 [70452] [INFO] Booting worker with pid: 70452
+2025-02-08 09:36:50 [70448] [INFO] Handling signal: int
+2025-02-08 09:36:50 [70448] [ERROR] Worker (pid:70451) was sent SIGINT!
+2025-02-08 09:36:50 [70448] [ERROR] Worker (pid:70450) was sent SIGINT!
+2025-02-08 09:36:50 [70448] [ERROR] Worker (pid:70449) was sent SIGINT!
+2025-02-08 09:36:50 [70448] [ERROR] Worker (pid:70452) was sent SIGINT!
+2025-02-08 09:36:50 [70448] [INFO] Shutting down: Master
+2025-02-08 09:36:53 [70818] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:36:53 [70818] [INFO] Listening at: http://0.0.0.0:8000 (70818)
+2025-02-08 09:36:53 [70818] [INFO] Using worker: sync
+2025-02-08 09:36:53 [70820] [INFO] Booting worker with pid: 70820
+2025-02-08 09:36:53 [70821] [INFO] Booting worker with pid: 70821
+2025-02-08 09:36:53 [70822] [INFO] Booting worker with pid: 70822
+2025-02-08 09:36:53 [70823] [INFO] Booting worker with pid: 70823
+2025-02-08 09:39:27 [70818] [INFO] Handling signal: int
+2025-02-08 09:39:27 [70818] [ERROR] Worker (pid:70823) was sent SIGINT!
+2025-02-08 09:39:27 [70818] [ERROR] Worker (pid:70821) was sent SIGINT!
+2025-02-08 09:39:27 [70818] [ERROR] Worker (pid:70820) was sent SIGINT!
+2025-02-08 09:39:27 [70818] [ERROR] Worker (pid:70822) was sent SIGINT!
+2025-02-08 09:39:27 [70818] [INFO] Shutting down: Master
+2025-02-08 09:39:34 [71025] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:39:34 [71025] [INFO] Listening at: http://0.0.0.0:8000 (71025)
+2025-02-08 09:39:34 [71025] [INFO] Using worker: sync
+2025-02-08 09:39:34 [71026] [INFO] Booting worker with pid: 71026
+2025-02-08 09:39:34 [71027] [INFO] Booting worker with pid: 71027
+2025-02-08 09:39:34 [71028] [INFO] Booting worker with pid: 71028
+2025-02-08 09:39:34 [71029] [INFO] Booting worker with pid: 71029
+2025-02-08 09:42:29 [71025] [INFO] Handling signal: int
+2025-02-08 09:42:29 [71025] [ERROR] Worker (pid:71029) was sent SIGINT!
+2025-02-08 09:42:29 [71025] [ERROR] Worker (pid:71027) was sent SIGINT!
+2025-02-08 09:42:29 [71025] [ERROR] Worker (pid:71028) was sent SIGINT!
+2025-02-08 09:42:29 [71025] [ERROR] Worker (pid:71026) was sent SIGINT!
+2025-02-08 09:42:29 [71025] [INFO] Shutting down: Master
+2025-02-08 09:42:31 [71221] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:42:31 [71221] [INFO] Listening at: http://0.0.0.0:8000 (71221)
+2025-02-08 09:42:31 [71221] [INFO] Using worker: sync
+2025-02-08 09:42:31 [71223] [INFO] Booting worker with pid: 71223
+2025-02-08 09:42:31 [71224] [INFO] Booting worker with pid: 71224
+2025-02-08 09:42:32 [71225] [INFO] Booting worker with pid: 71225
+2025-02-08 09:42:32 [71228] [INFO] Booting worker with pid: 71228
+2025-02-08 09:45:02 [71221] [INFO] Handling signal: int
+2025-02-08 09:45:03 [71221] [ERROR] Worker (pid:71224) was sent SIGINT!
+2025-02-08 09:45:03 [71221] [INFO] Shutting down: Master
+2025-02-08 09:45:04 [71647] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:45:04 [71647] [INFO] Listening at: http://0.0.0.0:8000 (71647)
+2025-02-08 09:45:04 [71647] [INFO] Using worker: sync
+2025-02-08 09:45:04 [71648] [INFO] Booting worker with pid: 71648
+2025-02-08 09:45:04 [71649] [INFO] Booting worker with pid: 71649
+2025-02-08 09:45:04 [71650] [INFO] Booting worker with pid: 71650
+2025-02-08 09:45:04 [71651] [INFO] Booting worker with pid: 71651
+2025-02-08 09:49:41 [71647] [INFO] Handling signal: int
+2025-02-08 09:49:42 [71647] [INFO] Shutting down: Master
+2025-02-08 09:49:46 [71948] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:49:46 [71948] [INFO] Listening at: http://0.0.0.0:8000 (71948)
+2025-02-08 09:49:46 [71948] [INFO] Using worker: sync
+2025-02-08 09:49:46 [71949] [INFO] Booting worker with pid: 71949
+2025-02-08 09:49:46 [71950] [INFO] Booting worker with pid: 71950
+2025-02-08 09:49:46 [71951] [INFO] Booting worker with pid: 71951
+2025-02-08 09:49:46 [71952] [INFO] Booting worker with pid: 71952
+2025-02-08 09:50:02 [71948] [INFO] Handling signal: int
+2025-02-08 09:50:02 [71948] [INFO] Shutting down: Master
+2025-02-08 09:50:14 [72185] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:50:14 [72185] [INFO] Listening at: http://0.0.0.0:8000 (72185)
+2025-02-08 09:50:14 [72185] [INFO] Using worker: sync
+2025-02-08 09:50:14 [72186] [INFO] Booting worker with pid: 72186
+2025-02-08 09:50:14 [72187] [INFO] Booting worker with pid: 72187
+2025-02-08 09:50:14 [72188] [INFO] Booting worker with pid: 72188
+2025-02-08 09:50:15 [72189] [INFO] Booting worker with pid: 72189
+2025-02-08 09:54:24 [72185] [INFO] Handling signal: int
+2025-02-08 09:54:24 [72185] [ERROR] Worker (pid:72187) was sent SIGINT!
+2025-02-08 09:54:24 [72185] [ERROR] Worker (pid:72186) was sent SIGINT!
+2025-02-08 09:54:24 [72185] [ERROR] Worker (pid:72188) was sent SIGINT!
+2025-02-08 09:54:24 [72185] [ERROR] Worker (pid:72189) was sent SIGINT!
+2025-02-08 09:54:24 [72185] [INFO] Shutting down: Master
+2025-02-08 09:54:26 [72453] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:54:26 [72453] [INFO] Listening at: http://0.0.0.0:8000 (72453)
+2025-02-08 09:54:26 [72453] [INFO] Using worker: sync
+2025-02-08 09:54:26 [72454] [INFO] Booting worker with pid: 72454
+2025-02-08 09:54:26 [72455] [INFO] Booting worker with pid: 72455
+2025-02-08 09:54:26 [72457] [INFO] Booting worker with pid: 72457
+2025-02-08 09:54:26 [72458] [INFO] Booting worker with pid: 72458
+2025-02-08 09:57:59 [72453] [CRITICAL] WORKER TIMEOUT (pid:72454)
+2025-02-08 09:57:59 [72453] [CRITICAL] WORKER TIMEOUT (pid:72457)
+2025-02-08 09:57:59 [72453] [ERROR] Worker (pid:72454) exited with code 1
+2025-02-08 09:57:59 [72453] [ERROR] Worker (pid:72454) exited with code 1.
+2025-02-08 09:57:59 [72453] [ERROR] Worker (pid:72457) exited with code 1
+2025-02-08 09:57:59 [72453] [ERROR] Worker (pid:72457) exited with code 1.
+2025-02-08 09:57:59 [72741] [INFO] Booting worker with pid: 72741
+2025-02-08 09:57:59 [72742] [INFO] Booting worker with pid: 72742
+2025-02-08 09:58:01 [72453] [INFO] Handling signal: int
+2025-02-08 09:58:02 [72453] [ERROR] Worker (pid:72741) was sent SIGINT!
+2025-02-08 09:58:02 [72453] [ERROR] Worker (pid:72458) was sent SIGINT!
+2025-02-08 09:58:02 [72453] [ERROR] Worker (pid:72455) was sent SIGINT!
+2025-02-08 09:58:02 [72453] [ERROR] Worker (pid:72742) was sent SIGINT!
+2025-02-08 09:58:02 [72453] [INFO] Shutting down: Master
+2025-02-08 09:59:10 [72894] [INFO] Starting gunicorn 21.2.0
+2025-02-08 09:59:10 [72894] [INFO] Listening at: http://0.0.0.0:8000 (72894)
+2025-02-08 09:59:10 [72894] [INFO] Using worker: sync
+2025-02-08 09:59:10 [72895] [INFO] Booting worker with pid: 72895
+2025-02-08 09:59:10 [72896] [INFO] Booting worker with pid: 72896
+2025-02-08 09:59:10 [72897] [INFO] Booting worker with pid: 72897
+2025-02-08 09:59:10 [72898] [INFO] Booting worker with pid: 72898
+2025-02-08 10:01:17 [72894] [INFO] Handling signal: int
+2025-02-08 10:01:17 [72894] [ERROR] Worker (pid:72897) was sent SIGINT!
+2025-02-08 10:01:17 [72894] [ERROR] Worker (pid:72895) was sent SIGINT!
+2025-02-08 10:01:17 [72894] [ERROR] Worker (pid:72898) was sent SIGINT!
+2025-02-08 10:01:17 [72894] [ERROR] Worker (pid:72896) was sent SIGINT!
+2025-02-08 10:01:17 [72894] [INFO] Shutting down: Master
+2025-02-08 10:01:23 [73089] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:01:23 [73089] [INFO] Listening at: http://0.0.0.0:8000 (73089)
+2025-02-08 10:01:23 [73089] [INFO] Using worker: sync
+2025-02-08 10:01:23 [73090] [INFO] Booting worker with pid: 73090
+2025-02-08 10:01:23 [73091] [INFO] Booting worker with pid: 73091
+2025-02-08 10:01:23 [73092] [INFO] Booting worker with pid: 73092
+2025-02-08 10:01:23 [73093] [INFO] Booting worker with pid: 73093
+2025-02-08 10:03:57 [73089] [INFO] Handling signal: int
+2025-02-08 10:03:58 [73089] [ERROR] Worker (pid:73093) was sent SIGINT!
+2025-02-08 10:03:58 [73089] [ERROR] Worker (pid:73090) was sent SIGINT!
+2025-02-08 10:03:58 [73089] [ERROR] Worker (pid:73092) was sent SIGINT!
+2025-02-08 10:03:58 [73089] [ERROR] Worker (pid:73091) was sent SIGINT!
+2025-02-08 10:03:58 [73089] [INFO] Shutting down: Master
+2025-02-08 10:03:59 [73287] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:03:59 [73287] [INFO] Listening at: http://0.0.0.0:8000 (73287)
+2025-02-08 10:03:59 [73287] [INFO] Using worker: sync
+2025-02-08 10:03:59 [73292] [INFO] Booting worker with pid: 73292
+2025-02-08 10:03:59 [73293] [INFO] Booting worker with pid: 73293
+2025-02-08 10:03:59 [73294] [INFO] Booting worker with pid: 73294
+2025-02-08 10:03:59 [73295] [INFO] Booting worker with pid: 73295
+2025-02-08 10:06:22 [73287] [INFO] Handling signal: int
+2025-02-08 10:06:22 [73287] [ERROR] Worker (pid:73292) was sent SIGINT!
+2025-02-08 10:06:22 [73287] [ERROR] Worker (pid:73295) was sent SIGINT!
+2025-02-08 10:06:22 [73287] [ERROR] Worker (pid:73293) was sent SIGINT!
+2025-02-08 10:06:22 [73287] [ERROR] Worker (pid:73294) was sent SIGINT!
+2025-02-08 10:06:22 [73287] [INFO] Shutting down: Master
+2025-02-08 10:06:24 [73722] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:06:24 [73722] [INFO] Listening at: http://0.0.0.0:8000 (73722)
+2025-02-08 10:06:24 [73722] [INFO] Using worker: sync
+2025-02-08 10:06:24 [73723] [INFO] Booting worker with pid: 73723
+2025-02-08 10:06:24 [73724] [INFO] Booting worker with pid: 73724
+2025-02-08 10:06:24 [73725] [INFO] Booting worker with pid: 73725
+2025-02-08 10:06:24 [73726] [INFO] Booting worker with pid: 73726
+2025-02-08 10:13:48 [73722] [INFO] Handling signal: int
+2025-02-08 10:13:48 [73722] [ERROR] Worker (pid:73724) was sent SIGINT!
+2025-02-08 10:13:48 [73722] [ERROR] Worker (pid:73723) was sent SIGINT!
+2025-02-08 10:13:48 [73722] [ERROR] Worker (pid:73725) was sent SIGINT!
+2025-02-08 10:13:48 [73722] [ERROR] Worker (pid:73726) was sent SIGINT!
+2025-02-08 10:13:48 [73722] [INFO] Shutting down: Master
+2025-02-08 10:13:59 [74412] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:13:59 [74412] [INFO] Listening at: http://0.0.0.0:8000 (74412)
+2025-02-08 10:13:59 [74412] [INFO] Using worker: sync
+2025-02-08 10:13:59 [74413] [INFO] Booting worker with pid: 74413
+2025-02-08 10:13:59 [74414] [INFO] Booting worker with pid: 74414
+2025-02-08 10:13:59 [74416] [INFO] Booting worker with pid: 74416
+2025-02-08 10:13:59 [74417] [INFO] Booting worker with pid: 74417
+2025-02-08 10:15:15 [74412] [INFO] Handling signal: int
+2025-02-08 10:15:16 [74412] [ERROR] Worker (pid:74414) was sent SIGINT!
+2025-02-08 10:15:16 [74412] [ERROR] Worker (pid:74417) was sent SIGINT!
+2025-02-08 10:15:16 [74412] [ERROR] Worker (pid:74413) was sent SIGINT!
+2025-02-08 10:15:16 [74412] [ERROR] Worker (pid:74416) was sent SIGINT!
+2025-02-08 10:15:16 [74412] [INFO] Shutting down: Master
+2025-02-08 10:19:37 [74957] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:19:37 [74957] [INFO] Listening at: http://0.0.0.0:8000 (74957)
+2025-02-08 10:19:37 [74957] [INFO] Using worker: sync
+2025-02-08 10:19:37 [74959] [INFO] Booting worker with pid: 74959
+2025-02-08 10:19:37 [74960] [INFO] Booting worker with pid: 74960
+2025-02-08 10:19:37 [74961] [INFO] Booting worker with pid: 74961
+2025-02-08 10:19:37 [74962] [INFO] Booting worker with pid: 74962
+2025-02-08 10:21:42 [74957] [INFO] Handling signal: int
+2025-02-08 10:21:42 [74957] [INFO] Shutting down: Master
+2025-02-08 10:22:24 [75212] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:22:24 [75212] [INFO] Listening at: http://0.0.0.0:8000 (75212)
+2025-02-08 10:22:24 [75212] [INFO] Using worker: sync
+2025-02-08 10:22:24 [75213] [INFO] Booting worker with pid: 75213
+2025-02-08 10:22:24 [75214] [INFO] Booting worker with pid: 75214
+2025-02-08 10:22:24 [75215] [INFO] Booting worker with pid: 75215
+2025-02-08 10:22:24 [75216] [INFO] Booting worker with pid: 75216
+2025-02-08 10:33:58 [75212] [INFO] Handling signal: int
+2025-02-08 10:33:59 [75212] [INFO] Shutting down: Master
+2025-02-08 10:34:02 [76012] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:34:02 [76012] [INFO] Listening at: http://0.0.0.0:8000 (76012)
+2025-02-08 10:34:02 [76012] [INFO] Using worker: sync
+2025-02-08 10:34:02 [76013] [INFO] Booting worker with pid: 76013
+2025-02-08 10:34:02 [76014] [INFO] Booting worker with pid: 76014
+2025-02-08 10:34:02 [76015] [INFO] Booting worker with pid: 76015
+2025-02-08 10:34:02 [76016] [INFO] Booting worker with pid: 76016
+2025-02-08 10:36:37 [76012] [INFO] Handling signal: int
+2025-02-08 10:36:38 [76012] [ERROR] Worker (pid:76014) was sent SIGINT!
+2025-02-08 10:36:38 [76012] [ERROR] Worker (pid:76015) was sent SIGINT!
+2025-02-08 10:36:38 [76012] [ERROR] Worker (pid:76013) was sent SIGINT!
+2025-02-08 10:36:38 [76012] [ERROR] Worker (pid:76016) was sent SIGINT!
+2025-02-08 10:36:38 [76012] [INFO] Shutting down: Master
+2025-02-08 10:36:43 [76185] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:36:43 [76185] [INFO] Listening at: http://0.0.0.0:8000 (76185)
+2025-02-08 10:36:43 [76185] [INFO] Using worker: sync
+2025-02-08 10:36:43 [76187] [INFO] Booting worker with pid: 76187
+2025-02-08 10:36:43 [76188] [INFO] Booting worker with pid: 76188
+2025-02-08 10:36:43 [76189] [INFO] Booting worker with pid: 76189
+2025-02-08 10:36:43 [76190] [INFO] Booting worker with pid: 76190
+2025-02-08 10:40:33 [76185] [INFO] Handling signal: int
+2025-02-08 10:40:33 [76185] [ERROR] Worker (pid:76189) was sent SIGINT!
+2025-02-08 10:40:33 [76185] [INFO] Shutting down: Master
+2025-02-08 10:40:39 [76690] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:40:39 [76690] [INFO] Listening at: http://0.0.0.0:8000 (76690)
+2025-02-08 10:40:39 [76690] [INFO] Using worker: sync
+2025-02-08 10:40:39 [76691] [INFO] Booting worker with pid: 76691
+2025-02-08 10:40:39 [76692] [INFO] Booting worker with pid: 76692
+2025-02-08 10:40:39 [76693] [INFO] Booting worker with pid: 76693
+2025-02-08 10:40:39 [76694] [INFO] Booting worker with pid: 76694
+2025-02-08 10:41:32 [76690] [INFO] Handling signal: int
+2025-02-08 10:41:32 [76690] [ERROR] Worker (pid:76694) was sent SIGINT!
+2025-02-08 10:41:32 [76690] [ERROR] Worker (pid:76691) was sent SIGINT!
+2025-02-08 10:41:32 [76690] [ERROR] Worker (pid:76692) was sent SIGINT!
+2025-02-08 10:41:32 [76690] [ERROR] Worker (pid:76693) was sent SIGINT!
+2025-02-08 10:41:32 [76690] [INFO] Shutting down: Master
+2025-02-08 10:49:53 [77442] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:49:53 [77442] [INFO] Listening at: http://0.0.0.0:8000 (77442)
+2025-02-08 10:49:53 [77442] [INFO] Using worker: sync
+2025-02-08 10:49:53 [77443] [INFO] Booting worker with pid: 77443
+2025-02-08 10:49:53 [77444] [INFO] Booting worker with pid: 77444
+2025-02-08 10:49:53 [77445] [INFO] Booting worker with pid: 77445
+2025-02-08 10:49:53 [77446] [INFO] Booting worker with pid: 77446
+2025-02-08 10:52:30 [77442] [INFO] Handling signal: int
+2025-02-08 10:52:30 [77442] [INFO] Shutting down: Master
+2025-02-08 10:52:33 [77732] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:52:33 [77732] [INFO] Listening at: http://0.0.0.0:8000 (77732)
+2025-02-08 10:52:33 [77732] [INFO] Using worker: sync
+2025-02-08 10:52:33 [77733] [INFO] Booting worker with pid: 77733
+2025-02-08 10:52:33 [77734] [INFO] Booting worker with pid: 77734
+2025-02-08 10:52:33 [77735] [INFO] Booting worker with pid: 77735
+2025-02-08 10:52:33 [77736] [INFO] Booting worker with pid: 77736
+2025-02-08 10:54:13 [77732] [INFO] Handling signal: int
+2025-02-08 10:54:13 [77732] [ERROR] Worker (pid:77735) was sent SIGINT!
+2025-02-08 10:54:13 [77732] [ERROR] Worker (pid:77733) was sent SIGINT!
+2025-02-08 10:54:13 [77732] [ERROR] Worker (pid:77734) was sent SIGINT!
+2025-02-08 10:54:13 [77732] [ERROR] Worker (pid:77736) was sent SIGINT!
+2025-02-08 10:54:13 [77732] [INFO] Shutting down: Master
+2025-02-08 10:54:14 [77881] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:54:14 [77881] [INFO] Listening at: http://0.0.0.0:8000 (77881)
+2025-02-08 10:54:14 [77881] [INFO] Using worker: sync
+2025-02-08 10:54:14 [77882] [INFO] Booting worker with pid: 77882
+2025-02-08 10:54:14 [77883] [INFO] Booting worker with pid: 77883
+2025-02-08 10:54:14 [77884] [INFO] Booting worker with pid: 77884
+2025-02-08 10:54:14 [77885] [INFO] Booting worker with pid: 77885
+2025-02-08 10:56:38 [77881] [INFO] Handling signal: int
+2025-02-08 10:56:38 [77881] [ERROR] Worker (pid:77885) was sent SIGINT!
+2025-02-08 10:56:38 [77881] [ERROR] Worker (pid:77884) was sent SIGINT!
+2025-02-08 10:56:38 [77881] [ERROR] Worker (pid:77883) was sent SIGINT!
+2025-02-08 10:56:38 [77881] [ERROR] Worker (pid:77882) was sent SIGINT!
+2025-02-08 10:56:39 [77881] [INFO] Shutting down: Master
+2025-02-08 10:56:40 [78251] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:56:40 [78251] [INFO] Listening at: http://0.0.0.0:8000 (78251)
+2025-02-08 10:56:40 [78251] [INFO] Using worker: sync
+2025-02-08 10:56:40 [78252] [INFO] Booting worker with pid: 78252
+2025-02-08 10:56:40 [78253] [INFO] Booting worker with pid: 78253
+2025-02-08 10:56:40 [78254] [INFO] Booting worker with pid: 78254
+2025-02-08 10:56:40 [78255] [INFO] Booting worker with pid: 78255
+2025-02-08 10:58:46 [78251] [INFO] Handling signal: int
+2025-02-08 10:58:47 [78251] [ERROR] Worker (pid:78254) was sent SIGINT!
+2025-02-08 10:58:47 [78251] [ERROR] Worker (pid:78255) was sent SIGINT!
+2025-02-08 10:58:47 [78251] [ERROR] Worker (pid:78252) was sent SIGINT!
+2025-02-08 10:58:47 [78251] [ERROR] Worker (pid:78253) was sent SIGINT!
+2025-02-08 10:58:47 [78251] [INFO] Shutting down: Master
+2025-02-08 10:58:53 [78483] [INFO] Starting gunicorn 21.2.0
+2025-02-08 10:58:53 [78483] [INFO] Listening at: http://0.0.0.0:8000 (78483)
+2025-02-08 10:58:53 [78483] [INFO] Using worker: sync
+2025-02-08 10:58:53 [78486] [INFO] Booting worker with pid: 78486
+2025-02-08 10:58:54 [78487] [INFO] Booting worker with pid: 78487
+2025-02-08 10:58:54 [78488] [INFO] Booting worker with pid: 78488
+2025-02-08 10:58:54 [78489] [INFO] Booting worker with pid: 78489
+2025-02-08 10:59:58 [78483] [INFO] Handling signal: int
+2025-02-08 10:59:58 [78483] [INFO] Shutting down: Master
+2025-02-08 11:01:38 [78753] [INFO] Starting gunicorn 21.2.0
+2025-02-08 11:01:38 [78753] [INFO] Listening at: http://0.0.0.0:8000 (78753)
+2025-02-08 11:01:38 [78753] [INFO] Using worker: sync
+2025-02-08 11:01:38 [78754] [INFO] Booting worker with pid: 78754
+2025-02-08 11:01:38 [78755] [INFO] Booting worker with pid: 78755
+2025-02-08 11:01:38 [78756] [INFO] Booting worker with pid: 78756
+2025-02-08 11:01:38 [78757] [INFO] Booting worker with pid: 78757
+2025-02-08 11:05:27 [78753] [INFO] Handling signal: int
+2025-02-08 11:05:28 [78753] [ERROR] Worker (pid:78756) was sent SIGINT!
+2025-02-08 11:05:28 [78753] [ERROR] Worker (pid:78754) was sent SIGINT!
+2025-02-08 11:05:28 [78753] [ERROR] Worker (pid:78757) was sent SIGINT!
+2025-02-08 11:05:28 [78753] [ERROR] Worker (pid:78755) was sent SIGINT!
+2025-02-08 11:05:28 [78753] [INFO] Shutting down: Master
+2025-02-08 11:05:30 [79115] [INFO] Starting gunicorn 21.2.0
+2025-02-08 11:05:30 [79115] [INFO] Listening at: http://0.0.0.0:8000 (79115)
+2025-02-08 11:05:30 [79115] [INFO] Using worker: sync
+2025-02-08 11:05:30 [79116] [INFO] Booting worker with pid: 79116
+2025-02-08 11:05:30 [79117] [INFO] Booting worker with pid: 79117
+2025-02-08 11:05:30 [79118] [INFO] Booting worker with pid: 79118
+2025-02-08 11:05:30 [79121] [INFO] Booting worker with pid: 79121
+2025-02-08 11:08:01 [79115] [INFO] Handling signal: int
+2025-02-08 11:08:02 [79115] [INFO] Shutting down: Master
+2025-02-08 11:08:03 [79325] [INFO] Starting gunicorn 21.2.0
+2025-02-08 11:08:03 [79325] [INFO] Listening at: http://0.0.0.0:8000 (79325)
+2025-02-08 11:08:03 [79325] [INFO] Using worker: sync
+2025-02-08 11:08:03 [79330] [INFO] Booting worker with pid: 79330
+2025-02-08 11:08:03 [79331] [INFO] Booting worker with pid: 79331
+2025-02-08 11:08:03 [79332] [INFO] Booting worker with pid: 79332
+2025-02-08 11:08:03 [79333] [INFO] Booting worker with pid: 79333
+2025-02-08 11:10:24 [79325] [INFO] Handling signal: int
+2025-02-08 11:10:24 [79325] [INFO] Shutting down: Master
+2025-02-08 11:10:26 [79799] [INFO] Starting gunicorn 21.2.0
+2025-02-08 11:10:26 [79799] [INFO] Listening at: http://0.0.0.0:8000 (79799)
+2025-02-08 11:10:26 [79799] [INFO] Using worker: sync
+2025-02-08 11:10:26 [79800] [INFO] Booting worker with pid: 79800
+2025-02-08 11:10:26 [79801] [INFO] Booting worker with pid: 79801
+2025-02-08 11:10:26 [79802] [INFO] Booting worker with pid: 79802
+2025-02-08 11:10:26 [79804] [INFO] Booting worker with pid: 79804
+2025-02-08 11:13:54 [79799] [INFO] Handling signal: int
+2025-02-08 11:13:55 [79799] [ERROR] Worker (pid:79804) was sent SIGINT!
+2025-02-08 11:13:55 [79799] [ERROR] Worker (pid:79800) was sent SIGINT!
+2025-02-08 11:13:55 [79799] [ERROR] Worker (pid:79801) was sent SIGINT!
+2025-02-08 11:13:55 [79799] [ERROR] Worker (pid:79802) was sent SIGINT!
+2025-02-08 11:13:55 [79799] [INFO] Shutting down: Master
+2025-02-08 11:13:57 [80125] [INFO] Starting gunicorn 21.2.0
+2025-02-08 11:13:57 [80125] [INFO] Listening at: http://0.0.0.0:8000 (80125)
+2025-02-08 11:13:57 [80125] [INFO] Using worker: sync
+2025-02-08 11:13:57 [80126] [INFO] Booting worker with pid: 80126
+2025-02-08 11:13:57 [80127] [INFO] Booting worker with pid: 80127
+2025-02-08 11:13:57 [80128] [INFO] Booting worker with pid: 80128
+2025-02-08 11:13:57 [80129] [INFO] Booting worker with pid: 80129
+2025-02-08 11:16:11 [80125] [INFO] Handling signal: int
+2025-02-08 11:16:12 [80125] [INFO] Shutting down: Master
+2025-02-08 11:16:14 [80322] [INFO] Starting gunicorn 21.2.0
+2025-02-08 11:16:14 [80322] [INFO] Listening at: http://0.0.0.0:8000 (80322)
+2025-02-08 11:16:14 [80322] [INFO] Using worker: sync
+2025-02-08 11:16:14 [80325] [INFO] Booting worker with pid: 80325
+2025-02-08 11:16:14 [80326] [INFO] Booting worker with pid: 80326
+2025-02-08 11:16:14 [80327] [INFO] Booting worker with pid: 80327
+2025-02-08 11:16:14 [80328] [INFO] Booting worker with pid: 80328

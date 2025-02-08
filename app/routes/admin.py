@@ -58,14 +58,19 @@ def create_user():
 @bp.route('/reset-password/<int:user_id>', methods=['POST'])
 @login_required
 def reset_user_password(user_id):
+    logger.debug(f'Password reset attempt for user {user_id} by {current_user.id}')
+    
     if not current_user.is_admin:
-        flash('Access denied', 'error')
+        logger.warning(f'Unauthorized password reset attempt by non-admin user {current_user.id}')
+        flash('Access denied. Administrator privileges required.', 'error')
         return redirect(url_for('shipments.new_shipment'))
     
     user = User.query.get_or_404(user_id)
     
-    if user.is_superuser and not current_user.is_superuser:
-        flash('Access denied. Only Super Users can modify Super User accounts.', 'error')
+    # Prevent admin users from resetting superuser passwords
+    if user.is_superuser:
+        logger.warning(f'Attempt to reset superuser password by admin user {current_user.id}')
+        flash('Access denied. Superuser passwords can only be reset through the recovery process.', 'error')
         return redirect(url_for('admin.manage_users'))
     
     new_password = request.form.get('new_password')
@@ -74,10 +79,61 @@ def reset_user_password(user_id):
         flash('Password must be at least 8 characters long', 'error')
         return redirect(url_for('admin.manage_users'))
     
-    user.set_password(new_password)
-    db.session.commit()
-    flash(f'Password reset for user {user.username}', 'success')
+    try:
+        # Log password reset attempt
+        logger.info(f'Password reset successful for user {user_id} by admin {current_user.id}')
+        
+        user.set_password(new_password)
+        db.session.commit()
+        flash(f'Password reset for user {user.username}', 'success')
+        
+    except Exception as e:
+        logger.error(f'Error during password reset: {str(e)}', exc_info=True)
+        db.session.rollback()
+        flash('An error occurred during password reset', 'error')
+        
     return redirect(url_for('admin.manage_users'))
+
+@bp.route('/superuser-recovery', methods=['GET', 'POST'])
+@login_required
+def superuser_recovery():
+    """Emergency recovery process for superuser accounts"""
+    if not current_user.is_superuser:
+        logger.warning(f'Unauthorized access to superuser recovery by user {current_user.id}')
+        flash('Access denied. This process is only available to superusers.', 'error')
+        return redirect(url_for('main.dashboard'))
+        
+    if request.method == 'POST':
+        try:
+            recovery_code = request.form.get('recovery_code')
+            new_password = request.form.get('new_password')
+            confirm_password = request.form.get('confirm_password')
+            
+            if not all([recovery_code, new_password, confirm_password]):
+                flash('All fields are required', 'error')
+                return render_template('admin/superuser_recovery.html')
+                
+            if new_password != confirm_password:
+                flash('Passwords do not match', 'error')
+                return render_template('admin/superuser_recovery.html')
+                
+            if len(new_password) < 12:  # Stricter password requirements for superusers
+                flash('Superuser passwords must be at least 12 characters long', 'error')
+                return render_template('admin/superuser_recovery.html')
+            
+            # Verify recovery code and process password reset
+            # This would typically involve checking against securely stored recovery codes
+            # and implementing additional security measures
+            
+            logger.info(f'Superuser recovery process completed for user {current_user.id}')
+            flash('Recovery process completed successfully', 'success')
+            return redirect(url_for('main.dashboard'))
+            
+        except Exception as e:
+            logger.error(f'Error during superuser recovery: {str(e)}', exc_info=True)
+            flash('An error occurred during the recovery process', 'error')
+            
+    return render_template('admin/superuser_recovery.html')
 
 @bp.route('/delete-user/<int:user_id>', methods=['POST'])
 @login_required

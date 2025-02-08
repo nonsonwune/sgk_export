@@ -29,106 +29,332 @@
 
 /* Print-specific styles */
 @media print {
-    .no-print {
-        display: none !important;
+    @page {
+        size: A4;
+        margin: 20mm 10mm; /* Increased top/bottom margin */
     }
-
-    body {
-        margin: 0;
-        padding: 0;
-        background: white;
-        font-size: 11pt;
-        line-height: 1.3;
-    }
-
-    .print-form {
-        padding: 15mm !important;
-        margin: 0 !important;
-        max-width: none !important;
-        box-shadow: none !important;
+    
+    html, body {
+        margin: 0 auto !important;
+        padding: 0 !important;
+        width: 210mm !important;
         background: white !important;
+        font-size: 12pt !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-sizing: border-box !important;
+        max-width: none !important;
+    }
+
+    .preview-container,
+    .print-form {
+        width: 210mm !important;
+        max-width: 210mm !important;
+        margin: 0 auto !important;
+        padding: 15mm 15mm 20mm !important; /* Added more bottom padding */
+        background: white !important;
+        box-shadow: none !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Ensure proper spacing after page breaks */
+    .info-section > *,
+    .form-section,
+    .items-table,
+    .pricing-summary,
+    .signature-section {
+        break-before: auto !important;
+        break-after: auto !important;
+        break-inside: avoid !important;
+        page-break-before: auto !important;
+        page-break-after: auto !important;
+        page-break-inside: avoid !important;
+        margin-top: 15mm !important; /* Space before each section */
+        margin-bottom: 15mm !important; /* Space after each section */
+    }
+
+    /* Additional spacing for elements that might break across pages */
+    .info-card,
+    .info-row,
+    .items-table tr,
+    .pricing-details,
+    .total-section {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Force page breaks before major sections if needed */
+    .items-table,
+    .financial-summary {
+        break-before: page !important;
+        page-break-before: page !important;
+        padding-top: 20mm !important; /* Extra padding at top of new page */
+    }
+
+    /* Ensure proper spacing within sections */
+    .info-cards-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15mm !important;
+        margin-bottom: 15mm !important;
+        width: 100% !important;
+    }
+
+    .info-card {
+        margin-bottom: 15mm !important;
+    }
+
+    .document-header {
+        width: 100% !important;
+        margin-bottom: 1rem !important;
+        background: white !important;
+        padding: 0 !important;
+        position: relative !important;
+        min-height: 110px !important;
     }
 
     .company-header {
-        text-align: center;
-        margin-bottom: 10mm;
-        border-bottom: 1px solid #000;
-        padding-bottom: 5mm;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 1.5rem !important;
+        width: calc(100% - 130px) !important;
+        position: relative !important;
+    }
+
+    .company-info-section {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 1.5rem !important;
+        flex: 1 !important;
     }
 
     .company-logo {
-        width: 80px !important;
+        width: 100px !important;
         height: auto !important;
-        margin-bottom: 3mm;
+        flex-shrink: 0 !important;
     }
 
-    .form-section {
-        margin-bottom: 8mm;
-        page-break-inside: avoid;
+    .company-info {
+        flex: 1 !important;
+        padding-right: 1rem !important;
     }
 
-    .section-title {
-        font-size: 12pt;
-        font-weight: bold;
-        margin-bottom: 3mm;
-        padding: 2mm 0;
-        border-bottom: 0.5pt solid #000;
+    .company-info h1 {
+        font-size: 20pt !important;
+        margin: 0 0 0.5rem 0 !important;
+        color: #2d3748 !important;
+        font-weight: 600 !important;
     }
 
-    .input-row {
-        margin-bottom: 3mm;
-        display: flex;
-        align-items: baseline;
+    /* QR Code Section - Updated */
+    .qr-code-section {
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 110px !important;
+        height: 110px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 2 !important;
+        background: white !important;
     }
 
-    .input-label {
-        width: 25%;
-        font-weight: 600;
-        padding-right: 3mm;
+    .qr-code-container {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: white !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
     }
 
-    .input-field {
-        width: 75%;
-        border-bottom: 0.5pt solid #000;
-        min-height: 6mm;
+    .qr-code-container img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        display: block !important;
     }
 
+    .qr-code-label {
+        font-size: 9pt !important;
+        color: #4a5568 !important;
+        text-align: center !important;
+        margin-top: 0.25rem !important;
+    }
+
+    /* Info Section - Updated */
+    .info-section {
+        width: 100% !important;
+        padding: 0 !important;
+        margin-top: 2rem !important;
+        clear: both !important;
+    }
+
+    .info-cards-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+        width: 100% !important;
+    }
+
+    .info-card {
+        background: white !important;
+        border: 1px solid #eef0f3 !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+        margin-bottom: 1rem !important;
+        break-inside: avoid !important;
+    }
+
+    .info-content {
+        padding: 1rem !important;
+    }
+
+    .info-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 11pt !important;
+    }
+
+    .label {
+        font-weight: 600 !important;
+        color: #4a5568 !important;
+        min-width: 120px !important;
+    }
+
+    .value {
+        flex: 1 !important;
+        text-align: right !important;
+    }
+
+    /* Table Styles */
     .items-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 5mm 0;
+        width: 100% !important;
+        margin: 1rem 0 !important;
+        border: 1px solid #eef0f3 !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        break-inside: avoid !important;
+    }
+
+    .items-table table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 11pt !important;
     }
 
     .items-table th {
-        background: #f8f9fa !important;
-        font-weight: bold;
-        text-align: left;
-        padding: 2mm;
-        border: 0.5pt solid #000;
+        background: #f8f9fe !important;
+        padding: 0.75rem !important;
+        text-align: left !important;
+        color: #4169E1 !important;
+        font-weight: 600 !important;
     }
 
     .items-table td {
-        padding: 2mm;
-        border: 0.5pt solid #000;
-        height: 7mm;
+        padding: 0.75rem !important;
+        border-bottom: 1px solid #eef0f3 !important;
     }
 
-    .signature-section {
-        margin-top: 15mm;
-        display: flex;
-        justify-content: space-between;
-        page-break-inside: avoid;
+    /* Status Badge */
+    .status-badge {
+        padding: 0.35rem 1rem !important;
+        border-radius: 20px !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
     }
 
-    .signature-box {
-        width: 45%;
+    .status-draft { background: #FFD700 !important; color: #724d00 !important; }
+    .status-saved { background: #28a745 !important; color: white !important; }
+    .status-pending { background: #ffc107 !important; color: #000 !important; }
+
+    /* Hide non-printable elements */
+    .main-nav,
+    .action-buttons,
+    .view-images-btn,
+    .no-print,
+    th.no-print,
+    td.no-print {
+        display: none !important;
     }
 
-    .signature-line {
-        border-top: 0.5pt solid #000;
-        margin-top: 15mm;
-        padding-top: 2mm;
-        text-align: center;
+    /* Override preview styles for print */
+    .document-meta {
+        background: none !important;
+        padding: 0.5rem 0 !important;
+        gap: 1.5rem !important;
+    }
+
+    .meta-item {
+        font-size: 11pt !important;
+        color: #2d3748 !important;
+    }
+
+    .card-header {
+        background: none !important;
+        padding: 0.75rem !important;
+        border-bottom: 2px solid #eef0f3 !important;
+    }
+
+    .card-header h2 {
+        font-size: 14pt !important;
+        margin: 0 !important;
+    }
+
+    .pricing-summary {
+        display: grid !important;
+        grid-template-columns: 1fr 250px !important;
+        gap: 1rem !important;
+        padding: 1rem !important;
+        break-inside: avoid !important;
+    }
+
+    .pricing-details {
+        gap: 0.5rem !important;
+    }
+
+    .total-section {
+        background: none !important;
+        padding: 1rem !important;
+        border: 1px solid #eef0f3 !important;
+    }
+
+    .total-row {
+        padding: 0.5rem 0 !important;
+        font-size: 11pt !important;
+    }
+
+    .total-row.final {
+        font-size: 13pt !important;
+        padding-top: 0.75rem !important;
+        margin-top: 0.75rem !important;
+    }
+
+    /* Adjust grid layout for better print */
+    @media print and (max-width: 210mm) {
+        .info-cards-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .pricing-summary {
+            grid-template-columns: 1fr !important;
+        }
     }
 }
 

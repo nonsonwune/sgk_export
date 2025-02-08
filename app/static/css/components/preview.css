@@ -1,0 +1,377 @@
+/* Preview Container Styles */
+.preview-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin: 2rem auto;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+/* Document Header Styles */
+.document-header {
+    padding: 2rem 3rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.company-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Company Info Styles */
+.company-info-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    flex: 1;
+}
+
+.company-logo {
+    width: 140px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+.company-info h1 {
+    font-weight: 600;
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+    color: #2d3748;
+}
+
+/* Document Meta Styles */
+.document-meta {
+    display: flex;
+    gap: 2.5rem;
+    background: rgba(65, 105, 225, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #4a5568;
+}
+
+/* QR Code Section */
+.qr-code-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qr-code-container {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.qr-code-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.qr-code-label {
+    font-size: 0.9rem;
+    color: #718096;
+}
+
+/* Info Section Styles */
+.info-section {
+    padding: 0 3rem 2rem;
+}
+
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Card Styles */
+.info-card {
+    background: #ffffff;
+    border: 1px solid #eef0f3;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    background: #f8f9fe;
+    padding: 1.25rem;
+    border-bottom: 1px solid #eef0f3;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-header i {
+    font-size: 1.4rem;
+    color: #4169E1;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.info-content {
+    padding: 1.5rem;
+}
+
+/* Info Row Styles */
+.info-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f5f6f8;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    color: #718096;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.value {
+    color: #2d3748;
+    font-weight: 500;
+}
+
+/* Table Styles */
+.items-table {
+    border: 1px solid #eef0f3;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem;
+}
+
+.items-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.items-table th {
+    background: #f8f9fe;
+    padding: 1rem;
+    text-align: left;
+    color: #4169E1;
+    font-weight: 600;
+    border-bottom: 2px solid #eef0f3;
+}
+
+.items-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eef0f3;
+    vertical-align: top;
+}
+
+.items-table tr:nth-child(even) {
+    background: #fafbff;
+}
+
+/* Financial Summary Styles */
+.pricing-summary {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    padding: 1.5rem;
+}
+
+.pricing-details {
+    display: grid;
+    gap: 1rem;
+}
+
+.total-section {
+    background: #f8f9fe;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #eef0f3;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    color: #2d3748;
+}
+
+.total-row.final {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 2px solid #eef0f3;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 2rem 3rem;
+    background: #f8f9fe;
+    border-top: 1px solid #eef0f3;
+}
+
+.action-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.action-button.primary {
+    background: #4169E1;
+    color: white;
+}
+
+.action-button.secondary {
+    background: #718096;
+    color: white;
+}
+
+.action-button.primary:hover {
+    background: #3154b4;
+}
+
+.action-button.secondary:hover {
+    background: #4a5568;
+}
+
+/* Status Badge Styles */
+.status-badge {
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-draft { background: #FFD700; color: #724d00; }
+.status-saved { background: #28a745; color: white; }
+.status-pending { background: #ffc107; color: #000; }
+
+/* Signature Styles */
+.signature-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.signature-image {
+    max-width: 200px;
+    max-height: 100px;
+    object-fit: contain;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 4px;
+}
+
+/* View Images Button */
+.view-images-btn {
+    padding: 0.5rem 0.75rem;
+    background: rgba(65, 105, 225, 0.1);
+    color: #4169E1;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.view-images-btn:hover {
+    background: #4169E1;
+    color: white;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+    .preview-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .document-header,
+    .info-section {
+        padding: 1rem;
+    }
+
+    .company-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .pricing-summary {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .document-meta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+} 

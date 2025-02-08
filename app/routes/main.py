@@ -13,8 +13,14 @@ logger = logging.getLogger(__name__)
 
 bp = Blueprint('main', __name__)
 
+def get_critical_css():
+    css_path = os.path.join(os.path.dirname(__file__), '../static/css/critical.css')
+    with open(css_path, 'r') as f:
+        return f'<style>{f.read()}</style>'
+
 @bp.route('/')
 def index():
+    critical_css = get_critical_css()
     if current_user.is_authenticated:
         return redirect(url_for('main.dashboard'))
     return redirect(url_for('auth.login'))

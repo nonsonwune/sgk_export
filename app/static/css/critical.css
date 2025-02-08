@@ -1,0 +1,62 @@
+/* Critical Navigation Styles */
+:root {
+    --nav-bg: white;
+    --nav-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --nav-text: #4a5568;
+    --nav-text-hover: #2d3748;
+    --nav-active-bg: #ebf4ff;
+    --nav-active-color: #4169E1;
+    --nav-border: #e2e8f0;
+}
+
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--nav-bg);
+}
+
+.main-nav {
+    padding: 0.75rem 2rem;
+    background: var(--nav-bg);
+    box-shadow: var(--nav-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    margin-right: 2rem;
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 600;
+    color: var(--nav-text-hover);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+} 

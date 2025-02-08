@@ -56,10 +56,10 @@ export function preparePrint() {
         console.debug('[Print] Starting print preparation');
         showPrintPreview();
 
-        // Find the content to print
-        const contentToClone = document.querySelector('.print-form');
+        // Find the content to print (support both templates)
+        const contentToClone = document.querySelector('.preview-container') || document.querySelector('.print-form');
         if (!contentToClone) {
-            console.error('[Print] Print content not found - missing .print-form element');
+            console.error('[Print] Print content not found - missing .preview-container or .print-form element');
             hidePrintPreview();
             return;
         }
@@ -73,15 +73,26 @@ export function preparePrint() {
         printFrame.style.width = '0';
         printFrame.style.height = '0';
         printFrame.style.border = '0';
+        printFrame.style.visibility = 'hidden';
         printFrame.className = 'print-frame';
         document.body.appendChild(printFrame);
-        console.debug('[Print] Created print iframe');
 
-        // Clone the print content
+        // Clone content and prepare for print
         const clonedContent = contentToClone.cloneNode(true);
+        
+        // Handle QR code if present
+        const qrCodeImg = clonedContent.querySelector('.qr-code-container img');
+        if (qrCodeImg) {
+            const originalQrImg = contentToClone.querySelector('.qr-code-container img');
+            if (originalQrImg) {
+                qrCodeImg.src = originalQrImg.src;
+                console.debug('[Print] QR code image cloned successfully');
+            }
+        }
+
         console.debug('[Print] Cloned content successfully');
 
-        // Setup iframe document
+        // Setup iframe document with proper viewport and print styles
         const frameDoc = printFrame.contentWindow.document;
         frameDoc.open();
         frameDoc.write(`
@@ -89,23 +100,67 @@ export function preparePrint() {
             <html>
             <head>
                 <title>Print</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
                 <link rel="stylesheet" href="/static/css/main.css">
-                <link rel="stylesheet" href="/static/css/components/forms.css">
-                <link rel="stylesheet" href="/static/css/components/tables.css">
-                <link rel="stylesheet" href="/static/css/components/buttons.css">
+                <link rel="stylesheet" href="/static/css/components/preview.css">
                 <link rel="stylesheet" href="/static/css/components/print.css">
                 <style>
+                    @page {
+                        size: A4;
+                        margin: 20mm 10mm;
+                    }
+                    html, body {
+                        margin: 0 auto !important;
+                        padding: 0 !important;
+                        width: 210mm !important;
+                        background: white !important;
+                        -webkit-print-color-adjust: exact !important;
+                        print-color-adjust: exact !important;
+                    }
+                    .preview-container,
+                    .print-form {
+                        width: 210mm !important;
+                        max-width: 210mm !important;
+                        margin: 0 auto !important;
+                        padding: 15mm 15mm 20mm !important;
+                        background: white !important;
+                        box-shadow: none !important;
+                    }
+                    /* Ensure proper spacing after page breaks */
+                    .info-section > *,
+                    .form-section,
+                    .items-table,
+                    .pricing-summary,
+                    .signature-section {
+                        break-before: auto !important;
+                        break-after: auto !important;
+                        break-inside: avoid !important;
+                        margin-top: 15mm !important;
+                        margin-bottom: 15mm !important;
+                    }
+                    /* Force page breaks before major sections */
+                    .items-table,
+                    .financial-summary {
+                        break-before: page !important;
+                        padding-top: 20mm !important;
+                    }
+                    /* Prevent unwanted breaks */
+                    .info-card,
+                    .info-row,
+                    .items-table tr,
+                    .pricing-details,
+                    .total-section {
+                        break-inside: avoid !important;
+                    }
                     @media print {
                         body {
-                            margin: 0;
-                            padding: 0;
-                            background: white;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
                         }
-                        .print-frame {
-                            margin: 0;
-                            padding: 0;
+                        .no-print {
+                            display: none !important;
                         }
                     }
                 </style>
@@ -116,35 +171,37 @@ export function preparePrint() {
             </html>
         `);
         frameDoc.close();
-        console.debug('[Print] Initialized print iframe document');
 
-        // Wait for images to load in the iframe
+        // Wait for resources to load
         setTimeout(() => {
             try {
-                // Print the iframe
+                console.debug('[Print] Initiating print');
                 printFrame.contentWindow.print();
 
                 // Cleanup after printing
                 printFrame.contentWindow.onafterprint = function() {
                     document.body.removeChild(printFrame);
                     hidePrintPreview();
+                    console.debug('[Print] Print completed and cleanup finished');
                 };
 
-                // Fallback cleanup if print is cancelled
+                // Fallback cleanup
                 setTimeout(() => {
                     if (document.body.contains(printFrame)) {
                         document.body.removeChild(printFrame);
                         hidePrintPreview();
+                        console.debug('[Print] Cleanup after timeout');
                     }
                 }, 1000);
             } catch (e) {
-                console.error('Error during print:', e);
+                console.error('[Print] Error during print:', e);
                 hidePrintPreview();
                 if (document.body.contains(printFrame)) {
                     document.body.removeChild(printFrame);
                 }
             }
-        }, 500);
+        }, 1000);
+
     } catch (e) {
         console.error('[Print] Error preparing print:', e);
         hidePrintPreview();

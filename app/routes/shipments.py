@@ -223,6 +223,13 @@ def view_shipment(shipment_id):
 @login_required
 def edit_shipment(shipment_id):
     logger.debug(f'Accessing edit form for shipment {shipment_id}')
+    
+    # Check if user is a super user
+    if not current_user.is_superuser:
+        logger.warning(f'Unauthorized edit attempt by user {current_user.id}')
+        flash('Access denied. Only super users can edit shipments.', 'error')
+        return redirect(url_for('shipments.list_shipments'))
+        
     try:
         shipment = Shipment.query.get_or_404(shipment_id)
         logger.debug(f'Found shipment with waybill: {shipment.waybill_number}')
@@ -275,6 +282,13 @@ def edit_shipment(shipment_id):
 @login_required
 def delete_shipment(shipment_id):
     """Delete a shipment and its associated items"""
+    
+    # Check if user is a super user
+    if not current_user.is_superuser:
+        logger.warning(f'Unauthorized delete attempt by user {current_user.id}')
+        flash('Access denied. Only super users can delete shipments.', 'error')
+        return redirect(url_for('shipments.list_shipments'))
+        
     try:
         shipment = Shipment.query.get_or_404(shipment_id)
         
