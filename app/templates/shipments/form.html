@@ -48,11 +48,10 @@
 {% block content %}
 {# DEBUG: Content block start #}
 <form method="POST" action="{{ url_for('shipments.submit_shipment') }}" enctype="multipart/form-data" class="export-form" novalidate>
-<form action="{{ url_for('shipments.submit_shipment') }}" method="POST" enctype="multipart/form-data" class="export-form" novalidate>
     <div class="form-container">
         {# DEBUG: Form container start #}
         <div class="form-header">
-        <div class="form-title">
+            <div class="form-title">
                 <i class="fas fa-file-export"></i>
                 <h1>Export Documentation Form</h1>
             </div>
@@ -64,64 +63,64 @@
                 <i class="fas fa-hashtag"></i>
                 <h2>Reference Information</h2>
             </div>
-        <div class="form-group">
-            <label for="waybill_number">Waybill Number</label>
-                <input type="text" id="waybill_number" name="waybill_number" value="Auto-generated" readonly class="readonly-input" aria-label="Auto-generated waybill number">
+            <div class="form-group">
+                <label for="waybill_number" class="form-label">Waybill Number</label>
+                <input type="text" id="waybill_number" name="waybill_number" value="Auto-generated" readonly class="form-control readonly-input" aria-label="Auto-generated waybill number">
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-card flex-1">
+        <div class="form-row two-columns">
+            <div class="form-card">
                 <div class="form-card-header">
                     <i class="fas fa-user-tie"></i>
                     <h2>Sender Information</h2>
                 </div>
                 <div class="form-group">
-                    <label for="sender_name">Name <span class="required-star">*</span></label>
-                    <input type="text" id="sender_name" name="sender_name" value="{{ contact_data.sender_name|default('') }}" required>
+                    <label for="sender_name" class="form-label required">Name</label>
+                    <input type="text" id="sender_name" name="sender_name" value="{{ contact_data.sender_name|default('') }}" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="sender_email">Email</label>
-                    <input type="email" id="sender_email" name="sender_email" value="{{ contact_data.sender_email|default('') }}">
+                    <label for="sender_email" class="form-label">Email</label>
+                    <input type="email" id="sender_email" name="sender_email" value="{{ contact_data.sender_email|default('') }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="sender_address">Address</label>
-                    <input type="text" id="sender_address" name="sender_address" value="{{ contact_data.sender_address|default('') }}">
+                    <label for="sender_address" class="form-label">Address</label>
+                    <input type="text" id="sender_address" name="sender_address" value="{{ contact_data.sender_address|default('') }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="sender_business">Business</label>
-                    <input type="text" id="sender_business" name="sender_business" value="{{ contact_data.sender_business|default('') }}">
+                    <label for="sender_business" class="form-label">Business</label>
+                    <input type="text" id="sender_business" name="sender_business" value="{{ contact_data.sender_business|default('') }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="sender_mobile">Mobile <span class="required-star">*</span></label>
-                    <input type="tel" id="sender_mobile" name="sender_mobile" value="{{ contact_data.sender_mobile|default('') }}" required>
+                    <label for="sender_mobile" class="form-label required">Mobile</label>
+                    <input type="tel" id="sender_mobile" name="sender_mobile" value="{{ contact_data.sender_mobile|default('') }}" class="form-control" required>
                 </div>
             </div>
 
-            <div class="form-card flex-1">
+            <div class="form-card">
                 <div class="form-card-header">
                     <i class="fas fa-user-check"></i>
                     <h2>Receiver Information</h2>
                 </div>
                 <div class="form-group">
-                    <label for="receiver_name">Name <span class="required-star">*</span></label>
-                    <input type="text" id="receiver_name" name="receiver_name" value="{{ contact_data.receiver_name }}" required>
+                    <label for="receiver_name" class="form-label required">Name</label>
+                    <input type="text" id="receiver_name" name="receiver_name" value="{{ contact_data.receiver_name }}" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="receiver_email">Email</label>
-                    <input type="email" id="receiver_email" name="receiver_email" value="{{ contact_data.receiver_email }}">
+                    <label for="receiver_email" class="form-label">Email</label>
+                    <input type="email" id="receiver_email" name="receiver_email" value="{{ contact_data.receiver_email }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="receiver_address">Address</label>
-                    <input type="text" id="receiver_address" name="receiver_address" value="{{ contact_data.receiver_address }}">
+                    <label for="receiver_address" class="form-label">Address</label>
+                    <input type="text" id="receiver_address" name="receiver_address" value="{{ contact_data.receiver_address }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="receiver_business">Business</label>
-                    <input type="text" id="receiver_business" name="receiver_business" value="{{ contact_data.receiver_business }}">
+                    <label for="receiver_business" class="form-label">Business</label>
+                    <input type="text" id="receiver_business" name="receiver_business" value="{{ contact_data.receiver_business }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="receiver_mobile">Mobile <span class="required-star">*</span></label>
-                    <input type="tel" id="receiver_mobile" name="receiver_mobile" value="{{ contact_data.receiver_mobile }}" required>
+                    <label for="receiver_mobile" class="form-label required">Mobile</label>
+                    <input type="tel" id="receiver_mobile" name="receiver_mobile" value="{{ contact_data.receiver_mobile }}" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -133,17 +132,17 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <h2>Destination Details</h2>
                 </div>
-            <div class="form-row">
-                <div class="form-group">
-                        <label for="destination_address">Address<span class="required-star">*</span></label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="destination_address" class="form-label required">Address</label>
                         <input type="text" id="destination_address" name="destination_address" class="form-control" required>
-                </div>
-                <div class="form-group">
-                        <label for="destination_country">Country<span class="required-star">*</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination_country" class="form-label required">Country</label>
                         <input type="text" id="destination_country" name="destination_country" class="form-control" required>
-                </div>
-                <div class="form-group">
-                        <label for="destination_postcode">Postcode/Zipcode<span class="required-star">*</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination_postcode" class="form-label required">Postcode/Zipcode</label>
                         <input type="text" id="destination_postcode" name="destination_postcode" class="form-control" required>
                     </div>
                 </div>
@@ -156,33 +155,33 @@
                     <i class="fas fa-box"></i>
                     <h2>Item Details</h2>
                 </div>
-            <div id="items-container">
-                <div class="item-entry">
-                    <div class="form-row">
-                        <div class="form-group">
-                                <label for="description_0">Description <span class="required-star">*</span></label>
-                            <input type="text" id="description_0" name="description[]" required>
-                        </div>
-                        <div class="form-group">
-                                <label for="value_0">Value <span class="required-star">*</span></label>
-                                <input type="number" id="value_0" name="value[]" step="0.01" required>
-                        </div>
-                        <div class="form-group">
-                                <label for="quantity_0">Quantity <span class="required-star">*</span></label>
-                            <input type="number" id="quantity_0" name="quantity[]" required>
-                        </div>
-                        <div class="form-group">
-                                <label for="weight_0">Weight (kg) <span class="required-star">*</span></label>
-                            <input type="number" id="weight_0" name="weight[]" step="0.1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="item_image_0">Item Image</label>
-                            <input type="file" id="item_image_0" name="item_image[]" accept="image/*">
+                <div id="items-container">
+                    <div class="item-entry">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="description_0" class="form-label required">Description</label>
+                                <input type="text" id="description_0" name="description[]" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="value_0" class="form-label required">Value</label>
+                                <input type="number" id="value_0" name="value[]" step="0.01" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity_0" class="form-label required">Quantity</label>
+                                <input type="number" id="quantity_0" name="quantity[]" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="weight_0" class="form-label required">Weight (kg)</label>
+                                <input type="number" id="weight_0" name="weight[]" step="0.1" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="item_image_0" class="form-label">Item Image</label>
+                                <input type="file" id="item_image_0" name="item_image[]" accept="image/*" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                <button type="button" class="add-item-btn" onclick="addItemEntry()">
+                <button type="button" class="btn btn-primary add-item-btn" onclick="addItemEntry()">
                     <i class="fas fa-plus"></i> Add Another Item
                 </button>
             </div>
@@ -194,44 +193,44 @@
                     <i class="fas fa-calculator"></i>
                     <h2>Pricing Details</h2>
                 </div>
-            <div class="pricing-grid">
-                <div class="form-group">
-                    <label for="freight">Freight Pricing</label>
-                        <input type="number" id="freight" name="freight" value="0" step="0.01">
+                <div class="pricing-grid">
+                    <div class="form-group">
+                        <label for="freight" class="form-label">Freight Pricing</label>
+                        <input type="number" id="freight" name="freight" value="0" step="0.01" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="additional" class="form-label">Additional Charges</label>
+                        <input type="number" id="additional" name="additional" value="0" step="0.01" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup" class="form-label">Pick Up Charge</label>
+                        <input type="number" id="pickup" name="pickup" value="0" step="0.01" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="handling" class="form-label">Handling Fees</label>
+                        <input type="number" id="handling" name="handling" value="0" step="0.01" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="crating" class="form-label">Crating</label>
+                        <input type="number" id="crating" name="crating" value="0" step="0.01" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="insurance" class="form-label">Insurance Charge</label>
+                        <input type="number" id="insurance" name="insurance" value="0" step="0.01" class="form-control">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="additional">Additional Charges</label>
-                        <input type="number" id="additional" name="additional" value="0" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="pickup">Pick Up Charge</label>
-                        <input type="number" id="pickup" name="pickup" value="0" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="handling">Handling Fees</label>
-                        <input type="number" id="handling" name="handling" value="0" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="crating">Crating</label>
-                        <input type="number" id="crating" name="crating" value="0" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="insurance">Insurance Charge</label>
-                        <input type="number" id="insurance" name="insurance" value="0" step="0.01">
-                </div>
-            </div>
-            <div class="total-section">
-                <div class="total-row">
-                    <div>Subtotal</div>
-                    <div id="subtotal">$0.00</div>
-                </div>
-                <div class="total-row">
-                    <div>VAT (7%)</div>
-                    <div id="vat">$0.00</div>
-                </div>
-                <div class="total-row final">
-                    <div>Total Amount</div>
-                    <div id="total">$0.00</div>
+                <div class="total-section">
+                    <div class="total-row">
+                        <div>Subtotal</div>
+                        <div id="subtotal">$0.00</div>
+                    </div>
+                    <div class="total-row">
+                        <div>VAT (7%)</div>
+                        <div id="vat">$0.00</div>
+                    </div>
+                    <div class="total-row final">
+                        <div>Total Amount</div>
+                        <div id="total">$0.00</div>
                     </div>
                 </div>
             </div>
@@ -243,41 +242,41 @@
                     <i class="fas fa-clipboard-check"></i>
                     <h2>Additional Details</h2>
                 </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="is_collection" name="is_collection">
-                <label for="is_collection">Is Collection?</label>
-            </div>
-            <div class="form-group">
-                <label for="customer_group">Customer Group</label>
-                <select id="customer_group" name="customer_group" class="form-select" required>
-                    <option value="">Select Customer Group</option>
-                    <option value="Walk In">Walk In - New Customers</option>
-                    <option value="Returning">Returning - Established Customers</option>
-                    <option value="Referred">Referred - Recommended Customers</option>
-                    <option value="Corporate">Corporate - Business Accounts</option>
-                    <option value="Online">Online - Digital Channel Customers</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="order_booked_by">Order Booked By</label>
-                <input type="text" id="order_booked_by" name="order_booked_by" value="{{ current_user.name }}" class="form-control" readonly style="background-color: #f8f9fa; border-color: #dee2e6;">
-            </div>
-            <div class="form-group">
-                <label for="signature-pad">Sender Signature <span class="required-star">*</span></label>
-                <div class="signature-pad-container">
-                    <canvas id="signature-pad" class="signature-pad"></canvas>
-                    <div class="signature-pad-controls">
-                        <button type="button" class="btn-clear">
-                            <i class="fas fa-eraser"></i> Clear Signature
-                        </button>
-                    </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="is_collection" name="is_collection">
+                    <label for="is_collection">Is Collection?</label>
                 </div>
-                <input type="hidden" name="sender_signature" id="signature-input" required>
-                <div class="error-message" aria-live="polite"></div>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">I accept the terms and conditions</label>
+                <div class="form-group">
+                    <label for="customer_group">Customer Group</label>
+                    <select id="customer_group" name="customer_group" class="form-select" required>
+                        <option value="">Select Customer Group</option>
+                        <option value="Walk In">Walk In - New Customers</option>
+                        <option value="Returning">Returning - Established Customers</option>
+                        <option value="Referred">Referred - Recommended Customers</option>
+                        <option value="Corporate">Corporate - Business Accounts</option>
+                        <option value="Online">Online - Digital Channel Customers</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="order_booked_by">Order Booked By</label>
+                    <input type="text" id="order_booked_by" name="order_booked_by" value="{{ current_user.name }}" class="form-control" readonly style="background-color: #f8f9fa; border-color: #dee2e6;">
+                </div>
+                <div class="form-group">
+                    <label for="signature-pad">Sender Signature <span class="required-star">*</span></label>
+                    <div class="signature-pad-container">
+                        <canvas id="signature-pad" class="signature-pad"></canvas>
+                        <div class="signature-pad-controls">
+                            <button type="button" class="btn-clear">
+                                <i class="fas fa-eraser"></i> Clear Signature
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="sender_signature" id="signature-input" required>
+                    <div class="error-message" aria-live="polite"></div>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I accept the terms and conditions</label>
                 </div>
             </div>
         </div>

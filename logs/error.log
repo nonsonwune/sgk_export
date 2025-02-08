@@ -1,726 +1,90 @@
-2025-02-07 22:02:56 [4514] [INFO] Starting gunicorn 21.2.0
-2025-02-07 22:02:56 [4514] [INFO] Listening at: http://0.0.0.0:8000 (4514)
-2025-02-07 22:02:56 [4514] [INFO] Using worker: sync
-2025-02-07 22:02:56 [4515] [INFO] Booting worker with pid: 4515
-2025-02-07 22:02:57 [4516] [INFO] Booting worker with pid: 4516
-2025-02-07 22:02:57 [4517] [INFO] Booting worker with pid: 4517
-2025-02-07 22:02:57 [4518] [INFO] Booting worker with pid: 4518
-2025-02-07 22:10:08 [4514] [INFO] Handling signal: int
-2025-02-07 22:10:09 [4514] [INFO] Shutting down: Master
-2025-02-07 22:10:15 [5024] [INFO] Starting gunicorn 21.2.0
-2025-02-07 22:10:15 [5024] [INFO] Listening at: http://0.0.0.0:8000 (5024)
-2025-02-07 22:10:15 [5024] [INFO] Using worker: sync
-2025-02-07 22:10:15 [5030] [INFO] Booting worker with pid: 5030
-2025-02-07 22:10:15 [5032] [INFO] Booting worker with pid: 5032
-2025-02-07 22:10:15 [5033] [INFO] Booting worker with pid: 5033
-2025-02-07 22:10:15 [5034] [INFO] Booting worker with pid: 5034
-2025-02-07 22:15:25 [5024] [INFO] Handling signal: int
-2025-02-07 22:15:26 [5024] [INFO] Shutting down: Master
-2025-02-07 22:15:29 [5524] [INFO] Starting gunicorn 21.2.0
-2025-02-07 22:15:29 [5524] [INFO] Listening at: http://0.0.0.0:8000 (5524)
-2025-02-07 22:15:29 [5524] [INFO] Using worker: sync
-2025-02-07 22:15:29 [5525] [INFO] Booting worker with pid: 5525
-2025-02-07 22:15:29 [5526] [INFO] Booting worker with pid: 5526
-2025-02-07 22:15:29 [5527] [INFO] Booting worker with pid: 5527
-2025-02-07 22:15:29 [5528] [INFO] Booting worker with pid: 5528
-2025-02-07 22:21:33 [5524] [INFO] Handling signal: int
-2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5528) was sent SIGINT!
-2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5525) was sent SIGINT!
-2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5527) was sent SIGINT!
-2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5526) was sent SIGINT!
-2025-02-07 22:21:33 [5524] [INFO] Shutting down: Master
-2025-02-07 22:21:36 [6145] [INFO] Starting gunicorn 21.2.0
-2025-02-07 22:21:36 [6145] [INFO] Listening at: http://0.0.0.0:8000 (6145)
-2025-02-07 22:21:36 [6145] [INFO] Using worker: sync
-2025-02-07 22:21:36 [6146] [INFO] Booting worker with pid: 6146
-2025-02-07 22:21:36 [6149] [INFO] Booting worker with pid: 6149
-2025-02-07 22:21:36 [6151] [INFO] Booting worker with pid: 6151
-2025-02-07 22:21:36 [6152] [INFO] Booting worker with pid: 6152
-2025-02-07 22:25:10 [6145] [INFO] Handling signal: int
-2025-02-07 22:25:10 [6145] [ERROR] Worker (pid:6149) was sent SIGINT!
-2025-02-07 22:25:10 [6145] [ERROR] Worker (pid:6146) was sent SIGINT!
-2025-02-07 22:25:10 [6145] [ERROR] Worker (pid:6152) was sent SIGINT!
-2025-02-07 22:25:10 [6145] [INFO] Shutting down: Master
-2025-02-07 22:25:15 [6359] [INFO] Starting gunicorn 21.2.0
-2025-02-07 22:25:15 [6359] [INFO] Listening at: http://0.0.0.0:8000 (6359)
-2025-02-07 22:25:15 [6359] [INFO] Using worker: sync
-2025-02-07 22:25:15 [6360] [INFO] Booting worker with pid: 6360
-2025-02-07 22:25:16 [6361] [INFO] Booting worker with pid: 6361
-2025-02-07 22:25:16 [6362] [INFO] Booting worker with pid: 6362
-2025-02-07 22:25:16 [6363] [INFO] Booting worker with pid: 6363
-2025-02-07 22:25:21 [ERROR] [PID:6360] [app.routes.main] Error loading print form template: Encountered unknown tag 'endblock'.
-2025-02-07 22:25:21 [ERROR] [PID:6360] [app.routes.main] Stack trace:
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 100, in print_form_template
-    return render_template('shipments/print_form_template.html', shipments=shipments)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 137, in load
-    code = environment.compile(source, name, filename)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 768, in compile
-    self.handle_exception(source=source_hint)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 401, in template
-    {% endblock %}
-jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'.
-2025-02-07 22:27:43 [6359] [INFO] Handling signal: int
-2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6361) was sent SIGINT!
-2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6363) was sent SIGINT!
-2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6360) was sent SIGINT!
-2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6362) was sent SIGINT!
-2025-02-07 22:27:43 [6359] [INFO] Shutting down: Master
-2025-02-07 22:27:46 [6491] [INFO] Starting gunicorn 21.2.0
-2025-02-07 22:27:46 [6491] [INFO] Listening at: http://0.0.0.0:8000 (6491)
-2025-02-07 22:27:46 [6491] [INFO] Using worker: sync
-2025-02-07 22:27:46 [6492] [INFO] Booting worker with pid: 6492
-2025-02-07 22:27:46 [6493] [INFO] Booting worker with pid: 6493
-2025-02-07 22:27:46 [6494] [INFO] Booting worker with pid: 6494
-2025-02-07 22:27:46 [6495] [INFO] Booting worker with pid: 6495
-2025-02-07 23:23:10 [6491] [CRITICAL] WORKER TIMEOUT (pid:6492)
-2025-02-07 23:23:11 [6491] [CRITICAL] WORKER TIMEOUT (pid:6493)
-2025-02-07 23:23:11 [6491] [CRITICAL] WORKER TIMEOUT (pid:6494)
-2025-02-07 23:23:11 [6491] [CRITICAL] WORKER TIMEOUT (pid:6495)
-2025-02-07 23:23:12 [6491] [ERROR] Worker (pid:6493) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:23:12 [6491] [ERROR] Worker (pid:6492) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:23:12 [6491] [ERROR] Worker (pid:6495) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:23:12 [7057] [INFO] Booting worker with pid: 7057
-2025-02-07 23:23:12 [7058] [INFO] Booting worker with pid: 7058
-2025-02-07 23:23:13 [6491] [ERROR] Worker (pid:6494) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:23:13 [7059] [INFO] Booting worker with pid: 7059
-2025-02-07 23:23:13 [7060] [INFO] Booting worker with pid: 7060
-2025-02-07 23:40:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:7057)
-2025-02-07 23:40:25 [6491] [CRITICAL] WORKER TIMEOUT (pid:7058)
-2025-02-07 23:40:25 [6491] [CRITICAL] WORKER TIMEOUT (pid:7059)
-2025-02-07 23:40:25 [6491] [CRITICAL] WORKER TIMEOUT (pid:7060)
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7057) exited with code 1
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7059) exited with code 1
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7059) exited with code 1.
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7057) exited with code 1.
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7058) exited with code 1
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7058) exited with code 1.
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7060) exited with code 1
-2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7060) exited with code 1.
-2025-02-07 23:40:26 [7870] [INFO] Booting worker with pid: 7870
-2025-02-07 23:40:26 [7883] [INFO] Booting worker with pid: 7883
-2025-02-07 23:40:26 [7893] [INFO] Booting worker with pid: 7893
-2025-02-07 23:40:26 [7910] [INFO] Booting worker with pid: 7910
-2025-02-07 23:57:49 [6491] [CRITICAL] WORKER TIMEOUT (pid:7870)
-2025-02-07 23:57:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:7883)
-2025-02-07 23:57:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:7893)
-2025-02-07 23:57:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:7910)
-2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7883) exited with code 1
-2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7883) exited with code 1.
-2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7910) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7870) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7893) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 23:57:51 [8911] [INFO] Booting worker with pid: 8911
-2025-02-07 23:57:51 [8916] [INFO] Booting worker with pid: 8916
-2025-02-07 23:57:51 [8926] [INFO] Booting worker with pid: 8926
-2025-02-07 23:57:51 [8948] [INFO] Booting worker with pid: 8948
-2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8911)
-2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8916)
-2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8926)
-2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8948)
-2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8926) exited with code 1
-2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8926) exited with code 1.
-2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8916) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8948) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8911) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 00:20:51 [11623] [INFO] Booting worker with pid: 11623
-2025-02-08 00:20:51 [11635] [INFO] Booting worker with pid: 11635
-2025-02-08 00:20:51 [11649] [INFO] Booting worker with pid: 11649
-2025-02-08 00:20:51 [11654] [INFO] Booting worker with pid: 11654
-2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11623)
-2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11635)
-2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11649)
-2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11654)
-2025-02-08 00:39:38 [6491] [ERROR] Worker (pid:11649) exited with code 1
-2025-02-08 00:39:38 [6491] [ERROR] Worker (pid:11649) exited with code 1.
-2025-02-08 00:39:38 [12540] [INFO] Booting worker with pid: 12540
-2025-02-08 00:39:38 [12541] [INFO] Booting worker with pid: 12541
-2025-02-08 00:39:38 [12547] [INFO] Booting worker with pid: 12547
-2025-02-08 00:39:38 [12548] [INFO] Booting worker with pid: 12548
-2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12540)
-2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12541)
-2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12547)
-2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12548)
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12547) exited with code 1
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12547) exited with code 1.
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12548) exited with code 1
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12548) exited with code 1.
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12540) exited with code 1
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12540) exited with code 1.
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12541) exited with code 1
-2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12541) exited with code 1.
-2025-02-08 00:57:22 [13687] [INFO] Booting worker with pid: 13687
-2025-02-08 00:57:22 [13688] [INFO] Booting worker with pid: 13688
-2025-02-08 00:57:22 [13689] [INFO] Booting worker with pid: 13689
-2025-02-08 00:57:22 [13690] [INFO] Booting worker with pid: 13690
-2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13687)
-2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13688)
-2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13689)
-2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13690)
-2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13687) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13690) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13688) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13689) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:16:14 [15144] [INFO] Booting worker with pid: 15144
-2025-02-08 01:16:14 [15153] [INFO] Booting worker with pid: 15153
-2025-02-08 01:16:14 [15155] [INFO] Booting worker with pid: 15155
-2025-02-08 01:16:14 [15159] [INFO] Booting worker with pid: 15159
-2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15144)
-2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15153)
-2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15155)
-2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15159)
-2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15159) exited with code 1
-2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15159) exited with code 1.
-2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15155) exited with code 1
-2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15155) exited with code 1.
-2025-02-08 01:24:16 [17081] [INFO] Booting worker with pid: 17081
-2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15153) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15144) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:24:16 [17086] [INFO] Booting worker with pid: 17086
-2025-02-08 01:24:16 [17088] [INFO] Booting worker with pid: 17088
-2025-02-08 01:24:16 [17103] [INFO] Booting worker with pid: 17103
-2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17081)
-2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17086)
-2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17088)
-2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17103)
-2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17081) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17103) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17088) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17086) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 01:43:42 [18856] [INFO] Booting worker with pid: 18856
-2025-02-08 01:43:42 [18867] [INFO] Booting worker with pid: 18867
-2025-02-08 01:43:42 [18871] [INFO] Booting worker with pid: 18871
-2025-02-08 01:43:43 [18872] [INFO] Booting worker with pid: 18872
-2025-02-08 02:01:32 [6491] [CRITICAL] WORKER TIMEOUT (pid:18856)
-2025-02-08 02:01:32 [6491] [CRITICAL] WORKER TIMEOUT (pid:18867)
-2025-02-08 02:01:33 [6491] [CRITICAL] WORKER TIMEOUT (pid:18871)
-2025-02-08 02:01:33 [6491] [CRITICAL] WORKER TIMEOUT (pid:18872)
-2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18856) exited with code 1
-2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18856) exited with code 1.
-2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18867) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18871) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18872) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:01:33 [20636] [INFO] Booting worker with pid: 20636
-2025-02-08 02:01:33 [20639] [INFO] Booting worker with pid: 20639
-2025-02-08 02:01:33 [20649] [INFO] Booting worker with pid: 20649
-2025-02-08 02:01:33 [20650] [INFO] Booting worker with pid: 20650
-2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20636)
-2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20639)
-2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20649)
-2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20650)
-2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20636) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20649) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20650) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20639) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:21:23 [22783] [INFO] Booting worker with pid: 22783
-2025-02-08 02:21:23 [22801] [INFO] Booting worker with pid: 22801
-2025-02-08 02:21:24 [22815] [INFO] Booting worker with pid: 22815
-2025-02-08 02:21:24 [22831] [INFO] Booting worker with pid: 22831
-2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22783)
-2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22801)
-2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22815)
-2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22831)
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22815) exited with code 1
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22815) exited with code 1.
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22831) exited with code 1
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22831) exited with code 1.
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22801) exited with code 1
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22801) exited with code 1.
-2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22783) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 02:25:25 [24910] [INFO] Booting worker with pid: 24910
-2025-02-08 02:25:25 [24911] [INFO] Booting worker with pid: 24911
-2025-02-08 02:25:25 [24912] [INFO] Booting worker with pid: 24912
-2025-02-08 02:25:25 [24913] [INFO] Booting worker with pid: 24913
-2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24910)
-2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24911)
-2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24912)
-2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24913)
-2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24910) exited with code 1
-2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24910) exited with code 1.
-2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24913) exited with code 1
-2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24913) exited with code 1.
-2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24911) exited with code 1
-2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24911) exited with code 1.
-2025-02-08 02:45:24 [27861] [INFO] Booting worker with pid: 27861
-2025-02-08 02:45:24 [27866] [INFO] Booting worker with pid: 27866
-2025-02-08 02:45:24 [27870] [INFO] Booting worker with pid: 27870
-2025-02-08 02:45:24 [27874] [INFO] Booting worker with pid: 27874
-2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27861)
-2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27866)
-2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27870)
-2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27874)
-2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27866) exited with code 1
-2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27866) exited with code 1.
-2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27861) exited with code 1
-2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27861) exited with code 1.
-2025-02-08 03:03:56 [29858] [INFO] Booting worker with pid: 29858
-2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27870) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27874) was sent SIGKILL! Perhaps out of memory?
-2025-02-08 03:03:56 [29863] [INFO] Booting worker with pid: 29863
-2025-02-08 03:03:56 [29873] [INFO] Booting worker with pid: 29873
-2025-02-08 03:03:56 [29887] [INFO] Booting worker with pid: 29887
-2025-02-08 03:45:02 [6491] [INFO] Handling signal: int
-2025-02-08 03:45:03 [6491] [INFO] Shutting down: Master
-2025-02-08 03:46:40 [33042] [INFO] Starting gunicorn 21.2.0
-2025-02-08 03:46:40 [33042] [INFO] Listening at: http://0.0.0.0:8000 (33042)
-2025-02-08 03:46:40 [33042] [INFO] Using worker: sync
-2025-02-08 03:46:40 [33043] [INFO] Booting worker with pid: 33043
-2025-02-08 03:46:40 [33044] [INFO] Booting worker with pid: 33044
-2025-02-08 03:46:40 [33045] [INFO] Booting worker with pid: 33045
-2025-02-08 03:46:40 [33046] [INFO] Booting worker with pid: 33046
-2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
-2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
-2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
-2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
-2025-02-08 04:02:07 [33042] [INFO] Handling signal: int
-2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33046) was sent SIGINT!
-2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33044) was sent SIGINT!
-2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33045) was sent SIGINT!
-2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33043) was sent SIGINT!
-2025-02-08 04:02:07 [33042] [INFO] Shutting down: Master
-2025-02-08 04:02:09 [33959] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:02:09 [33959] [INFO] Listening at: http://0.0.0.0:8000 (33959)
-2025-02-08 04:02:09 [33959] [INFO] Using worker: sync
-2025-02-08 04:02:09 [33960] [INFO] Booting worker with pid: 33960
-2025-02-08 04:02:09 [33961] [INFO] Booting worker with pid: 33961
-2025-02-08 04:02:09 [33962] [INFO] Booting worker with pid: 33962
-2025-02-08 04:02:10 [33964] [INFO] Booting worker with pid: 33964
-2025-02-08 04:06:12 [33959] [INFO] Handling signal: int
-2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33964) was sent SIGINT!
-2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33961) was sent SIGINT!
-2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33960) was sent SIGINT!
-2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33962) was sent SIGINT!
-2025-02-08 04:06:12 [33959] [INFO] Shutting down: Master
-2025-02-08 04:06:14 [34336] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:06:14 [34336] [INFO] Listening at: http://0.0.0.0:8000 (34336)
-2025-02-08 04:06:14 [34336] [INFO] Using worker: sync
-2025-02-08 04:06:14 [34338] [INFO] Booting worker with pid: 34338
-2025-02-08 04:06:14 [34339] [INFO] Booting worker with pid: 34339
-2025-02-08 04:06:14 [34340] [INFO] Booting worker with pid: 34340
-2025-02-08 04:06:14 [34341] [INFO] Booting worker with pid: 34341
-2025-02-08 04:09:05 [34336] [INFO] Handling signal: int
-2025-02-08 04:09:05 [34336] [ERROR] Worker (pid:34338) was sent SIGINT!
-2025-02-08 04:09:06 [34336] [INFO] Shutting down: Master
-2025-02-08 04:09:11 [34540] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:09:11 [34540] [INFO] Listening at: http://0.0.0.0:8000 (34540)
-2025-02-08 04:09:11 [34540] [INFO] Using worker: sync
-2025-02-08 04:09:11 [34541] [INFO] Booting worker with pid: 34541
-2025-02-08 04:09:11 [34542] [INFO] Booting worker with pid: 34542
-2025-02-08 04:09:11 [34543] [INFO] Booting worker with pid: 34543
-2025-02-08 04:09:11 [34544] [INFO] Booting worker with pid: 34544
-2025-02-08 04:11:08 [34540] [INFO] Handling signal: int
-2025-02-08 04:11:09 [34540] [INFO] Shutting down: Master
-2025-02-08 04:11:29 [34680] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:11:29 [34680] [INFO] Listening at: http://0.0.0.0:8000 (34680)
-2025-02-08 04:11:29 [34680] [INFO] Using worker: sync
-2025-02-08 04:11:29 [34683] [INFO] Booting worker with pid: 34683
-2025-02-08 04:11:29 [34684] [INFO] Booting worker with pid: 34684
-2025-02-08 04:11:30 [34685] [INFO] Booting worker with pid: 34685
-2025-02-08 04:11:30 [34686] [INFO] Booting worker with pid: 34686
-2025-02-08 04:15:03 [34680] [INFO] Handling signal: int
-2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34683) was sent SIGINT!
-2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34685) was sent SIGINT!
-2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34684) was sent SIGINT!
-2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34686) was sent SIGINT!
-2025-02-08 04:15:03 [34680] [INFO] Shutting down: Master
-2025-02-08 04:15:06 [35005] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:15:06 [35005] [INFO] Listening at: http://0.0.0.0:8000 (35005)
-2025-02-08 04:15:06 [35005] [INFO] Using worker: sync
-2025-02-08 04:15:06 [35006] [INFO] Booting worker with pid: 35006
-2025-02-08 04:15:06 [35007] [INFO] Booting worker with pid: 35007
-2025-02-08 04:15:06 [35008] [INFO] Booting worker with pid: 35008
-2025-02-08 04:15:06 [35009] [INFO] Booting worker with pid: 35009
-2025-02-08 04:18:57 [35005] [INFO] Handling signal: int
-2025-02-08 04:18:58 [35005] [INFO] Shutting down: Master
-2025-02-08 04:19:38 [35178] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:19:38 [35178] [INFO] Listening at: http://0.0.0.0:8000 (35178)
-2025-02-08 04:19:38 [35178] [INFO] Using worker: sync
-2025-02-08 04:19:38 [35179] [INFO] Booting worker with pid: 35179
-2025-02-08 04:19:38 [35180] [INFO] Booting worker with pid: 35180
-2025-02-08 04:19:38 [35181] [INFO] Booting worker with pid: 35181
-2025-02-08 04:19:38 [35182] [INFO] Booting worker with pid: 35182
-2025-02-08 04:21:43 [35178] [INFO] Handling signal: int
-2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35182) was sent SIGINT!
-2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35180) was sent SIGINT!
-2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35179) was sent SIGINT!
-2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35181) was sent SIGINT!
-2025-02-08 04:21:43 [35178] [INFO] Shutting down: Master
-2025-02-08 04:21:46 [35511] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:21:46 [35511] [INFO] Listening at: http://0.0.0.0:8000 (35511)
-2025-02-08 04:21:46 [35511] [INFO] Using worker: sync
-2025-02-08 04:21:46 [35512] [INFO] Booting worker with pid: 35512
-2025-02-08 04:21:46 [35513] [INFO] Booting worker with pid: 35513
-2025-02-08 04:21:46 [35514] [INFO] Booting worker with pid: 35514
-2025-02-08 04:21:46 [35515] [INFO] Booting worker with pid: 35515
-2025-02-08 04:22:17 [ERROR] [PID:35514] [app.routes.main] Error loading print form template: 'now' is undefined
-2025-02-08 04:22:17 [ERROR] [PID:35514] [app.routes.main] Stack trace:
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 100, in print_form_template
-    return render_template('shipments/print_form_template.html', shipments=shipments)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 548, in block 'content'
-    Form Version: 1.0 | Generated: {{ now().strftime('%Y-%m-%d %H:%M') }}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/utils.py", line 83, in from_obj
-    if hasattr(obj, "jinja_pass_arg"):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'now' is undefined
-2025-02-08 04:24:18 [35511] [INFO] Handling signal: int
-2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35514) was sent SIGINT!
-2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35513) was sent SIGINT!
-2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35512) was sent SIGINT!
-2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35515) was sent SIGINT!
-2025-02-08 04:24:18 [35511] [INFO] Shutting down: Master
-2025-02-08 04:24:20 [35655] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:24:20 [35655] [INFO] Listening at: http://0.0.0.0:8000 (35655)
-2025-02-08 04:24:20 [35655] [INFO] Using worker: sync
-2025-02-08 04:24:20 [35656] [INFO] Booting worker with pid: 35656
-2025-02-08 04:24:20 [35657] [INFO] Booting worker with pid: 35657
-2025-02-08 04:24:20 [35658] [INFO] Booting worker with pid: 35658
-2025-02-08 04:24:20 [35659] [INFO] Booting worker with pid: 35659
-2025-02-08 04:27:13 [ERROR] [PID:35656] [gunicorn.error] Error handling request /admin/users
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 16, in manage_users
-    return render_template('manage_users.html', users=users)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_users.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_users.html", line 42, in block 'content'
-    <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" style="display: inline;">
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete_user' with values ['user_id']. Did you mean 'admin.delete_user' instead?
-2025-02-08 04:27:34 [ERROR] [PID:35658] [gunicorn.error] Error handling request /admin/users
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 16, in manage_users
-    return render_template('manage_users.html', users=users)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_users.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_users.html", line 42, in block 'content'
-    <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" style="display: inline;">
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete_user' with values ['user_id']. Did you mean 'admin.delete_user' instead?
-2025-02-08 04:29:35 [35655] [CRITICAL] WORKER TIMEOUT (pid:35656)
-2025-02-08 04:29:35 [35655] [ERROR] Worker (pid:35656) exited with code 1
-2025-02-08 04:29:35 [35655] [ERROR] Worker (pid:35656) exited with code 1.
-2025-02-08 04:29:35 [36323] [INFO] Booting worker with pid: 36323
-2025-02-08 04:30:36 [35655] [INFO] Handling signal: int
-2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:35658) was sent SIGINT!
-2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:35657) was sent SIGINT!
-2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:36323) was sent SIGINT!
-2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:35659) was sent SIGINT!
-2025-02-08 04:30:37 [35655] [INFO] Shutting down: Master
-2025-02-08 04:30:39 [36423] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:30:39 [36423] [INFO] Listening at: http://0.0.0.0:8000 (36423)
-2025-02-08 04:30:39 [36423] [INFO] Using worker: sync
-2025-02-08 04:30:39 [36424] [INFO] Booting worker with pid: 36424
-2025-02-08 04:30:39 [36425] [INFO] Booting worker with pid: 36425
-2025-02-08 04:30:39 [36426] [INFO] Booting worker with pid: 36426
-2025-02-08 04:30:39 [36427] [INFO] Booting worker with pid: 36427
-2025-02-08 04:30:47 [ERROR] [PID:36425] [gunicorn.error] Error handling request /admin/users
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 15, in manage_users
-    logger.debug(f'Available endpoints: {[rule.endpoint for rule in current_app.url_map.iter_rules()]}')
-                                                                    ^^^^^^^^^^^
-NameError: name 'current_app' is not defined
-2025-02-08 04:32:45 [36423] [INFO] Handling signal: int
-2025-02-08 04:32:46 [36423] [INFO] Shutting down: Master
-2025-02-08 04:32:55 [36644] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:32:55 [36644] [INFO] Listening at: http://0.0.0.0:8000 (36644)
-2025-02-08 04:32:55 [36644] [INFO] Using worker: sync
-2025-02-08 04:32:55 [36645] [INFO] Booting worker with pid: 36645
-2025-02-08 04:32:55 [36646] [INFO] Booting worker with pid: 36646
-2025-02-08 04:32:55 [36647] [INFO] Booting worker with pid: 36647
-2025-02-08 04:32:55 [36648] [INFO] Booting worker with pid: 36648
-2025-02-08 04:34:05 [ERROR] [PID:36647] [gunicorn.error] Error handling request /admin/manage-admins
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 117, in manage_admins
-    return render_template('manage_admins.html', users=users)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_admins.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_admins.html", line 74, in block 'content'
-    <form method="POST" action="{{ url_for('admin.modify_admin', user_id=user.id) }}">
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'user' is undefined
-2025-02-08 04:36:06 [36644] [CRITICAL] WORKER TIMEOUT (pid:36645)
-2025-02-08 04:36:06 [36644] [ERROR] Worker (pid:36645) exited with code 1
-2025-02-08 04:36:06 [36644] [ERROR] Worker (pid:36645) exited with code 1.
-2025-02-08 04:36:06 [36994] [INFO] Booting worker with pid: 36994
-2025-02-08 04:36:13 [36644] [INFO] Handling signal: int
-2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36994) was sent SIGINT!
-2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36646) was sent SIGINT!
-2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36648) was sent SIGINT!
-2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36647) was sent SIGINT!
-2025-02-08 04:36:13 [36644] [INFO] Shutting down: Master
-2025-02-08 04:36:15 [37066] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:36:15 [37066] [INFO] Listening at: http://0.0.0.0:8000 (37066)
-2025-02-08 04:36:15 [37066] [INFO] Using worker: sync
-2025-02-08 04:36:15 [37067] [INFO] Booting worker with pid: 37067
-2025-02-08 04:36:15 [37068] [INFO] Booting worker with pid: 37068
-2025-02-08 04:36:15 [37069] [INFO] Booting worker with pid: 37069
-2025-02-08 04:36:15 [37070] [INFO] Booting worker with pid: 37070
-2025-02-08 04:36:48 [ERROR] [PID:37069] [gunicorn.error] Error handling request /change-password
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/auth.py", line 55, in change_password
-    return render_template('change_password.html')
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/change_password.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/change_password.html", line 22, in block 'content'
-    <form method="POST" action="{{ url_for('change_password') }}" class="needs-validation" novalidate>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'change_password'. Did you mean 'auth.change_password' instead?
-2025-02-08 04:38:49 [37066] [CRITICAL] WORKER TIMEOUT (pid:37067)
-2025-02-08 04:38:49 [37066] [ERROR] Worker (pid:37067) exited with code 1
-2025-02-08 04:38:49 [37066] [ERROR] Worker (pid:37067) exited with code 1.
-2025-02-08 04:38:49 [37182] [INFO] Booting worker with pid: 37182
-2025-02-08 04:38:56 [37066] [INFO] Handling signal: int
-2025-02-08 04:38:56 [37066] [INFO] Shutting down: Master
-2025-02-08 04:39:20 [37254] [INFO] Starting gunicorn 21.2.0
-2025-02-08 04:39:20 [37254] [INFO] Listening at: http://0.0.0.0:8000 (37254)
-2025-02-08 04:39:20 [37254] [INFO] Using worker: sync
-2025-02-08 04:39:20 [37255] [INFO] Booting worker with pid: 37255
-2025-02-08 04:39:20 [37256] [INFO] Booting worker with pid: 37256
-2025-02-08 04:39:20 [37257] [INFO] Booting worker with pid: 37257
-2025-02-08 04:39:20 [37258] [INFO] Booting worker with pid: 37258
+2025-02-08 05:00:08 [39074] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:00:08 [39074] [INFO] Listening at: http://0.0.0.0:8000 (39074)
+2025-02-08 05:00:08 [39074] [INFO] Using worker: sync
+2025-02-08 05:00:09 [39075] [INFO] Booting worker with pid: 39075
+2025-02-08 05:00:09 [39076] [INFO] Booting worker with pid: 39076
+2025-02-08 05:00:09 [39077] [INFO] Booting worker with pid: 39077
+2025-02-08 05:00:09 [39078] [INFO] Booting worker with pid: 39078
+2025-02-08 05:05:55 [39074] [INFO] Handling signal: int
+2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39077) was sent SIGINT!
+2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39076) was sent SIGINT!
+2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39075) was sent SIGINT!
+2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39078) was sent SIGINT!
+2025-02-08 05:05:55 [39074] [INFO] Shutting down: Master
+2025-02-08 05:06:02 [39660] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:06:02 [39660] [INFO] Listening at: http://0.0.0.0:8000 (39660)
+2025-02-08 05:06:02 [39660] [INFO] Using worker: sync
+2025-02-08 05:06:02 [39661] [INFO] Booting worker with pid: 39661
+2025-02-08 05:06:02 [39662] [INFO] Booting worker with pid: 39662
+2025-02-08 05:06:02 [39663] [INFO] Booting worker with pid: 39663
+2025-02-08 05:06:02 [39664] [INFO] Booting worker with pid: 39664
+2025-02-08 05:09:32 [39660] [INFO] Handling signal: int
+2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39663) was sent SIGINT!
+2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39662) was sent SIGINT!
+2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39661) was sent SIGINT!
+2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39664) was sent SIGINT!
+2025-02-08 05:09:32 [39660] [INFO] Shutting down: Master
+2025-02-08 05:09:49 [39878] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:09:49 [39878] [INFO] Listening at: http://0.0.0.0:8000 (39878)
+2025-02-08 05:09:49 [39878] [INFO] Using worker: sync
+2025-02-08 05:09:49 [39879] [INFO] Booting worker with pid: 39879
+2025-02-08 05:09:49 [39880] [INFO] Booting worker with pid: 39880
+2025-02-08 05:09:49 [39881] [INFO] Booting worker with pid: 39881
+2025-02-08 05:09:49 [39882] [INFO] Booting worker with pid: 39882
+2025-02-08 05:13:38 [39878] [INFO] Handling signal: int
+2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39881) was sent SIGINT!
+2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39880) was sent SIGINT!
+2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39879) was sent SIGINT!
+2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39882) was sent SIGINT!
+2025-02-08 05:13:39 [39878] [INFO] Shutting down: Master
+2025-02-08 05:13:43 [40266] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:13:43 [40266] [INFO] Listening at: http://0.0.0.0:8000 (40266)
+2025-02-08 05:13:43 [40266] [INFO] Using worker: sync
+2025-02-08 05:13:43 [40267] [INFO] Booting worker with pid: 40267
+2025-02-08 05:13:43 [40268] [INFO] Booting worker with pid: 40268
+2025-02-08 05:13:43 [40269] [INFO] Booting worker with pid: 40269
+2025-02-08 05:13:43 [40270] [INFO] Booting worker with pid: 40270
+2025-02-08 05:20:05 [40266] [INFO] Handling signal: int
+2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40268) was sent SIGINT!
+2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40267) was sent SIGINT!
+2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40270) was sent SIGINT!
+2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40269) was sent SIGINT!
+2025-02-08 05:20:06 [40266] [INFO] Shutting down: Master
+2025-02-08 05:20:09 [40723] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:20:09 [40723] [INFO] Listening at: http://0.0.0.0:8000 (40723)
+2025-02-08 05:20:09 [40723] [INFO] Using worker: sync
+2025-02-08 05:20:09 [40724] [INFO] Booting worker with pid: 40724
+2025-02-08 05:20:09 [40725] [INFO] Booting worker with pid: 40725
+2025-02-08 05:20:09 [40726] [INFO] Booting worker with pid: 40726
+2025-02-08 05:20:09 [40727] [INFO] Booting worker with pid: 40727
+2025-02-08 05:27:19 [40723] [INFO] Handling signal: int
+2025-02-08 05:27:20 [40723] [INFO] Shutting down: Master
+2025-02-08 05:27:35 [41085] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:27:35 [41085] [INFO] Listening at: http://0.0.0.0:8000 (41085)
+2025-02-08 05:27:35 [41085] [INFO] Using worker: sync
+2025-02-08 05:27:35 [41086] [INFO] Booting worker with pid: 41086
+2025-02-08 05:27:35 [41087] [INFO] Booting worker with pid: 41087
+2025-02-08 05:27:35 [41088] [INFO] Booting worker with pid: 41088
+2025-02-08 05:27:35 [41089] [INFO] Booting worker with pid: 41089
+2025-02-08 05:31:00 [41085] [INFO] Handling signal: int
+2025-02-08 05:31:01 [41085] [INFO] Shutting down: Master
+2025-02-08 05:31:28 [41294] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:31:28 [41294] [INFO] Listening at: http://0.0.0.0:8000 (41294)
+2025-02-08 05:31:28 [41294] [INFO] Using worker: sync
+2025-02-08 05:31:28 [41295] [INFO] Booting worker with pid: 41295
+2025-02-08 05:31:28 [41296] [INFO] Booting worker with pid: 41296
+2025-02-08 05:31:28 [41297] [INFO] Booting worker with pid: 41297
+2025-02-08 05:31:28 [41298] [INFO] Booting worker with pid: 41298
+2025-02-08 05:33:35 [41294] [INFO] Handling signal: int
+2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41298) was sent SIGINT!
+2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41296) was sent SIGINT!
+2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41297) was sent SIGINT!
+2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41295) was sent SIGINT!
+2025-02-08 05:33:35 [41294] [INFO] Shutting down: Master
+2025-02-08 05:33:38 [41583] [INFO] Starting gunicorn 21.2.0
+2025-02-08 05:33:38 [41583] [INFO] Listening at: http://0.0.0.0:8000 (41583)
+2025-02-08 05:33:38 [41583] [INFO] Using worker: sync
+2025-02-08 05:33:38 [41585] [INFO] Booting worker with pid: 41585
+2025-02-08 05:33:38 [41586] [INFO] Booting worker with pid: 41586
+2025-02-08 05:33:38 [41587] [INFO] Booting worker with pid: 41587
+2025-02-08 05:33:38 [41588] [INFO] Booting worker with pid: 41588

@@ -5,11 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SGK Global Shipping Export Documentation">
     <title>{% block title %}SGK Global Shipping{% endblock %}</title>
+    
+    <!-- Third-party CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Application CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" onload="console.log('main.css loaded')" onerror="console.error('Failed to load main.css')">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/forms.css') }}" onload="console.log('forms.css loaded')" onerror="console.error('Failed to load forms.css')">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/tables.css') }}" onload="console.log('tables.css loaded')" onerror="console.error('Failed to load tables.css')">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/modals.css') }}" onload="console.log('modals.css loaded')" onerror="console.error('Failed to load modals.css')">
+    
+    <!-- CSS Loading Verification -->
+    <script>
+        window.addEventListener('load', function() {
+            console.log('Verifying CSS loading...');
+            const styleSheets = document.styleSheets;
+            for (let i = 0; i < styleSheets.length; i++) {
+                try {
+                    const href = styleSheets[i].href;
+                    if (href) {
+                        console.log('Loaded stylesheet:', href);
+                    }
+                } catch (e) {
+                    console.error('Error checking stylesheet:', e);
+                }
+            }
+        });
+    </script>
+    
+    <!-- Page-specific CSS -->
     {% block extra_head %}{% endblock %}
+    
+    <!-- Third-party JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <nav class="main-nav sticky-nav">
@@ -84,149 +114,6 @@
         {% endif %}
     </nav>
 
-    <style>
-        body {
-            padding-top: 70px; /* Add padding to prevent content from going under nav */
-        }
-
-        .sticky-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: white;
-            transition: all 0.3s ease;
-        }
-
-        .main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 2rem;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.5rem 1rem;
-        }
-
-        .nav-logo {
-            width: 50px;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .brand-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2d3748;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            color: #4a5568;
-            text-decoration: none;
-            border-radius: 0.375rem;
-            transition: all 0.2s ease;
-        }
-
-        .nav-link:hover {
-            background: #f7fafc;
-            color: #2d3748;
-        }
-
-        .nav-link.active {
-            background: #ebf4ff;
-            color: #4169E1;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding-top: 60px; /* Slightly less padding for mobile */
-            }
-
-            .main-nav {
-                padding: 0.25rem 1rem;
-            }
-
-            .nav-brand {
-                gap: 0.5rem;
-            }
-
-            .brand-text {
-                font-size: 1rem;
-            }
-
-            .nav-links {
-                gap: 0.5rem;
-            }
-
-            .nav-link {
-                padding: 0.5rem;
-            }
-        }
-
-        .user-menu {
-            position: relative;
-        }
-        
-        .user-menu .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-        }
-        
-        .dropdown-toggle::after {
-            display: none;
-        }
-        
-        .dropdown-menu {
-            min-width: 200px;
-            padding: 0.5rem 0;
-            margin: 0.5rem 0;
-            font-size: 0.9rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.375rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            color: #4a5568;
-        }
-        
-        .dropdown-item:hover {
-            background-color: #f7fafc;
-            color: #2d3748;
-        }
-        
-        .dropdown-divider {
-            margin: 0.5rem 0;
-            border-top: 1px solid #e2e8f0;
-        }
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <main class="main-content">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -238,6 +125,12 @@
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Application JavaScript -->
+    <script type="module" src="{{ url_for('static', filename='js/modules/modal.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/validation.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Page-specific JavaScript -->
     {% block scripts %}{% endblock %}
 </body>
 </html> 
