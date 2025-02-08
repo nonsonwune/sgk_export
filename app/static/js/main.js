@@ -50,12 +50,19 @@ console.log('Loading main.js');
 // Import modules
 import { initializeModals } from './modules/modal.js';
 import { initializeFormValidation } from './modules/validation.js';
+import { initializePrint } from './modules/print.js';
 
 // Initialize all modules when the DOM is ready
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM Content Loaded');
     
     try {
+        // Initialize print functionality if on print template page
+        if (document.querySelector('.print-content')) {
+            console.log('Initializing print functionality');
+            initializePrint();
+        }
+
         // Debug style application
         console.log('Verifying critical styles...');
         const formCardHeaders = document.querySelectorAll('.form-card-header');

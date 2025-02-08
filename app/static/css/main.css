@@ -1,11 +1,11 @@
 /* Main Styles */
 
 /* Import Component Styles */
-@import url('components/navigation.css');
-@import url('components/modals.css');
-@import url('components/forms.css');
-@import url('components/tables.css');
-@import url('components/buttons.css');
+@import url('/static/css/components/navigation.css');
+@import url('/static/css/components/modals.css');
+@import url('/static/css/components/forms.css');
+@import url('/static/css/components/tables.css');
+@import url('/static/css/components/buttons.css');
 
 /* Global Styles */
 :root {

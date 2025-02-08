@@ -3,640 +3,332 @@
 {% block title %}Print Form Template - SGK Global Shipping{% endblock %}
 
 {% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/print.css') }}">
 <style>
-    /* Screen styles */
-    .print-content {
+    @media print {
+        .main-nav, .action-buttons, .screen-controls { 
+            display: none !important; 
+        }
+        body { 
+            font-size: 11pt;
+            line-height: 1.3;
+            background: white;
+            margin: 0;
+            padding: 0;
+        }
+        .print-form {
+            margin: 0 !important;
+            padding: 15mm !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .print-form {
+        max-width: 210mm;  /* A4 width */
+        margin: 2rem auto;
+        padding: 20mm;
         background: white;
-        padding: 30px;
-        margin: 20px auto;
-        max-width: 210mm; /* A4 width */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .required-legend {
-        margin: 20px 0;
-        font-size: 0.9em;
-        color: #666;
-    }
-
-    .required-legend .required {
-        color: #ff0000;
-        font-weight: bold;
-    }
-
-    /* Print Preview Dialog */
-    .print-preview-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
-
-    .print-preview-content {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
+    .company-header {
         text-align: center;
-        min-width: 300px;
+        margin-bottom: 5mm;
+        padding-bottom: 5mm;
+        border-bottom: 2px solid #4169E1;
     }
 
-    .print-preview-spinner {
-        margin: 20px 0;
+    .company-logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 2mm;
     }
 
-    .form-actions {
-        margin-top: 15px;
+    .company-header h1 {
+        margin: 3mm 0 2mm;
+        color: #2d3748;
+        font-size: 24pt;
+        font-weight: 600;
+    }
+
+    .company-header p {
+        margin: 0;
+        color: #4a5568;
+        font-size: 12pt;
+    }
+
+    .form-section {
+        margin-bottom: 6mm;
+        page-break-inside: avoid;
+    }
+
+    .section-title {
+        font-size: 12pt;
+        font-weight: 600;
+        margin-bottom: 3mm;
+        color: #2d3748;
+        background: #f8f9fe;
+        padding: 2mm 3mm;
+        border-left: 4px solid #4169E1;
         display: flex;
-        gap: 10px;
-        justify-content: center;
+        align-items: center;
+        gap: 3mm;
     }
 
-    .form-meta {
-        margin-top: 10px;
+    .section-title i {
+        color: #4169E1;
+    }
+
+    .input-row {
+        display: flex;
+        margin-bottom: 3mm;
+        align-items: baseline;
+    }
+
+    .input-label {
+        width: 25%;
+        font-weight: 500;
+        color: #4a5568;
+        padding-right: 3mm;
+    }
+
+    .input-field {
+        width: 75%;
+        border-bottom: 1px solid #e2e8f0;
+        min-height: 6mm;
+        padding: 1mm 0;
+    }
+
+    .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2mm 0 6mm;
+    }
+
+    .items-table th {
+        background: #f8f9fe;
+        color: #2d3748;
+        font-weight: 600;
+        text-align: left;
+        padding: 2mm 3mm;
+        border: 1px solid #e2e8f0;
+    }
+
+    .items-table td {
+        padding: 3mm;
+        border: 1px solid #e2e8f0;
+        height: 7mm;
+    }
+
+    .items-table tr:nth-child(even) td {
+        background: #f8f9fe;
+    }
+
+    .signature-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10mm;
+        page-break-inside: avoid;
+    }
+
+    .signature-box {
+        width: 45%;
+    }
+
+    .signature-line {
+        border-top: 1px solid #4169E1;
+        margin-top: 15mm;
+        padding-top: 2mm;
+        text-align: center;
+        color: #4a5568;
+    }
+
+    .manual-input {
+        display: inline-block;
+        min-width: 150px;
+        border-bottom: 1px solid #000;
+        text-align: center;
+    }
+
+    .required-note {
+        margin: 3mm 0;
+        color: #4a5568;
         font-size: 0.9em;
-        color: #666;
+    }
+
+    .screen-controls {
+        margin-bottom: 4mm;
         text-align: right;
     }
 
-    /* Print-specific styles */
-    @media print {
-        @page {
-            size: A4 portrait;
-            margin: 1.5cm 2cm;
-        }
+    .print-button {
+        padding: 2mm 4mm;
+        background: #4169E1;
+        color: white;
+        border: none;
+        border-radius: 2mm;
+        cursor: pointer;
+        font-size: 11pt;
+        display: inline-flex;
+        align-items: center;
+        gap: 2mm;
+    }
 
-        /* Reset all styles for print */
-        * {
-            margin: 0 !important;
-            padding: 0 !important;
-            box-sizing: border-box !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            box-shadow: none !important;
-        }
-
-        /* Container reset for print */
-        .container {
-            width: 100% !important;
-            max-width: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            box-shadow: none !important;
-        }
-
-        .print-content {
-            width: 100% !important;
-            max-width: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            box-shadow: none !important;
-            overflow: visible !important;
-        }
-
-        /* Hide all non-printable elements */
-        .no-print, 
-        .navbar,
-        .nav,
-        .footer,
-        .btn,
-        .alert,
-        header,
-        #navbar,
-        nav,
-        .screen-only,
-        .card,
-        .card-header,
-        .card-body,
-        #header,
-        .header,
-        .main-header,
-        .navigation,
-        .site-header,
-        .top-nav,
-        .main-nav {
-            display: none !important;
-        }
-
-        /* Force hide any navigation elements */
-        [class*="nav-"],
-        [class*="navbar-"],
-        [id*="nav-"],
-        [id*="navbar-"] {
-            display: none !important;
-        }
-
-        body {
-            font-family: Arial, sans-serif !important;
-            font-size: 11pt !important;
-            line-height: 1.4 !important;
-            background: #fff !important;
-            color: #000 !important;
-        }
-
-        /* Company header styling */
-        .company-header {
-            text-align: center !important;
-            margin-bottom: 30px !important;
-            padding-bottom: 20px !important;
-            border-bottom: 2px solid #000 !important;
-        }
-
-        .company-header h1 {
-            font-size: 24pt !important;
-            font-weight: bold !important;
-            margin: 15px 0 10px !important;
-            color: #000 !important;
-        }
-
-        .company-header h3 {
-            font-size: 14pt !important;
-            margin-top: 10px !important;
-        }
-
-        .company-logo {
-            max-width: 120px !important;
-            height: auto !important;
-        }
-
-        /* Section styling */
-        .print-section {
-            margin: 25px 0 !important;
-            padding: 0 !important;
-            page-break-inside: avoid !important;
-        }
-
-        .section-title {
-            font-size: 13pt !important;
-            font-weight: bold !important;
-            margin: 0 0 15px !important;
-            padding: 5px 10px !important;
-            background-color: #f5f5f5 !important;
-            border-left: 4px solid #000 !important;
-            color: #000 !important;
-        }
-
-        /* Form fields */
-        .form-group {
-            margin-bottom: 15px !important;
-        }
-
-        .form-group.full-width {
-            width: 100% !important;
-        }
-
-        .form-group.half-width {
-            width: 48% !important;
-        }
-
-        .form-row {
-            display: flex !important;
-            gap: 4% !important;
-            margin-bottom: 15px !important;
-            flex-wrap: wrap !important;
-        }
-
-        label {
-            display: block !important;
-            margin-bottom: 5px !important;
-            font-size: 10pt !important;
-            color: #333 !important;
-        }
-
-        .required {
-            color: #ff0000 !important;
-            font-weight: bold !important;
-        }
-
-        .input-line {
-            border-bottom: 1px solid #666 !important;
-            min-height: 25px !important;
-            padding: 4px 0 !important;
-            margin: 2px 0 !important;
-            position: relative !important;
-        }
-
-        .input-line:empty::before {
-            content: '' !important;
-            position: absolute !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            border-bottom: 1px dashed #999 !important;
-        }
-
-        /* Tables */
-        table {
-            width: 100% !important;
-            border-collapse: collapse !important;
-            margin: 15px 0 !important;
-        }
-
-        th {
-            background-color: #f5f5f5 !important;
-            font-weight: bold !important;
-            font-size: 10pt !important;
-            padding: 8px !important;
-            text-align: left !important;
-            border: 1px solid #000 !important;
-        }
-
-        td {
-            padding: 8px !important;
-            text-align: left !important;
-            border: 1px solid #000 !important;
-            font-size: 10pt !important;
-            height: 30px !important;
-        }
-
-        /* Signatures */
-        .signature-section {
-            margin-top: 40px !important;
-        }
-
-        .signature-box .input-line {
-            min-height: 60px !important;
-            border-bottom: 1px solid #000 !important;
-        }
-
-        .signature-box label {
-            font-weight: bold !important;
-        }
-
-        /* Form metadata */
-        .form-meta {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 8pt !important;
-            color: #999 !important;
-        }
-
-        /* Required fields legend */
-        .required-legend {
-            margin: 10px 0 20px !important;
-            font-size: 9pt !important;
-            color: #666 !important;
-        }
-
-        /* Improved table layout */
-        .table th {
-            background-color: #f5f5f5 !important;
-            font-weight: bold !important;
-            font-size: 10pt !important;
-            padding: 10px !important;
-            white-space: nowrap !important;
-        }
-
-        .table td {
-            height: 35px !important; /* Increased height for writing */
-            vertical-align: middle !important;
-        }
-
-        /* Pricing section improvements */
-        .pricing-details .form-row {
-            margin-bottom: 20px !important;
-        }
-
-        .pricing-details .input-line {
-            min-height: 30px !important;
-        }
-
-        /* Page break control */
-        .print-section {
-            page-break-inside: avoid !important;
-        }
-
-        .table {
-            page-break-inside: auto !important;
-        }
-
-        tr {
-            page-break-inside: avoid !important;
-        }
+    .print-button:hover {
+        background: #3154b4;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Print Preview Dialog -->
-<div class="print-preview-overlay" id="printPreviewOverlay">
-    <div class="print-preview-content">
-        <h3>Preparing document for printing...</h3>
-        <div class="print-preview-spinner">
-            <i class="fas fa-spinner fa-spin fa-2x"></i>
+<div class="screen-controls no-print">
+    <button type="button" class="print-button">
+        <i class="fas fa-print"></i> Print Blank Form
+    </button>
+</div>
+
+<div class="print-form">
+    <div class="company-header">
+        <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
+        <h1>Export Documentation Form</h1>
+        <p>Waybill #<span class="manual-input">________________</span></p>
+        <p>Date: <span class="manual-input">________________</span></p>
+    </div>
+
+    <div class="required-note">* Required fields</div>
+
+    <div class="form-section">
+        <div class="section-title">
+            <i class="fas fa-user-tie"></i> Sender Information
         </div>
-        <div class="form-actions">
-            <button onclick="cancelPrint()" class="btn btn-secondary">
-                <i class="fas fa-times"></i> Cancel
-            </button>
+        <div class="input-row">
+            <div class="input-label">Full Name *</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Email</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Address</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Business</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Mobile *</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">
+            <i class="fas fa-user-check"></i> Receiver Information
+        </div>
+        <div class="input-row">
+            <div class="input-label">Full Name *</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Email</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Address</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Business</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Mobile *</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">
+            <i class="fas fa-map-marker-alt"></i> Destination Details
+        </div>
+        <div class="input-row">
+            <div class="input-label">Address *</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Country *</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Postcode/Zipcode *</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">
+            <i class="fas fa-box"></i> Shipment Items
+        </div>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th width="40%">Description</th>
+                    <th width="20%">Quantity</th>
+                    <th width="20%">Value ($)</th>
+                    <th width="20%">Weight (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _ in range(5) %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-section">
+        <div class="section-title">
+            <i class="fas fa-info-circle"></i> Additional Details
+        </div>
+        <div class="input-row">
+            <div class="input-label">Collection Required</div>
+            <div class="input-field">□ Yes □ No</div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Customer Group</div>
+            <div class="input-field"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-label">Order Booked By</div>
+            <div class="input-field"></div>
+        </div>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line">Sender's Signature *</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line">Authorized Signature</div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <!-- Screen-only controls -->
-    <div class="screen-only no-print">
-        <div class="card">
-            <div class="card-header">
-                <h2><i class="fas fa-print"></i> Print Form Template</h2>
-            </div>
-            <div class="card-body">
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle"></i> Select a shipment to print its details, or print a blank form for manual filling.
-                </div>
-                
-                <form action="{{ url_for('main.print_form_template') }}" method="GET" class="mb-4">
-                    <div class="form-group">
-                        <label for="shipment_id">Select Shipment (Optional)</label>
-                        <select name="shipment_id" id="shipment_id" class="form-control">
-                            <option value="">-- Print Blank Form --</option>
-                            {% for shipment in shipments %}
-                            <option value="{{ shipment.id }}" {% if selected_shipment and selected_shipment.id == shipment.id %}selected{% endif %}>
-                                {{ shipment.waybill_number }} - {{ shipment.sender_name }} to {{ shipment.receiver_name }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <button type="button" onclick="preparePrint()" class="btn btn-success">
-                        <i class="fas fa-print"></i> Print Form
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Printable content -->
-    <div class="print-content {% if not selected_shipment %}blank-form{% endif %}">
-        <!-- Required Fields Legend -->
-        <div class="required-legend">
-            <span class="required">*</span> Required fields
-        </div>
-
-        <div class="company-header">
-            <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
-            <h1>Export Documentation Form</h1>
-            {% if selected_shipment %}
-            <h3>Waybill #{{ selected_shipment.waybill_number }}</h3>
-            {% else %}
-            <h3>Waybill #_______________</h3>
-            {% endif %}
-        </div>
-
-        <div class="print-section">
-            <div class="section-title">Sender Information</div>
-            <div class="form-group full-width">
-                <label>Full Name: <span class="required">*</span></label>
-                <div class="input-line">{{ selected_shipment.sender_name if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Email:</label>
-                <div class="input-line">{{ selected_shipment.sender_email if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Address:</label>
-                <div class="input-line">{{ selected_shipment.sender_address if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-row">
-                <div class="form-group half-width">
-                    <label>Business:</label>
-                    <div class="input-line">{{ selected_shipment.sender_business if selected_shipment else '' }}</div>
-                </div>
-                <div class="form-group half-width">
-                    <label>Mobile: <span class="required">*</span></label>
-                    <div class="input-line">{{ selected_shipment.sender_mobile if selected_shipment else '' }}</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="print-section">
-            <div class="section-title">Receiver Information</div>
-            <div class="form-group full-width">
-                <label>Full Name: <span class="required">*</span></label>
-                <div class="input-line">{{ selected_shipment.receiver_name if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Email:</label>
-                <div class="input-line">{{ selected_shipment.receiver_email if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Address:</label>
-                <div class="input-line">{{ selected_shipment.receiver_address if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Business:</label>
-                <div class="input-line">{{ selected_shipment.receiver_business if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-row">
-                <div class="form-group half-width">
-                    <label>Mobile: <span class="required">*</span></label>
-                    <div class="input-line">{{ selected_shipment.receiver_mobile if selected_shipment else '' }}</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="print-section">
-            <div class="section-title">Destination Details</div>
-            <div class="form-group full-width">
-                <label>Address: <span class="required">*</span></label>
-                <div class="input-line">{{ selected_shipment.destination_address if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Country: <span class="required">*</span></label>
-                <div class="input-line">{{ selected_shipment.destination_country if selected_shipment else '' }}</div>
-            </div>
-            <div class="form-group full-width">
-                <label>Postcode/Zipcode: <span class="required">*</span></label>
-                <div class="input-line">{{ selected_shipment.destination_postcode if selected_shipment else '' }}</div>
-            </div>
-        </div>
-
-        <div class="print-section">
-            <div class="section-title">Item Details</div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Value</th>
-                        <th>Quantity</th>
-                        <th>Weight (kg)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if selected_shipment and selected_shipment.items %}
-                        {% for item in selected_shipment.items %}
-                        <tr>
-                            <td>{{ item.description }}</td>
-                            <td>${{ "%.2f"|format(item.value) }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>{{ "%.1f"|format(item.weight) }}</td>
-                        </tr>
-                        {% endfor %}
-                    {% else %}
-                        {% for _ in range(5) %}
-                        <tr>
-                            <td class="input-line"></td>
-                            <td class="input-line"></td>
-                            <td class="input-line"></td>
-                            <td class="input-line"></td>
-                        </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="print-section">
-            <div class="section-title">Pricing Details</div>
-            <div class="form-row">
-                <div class="form-group flex-1">
-                    <label>Freight Pricing:</label>
-                    <div class="input-line">{{ "%.2f"|format(selected_shipment.freight_pricing) if selected_shipment else '' }}</div>
-                </div>
-                <div class="form-group flex-1">
-                    <label>Additional Charges:</label>
-                    <div class="input-line">{{ "%.2f"|format(selected_shipment.additional_charges) if selected_shipment else '' }}</div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group flex-1">
-                    <label>Pick Up Charge:</label>
-                    <div class="input-line">{{ "%.2f"|format(selected_shipment.pickup_charge) if selected_shipment else '' }}</div>
-                </div>
-                <div class="form-group flex-1">
-                    <label>Handling Fees:</label>
-                    <div class="input-line">{{ "%.2f"|format(selected_shipment.handling_fees) if selected_shipment else '' }}</div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group flex-1">
-                    <label>Crating:</label>
-                    <div class="input-line">{{ "%.2f"|format(selected_shipment.crating) if selected_shipment else '' }}</div>
-                </div>
-                <div class="form-group flex-1">
-                    <label>Insurance Charge:</label>
-                    <div class="input-line">{{ "%.2f"|format(selected_shipment.insurance_charge) if selected_shipment else '' }}</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="print-section">
-            <div class="section-title">Signatures</div>
-            <div class="form-row">
-                <div class="form-group half-width">
-                    <label>Sender's Signature: <span class="required">*</span></label>
-                    {% if selected_shipment and selected_shipment.sender_signature %}
-                        <img src="{{ selected_shipment.sender_signature }}" alt="Sender's Signature" style="max-width: 200px;">
-                    {% else %}
-                        <div class="input-line signature-box"></div>
-                    {% endif %}
-                </div>
-                <div class="form-group half-width">
-                    <label>Date:</label>
-                    <div class="input-line">{{ selected_shipment.created_at.strftime('%Y-%m-%d') if selected_shipment else '' }}</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form Metadata -->
-        <div class="form-meta">
-            Form Version: 1.0 | Generated: {{ now().strftime('%Y-%m-%d %H:%M') }}
-            {% if selected_shipment %}
-            | Shipment ID: {{ selected_shipment.id }}
-            {% endif %}
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block scripts %}
-<script>
-function showPrintPreview() {
-    const overlay = document.getElementById('printPreviewOverlay');
-    overlay.style.display = 'flex';
-}
-
-function hidePrintPreview() {
-    const overlay = document.getElementById('printPreviewOverlay');
-    overlay.style.display = 'none';
-}
-
-function cancelPrint() {
-    hidePrintPreview();
-    // Remove any cleanup frames
-    const printFrame = document.querySelector('iframe.print-frame');
-    if (printFrame) {
-        document.body.removeChild(printFrame);
-    }
-}
-
-function preparePrint() {
-    // Show loading overlay
-    showPrintPreview();
-
-    // Create a hidden iframe for printing
-    const printFrame = document.createElement('iframe');
-    printFrame.style.position = 'fixed';
-    printFrame.style.right = '0';
-    printFrame.style.bottom = '0';
-    printFrame.style.width = '0';
-    printFrame.style.height = '0';
-    printFrame.style.border = '0';
-    printFrame.className = 'print-frame';
-    document.body.appendChild(printFrame);
-
-    // Clone the print content
-    const contentToClone = document.querySelector('.print-content');
-    const clonedContent = contentToClone.cloneNode(true);
-
-    // Setup iframe document
-    const frameDoc = printFrame.contentWindow.document;
-    frameDoc.open();
-    frameDoc.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Print</title>
-            <style>
-                ${document.querySelector('style').innerText}
-            </style>
-        </head>
-        <body class="printing">
-            ${clonedContent.outerHTML}
-        </body>
-        </html>
-    `);
-    frameDoc.close();
-
-    // Wait for images to load in the iframe
-    setTimeout(() => {
-        // Print the iframe
-        printFrame.contentWindow.print();
-
-        // Cleanup after printing
-        printFrame.contentWindow.onafterprint = function() {
-            document.body.removeChild(printFrame);
-            hidePrintPreview();
-        };
-
-        // Fallback cleanup if print is cancelled
-        setTimeout(() => {
-            if (document.body.contains(printFrame)) {
-                document.body.removeChild(printFrame);
-                hidePrintPreview();
-            }
-        }, 1000);
-    }, 500);
-}
-
-// Auto-submit form on shipment selection
-document.getElementById('shipment_id')?.addEventListener('change', function() {
-    this.form.submit();
-});
+<script type="module">
+    import { initializePrint } from "{{ url_for('static', filename='js/modules/print.js') }}";
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        initializePrint();
+    });
 </script>
 {% endblock %} 

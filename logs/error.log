@@ -1,90 +1,39 @@
-2025-02-08 05:00:08 [39074] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:00:08 [39074] [INFO] Listening at: http://0.0.0.0:8000 (39074)
-2025-02-08 05:00:08 [39074] [INFO] Using worker: sync
-2025-02-08 05:00:09 [39075] [INFO] Booting worker with pid: 39075
-2025-02-08 05:00:09 [39076] [INFO] Booting worker with pid: 39076
-2025-02-08 05:00:09 [39077] [INFO] Booting worker with pid: 39077
-2025-02-08 05:00:09 [39078] [INFO] Booting worker with pid: 39078
-2025-02-08 05:05:55 [39074] [INFO] Handling signal: int
-2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39077) was sent SIGINT!
-2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39076) was sent SIGINT!
-2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39075) was sent SIGINT!
-2025-02-08 05:05:55 [39074] [ERROR] Worker (pid:39078) was sent SIGINT!
-2025-02-08 05:05:55 [39074] [INFO] Shutting down: Master
-2025-02-08 05:06:02 [39660] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:06:02 [39660] [INFO] Listening at: http://0.0.0.0:8000 (39660)
-2025-02-08 05:06:02 [39660] [INFO] Using worker: sync
-2025-02-08 05:06:02 [39661] [INFO] Booting worker with pid: 39661
-2025-02-08 05:06:02 [39662] [INFO] Booting worker with pid: 39662
-2025-02-08 05:06:02 [39663] [INFO] Booting worker with pid: 39663
-2025-02-08 05:06:02 [39664] [INFO] Booting worker with pid: 39664
-2025-02-08 05:09:32 [39660] [INFO] Handling signal: int
-2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39663) was sent SIGINT!
-2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39662) was sent SIGINT!
-2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39661) was sent SIGINT!
-2025-02-08 05:09:32 [39660] [ERROR] Worker (pid:39664) was sent SIGINT!
-2025-02-08 05:09:32 [39660] [INFO] Shutting down: Master
-2025-02-08 05:09:49 [39878] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:09:49 [39878] [INFO] Listening at: http://0.0.0.0:8000 (39878)
-2025-02-08 05:09:49 [39878] [INFO] Using worker: sync
-2025-02-08 05:09:49 [39879] [INFO] Booting worker with pid: 39879
-2025-02-08 05:09:49 [39880] [INFO] Booting worker with pid: 39880
-2025-02-08 05:09:49 [39881] [INFO] Booting worker with pid: 39881
-2025-02-08 05:09:49 [39882] [INFO] Booting worker with pid: 39882
-2025-02-08 05:13:38 [39878] [INFO] Handling signal: int
-2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39881) was sent SIGINT!
-2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39880) was sent SIGINT!
-2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39879) was sent SIGINT!
-2025-02-08 05:13:39 [39878] [ERROR] Worker (pid:39882) was sent SIGINT!
-2025-02-08 05:13:39 [39878] [INFO] Shutting down: Master
-2025-02-08 05:13:43 [40266] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:13:43 [40266] [INFO] Listening at: http://0.0.0.0:8000 (40266)
-2025-02-08 05:13:43 [40266] [INFO] Using worker: sync
-2025-02-08 05:13:43 [40267] [INFO] Booting worker with pid: 40267
-2025-02-08 05:13:43 [40268] [INFO] Booting worker with pid: 40268
-2025-02-08 05:13:43 [40269] [INFO] Booting worker with pid: 40269
-2025-02-08 05:13:43 [40270] [INFO] Booting worker with pid: 40270
-2025-02-08 05:20:05 [40266] [INFO] Handling signal: int
-2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40268) was sent SIGINT!
-2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40267) was sent SIGINT!
-2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40270) was sent SIGINT!
-2025-02-08 05:20:06 [40266] [ERROR] Worker (pid:40269) was sent SIGINT!
-2025-02-08 05:20:06 [40266] [INFO] Shutting down: Master
-2025-02-08 05:20:09 [40723] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:20:09 [40723] [INFO] Listening at: http://0.0.0.0:8000 (40723)
-2025-02-08 05:20:09 [40723] [INFO] Using worker: sync
-2025-02-08 05:20:09 [40724] [INFO] Booting worker with pid: 40724
-2025-02-08 05:20:09 [40725] [INFO] Booting worker with pid: 40725
-2025-02-08 05:20:09 [40726] [INFO] Booting worker with pid: 40726
-2025-02-08 05:20:09 [40727] [INFO] Booting worker with pid: 40727
-2025-02-08 05:27:19 [40723] [INFO] Handling signal: int
-2025-02-08 05:27:20 [40723] [INFO] Shutting down: Master
-2025-02-08 05:27:35 [41085] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:27:35 [41085] [INFO] Listening at: http://0.0.0.0:8000 (41085)
-2025-02-08 05:27:35 [41085] [INFO] Using worker: sync
-2025-02-08 05:27:35 [41086] [INFO] Booting worker with pid: 41086
-2025-02-08 05:27:35 [41087] [INFO] Booting worker with pid: 41087
-2025-02-08 05:27:35 [41088] [INFO] Booting worker with pid: 41088
-2025-02-08 05:27:35 [41089] [INFO] Booting worker with pid: 41089
-2025-02-08 05:31:00 [41085] [INFO] Handling signal: int
-2025-02-08 05:31:01 [41085] [INFO] Shutting down: Master
-2025-02-08 05:31:28 [41294] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:31:28 [41294] [INFO] Listening at: http://0.0.0.0:8000 (41294)
-2025-02-08 05:31:28 [41294] [INFO] Using worker: sync
-2025-02-08 05:31:28 [41295] [INFO] Booting worker with pid: 41295
-2025-02-08 05:31:28 [41296] [INFO] Booting worker with pid: 41296
-2025-02-08 05:31:28 [41297] [INFO] Booting worker with pid: 41297
-2025-02-08 05:31:28 [41298] [INFO] Booting worker with pid: 41298
-2025-02-08 05:33:35 [41294] [INFO] Handling signal: int
-2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41298) was sent SIGINT!
-2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41296) was sent SIGINT!
-2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41297) was sent SIGINT!
-2025-02-08 05:33:35 [41294] [ERROR] Worker (pid:41295) was sent SIGINT!
-2025-02-08 05:33:35 [41294] [INFO] Shutting down: Master
-2025-02-08 05:33:38 [41583] [INFO] Starting gunicorn 21.2.0
-2025-02-08 05:33:38 [41583] [INFO] Listening at: http://0.0.0.0:8000 (41583)
-2025-02-08 05:33:38 [41583] [INFO] Using worker: sync
-2025-02-08 05:33:38 [41585] [INFO] Booting worker with pid: 41585
-2025-02-08 05:33:38 [41586] [INFO] Booting worker with pid: 41586
-2025-02-08 05:33:38 [41587] [INFO] Booting worker with pid: 41587
-2025-02-08 05:33:38 [41588] [INFO] Booting worker with pid: 41588
+2025-02-08 06:36:36 [51761] [INFO] Starting gunicorn 21.2.0
+2025-02-08 06:36:36 [51761] [INFO] Listening at: http://0.0.0.0:8000 (51761)
+2025-02-08 06:36:36 [51761] [INFO] Using worker: sync
+2025-02-08 06:36:36 [51762] [INFO] Booting worker with pid: 51762
+2025-02-08 06:36:36 [51763] [INFO] Booting worker with pid: 51763
+2025-02-08 06:36:36 [51764] [INFO] Booting worker with pid: 51764
+2025-02-08 06:36:36 [51765] [INFO] Booting worker with pid: 51765
+2025-02-08 06:39:10 [51761] [INFO] Handling signal: int
+2025-02-08 06:39:11 [51761] [ERROR] Worker (pid:51763) was sent SIGINT!
+2025-02-08 06:39:11 [51761] [ERROR] Worker (pid:51762) was sent SIGINT!
+2025-02-08 06:39:11 [51761] [ERROR] Worker (pid:51764) was sent SIGINT!
+2025-02-08 06:39:11 [51761] [ERROR] Worker (pid:51765) was sent SIGINT!
+2025-02-08 06:39:11 [51761] [INFO] Shutting down: Master
+2025-02-08 06:39:13 [52132] [INFO] Starting gunicorn 21.2.0
+2025-02-08 06:39:13 [52132] [INFO] Listening at: http://0.0.0.0:8000 (52132)
+2025-02-08 06:39:13 [52132] [INFO] Using worker: sync
+2025-02-08 06:39:13 [52133] [INFO] Booting worker with pid: 52133
+2025-02-08 06:39:13 [52134] [INFO] Booting worker with pid: 52134
+2025-02-08 06:39:13 [52135] [INFO] Booting worker with pid: 52135
+2025-02-08 06:39:13 [52136] [INFO] Booting worker with pid: 52136
+2025-02-08 06:44:27 [52132] [INFO] Handling signal: int
+2025-02-08 06:44:27 [52132] [ERROR] Worker (pid:52135) was sent SIGINT!
+2025-02-08 06:44:27 [52132] [ERROR] Worker (pid:52134) was sent SIGINT!
+2025-02-08 06:44:27 [52132] [ERROR] Worker (pid:52136) was sent SIGINT!
+2025-02-08 06:44:27 [52132] [ERROR] Worker (pid:52133) was sent SIGINT!
+2025-02-08 06:44:27 [52132] [INFO] Shutting down: Master
+2025-02-08 06:45:52 [52701] [INFO] Starting gunicorn 21.2.0
+2025-02-08 06:45:52 [52701] [INFO] Listening at: http://0.0.0.0:8000 (52701)
+2025-02-08 06:45:52 [52701] [INFO] Using worker: sync
+2025-02-08 06:45:52 [52702] [INFO] Booting worker with pid: 52702
+2025-02-08 06:45:52 [52703] [INFO] Booting worker with pid: 52703
+2025-02-08 06:45:52 [52704] [INFO] Booting worker with pid: 52704
+2025-02-08 06:45:52 [52705] [INFO] Booting worker with pid: 52705
+2025-02-08 06:48:01 [52701] [INFO] Handling signal: int
+2025-02-08 06:48:01 [52701] [ERROR] Worker (pid:52705) was sent SIGINT!
+2025-02-08 06:48:01 [52701] [ERROR] Worker (pid:52704) was sent SIGINT!
+2025-02-08 06:48:01 [52701] [ERROR] Worker (pid:52703) was sent SIGINT!
+2025-02-08 06:48:01 [52701] [ERROR] Worker (pid:52702) was sent SIGINT!
+2025-02-08 06:48:01 [52701] [INFO] Shutting down: Master
