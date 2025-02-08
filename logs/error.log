@@ -1,115 +1,379 @@
-2025-02-07 15:47:16 [80500] [INFO] Starting gunicorn 21.2.0
-2025-02-07 15:47:16 [80500] [INFO] Listening at: http://0.0.0.0:8000 (80500)
-2025-02-07 15:47:16 [80500] [INFO] Using worker: sync
-2025-02-07 15:47:16 [80501] [INFO] Booting worker with pid: 80501
-2025-02-07 15:47:16 [80502] [INFO] Booting worker with pid: 80502
-2025-02-07 15:47:16 [80503] [INFO] Booting worker with pid: 80503
-2025-02-07 15:47:16 [80504] [INFO] Booting worker with pid: 80504
-2025-02-07 15:47:38 [ERROR] [PID:80503] [app.routes.shipments] Error in list_shipments: (psycopg2.errors.UndefinedColumn) column export_request.created_by does not exist
-LINE 2: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-HINT:  Perhaps you meant to reference the column "export_request.created_at".
-
-[SQL: SELECT count(*) AS count_1 
-FROM (SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.created_by AS export_request_created_by, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request) AS anon_1]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2025-02-07 15:47:38 [ERROR] [PID:80502] [app.routes.main] Error loading dashboard: (psycopg2.errors.UndefinedColumn) column export_request.created_by does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-HINT:  Perhaps you meant to reference the column "export_request.created_at".
-
-[SQL: SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.created_by AS export_request_created_by, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request ORDER BY export_request.created_at DESC 
- LIMIT %(param_1)s]
-[parameters: {'param_1': 5}]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-07 22:02:56 [4514] [INFO] Starting gunicorn 21.2.0
+2025-02-07 22:02:56 [4514] [INFO] Listening at: http://0.0.0.0:8000 (4514)
+2025-02-07 22:02:56 [4514] [INFO] Using worker: sync
+2025-02-07 22:02:56 [4515] [INFO] Booting worker with pid: 4515
+2025-02-07 22:02:57 [4516] [INFO] Booting worker with pid: 4516
+2025-02-07 22:02:57 [4517] [INFO] Booting worker with pid: 4517
+2025-02-07 22:02:57 [4518] [INFO] Booting worker with pid: 4518
+2025-02-07 22:10:08 [4514] [INFO] Handling signal: int
+2025-02-07 22:10:09 [4514] [INFO] Shutting down: Master
+2025-02-07 22:10:15 [5024] [INFO] Starting gunicorn 21.2.0
+2025-02-07 22:10:15 [5024] [INFO] Listening at: http://0.0.0.0:8000 (5024)
+2025-02-07 22:10:15 [5024] [INFO] Using worker: sync
+2025-02-07 22:10:15 [5030] [INFO] Booting worker with pid: 5030
+2025-02-07 22:10:15 [5032] [INFO] Booting worker with pid: 5032
+2025-02-07 22:10:15 [5033] [INFO] Booting worker with pid: 5033
+2025-02-07 22:10:15 [5034] [INFO] Booting worker with pid: 5034
+2025-02-07 22:15:25 [5024] [INFO] Handling signal: int
+2025-02-07 22:15:26 [5024] [INFO] Shutting down: Master
+2025-02-07 22:15:29 [5524] [INFO] Starting gunicorn 21.2.0
+2025-02-07 22:15:29 [5524] [INFO] Listening at: http://0.0.0.0:8000 (5524)
+2025-02-07 22:15:29 [5524] [INFO] Using worker: sync
+2025-02-07 22:15:29 [5525] [INFO] Booting worker with pid: 5525
+2025-02-07 22:15:29 [5526] [INFO] Booting worker with pid: 5526
+2025-02-07 22:15:29 [5527] [INFO] Booting worker with pid: 5527
+2025-02-07 22:15:29 [5528] [INFO] Booting worker with pid: 5528
+2025-02-07 22:21:33 [5524] [INFO] Handling signal: int
+2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5528) was sent SIGINT!
+2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5525) was sent SIGINT!
+2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5527) was sent SIGINT!
+2025-02-07 22:21:33 [5524] [ERROR] Worker (pid:5526) was sent SIGINT!
+2025-02-07 22:21:33 [5524] [INFO] Shutting down: Master
+2025-02-07 22:21:36 [6145] [INFO] Starting gunicorn 21.2.0
+2025-02-07 22:21:36 [6145] [INFO] Listening at: http://0.0.0.0:8000 (6145)
+2025-02-07 22:21:36 [6145] [INFO] Using worker: sync
+2025-02-07 22:21:36 [6146] [INFO] Booting worker with pid: 6146
+2025-02-07 22:21:36 [6149] [INFO] Booting worker with pid: 6149
+2025-02-07 22:21:36 [6151] [INFO] Booting worker with pid: 6151
+2025-02-07 22:21:36 [6152] [INFO] Booting worker with pid: 6152
+2025-02-07 22:25:10 [6145] [INFO] Handling signal: int
+2025-02-07 22:25:10 [6145] [ERROR] Worker (pid:6149) was sent SIGINT!
+2025-02-07 22:25:10 [6145] [ERROR] Worker (pid:6146) was sent SIGINT!
+2025-02-07 22:25:10 [6145] [ERROR] Worker (pid:6152) was sent SIGINT!
+2025-02-07 22:25:10 [6145] [INFO] Shutting down: Master
+2025-02-07 22:25:15 [6359] [INFO] Starting gunicorn 21.2.0
+2025-02-07 22:25:15 [6359] [INFO] Listening at: http://0.0.0.0:8000 (6359)
+2025-02-07 22:25:15 [6359] [INFO] Using worker: sync
+2025-02-07 22:25:15 [6360] [INFO] Booting worker with pid: 6360
+2025-02-07 22:25:16 [6361] [INFO] Booting worker with pid: 6361
+2025-02-07 22:25:16 [6362] [INFO] Booting worker with pid: 6362
+2025-02-07 22:25:16 [6363] [INFO] Booting worker with pid: 6363
+2025-02-07 22:25:21 [ERROR] [PID:6360] [app.routes.main] Error loading print form template: Encountered unknown tag 'endblock'.
+2025-02-07 22:25:21 [ERROR] [PID:6360] [app.routes.main] Stack trace:
 Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-psycopg2.errors.UndefinedColumn: column export_request.created_by does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-HINT:  Perhaps you meant to reference the column "export_request.created_at".
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 41, in dashboard
-    ).limit(5).all()
-               ^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2672, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2826, in _iter
-    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-                                                  ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
-    result: Result[Any] = compile_state_cls.orm_execute_statement(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
-    result = conn.execute(
-             ^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
-    return meth(
-           ^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
-    return connection._execute_clauseelement(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 100, in print_form_template
+    return render_template('shipments/print_form_template.html', shipments=shipments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1630, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1979, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2335, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column export_request.created_by does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-HINT:  Perhaps you meant to reference the column "export_request.created_at".
-
-[SQL: SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.created_by AS export_request_created_by, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request ORDER BY export_request.created_at DESC 
- LIMIT %(param_1)s]
-[parameters: {'param_1': 5}]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2025-02-07 15:49:39 [80500] [CRITICAL] WORKER TIMEOUT (pid:80504)
-2025-02-07 15:49:39 [80500] [ERROR] Worker (pid:80504) exited with code 1
-2025-02-07 15:49:39 [80500] [ERROR] Worker (pid:80504) exited with code 1.
-2025-02-07 15:49:39 [80648] [INFO] Booting worker with pid: 80648
-2025-02-07 15:51:54 [80500] [INFO] Handling signal: winch
-2025-02-07 15:51:55 [80500] [INFO] Handling signal: winch
-2025-02-07 15:51:57 [80500] [INFO] Handling signal: int
-2025-02-07 15:51:57 [80500] [ERROR] Worker (pid:80502) was sent SIGINT!
-2025-02-07 15:51:57 [80500] [ERROR] Worker (pid:80503) was sent SIGINT!
-2025-02-07 15:51:57 [80500] [ERROR] Worker (pid:80501) was sent SIGINT!
-2025-02-07 15:51:57 [80500] [ERROR] Worker (pid:80648) was sent SIGINT!
-2025-02-07 15:51:57 [80500] [INFO] Shutting down: Master
-2025-02-07 15:52:01 [81009] [INFO] Starting gunicorn 21.2.0
-2025-02-07 15:52:01 [81009] [INFO] Listening at: http://0.0.0.0:8000 (81009)
-2025-02-07 15:52:01 [81009] [INFO] Using worker: sync
-2025-02-07 15:52:01 [81011] [INFO] Booting worker with pid: 81011
-2025-02-07 15:52:01 [81012] [INFO] Booting worker with pid: 81012
-2025-02-07 15:52:01 [81013] [INFO] Booting worker with pid: 81013
-2025-02-07 15:52:01 [81014] [INFO] Booting worker with pid: 81014
-2025-02-07 15:52:14 [ERROR] [PID:81011] [app.routes.shipments] Error in list_shipments: Could not build url for endpoint 'new_export'. Did you mean 'main.reports' instead?
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 401, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'.
+2025-02-07 22:27:43 [6359] [INFO] Handling signal: int
+2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6361) was sent SIGINT!
+2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6363) was sent SIGINT!
+2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6360) was sent SIGINT!
+2025-02-07 22:27:43 [6359] [ERROR] Worker (pid:6362) was sent SIGINT!
+2025-02-07 22:27:43 [6359] [INFO] Shutting down: Master
+2025-02-07 22:27:46 [6491] [INFO] Starting gunicorn 21.2.0
+2025-02-07 22:27:46 [6491] [INFO] Listening at: http://0.0.0.0:8000 (6491)
+2025-02-07 22:27:46 [6491] [INFO] Using worker: sync
+2025-02-07 22:27:46 [6492] [INFO] Booting worker with pid: 6492
+2025-02-07 22:27:46 [6493] [INFO] Booting worker with pid: 6493
+2025-02-07 22:27:46 [6494] [INFO] Booting worker with pid: 6494
+2025-02-07 22:27:46 [6495] [INFO] Booting worker with pid: 6495
+2025-02-07 23:23:10 [6491] [CRITICAL] WORKER TIMEOUT (pid:6492)
+2025-02-07 23:23:11 [6491] [CRITICAL] WORKER TIMEOUT (pid:6493)
+2025-02-07 23:23:11 [6491] [CRITICAL] WORKER TIMEOUT (pid:6494)
+2025-02-07 23:23:11 [6491] [CRITICAL] WORKER TIMEOUT (pid:6495)
+2025-02-07 23:23:12 [6491] [ERROR] Worker (pid:6493) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:23:12 [6491] [ERROR] Worker (pid:6492) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:23:12 [6491] [ERROR] Worker (pid:6495) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:23:12 [7057] [INFO] Booting worker with pid: 7057
+2025-02-07 23:23:12 [7058] [INFO] Booting worker with pid: 7058
+2025-02-07 23:23:13 [6491] [ERROR] Worker (pid:6494) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:23:13 [7059] [INFO] Booting worker with pid: 7059
+2025-02-07 23:23:13 [7060] [INFO] Booting worker with pid: 7060
+2025-02-07 23:40:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:7057)
+2025-02-07 23:40:25 [6491] [CRITICAL] WORKER TIMEOUT (pid:7058)
+2025-02-07 23:40:25 [6491] [CRITICAL] WORKER TIMEOUT (pid:7059)
+2025-02-07 23:40:25 [6491] [CRITICAL] WORKER TIMEOUT (pid:7060)
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7057) exited with code 1
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7059) exited with code 1
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7059) exited with code 1.
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7057) exited with code 1.
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7058) exited with code 1
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7058) exited with code 1.
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7060) exited with code 1
+2025-02-07 23:40:26 [6491] [ERROR] Worker (pid:7060) exited with code 1.
+2025-02-07 23:40:26 [7870] [INFO] Booting worker with pid: 7870
+2025-02-07 23:40:26 [7883] [INFO] Booting worker with pid: 7883
+2025-02-07 23:40:26 [7893] [INFO] Booting worker with pid: 7893
+2025-02-07 23:40:26 [7910] [INFO] Booting worker with pid: 7910
+2025-02-07 23:57:49 [6491] [CRITICAL] WORKER TIMEOUT (pid:7870)
+2025-02-07 23:57:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:7883)
+2025-02-07 23:57:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:7893)
+2025-02-07 23:57:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:7910)
+2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7883) exited with code 1
+2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7883) exited with code 1.
+2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7910) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7870) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:57:51 [6491] [ERROR] Worker (pid:7893) was sent SIGKILL! Perhaps out of memory?
+2025-02-07 23:57:51 [8911] [INFO] Booting worker with pid: 8911
+2025-02-07 23:57:51 [8916] [INFO] Booting worker with pid: 8916
+2025-02-07 23:57:51 [8926] [INFO] Booting worker with pid: 8926
+2025-02-07 23:57:51 [8948] [INFO] Booting worker with pid: 8948
+2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8911)
+2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8916)
+2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8926)
+2025-02-08 00:20:50 [6491] [CRITICAL] WORKER TIMEOUT (pid:8948)
+2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8926) exited with code 1
+2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8926) exited with code 1.
+2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8916) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8948) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 00:20:51 [6491] [ERROR] Worker (pid:8911) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 00:20:51 [11623] [INFO] Booting worker with pid: 11623
+2025-02-08 00:20:51 [11635] [INFO] Booting worker with pid: 11635
+2025-02-08 00:20:51 [11649] [INFO] Booting worker with pid: 11649
+2025-02-08 00:20:51 [11654] [INFO] Booting worker with pid: 11654
+2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11623)
+2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11635)
+2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11649)
+2025-02-08 00:39:37 [6491] [CRITICAL] WORKER TIMEOUT (pid:11654)
+2025-02-08 00:39:38 [6491] [ERROR] Worker (pid:11649) exited with code 1
+2025-02-08 00:39:38 [6491] [ERROR] Worker (pid:11649) exited with code 1.
+2025-02-08 00:39:38 [12540] [INFO] Booting worker with pid: 12540
+2025-02-08 00:39:38 [12541] [INFO] Booting worker with pid: 12541
+2025-02-08 00:39:38 [12547] [INFO] Booting worker with pid: 12547
+2025-02-08 00:39:38 [12548] [INFO] Booting worker with pid: 12548
+2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12540)
+2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12541)
+2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12547)
+2025-02-08 00:57:21 [6491] [CRITICAL] WORKER TIMEOUT (pid:12548)
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12547) exited with code 1
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12547) exited with code 1.
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12548) exited with code 1
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12548) exited with code 1.
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12540) exited with code 1
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12540) exited with code 1.
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12541) exited with code 1
+2025-02-08 00:57:22 [6491] [ERROR] Worker (pid:12541) exited with code 1.
+2025-02-08 00:57:22 [13687] [INFO] Booting worker with pid: 13687
+2025-02-08 00:57:22 [13688] [INFO] Booting worker with pid: 13688
+2025-02-08 00:57:22 [13689] [INFO] Booting worker with pid: 13689
+2025-02-08 00:57:22 [13690] [INFO] Booting worker with pid: 13690
+2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13687)
+2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13688)
+2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13689)
+2025-02-08 01:16:13 [6491] [CRITICAL] WORKER TIMEOUT (pid:13690)
+2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13687) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13690) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13688) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:16:14 [6491] [ERROR] Worker (pid:13689) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:16:14 [15144] [INFO] Booting worker with pid: 15144
+2025-02-08 01:16:14 [15153] [INFO] Booting worker with pid: 15153
+2025-02-08 01:16:14 [15155] [INFO] Booting worker with pid: 15155
+2025-02-08 01:16:14 [15159] [INFO] Booting worker with pid: 15159
+2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15144)
+2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15153)
+2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15155)
+2025-02-08 01:24:15 [6491] [CRITICAL] WORKER TIMEOUT (pid:15159)
+2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15159) exited with code 1
+2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15159) exited with code 1.
+2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15155) exited with code 1
+2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15155) exited with code 1.
+2025-02-08 01:24:16 [17081] [INFO] Booting worker with pid: 17081
+2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15153) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:24:16 [6491] [ERROR] Worker (pid:15144) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:24:16 [17086] [INFO] Booting worker with pid: 17086
+2025-02-08 01:24:16 [17088] [INFO] Booting worker with pid: 17088
+2025-02-08 01:24:16 [17103] [INFO] Booting worker with pid: 17103
+2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17081)
+2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17086)
+2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17088)
+2025-02-08 01:43:41 [6491] [CRITICAL] WORKER TIMEOUT (pid:17103)
+2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17081) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17103) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17088) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:43:42 [6491] [ERROR] Worker (pid:17086) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 01:43:42 [18856] [INFO] Booting worker with pid: 18856
+2025-02-08 01:43:42 [18867] [INFO] Booting worker with pid: 18867
+2025-02-08 01:43:42 [18871] [INFO] Booting worker with pid: 18871
+2025-02-08 01:43:43 [18872] [INFO] Booting worker with pid: 18872
+2025-02-08 02:01:32 [6491] [CRITICAL] WORKER TIMEOUT (pid:18856)
+2025-02-08 02:01:32 [6491] [CRITICAL] WORKER TIMEOUT (pid:18867)
+2025-02-08 02:01:33 [6491] [CRITICAL] WORKER TIMEOUT (pid:18871)
+2025-02-08 02:01:33 [6491] [CRITICAL] WORKER TIMEOUT (pid:18872)
+2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18856) exited with code 1
+2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18856) exited with code 1.
+2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18867) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18871) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:01:33 [6491] [ERROR] Worker (pid:18872) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:01:33 [20636] [INFO] Booting worker with pid: 20636
+2025-02-08 02:01:33 [20639] [INFO] Booting worker with pid: 20639
+2025-02-08 02:01:33 [20649] [INFO] Booting worker with pid: 20649
+2025-02-08 02:01:33 [20650] [INFO] Booting worker with pid: 20650
+2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20636)
+2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20639)
+2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20649)
+2025-02-08 02:21:22 [6491] [CRITICAL] WORKER TIMEOUT (pid:20650)
+2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20636) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20649) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20650) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:21:23 [6491] [ERROR] Worker (pid:20639) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:21:23 [22783] [INFO] Booting worker with pid: 22783
+2025-02-08 02:21:23 [22801] [INFO] Booting worker with pid: 22801
+2025-02-08 02:21:24 [22815] [INFO] Booting worker with pid: 22815
+2025-02-08 02:21:24 [22831] [INFO] Booting worker with pid: 22831
+2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22783)
+2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22801)
+2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22815)
+2025-02-08 02:25:24 [6491] [CRITICAL] WORKER TIMEOUT (pid:22831)
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22815) exited with code 1
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22815) exited with code 1.
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22831) exited with code 1
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22831) exited with code 1.
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22801) exited with code 1
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22801) exited with code 1.
+2025-02-08 02:25:25 [6491] [ERROR] Worker (pid:22783) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 02:25:25 [24910] [INFO] Booting worker with pid: 24910
+2025-02-08 02:25:25 [24911] [INFO] Booting worker with pid: 24911
+2025-02-08 02:25:25 [24912] [INFO] Booting worker with pid: 24912
+2025-02-08 02:25:25 [24913] [INFO] Booting worker with pid: 24913
+2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24910)
+2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24911)
+2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24912)
+2025-02-08 02:45:23 [6491] [CRITICAL] WORKER TIMEOUT (pid:24913)
+2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24910) exited with code 1
+2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24910) exited with code 1.
+2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24913) exited with code 1
+2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24913) exited with code 1.
+2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24911) exited with code 1
+2025-02-08 02:45:24 [6491] [ERROR] Worker (pid:24911) exited with code 1.
+2025-02-08 02:45:24 [27861] [INFO] Booting worker with pid: 27861
+2025-02-08 02:45:24 [27866] [INFO] Booting worker with pid: 27866
+2025-02-08 02:45:24 [27870] [INFO] Booting worker with pid: 27870
+2025-02-08 02:45:24 [27874] [INFO] Booting worker with pid: 27874
+2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27861)
+2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27866)
+2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27870)
+2025-02-08 03:03:55 [6491] [CRITICAL] WORKER TIMEOUT (pid:27874)
+2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27866) exited with code 1
+2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27866) exited with code 1.
+2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27861) exited with code 1
+2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27861) exited with code 1.
+2025-02-08 03:03:56 [29858] [INFO] Booting worker with pid: 29858
+2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27870) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 03:03:56 [6491] [ERROR] Worker (pid:27874) was sent SIGKILL! Perhaps out of memory?
+2025-02-08 03:03:56 [29863] [INFO] Booting worker with pid: 29863
+2025-02-08 03:03:56 [29873] [INFO] Booting worker with pid: 29873
+2025-02-08 03:03:56 [29887] [INFO] Booting worker with pid: 29887
+2025-02-08 03:45:02 [6491] [INFO] Handling signal: int
+2025-02-08 03:45:03 [6491] [INFO] Shutting down: Master
+2025-02-08 03:46:40 [33042] [INFO] Starting gunicorn 21.2.0
+2025-02-08 03:46:40 [33042] [INFO] Listening at: http://0.0.0.0:8000 (33042)
+2025-02-08 03:46:40 [33042] [INFO] Using worker: sync
+2025-02-08 03:46:40 [33043] [INFO] Booting worker with pid: 33043
+2025-02-08 03:46:40 [33044] [INFO] Booting worker with pid: 33044
+2025-02-08 03:46:40 [33045] [INFO] Booting worker with pid: 33045
+2025-02-08 03:46:40 [33046] [INFO] Booting worker with pid: 33046
+2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
+2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
+2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
+2025-02-08 03:58:20 [33042] [INFO] Handling signal: winch
+2025-02-08 04:02:07 [33042] [INFO] Handling signal: int
+2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33046) was sent SIGINT!
+2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33044) was sent SIGINT!
+2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33045) was sent SIGINT!
+2025-02-08 04:02:07 [33042] [ERROR] Worker (pid:33043) was sent SIGINT!
+2025-02-08 04:02:07 [33042] [INFO] Shutting down: Master
+2025-02-08 04:02:09 [33959] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:02:09 [33959] [INFO] Listening at: http://0.0.0.0:8000 (33959)
+2025-02-08 04:02:09 [33959] [INFO] Using worker: sync
+2025-02-08 04:02:09 [33960] [INFO] Booting worker with pid: 33960
+2025-02-08 04:02:09 [33961] [INFO] Booting worker with pid: 33961
+2025-02-08 04:02:09 [33962] [INFO] Booting worker with pid: 33962
+2025-02-08 04:02:10 [33964] [INFO] Booting worker with pid: 33964
+2025-02-08 04:06:12 [33959] [INFO] Handling signal: int
+2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33964) was sent SIGINT!
+2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33961) was sent SIGINT!
+2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33960) was sent SIGINT!
+2025-02-08 04:06:12 [33959] [ERROR] Worker (pid:33962) was sent SIGINT!
+2025-02-08 04:06:12 [33959] [INFO] Shutting down: Master
+2025-02-08 04:06:14 [34336] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:06:14 [34336] [INFO] Listening at: http://0.0.0.0:8000 (34336)
+2025-02-08 04:06:14 [34336] [INFO] Using worker: sync
+2025-02-08 04:06:14 [34338] [INFO] Booting worker with pid: 34338
+2025-02-08 04:06:14 [34339] [INFO] Booting worker with pid: 34339
+2025-02-08 04:06:14 [34340] [INFO] Booting worker with pid: 34340
+2025-02-08 04:06:14 [34341] [INFO] Booting worker with pid: 34341
+2025-02-08 04:09:05 [34336] [INFO] Handling signal: int
+2025-02-08 04:09:05 [34336] [ERROR] Worker (pid:34338) was sent SIGINT!
+2025-02-08 04:09:06 [34336] [INFO] Shutting down: Master
+2025-02-08 04:09:11 [34540] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:09:11 [34540] [INFO] Listening at: http://0.0.0.0:8000 (34540)
+2025-02-08 04:09:11 [34540] [INFO] Using worker: sync
+2025-02-08 04:09:11 [34541] [INFO] Booting worker with pid: 34541
+2025-02-08 04:09:11 [34542] [INFO] Booting worker with pid: 34542
+2025-02-08 04:09:11 [34543] [INFO] Booting worker with pid: 34543
+2025-02-08 04:09:11 [34544] [INFO] Booting worker with pid: 34544
+2025-02-08 04:11:08 [34540] [INFO] Handling signal: int
+2025-02-08 04:11:09 [34540] [INFO] Shutting down: Master
+2025-02-08 04:11:29 [34680] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:11:29 [34680] [INFO] Listening at: http://0.0.0.0:8000 (34680)
+2025-02-08 04:11:29 [34680] [INFO] Using worker: sync
+2025-02-08 04:11:29 [34683] [INFO] Booting worker with pid: 34683
+2025-02-08 04:11:29 [34684] [INFO] Booting worker with pid: 34684
+2025-02-08 04:11:30 [34685] [INFO] Booting worker with pid: 34685
+2025-02-08 04:11:30 [34686] [INFO] Booting worker with pid: 34686
+2025-02-08 04:15:03 [34680] [INFO] Handling signal: int
+2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34683) was sent SIGINT!
+2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34685) was sent SIGINT!
+2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34684) was sent SIGINT!
+2025-02-08 04:15:03 [34680] [ERROR] Worker (pid:34686) was sent SIGINT!
+2025-02-08 04:15:03 [34680] [INFO] Shutting down: Master
+2025-02-08 04:15:06 [35005] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:15:06 [35005] [INFO] Listening at: http://0.0.0.0:8000 (35005)
+2025-02-08 04:15:06 [35005] [INFO] Using worker: sync
+2025-02-08 04:15:06 [35006] [INFO] Booting worker with pid: 35006
+2025-02-08 04:15:06 [35007] [INFO] Booting worker with pid: 35007
+2025-02-08 04:15:06 [35008] [INFO] Booting worker with pid: 35008
+2025-02-08 04:15:06 [35009] [INFO] Booting worker with pid: 35009
+2025-02-08 04:18:57 [35005] [INFO] Handling signal: int
+2025-02-08 04:18:58 [35005] [INFO] Shutting down: Master
+2025-02-08 04:19:38 [35178] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:19:38 [35178] [INFO] Listening at: http://0.0.0.0:8000 (35178)
+2025-02-08 04:19:38 [35178] [INFO] Using worker: sync
+2025-02-08 04:19:38 [35179] [INFO] Booting worker with pid: 35179
+2025-02-08 04:19:38 [35180] [INFO] Booting worker with pid: 35180
+2025-02-08 04:19:38 [35181] [INFO] Booting worker with pid: 35181
+2025-02-08 04:19:38 [35182] [INFO] Booting worker with pid: 35182
+2025-02-08 04:21:43 [35178] [INFO] Handling signal: int
+2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35182) was sent SIGINT!
+2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35180) was sent SIGINT!
+2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35179) was sent SIGINT!
+2025-02-08 04:21:43 [35178] [ERROR] Worker (pid:35181) was sent SIGINT!
+2025-02-08 04:21:43 [35178] [INFO] Shutting down: Master
+2025-02-08 04:21:46 [35511] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:21:46 [35511] [INFO] Listening at: http://0.0.0.0:8000 (35511)
+2025-02-08 04:21:46 [35511] [INFO] Using worker: sync
+2025-02-08 04:21:46 [35512] [INFO] Booting worker with pid: 35512
+2025-02-08 04:21:46 [35513] [INFO] Booting worker with pid: 35513
+2025-02-08 04:21:46 [35514] [INFO] Booting worker with pid: 35514
+2025-02-08 04:21:46 [35515] [INFO] Booting worker with pid: 35515
+2025-02-08 04:22:17 [ERROR] [PID:35514] [app.routes.main] Error loading print form template: 'now' is undefined
+2025-02-08 04:22:17 [ERROR] [PID:35514] [app.routes.main] Stack trace:
 Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 23, in list_shipments
-    return render_template('shipments/list.html', shipments=shipments)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 100, in print_form_template
+    return render_template('shipments/print_form_template.html', shipments=shipments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
     return _render(app, template, context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -120,73 +384,32 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/list.html", line 1, in top-level template code
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 1, in top-level template code
     {% extends "base.html" %}
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
     {% block content %}{% endblock %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/list.html", line 267, in block 'content'
-    <a href="{{ url_for('new_export') }}" class="btn btn-primary">Create New Export</a>
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 548, in block 'content'
+    Form Version: 1.0 | Generated: {{ now().strftime('%Y-%m-%d %H:%M') }}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'new_export'. Did you mean 'main.reports' instead?
-2025-02-07 15:54:17 [81009] [INFO] Handling signal: int
-2025-02-07 15:54:17 [81009] [ERROR] Worker (pid:81012) was sent SIGINT!
-2025-02-07 15:54:17 [81009] [ERROR] Worker (pid:81011) was sent SIGINT!
-2025-02-07 15:54:17 [81009] [ERROR] Worker (pid:81013) was sent SIGINT!
-2025-02-07 15:54:17 [81009] [ERROR] Worker (pid:81014) was sent SIGINT!
-2025-02-07 15:54:17 [81009] [INFO] Shutting down: Master
-2025-02-07 15:54:19 [81217] [INFO] Starting gunicorn 21.2.0
-2025-02-07 15:54:19 [81217] [INFO] Listening at: http://0.0.0.0:8000 (81217)
-2025-02-07 15:54:19 [81217] [INFO] Using worker: sync
-2025-02-07 15:54:19 [81220] [INFO] Booting worker with pid: 81220
-2025-02-07 15:54:19 [81221] [INFO] Booting worker with pid: 81221
-2025-02-07 15:54:19 [81222] [INFO] Booting worker with pid: 81222
-2025-02-07 15:54:19 [81223] [INFO] Booting worker with pid: 81223
-2025-02-07 15:54:43 [ERROR] [PID:81222] [app.routes.main] Error loading print form template: Entity namespace for "export_request" has no property "created_by"
-2025-02-07 15:54:43 [ERROR] [PID:81222] [app.routes.main] Stack trace:
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 2175, in _entity_namespace_key
-    return getattr(ns, key)  # type: ignore
-           ^^^^^^^^^^^^^^^^
-AttributeError: type object 'Shipment' has no attribute 'created_by'
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 89, in print_form_template
-    shipments = Shipment.query.filter_by(created_by=current_user.id).order_by(Shipment.created_at.desc()).all()
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 1982, in filter_by
-    clauses = [
-              ^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 1983, in <listcomp>
-    _entity_namespace_key(from_entity, key) == value
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 2177, in _entity_namespace_key
-    raise exc.InvalidRequestError(
-sqlalchemy.exc.InvalidRequestError: Entity namespace for "export_request" has no property "created_by"
-2025-02-07 15:56:47 [81217] [INFO] Handling signal: int
-2025-02-07 15:56:47 [81217] [ERROR] Worker (pid:81223) was sent SIGINT!
-2025-02-07 15:56:47 [81217] [ERROR] Worker (pid:81220) was sent SIGINT!
-2025-02-07 15:56:47 [81217] [ERROR] Worker (pid:81222) was sent SIGINT!
-2025-02-07 15:56:47 [81217] [ERROR] Worker (pid:81221) was sent SIGINT!
-2025-02-07 15:56:47 [81217] [INFO] Shutting down: Master
-2025-02-07 15:57:14 [81389] [INFO] Starting gunicorn 21.2.0
-2025-02-07 15:57:14 [81389] [INFO] Listening at: http://0.0.0.0:8000 (81389)
-2025-02-07 15:57:14 [81389] [INFO] Using worker: sync
-2025-02-07 15:57:14 [81391] [INFO] Booting worker with pid: 81391
-2025-02-07 15:57:14 [81392] [INFO] Booting worker with pid: 81392
-2025-02-07 15:57:14 [81393] [INFO] Booting worker with pid: 81393
-2025-02-07 15:57:14 [81394] [INFO] Booting worker with pid: 81394
-2025-02-07 15:58:25 [ERROR] [PID:81393] [gunicorn.error] Error handling request /admin/users
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'now' is undefined
+2025-02-08 04:24:18 [35511] [INFO] Handling signal: int
+2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35514) was sent SIGINT!
+2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35513) was sent SIGINT!
+2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35512) was sent SIGINT!
+2025-02-08 04:24:18 [35511] [ERROR] Worker (pid:35515) was sent SIGINT!
+2025-02-08 04:24:18 [35511] [INFO] Shutting down: Master
+2025-02-08 04:24:20 [35655] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:24:20 [35655] [INFO] Listening at: http://0.0.0.0:8000 (35655)
+2025-02-08 04:24:20 [35655] [INFO] Using worker: sync
+2025-02-08 04:24:20 [35656] [INFO] Booting worker with pid: 35656
+2025-02-08 04:24:20 [35657] [INFO] Booting worker with pid: 35657
+2025-02-08 04:24:20 [35658] [INFO] Booting worker with pid: 35658
+2025-02-08 04:24:20 [35659] [INFO] Booting worker with pid: 35659
+2025-02-08 04:27:13 [ERROR] [PID:35656] [gunicorn.error] Error handling request /admin/users
 Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
     self.handle_request(listener, req, client, addr)
@@ -244,525 +467,7 @@ Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete_user' with values ['user_id']. Did you mean 'admin.delete_user' instead?
-2025-02-07 15:58:31 [81389] [INFO] Handling signal: int
-2025-02-07 15:58:31 [81389] [ERROR] Worker (pid:81392) was sent SIGINT!
-2025-02-07 15:58:31 [81389] [ERROR] Worker (pid:81394) was sent SIGINT!
-2025-02-07 15:58:31 [81389] [ERROR] Worker (pid:81391) was sent SIGINT!
-2025-02-07 15:58:31 [81389] [ERROR] Worker (pid:81393) was sent SIGINT!
-2025-02-07 15:58:31 [81389] [INFO] Shutting down: Master
-2025-02-07 15:58:33 [81492] [INFO] Starting gunicorn 21.2.0
-2025-02-07 15:58:33 [81492] [INFO] Listening at: http://0.0.0.0:8000 (81492)
-2025-02-07 15:58:33 [81492] [INFO] Using worker: sync
-2025-02-07 15:58:33 [81526] [INFO] Booting worker with pid: 81526
-2025-02-07 15:58:33 [81530] [INFO] Booting worker with pid: 81530
-2025-02-07 15:58:33 [81531] [INFO] Booting worker with pid: 81531
-2025-02-07 15:58:33 [81541] [INFO] Booting worker with pid: 81541
-2025-02-07 15:59:26 [81492] [INFO] Handling signal: int
-2025-02-07 15:59:26 [81492] [ERROR] Worker (pid:81531) was sent SIGINT!
-2025-02-07 15:59:26 [81492] [ERROR] Worker (pid:81526) was sent SIGINT!
-2025-02-07 15:59:26 [81492] [ERROR] Worker (pid:81530) was sent SIGINT!
-2025-02-07 15:59:26 [81492] [ERROR] Worker (pid:81541) was sent SIGINT!
-2025-02-07 15:59:26 [81492] [INFO] Shutting down: Master
-2025-02-07 15:59:29 [81727] [INFO] Starting gunicorn 21.2.0
-2025-02-07 15:59:29 [81727] [INFO] Listening at: http://0.0.0.0:8000 (81727)
-2025-02-07 15:59:29 [81727] [INFO] Using worker: sync
-2025-02-07 15:59:29 [81728] [INFO] Booting worker with pid: 81728
-2025-02-07 15:59:29 [81729] [INFO] Booting worker with pid: 81729
-2025-02-07 15:59:29 [81730] [INFO] Booting worker with pid: 81730
-2025-02-07 15:59:29 [81731] [INFO] Booting worker with pid: 81731
-2025-02-07 15:59:41 [ERROR] [PID:81731] [app.routes.shipments] Error viewing shipment 7: shipments/view.html
-2025-02-07 16:04:18 [81727] [INFO] Handling signal: int
-2025-02-07 16:04:18 [81727] [ERROR] Worker (pid:81728) was sent SIGINT!
-2025-02-07 16:04:18 [81727] [ERROR] Worker (pid:81730) was sent SIGINT!
-2025-02-07 16:04:18 [81727] [ERROR] Worker (pid:81729) was sent SIGINT!
-2025-02-07 16:04:18 [81727] [ERROR] Worker (pid:81731) was sent SIGINT!
-2025-02-07 16:04:18 [81727] [INFO] Shutting down: Master
-2025-02-07 16:04:20 [81918] [INFO] Starting gunicorn 21.2.0
-2025-02-07 16:04:20 [81918] [INFO] Listening at: http://0.0.0.0:8000 (81918)
-2025-02-07 16:04:20 [81918] [INFO] Using worker: sync
-2025-02-07 16:04:20 [81919] [INFO] Booting worker with pid: 81919
-2025-02-07 16:04:20 [81921] [INFO] Booting worker with pid: 81921
-2025-02-07 16:04:20 [81922] [INFO] Booting worker with pid: 81922
-2025-02-07 16:04:21 [81923] [INFO] Booting worker with pid: 81923
-2025-02-07 16:04:27 [ERROR] [PID:81919] [app.routes.shipments] Error viewing shipment 7: shipments/view.html
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/view.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/view.html
-2025-02-07 16:04:33 [ERROR] [PID:81922] [app.routes.shipments] Error viewing shipment 7: shipments/view.html
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/view.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/view.html
-2025-02-07 16:04:36 [ERROR] [PID:81921] [app.routes.shipments] Error viewing shipment 7: shipments/view.html
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/view.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/view.html
-2025-02-07 16:06:37 [81918] [CRITICAL] WORKER TIMEOUT (pid:81919)
-2025-02-07 16:06:37 [81918] [ERROR] Worker (pid:81919) exited with code 1
-2025-02-07 16:06:37 [81918] [ERROR] Worker (pid:81919) exited with code 1.
-2025-02-07 16:06:37 [82214] [INFO] Booting worker with pid: 82214
-2025-02-07 16:58:35 [81918] [INFO] Handling signal: int
-2025-02-07 16:58:35 [81918] [ERROR] Worker (pid:82214) was sent SIGINT!
-2025-02-07 16:58:35 [81918] [ERROR] Worker (pid:81922) was sent SIGINT!
-2025-02-07 16:58:35 [81918] [ERROR] Worker (pid:81921) was sent SIGINT!
-2025-02-07 16:58:35 [81918] [ERROR] Worker (pid:81923) was sent SIGINT!
-2025-02-07 16:58:35 [81918] [INFO] Shutting down: Master
-2025-02-07 16:58:39 [85574] [INFO] Starting gunicorn 21.2.0
-2025-02-07 16:58:39 [85574] [INFO] Listening at: http://0.0.0.0:8000 (85574)
-2025-02-07 16:58:39 [85574] [INFO] Using worker: sync
-2025-02-07 16:58:39 [85575] [INFO] Booting worker with pid: 85575
-2025-02-07 16:58:39 [85576] [INFO] Booting worker with pid: 85576
-2025-02-07 16:58:39 [85577] [INFO] Booting worker with pid: 85577
-2025-02-07 16:58:39 [85578] [INFO] Booting worker with pid: 85578
-2025-02-07 17:01:02 [85574] [INFO] Handling signal: int
-2025-02-07 17:01:02 [85574] [INFO] Shutting down: Master
-2025-02-07 17:02:20 [85749] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:02:20 [85749] [INFO] Listening at: http://0.0.0.0:8000 (85749)
-2025-02-07 17:02:20 [85749] [INFO] Using worker: sync
-2025-02-07 17:02:20 [85750] [INFO] Booting worker with pid: 85750
-2025-02-07 17:02:20 [85751] [INFO] Booting worker with pid: 85751
-2025-02-07 17:02:20 [85752] [INFO] Booting worker with pid: 85752
-2025-02-07 17:02:20 [85753] [INFO] Booting worker with pid: 85753
-2025-02-07 17:04:54 [85749] [CRITICAL] WORKER TIMEOUT (pid:85753)
-2025-02-07 17:04:54 [85749] [ERROR] Worker (pid:85753) exited with code 1
-2025-02-07 17:04:54 [85749] [ERROR] Worker (pid:85753) exited with code 1.
-2025-02-07 17:04:54 [86164] [INFO] Booting worker with pid: 86164
-2025-02-07 17:06:23 [85749] [INFO] Handling signal: int
-2025-02-07 17:06:23 [85749] [ERROR] Worker (pid:85751) was sent SIGINT!
-2025-02-07 17:06:23 [85749] [ERROR] Worker (pid:85750) was sent SIGINT!
-2025-02-07 17:06:23 [85749] [ERROR] Worker (pid:85752) was sent SIGINT!
-2025-02-07 17:06:23 [85749] [ERROR] Worker (pid:86164) was sent SIGINT!
-2025-02-07 17:06:23 [85749] [INFO] Shutting down: Master
-2025-02-07 17:06:25 [86291] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:06:25 [86291] [INFO] Listening at: http://0.0.0.0:8000 (86291)
-2025-02-07 17:06:25 [86291] [INFO] Using worker: sync
-2025-02-07 17:06:25 [86295] [INFO] Booting worker with pid: 86295
-2025-02-07 17:06:25 [86296] [INFO] Booting worker with pid: 86296
-2025-02-07 17:06:25 [86297] [INFO] Booting worker with pid: 86297
-2025-02-07 17:06:25 [86298] [INFO] Booting worker with pid: 86298
-2025-02-07 17:08:25 [ERROR] [PID:86295] [app.routes.shipments] Error viewing shipment 7: 'Shipment' object has no attribute 'qr_code'
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 119, in view_shipment
-    if not shipment.qr_code:
-           ^^^^^^^^^^^^^^^^
-AttributeError: 'Shipment' object has no attribute 'qr_code'
-2025-02-07 17:08:28 [ERROR] [PID:86297] [app.routes.shipments] Error viewing shipment 7: 'Shipment' object has no attribute 'qr_code'
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 119, in view_shipment
-    if not shipment.qr_code:
-           ^^^^^^^^^^^^^^^^
-AttributeError: 'Shipment' object has no attribute 'qr_code'
-2025-02-07 17:10:31 [86291] [CRITICAL] WORKER TIMEOUT (pid:86298)
-2025-02-07 17:10:31 [86291] [ERROR] Worker (pid:86298) exited with code 1
-2025-02-07 17:10:31 [86291] [ERROR] Worker (pid:86298) exited with code 1.
-2025-02-07 17:10:31 [86616] [INFO] Booting worker with pid: 86616
-2025-02-07 17:14:54 [86291] [INFO] Handling signal: int
-2025-02-07 17:14:54 [86291] [ERROR] Worker (pid:86296) was sent SIGINT!
-2025-02-07 17:14:54 [86291] [ERROR] Worker (pid:86295) was sent SIGINT!
-2025-02-07 17:14:54 [86291] [ERROR] Worker (pid:86297) was sent SIGINT!
-2025-02-07 17:14:54 [86291] [ERROR] Worker (pid:86616) was sent SIGINT!
-2025-02-07 17:14:54 [86291] [INFO] Shutting down: Master
-2025-02-07 17:14:57 [87031] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:14:57 [87031] [INFO] Listening at: http://0.0.0.0:8000 (87031)
-2025-02-07 17:14:57 [87031] [INFO] Using worker: sync
-2025-02-07 17:14:57 [87032] [INFO] Booting worker with pid: 87032
-2025-02-07 17:14:57 [87033] [INFO] Booting worker with pid: 87033
-2025-02-07 17:14:57 [87034] [INFO] Booting worker with pid: 87034
-2025-02-07 17:14:57 [87035] [INFO] Booting worker with pid: 87035
-2025-02-07 17:15:11 [87031] [INFO] Handling signal: int
-2025-02-07 17:15:11 [87031] [ERROR] Worker (pid:87035) was sent SIGINT!
-2025-02-07 17:15:11 [87031] [ERROR] Worker (pid:87033) was sent SIGINT!
-2025-02-07 17:15:11 [87031] [ERROR] Worker (pid:87032) was sent SIGINT!
-2025-02-07 17:15:11 [87031] [ERROR] Worker (pid:87034) was sent SIGINT!
-2025-02-07 17:15:11 [87031] [INFO] Shutting down: Master
-2025-02-07 17:15:14 [87107] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:15:14 [87107] [INFO] Listening at: http://0.0.0.0:8000 (87107)
-2025-02-07 17:15:14 [87107] [INFO] Using worker: sync
-2025-02-07 17:15:14 [87108] [INFO] Booting worker with pid: 87108
-2025-02-07 17:15:14 [87109] [INFO] Booting worker with pid: 87109
-2025-02-07 17:15:14 [87110] [INFO] Booting worker with pid: 87110
-2025-02-07 17:15:15 [87111] [INFO] Booting worker with pid: 87111
-2025-02-07 17:15:49 [ERROR] [PID:87111] [app.routes.shipments] Error in list_shipments: (psycopg2.errors.UndefinedColumn) column export_request.qr_code does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-
-[SQL: SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.qr_code AS export_request_qr_code, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request ORDER BY export_request.created_at DESC]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-psycopg2.errors.UndefinedColumn: column export_request.qr_code does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 27, in list_shipments
-    shipments = Shipment.query.order_by(Shipment.created_at.desc()).all()
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2672, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2826, in _iter
-    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-                                                  ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
-    result: Result[Any] = compile_state_cls.orm_execute_statement(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
-    result = conn.execute(
-             ^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
-    return meth(
-           ^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1630, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1979, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2335, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column export_request.qr_code does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-
-[SQL: SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.qr_code AS export_request_qr_code, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request ORDER BY export_request.created_at DESC]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2025-02-07 17:15:53 [ERROR] [PID:87110] [app.routes.shipments] Error in list_shipments: (psycopg2.errors.UndefinedColumn) column export_request.qr_code does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-
-[SQL: SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.qr_code AS export_request_qr_code, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request ORDER BY export_request.created_at DESC]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-psycopg2.errors.UndefinedColumn: column export_request.qr_code does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 27, in list_shipments
-    shipments = Shipment.query.order_by(Shipment.created_at.desc()).all()
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2672, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2826, in _iter
-    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-                                                  ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
-    result: Result[Any] = compile_state_cls.orm_execute_statement(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
-    result = conn.execute(
-             ^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
-    return meth(
-           ^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1630, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1979, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2335, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column export_request.qr_code does not exist
-LINE 1: ..._request.created_at AS export_request_created_at, export_req...
-                                                             ^
-
-[SQL: SELECT export_request.id AS export_request_id, export_request.waybill_number AS export_request_waybill_number, export_request.created_at AS export_request_created_at, export_request.qr_code AS export_request_qr_code, export_request.sender_name AS export_request_sender_name, export_request.sender_email AS export_request_sender_email, export_request.sender_address AS export_request_sender_address, export_request.sender_business AS export_request_sender_business, export_request.sender_mobile AS export_request_sender_mobile, export_request.receiver_name AS export_request_receiver_name, export_request.receiver_email AS export_request_receiver_email, export_request.receiver_address AS export_request_receiver_address, export_request.receiver_business AS export_request_receiver_business, export_request.receiver_mobile AS export_request_receiver_mobile, export_request.destination_address AS export_request_destination_address, export_request.destination_country AS export_request_destination_country, export_request.destination_postcode AS export_request_destination_postcode, export_request.freight_pricing AS export_request_freight_pricing, export_request.additional_charges AS export_request_additional_charges, export_request.pickup_charge AS export_request_pickup_charge, export_request.handling_fees AS export_request_handling_fees, export_request.crating AS export_request_crating, export_request.insurance_charge AS export_request_insurance_charge, export_request.total AS export_request_total, export_request.is_collection AS export_request_is_collection, export_request.customer_group AS export_request_customer_group, export_request.order_booked_by AS export_request_order_booked_by, export_request.sender_signature AS export_request_sender_signature, export_request.status AS export_request_status 
-FROM export_request ORDER BY export_request.created_at DESC]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2025-02-07 17:18:16 [87107] [INFO] Handling signal: int
-2025-02-07 17:18:17 [87107] [INFO] Shutting down: Master
-2025-02-07 17:31:32 [88663] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:31:32 [88663] [INFO] Listening at: http://0.0.0.0:8000 (88663)
-2025-02-07 17:31:32 [88663] [INFO] Using worker: sync
-2025-02-07 17:31:32 [88664] [INFO] Booting worker with pid: 88664
-2025-02-07 17:31:32 [88665] [INFO] Booting worker with pid: 88665
-2025-02-07 17:31:32 [88666] [INFO] Booting worker with pid: 88666
-2025-02-07 17:31:32 [88667] [INFO] Booting worker with pid: 88667
-2025-02-07 17:31:45 [ERROR] [PID:88665] [app.routes.shipments] Error generating QR code: generate_qr_code() missing 3 required positional arguments: 'sender_mobile', 'receiver_mobile', and 'order_booked_by'
-2025-02-07 17:31:45 [ERROR] [PID:88665] [app.routes.shipments] Error viewing shipment 7: Could not build url for endpoint 'serve_image' with values ['file_id']. Did you mean 'api.create_shipment' instead?
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 144, in view_shipment
-    response = render_template('shipments/preview.html',
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 672, in block 'content'
-    <img src="{{ url_for('serve_image', file_id=request.sender_signature) }}"
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'serve_image' with values ['file_id']. Did you mean 'api.create_shipment' instead?
-2025-02-07 17:33:49 [88663] [CRITICAL] WORKER TIMEOUT (pid:88664)
-2025-02-07 17:33:49 [88663] [ERROR] Worker (pid:88664) exited with code 1
-2025-02-07 17:33:49 [88663] [ERROR] Worker (pid:88664) exited with code 1.
-2025-02-07 17:33:49 [88795] [INFO] Booting worker with pid: 88795
-2025-02-07 17:34:07 [88663] [INFO] Handling signal: int
-2025-02-07 17:34:08 [88663] [ERROR] Worker (pid:88795) was sent SIGINT!
-2025-02-07 17:34:08 [88663] [ERROR] Worker (pid:88667) was sent SIGINT!
-2025-02-07 17:34:08 [88663] [ERROR] Worker (pid:88666) was sent SIGINT!
-2025-02-07 17:34:08 [88663] [ERROR] Worker (pid:88665) was sent SIGINT!
-2025-02-07 17:34:08 [88663] [INFO] Shutting down: Master
-2025-02-07 17:34:39 [88859] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:34:39 [88859] [INFO] Listening at: http://0.0.0.0:8000 (88859)
-2025-02-07 17:34:39 [88859] [INFO] Using worker: sync
-2025-02-07 17:34:39 [88860] [INFO] Booting worker with pid: 88860
-2025-02-07 17:34:39 [88861] [INFO] Booting worker with pid: 88861
-2025-02-07 17:34:39 [88862] [INFO] Booting worker with pid: 88862
-2025-02-07 17:34:39 [88863] [INFO] Booting worker with pid: 88863
-2025-02-07 17:34:51 [ERROR] [PID:88861] [app.routes.shipments] Error generating QR code: (psycopg2.ProgrammingError) can't adapt type '_io.BytesIO'
-[SQL: UPDATE export_request SET qr_code=%(qr_code)s WHERE export_request.id = %(export_request_id)s]
-[parameters: {'qr_code': <_io.BytesIO object at 0x10fb7cc70>, 'export_request_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2025-02-07 17:34:51 [ERROR] [PID:88861] [app.routes.shipments] Error viewing shipment 7: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.ProgrammingError) can't adapt type '_io.BytesIO'
-[SQL: UPDATE export_request SET qr_code=%(qr_code)s WHERE export_request.id = %(export_request_id)s]
-[parameters: {'qr_code': <_io.BytesIO object at 0x10fb7cc70>, 'export_request_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/f405) (Background on this error at: https://sqlalche.me/e/20/7s2a)
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 141, in view_shipment
-    subtotal = shipment.calculated_total
-               ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/models/shipment.py", line 68, in calculated_total
-    self.freight_pricing or 0,
-    ^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
-    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
-    value = self._fire_loader_callables(state, key, passive)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
-    return state._load_expired(state, passive)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/state.py", line 796, in _load_expired
-    self.manager.expired_attribute_loader(self, toload, passive)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 1653, in load_scalar_attributes
-    result = load_on_ident(
-             ^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 509, in load_on_ident
-    return load_on_pk_identity(
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
-    session.execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2181, in _execute_internal
-    conn = self._connection_for_bind(bind)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2050, in _connection_for_bind
-    return trans._connection_for_bind(engine, execution_options)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 2, in _connection_for_bind
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 103, in _go
-    self._raise_for_prerequisite_state(fn.__name__, current_state)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 928, in _raise_for_prerequisite_state
-    raise sa_exc.PendingRollbackError(
-sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.ProgrammingError) can't adapt type '_io.BytesIO'
-[SQL: UPDATE export_request SET qr_code=%(qr_code)s WHERE export_request.id = %(export_request_id)s]
-[parameters: {'qr_code': <_io.BytesIO object at 0x10fb7cc70>, 'export_request_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/f405) (Background on this error at: https://sqlalche.me/e/20/7s2a)
-2025-02-07 17:37:36 [88859] [INFO] Handling signal: int
-2025-02-07 17:37:37 [88859] [ERROR] Worker (pid:88863) was sent SIGINT!
-2025-02-07 17:37:37 [88859] [ERROR] Worker (pid:88861) was sent SIGINT!
-2025-02-07 17:37:37 [88859] [ERROR] Worker (pid:88860) was sent SIGINT!
-2025-02-07 17:37:37 [88859] [ERROR] Worker (pid:88862) was sent SIGINT!
-2025-02-07 17:37:37 [88859] [INFO] Shutting down: Master
-2025-02-07 17:37:39 [89047] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:37:39 [89047] [INFO] Listening at: http://0.0.0.0:8000 (89047)
-2025-02-07 17:37:39 [89047] [INFO] Using worker: sync
-2025-02-07 17:37:39 [89048] [INFO] Booting worker with pid: 89048
-2025-02-07 17:37:39 [89049] [INFO] Booting worker with pid: 89049
-2025-02-07 17:37:39 [89050] [INFO] Booting worker with pid: 89050
-2025-02-07 17:37:39 [89051] [INFO] Booting worker with pid: 89051
-2025-02-07 17:37:50 [ERROR] [PID:89051] [app.routes.shipments] Error saving QR code to database: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(500)
-
-[SQL: UPDATE export_request SET qr_code=%(qr_code)s WHERE export_request.id = %(export_request_id)s]
-[parameters: {'qr_code': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmIAAAJiAQAAAABMLZNLAAAGWUlEQVR4nO2dXYrjOhCFT10b8ihDFpClODtrekl3B/ZSsoAB+TEgU/OgKklO99Az0Altc/RgOrb7wwa ... (1968 characters truncated) ... PUfO5ZzwbaaS9klZqedRdQ6VZavEoubO1Ju2VBsMRjdOJOhJpe6Zt651L2Wao+1aVoHLYbtwZgdbMoCyQtnOa6Nf3/PWYf/KbkkYaaaSRRhpppJFGGmn/On4DrQfmz7dI9G0AAAAASUVORK5CYII=', 'export_request_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/9h9h)
-2025-02-07 17:43:11 [89047] [INFO] Handling signal: int
-2025-02-07 17:43:11 [89047] [ERROR] Worker (pid:89048) was sent SIGINT!
-2025-02-07 17:43:11 [89047] [ERROR] Worker (pid:89051) was sent SIGINT!
-2025-02-07 17:43:11 [89047] [ERROR] Worker (pid:89050) was sent SIGINT!
-2025-02-07 17:43:11 [89047] [ERROR] Worker (pid:89049) was sent SIGINT!
-2025-02-07 17:43:11 [89047] [INFO] Shutting down: Master
-2025-02-07 17:43:14 [89501] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:43:14 [89501] [INFO] Listening at: http://0.0.0.0:8000 (89501)
-2025-02-07 17:43:14 [89501] [INFO] Using worker: sync
-2025-02-07 17:43:14 [89502] [INFO] Booting worker with pid: 89502
-2025-02-07 17:43:14 [89503] [INFO] Booting worker with pid: 89503
-2025-02-07 17:43:14 [89504] [INFO] Booting worker with pid: 89504
-2025-02-07 17:43:14 [89505] [INFO] Booting worker with pid: 89505
-2025-02-07 17:43:22 [ERROR] [PID:89505] [app.routes.shipments] Error saving QR code to database: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(500)
-
-[SQL: UPDATE export_request SET qr_code=%(qr_code)s WHERE export_request.id = %(export_request_id)s]
-[parameters: {'qr_code': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmIAAAJiAQAAAABMLZNLAAAGWUlEQVR4nO2dXYrjOhCFT10b8ihDFpClODtrekl3B/ZSsoAB+TEgU/OgKklO99Az0Altc/RgOrb7wwa ... (1968 characters truncated) ... PUfO5ZzwbaaS9klZqedRdQ6VZavEoubO1Ju2VBsMRjdOJOhJpe6Zt651L2Wao+1aVoHLYbtwZgdbMoCyQtnOa6Nf3/PWYf/KbkkYaaaSRRhpppJFGGmn/On4DrQfmz7dI9G0AAAAASUVORK5CYII=', 'export_request_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/9h9h)
-2025-02-07 17:43:35 [ERROR] [PID:89502] [app.routes.shipments] Error deleting shipment 7: 'ShipmentItem' object has no attribute 'image_file_id'
-2025-02-07 17:43:35 [ERROR] [PID:89505] [app.routes.shipments] Error saving QR code to database: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(500)
-
-[SQL: UPDATE export_request SET qr_code=%(qr_code)s WHERE export_request.id = %(export_request_id)s]
-[parameters: {'qr_code': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmIAAAJiAQAAAABMLZNLAAAGWUlEQVR4nO2dXYrjOhCFT10b8ihDFpClODtrekl3B/ZSsoAB+TEgU/OgKklO99Az0Altc/RgOrb7wwa ... (1968 characters truncated) ... PUfO5ZzwbaaS9klZqedRdQ6VZavEoubO1Ju2VBsMRjdOJOhJpe6Zt651L2Wao+1aVoHLYbtwZgdbMoCyQtnOa6Nf3/PWYf/KbkkYaaaSRRhpppJFGGmn/On4DrQfmz7dI9G0AAAAASUVORK5CYII=', 'export_request_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/9h9h)
-2025-02-07 17:46:13 [89501] [INFO] Handling signal: int
-2025-02-07 17:46:14 [89501] [ERROR] Worker (pid:89504) was sent SIGINT!
-2025-02-07 17:46:14 [89501] [ERROR] Worker (pid:89505) was sent SIGINT!
-2025-02-07 17:46:14 [89501] [ERROR] Worker (pid:89503) was sent SIGINT!
-2025-02-07 17:46:14 [89501] [ERROR] Worker (pid:89502) was sent SIGINT!
-2025-02-07 17:46:14 [89501] [INFO] Shutting down: Master
-2025-02-07 17:46:16 [89866] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:46:16 [89866] [INFO] Listening at: http://0.0.0.0:8000 (89866)
-2025-02-07 17:46:16 [89866] [INFO] Using worker: sync
-2025-02-07 17:46:16 [89867] [INFO] Booting worker with pid: 89867
-2025-02-07 17:46:16 [89869] [INFO] Booting worker with pid: 89869
-2025-02-07 17:46:16 [89870] [INFO] Booting worker with pid: 89870
-2025-02-07 17:46:16 [89871] [INFO] Booting worker with pid: 89871
-2025-02-07 17:49:50 [ERROR] [PID:89870] [app.routes.shipments] Error deleting shipment 7: (psycopg2.errors.NotNullViolation) null value in column "export_request_id" of relation "item_detail" violates not-null constraint
-DETAIL:  Failing row contains (7, null, phone, 0.01, 1, 0.1, null, null).
-
-[SQL: UPDATE item_detail SET export_request_id=%(export_request_id)s WHERE item_detail.id = %(item_detail_id)s]
-[parameters: {'export_request_id': None, 'item_detail_id': 7}]
-(Background on this error at: https://sqlalche.me/e/20/gkpj)
-2025-02-07 17:51:45 [89866] [INFO] Handling signal: int
-2025-02-07 17:51:45 [89866] [ERROR] Worker (pid:89870) was sent SIGINT!
-2025-02-07 17:51:45 [89866] [ERROR] Worker (pid:89869) was sent SIGINT!
-2025-02-07 17:51:45 [89866] [ERROR] Worker (pid:89867) was sent SIGINT!
-2025-02-07 17:51:45 [89866] [ERROR] Worker (pid:89871) was sent SIGINT!
-2025-02-07 17:51:46 [89866] [INFO] Shutting down: Master
-2025-02-07 17:51:53 [90472] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:51:53 [90472] [INFO] Listening at: http://0.0.0.0:8000 (90472)
-2025-02-07 17:51:53 [90472] [INFO] Using worker: sync
-2025-02-07 17:51:53 [90473] [INFO] Booting worker with pid: 90473
-2025-02-07 17:51:53 [90474] [INFO] Booting worker with pid: 90474
-2025-02-07 17:51:54 [90475] [INFO] Booting worker with pid: 90475
-2025-02-07 17:51:54 [90476] [INFO] Booting worker with pid: 90476
-2025-02-07 17:52:30 [ERROR] [PID:90476] [gunicorn.error] Error handling request /admin/users
+2025-02-08 04:27:34 [ERROR] [PID:35658] [gunicorn.error] Error handling request /admin/users
 Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
     self.handle_request(listener, req, client, addr)
@@ -820,655 +525,24 @@ Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete_user' with values ['user_id']. Did you mean 'admin.delete_user' instead?
-2025-02-07 17:52:45 [90472] [INFO] Handling signal: int
-2025-02-07 17:52:45 [90472] [ERROR] Worker (pid:90474) was sent SIGINT!
-2025-02-07 17:52:45 [90472] [ERROR] Worker (pid:90473) was sent SIGINT!
-2025-02-07 17:52:45 [90472] [ERROR] Worker (pid:90475) was sent SIGINT!
-2025-02-07 17:52:45 [90472] [ERROR] Worker (pid:90476) was sent SIGINT!
-2025-02-07 17:52:45 [90472] [INFO] Shutting down: Master
-2025-02-07 17:52:48 [90549] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:52:48 [90549] [INFO] Listening at: http://0.0.0.0:8000 (90549)
-2025-02-07 17:52:48 [90549] [INFO] Using worker: sync
-2025-02-07 17:52:48 [90551] [INFO] Booting worker with pid: 90551
-2025-02-07 17:52:48 [90552] [INFO] Booting worker with pid: 90552
-2025-02-07 17:52:48 [90553] [INFO] Booting worker with pid: 90553
-2025-02-07 17:52:48 [90554] [INFO] Booting worker with pid: 90554
-2025-02-07 17:54:25 [ERROR] [PID:90554] [app.routes.shipments] Error in submit_shipment: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(500)
-
-[SQL: INSERT INTO export_request (waybill_number, created_at, qr_code, sender_name, sender_email, sender_address, sender_business, sender_mobile, receiver_name, receiver_email, receiver_address, receiver_business, receiver_mobile, destination_address, destination_country, destination_postcode, freight_pricing, additional_charges, pickup_charge, handling_fees, crating, insurance_charge, total, is_collection, customer_group, order_booked_by, sender_signature, status) VALUES (%(waybill_number)s, CURRENT_TIMESTAMP, %(qr_code)s, %(sender_name)s, %(sender_email)s, %(sender_address)s, %(sender_business)s, %(sender_mobile)s, %(receiver_name)s, %(receiver_email)s, %(receiver_address)s, %(receiver_business)s, %(receiver_mobile)s, %(destination_address)s, %(destination_country)s, %(destination_postcode)s, %(freight_pricing)s, %(additional_charges)s, %(pickup_charge)s, %(handling_fees)s, %(crating)s, %(insurance_charge)s, %(total)s, %(is_collection)s, %(customer_group)s, %(order_booked_by)s, %(sender_signature)s, %(status)s) RETURNING export_request.id, export_request.created_at]
-[parameters: {'waybill_number': 'EX000001', 'qr_code': None, 'sender_name': 'Chukwunonso Nwune', 'sender_email': 'chuqunonso@gmail.com', 'sender_address': 'M9 Government Guest House,', 'sender_business': 'RateMe', 'sender_mobile': '08097553252', 'receiver_name': 'Nonso Nwune', 'receiver_email': 'ch@rl.es', 'receiver_address': 'Off Arochukwu Crescent', 'receiver_business': 'inofficial', 'receiver_mobile': '0907707543', 'destination_address': 'M9 Government Guest House,', 'destination_country': 'Nigeria', 'destination_postcode': '400261', 'freight_pricing': 0.0, 'additional_charges': 0.0, 'pickup_charge': 0.0, 'handling_fees': 0.0, 'crating': 25.0, 'insurance_charge': 0.0, 'total': 25.0, 'is_collection': True, 'customer_group': 'Walk In', 'order_booked_by': 'Super User', 'sender_signature': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB18AAAG4CAYAAAAKQS74AAAAAXNSR0IArs4c6QAAIABJREFUeF7s3Qd0FeX29/GNiPQmvSgdFKR3EEEpShFEFEQUURTEgv2C1wKIIMJ ... (90968 characters truncated) ... QQAABBBBAAAEESL5yDyCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAJhECD5GgZEhkAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQT+DwDZBwGCXxszAAAAAElFTkSuQmCC', 'status': 'pending'}]
-(Background on this error at: https://sqlalche.me/e/20/9h9h)
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-psycopg2.errors.StringDataRightTruncation: value too long for type character varying(500)
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 92, in submit_shipment
-    db.session.commit()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
-    return self._proxied.commit()
-           ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1972, in commit
-    trans.commit(_to_root=True)
-  File "<string>", line 2, in commit
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-                ^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1257, in commit
-    self._prepare_impl()
-  File "<string>", line 2, in _prepare_impl
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-                ^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1232, in _prepare_impl
-    self.session.flush()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4296, in flush
-    self._flush(objects)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4431, in _flush
-    with util.safe_reraise():
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4392, in _flush
-    flush_context.execute()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
-    rec.execute(self)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
-    _emit_insert_statements(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
-    result = connection.execute(
-             ^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
-    return meth(
-           ^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1630, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1979, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2335, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.DataError: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(500)
-
-[SQL: INSERT INTO export_request (waybill_number, created_at, qr_code, sender_name, sender_email, sender_address, sender_business, sender_mobile, receiver_name, receiver_email, receiver_address, receiver_business, receiver_mobile, destination_address, destination_country, destination_postcode, freight_pricing, additional_charges, pickup_charge, handling_fees, crating, insurance_charge, total, is_collection, customer_group, order_booked_by, sender_signature, status) VALUES (%(waybill_number)s, CURRENT_TIMESTAMP, %(qr_code)s, %(sender_name)s, %(sender_email)s, %(sender_address)s, %(sender_business)s, %(sender_mobile)s, %(receiver_name)s, %(receiver_email)s, %(receiver_address)s, %(receiver_business)s, %(receiver_mobile)s, %(destination_address)s, %(destination_country)s, %(destination_postcode)s, %(freight_pricing)s, %(additional_charges)s, %(pickup_charge)s, %(handling_fees)s, %(crating)s, %(insurance_charge)s, %(total)s, %(is_collection)s, %(customer_group)s, %(order_booked_by)s, %(sender_signature)s, %(status)s) RETURNING export_request.id, export_request.created_at]
-[parameters: {'waybill_number': 'EX000001', 'qr_code': None, 'sender_name': 'Chukwunonso Nwune', 'sender_email': 'chuqunonso@gmail.com', 'sender_address': 'M9 Government Guest House,', 'sender_business': 'RateMe', 'sender_mobile': '08097553252', 'receiver_name': 'Nonso Nwune', 'receiver_email': 'ch@rl.es', 'receiver_address': 'Off Arochukwu Crescent', 'receiver_business': 'inofficial', 'receiver_mobile': '0907707543', 'destination_address': 'M9 Government Guest House,', 'destination_country': 'Nigeria', 'destination_postcode': '400261', 'freight_pricing': 0.0, 'additional_charges': 0.0, 'pickup_charge': 0.0, 'handling_fees': 0.0, 'crating': 25.0, 'insurance_charge': 0.0, 'total': 25.0, 'is_collection': True, 'customer_group': 'Walk In', 'order_booked_by': 'Super User', 'sender_signature': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB18AAAG4CAYAAAAKQS74AAAAAXNSR0IArs4c6QAAIABJREFUeF7s3Qd0FeX29/GNiPQmvSgdFKR3EEEpShFEFEQUURTEgv2C1wKIIMJ ... (90968 characters truncated) ... QQAABBBBAAAEESL5yDyCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAJhECD5GgZEhkAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQT+DwDZBwGCXxszAAAAAElFTkSuQmCC', 'status': 'pending'}]
-(Background on this error at: https://sqlalche.me/e/20/9h9h)
-2025-02-07 17:55:23 [90549] [INFO] Handling signal: int
-2025-02-07 17:55:23 [90549] [ERROR] Worker (pid:90552) was sent SIGINT!
-2025-02-07 17:55:23 [90549] [ERROR] Worker (pid:90551) was sent SIGINT!
-2025-02-07 17:55:23 [90549] [ERROR] Worker (pid:90554) was sent SIGINT!
-2025-02-07 17:55:23 [90549] [ERROR] Worker (pid:90553) was sent SIGINT!
-2025-02-07 17:55:23 [90549] [INFO] Shutting down: Master
-2025-02-07 17:57:35 [90946] [INFO] Starting gunicorn 21.2.0
-2025-02-07 17:57:35 [90946] [INFO] Listening at: http://0.0.0.0:8000 (90946)
-2025-02-07 17:57:35 [90946] [INFO] Using worker: sync
-2025-02-07 17:57:35 [90948] [INFO] Booting worker with pid: 90948
-2025-02-07 17:57:35 [90949] [INFO] Booting worker with pid: 90949
-2025-02-07 17:57:35 [90950] [INFO] Booting worker with pid: 90950
-2025-02-07 17:57:35 [90951] [INFO] Booting worker with pid: 90951
-2025-02-07 17:58:30 [ERROR] [PID:90951] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 314, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 17:58:30 [ERROR] [PID:90950] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 314, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 17:58:30 [ERROR] [PID:90949] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 314, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 17:58:31 [ERROR] [PID:90948] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 314, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 18:07:52 [90946] [INFO] Handling signal: int
-2025-02-07 18:07:52 [90946] [ERROR] Worker (pid:90951) was sent SIGINT!
-2025-02-07 18:07:52 [90946] [ERROR] Worker (pid:90948) was sent SIGINT!
-2025-02-07 18:07:52 [90946] [INFO] Shutting down: Master
-2025-02-07 18:07:54 [91707] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:07:54 [91707] [INFO] Listening at: http://0.0.0.0:8000 (91707)
-2025-02-07 18:07:54 [91707] [INFO] Using worker: sync
-2025-02-07 18:07:54 [91711] [INFO] Booting worker with pid: 91711
-2025-02-07 18:07:54 [91712] [INFO] Booting worker with pid: 91712
-2025-02-07 18:07:54 [91713] [INFO] Booting worker with pid: 91713
-2025-02-07 18:07:54 [91714] [INFO] Booting worker with pid: 91714
-2025-02-07 18:08:15 [ERROR] [PID:91714] [app.routes.shipments] Error viewing shipment: 'flask.wrappers.Request object' has no attribute 'created_at'
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/preview.html',
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 548, in block 'content'
-    <span>{{ request.created_at.strftime('%B %d, %Y') }}</span>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'flask.wrappers.Request object' has no attribute 'created_at'
-2025-02-07 18:08:18 [ERROR] [PID:91712] [app.routes.shipments] Error viewing shipment: 'flask.wrappers.Request object' has no attribute 'created_at'
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/preview.html',
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 548, in block 'content'
-    <span>{{ request.created_at.strftime('%B %d, %Y') }}</span>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'flask.wrappers.Request object' has no attribute 'created_at'
-2025-02-07 18:09:30 [91707] [INFO] Handling signal: int
-2025-02-07 18:09:30 [91707] [ERROR] Worker (pid:91713) was sent SIGINT!
-2025-02-07 18:09:30 [91707] [ERROR] Worker (pid:91711) was sent SIGINT!
-2025-02-07 18:09:30 [91707] [ERROR] Worker (pid:91714) was sent SIGINT!
-2025-02-07 18:09:30 [91707] [ERROR] Worker (pid:91712) was sent SIGINT!
-2025-02-07 18:09:30 [91707] [INFO] Shutting down: Master
-2025-02-07 18:09:32 [91825] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:09:32 [91825] [INFO] Listening at: http://0.0.0.0:8000 (91825)
-2025-02-07 18:09:32 [91825] [INFO] Using worker: sync
-2025-02-07 18:09:32 [91826] [INFO] Booting worker with pid: 91826
-2025-02-07 18:09:32 [91827] [INFO] Booting worker with pid: 91827
-2025-02-07 18:09:32 [91828] [INFO] Booting worker with pid: 91828
-2025-02-07 18:09:32 [91829] [INFO] Booting worker with pid: 91829
-2025-02-07 18:09:40 [ERROR] [PID:91827] [app.routes.shipments] Error viewing shipment: 'flask.wrappers.Request object' has no attribute 'freight_pricing'
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/preview.html',
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 700, in block 'content'
-    <span class="value">${{ "%.2f"|format(request.freight_pricing) }}</span>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1016, in do_format
-    return soft_str(value) % (kwargs or args)
-           ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
-jinja2.exceptions.UndefinedError: 'flask.wrappers.Request object' has no attribute 'freight_pricing'
-2025-02-07 18:09:55 [91825] [INFO] Handling signal: int
-2025-02-07 18:09:55 [91825] [ERROR] Worker (pid:91826) was sent SIGINT!
-2025-02-07 18:09:56 [91825] [ERROR] Worker (pid:91829) was sent SIGINT!
-2025-02-07 18:09:56 [91825] [ERROR] Worker (pid:91828) was sent SIGINT!
-2025-02-07 18:09:56 [91825] [ERROR] Worker (pid:91827) was sent SIGINT!
-2025-02-07 18:09:56 [91825] [INFO] Shutting down: Master
-2025-02-07 18:09:58 [91902] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:09:58 [91902] [INFO] Listening at: http://0.0.0.0:8000 (91902)
-2025-02-07 18:09:58 [91902] [INFO] Using worker: sync
-2025-02-07 18:09:58 [91903] [INFO] Booting worker with pid: 91903
-2025-02-07 18:09:58 [91905] [INFO] Booting worker with pid: 91905
-2025-02-07 18:09:58 [91906] [INFO] Booting worker with pid: 91906
-2025-02-07 18:09:58 [91907] [INFO] Booting worker with pid: 91907
-2025-02-07 18:10:08 [ERROR] [PID:91905] [app.routes.shipments] Error viewing shipment: 'flask.wrappers.Request object' has no attribute 'freight_pricing'
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 117, in view_shipment
-    return render_template('shipments/preview.html',
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 700, in block 'content'
-    <span class="value">${{ "%.2f"|format(request.freight_pricing) }}</span>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1016, in do_format
-    return soft_str(value) % (kwargs or args)
-           ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
-jinja2.exceptions.UndefinedError: 'flask.wrappers.Request object' has no attribute 'freight_pricing'
-2025-02-07 18:11:54 [91902] [INFO] Handling signal: int
-2025-02-07 18:11:54 [91902] [ERROR] Worker (pid:91906) was sent SIGINT!
-2025-02-07 18:11:54 [91902] [ERROR] Worker (pid:91905) was sent SIGINT!
-2025-02-07 18:11:54 [91902] [ERROR] Worker (pid:91903) was sent SIGINT!
-2025-02-07 18:11:54 [91902] [ERROR] Worker (pid:91907) was sent SIGINT!
-2025-02-07 18:11:54 [91902] [INFO] Shutting down: Master
-2025-02-07 18:11:56 [92054] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:11:56 [92054] [INFO] Listening at: http://0.0.0.0:8000 (92054)
-2025-02-07 18:11:56 [92054] [INFO] Using worker: sync
-2025-02-07 18:11:56 [92055] [INFO] Booting worker with pid: 92055
-2025-02-07 18:11:56 [92056] [INFO] Booting worker with pid: 92056
-2025-02-07 18:11:56 [92057] [INFO] Booting worker with pid: 92057
-2025-02-07 18:11:56 [92058] [INFO] Booting worker with pid: 92058
-2025-02-07 18:12:04 [ERROR] [PID:92058] [app.routes.shipments] Error viewing shipment: 'subtotal' is undefined
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 118, in view_shipment
-    return render_template('shipments/preview.html',
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 726, in block 'content'
-    <span>${{ "%.2f"|format(subtotal) }}</span>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1016, in do_format
-    return soft_str(value) % (kwargs or args)
-           ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
-jinja2.exceptions.UndefinedError: 'subtotal' is undefined
-2025-02-07 18:13:24 [92054] [INFO] Handling signal: int
-2025-02-07 18:13:24 [92054] [ERROR] Worker (pid:92058) was sent SIGINT!
-2025-02-07 18:13:24 [92054] [ERROR] Worker (pid:92056) was sent SIGINT!
-2025-02-07 18:13:24 [92054] [ERROR] Worker (pid:92055) was sent SIGINT!
-2025-02-07 18:13:24 [92054] [ERROR] Worker (pid:92057) was sent SIGINT!
-2025-02-07 18:13:24 [92054] [INFO] Shutting down: Master
-2025-02-07 18:13:26 [92157] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:13:26 [92157] [INFO] Listening at: http://0.0.0.0:8000 (92157)
-2025-02-07 18:13:26 [92157] [INFO] Using worker: sync
-2025-02-07 18:13:26 [92165] [INFO] Booting worker with pid: 92165
-2025-02-07 18:13:26 [92166] [INFO] Booting worker with pid: 92166
-2025-02-07 18:13:26 [92167] [INFO] Booting worker with pid: 92167
-2025-02-07 18:13:26 [92168] [INFO] Booting worker with pid: 92168
-2025-02-07 18:17:26 [92157] [INFO] Handling signal: int
-2025-02-07 18:17:27 [92157] [INFO] Shutting down: Master
-2025-02-07 18:17:30 [92532] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:17:30 [92532] [INFO] Listening at: http://0.0.0.0:8000 (92532)
-2025-02-07 18:17:30 [92532] [INFO] Using worker: sync
-2025-02-07 18:17:30 [92534] [INFO] Booting worker with pid: 92534
-2025-02-07 18:17:30 [92535] [INFO] Booting worker with pid: 92535
-2025-02-07 18:17:30 [92536] [INFO] Booting worker with pid: 92536
-2025-02-07 18:17:30 [92537] [INFO] Booting worker with pid: 92537
-2025-02-07 18:17:40 [ERROR] [PID:92536] [app.routes.shipments] Error viewing shipment: Could not build url for endpoint 'main.serve_image' with values ['image_id']. Did you forget to specify values ['file_id']?
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 141, in view_shipment
-    return render_template('shipments/preview.html',
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
-    {% block content %}{% endblock %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 763, in block 'content'
-    <img src="{{ url_for('main.serve_image', image_id=shipment.sender_signature) }}"
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'main.serve_image' with values ['image_id']. Did you forget to specify values ['file_id']?
-2025-02-07 18:18:03 [92532] [INFO] Handling signal: int
-2025-02-07 18:18:03 [92532] [ERROR] Worker (pid:92537) was sent SIGINT!
-2025-02-07 18:18:03 [92532] [ERROR] Worker (pid:92536) was sent SIGINT!
-2025-02-07 18:18:03 [92532] [ERROR] Worker (pid:92534) was sent SIGINT!
-2025-02-07 18:18:03 [92532] [ERROR] Worker (pid:92535) was sent SIGINT!
-2025-02-07 18:18:03 [92532] [INFO] Shutting down: Master
-2025-02-07 18:20:33 [92739] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:20:33 [92739] [INFO] Listening at: http://0.0.0.0:8000 (92739)
-2025-02-07 18:20:33 [92739] [INFO] Using worker: sync
-2025-02-07 18:20:33 [92740] [INFO] Booting worker with pid: 92740
-2025-02-07 18:20:33 [92741] [INFO] Booting worker with pid: 92741
-2025-02-07 18:20:33 [92742] [INFO] Booting worker with pid: 92742
-2025-02-07 18:20:33 [92743] [INFO] Booting worker with pid: 92743
-2025-02-07 18:23:13 [92739] [CRITICAL] WORKER TIMEOUT (pid:92740)
-2025-02-07 18:23:13 [92739] [ERROR] Worker (pid:92740) exited with code 1
-2025-02-07 18:23:13 [92739] [ERROR] Worker (pid:92740) exited with code 1.
-2025-02-07 18:23:13 [92994] [INFO] Booting worker with pid: 92994
-2025-02-07 18:25:35 [92739] [INFO] Handling signal: int
-2025-02-07 18:25:36 [92739] [INFO] Shutting down: Master
-2025-02-07 18:25:41 [93136] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:25:41 [93136] [INFO] Listening at: http://0.0.0.0:8000 (93136)
-2025-02-07 18:25:41 [93136] [INFO] Using worker: sync
-2025-02-07 18:25:41 [93137] [INFO] Booting worker with pid: 93137
-2025-02-07 18:25:41 [93138] [INFO] Booting worker with pid: 93138
-2025-02-07 18:25:41 [93139] [INFO] Booting worker with pid: 93139
-2025-02-07 18:25:41 [93140] [INFO] Booting worker with pid: 93140
-2025-02-07 18:27:57 [93136] [INFO] Handling signal: int
-2025-02-07 18:27:57 [93136] [ERROR] Worker (pid:93140) was sent SIGINT!
-2025-02-07 18:27:57 [93136] [ERROR] Worker (pid:93138) was sent SIGINT!
-2025-02-07 18:27:57 [93136] [ERROR] Worker (pid:93139) was sent SIGINT!
-2025-02-07 18:27:57 [93136] [ERROR] Worker (pid:93137) was sent SIGINT!
-2025-02-07 18:27:57 [93136] [INFO] Shutting down: Master
-2025-02-07 18:27:59 [93270] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:27:59 [93270] [INFO] Listening at: http://0.0.0.0:8000 (93270)
-2025-02-07 18:27:59 [93270] [INFO] Using worker: sync
-2025-02-07 18:27:59 [93271] [INFO] Booting worker with pid: 93271
-2025-02-07 18:27:59 [93272] [INFO] Booting worker with pid: 93272
-2025-02-07 18:27:59 [93273] [INFO] Booting worker with pid: 93273
-2025-02-07 18:27:59 [93275] [INFO] Booting worker with pid: 93275
-2025-02-07 18:30:18 [93270] [CRITICAL] WORKER TIMEOUT (pid:93271)
-2025-02-07 18:30:18 [93270] [ERROR] Worker (pid:93271) exited with code 1
-2025-02-07 18:30:18 [93270] [ERROR] Worker (pid:93271) exited with code 1.
-2025-02-07 18:30:18 [93553] [INFO] Booting worker with pid: 93553
-2025-02-07 18:30:21 [93270] [INFO] Handling signal: int
-2025-02-07 18:30:21 [93270] [ERROR] Worker (pid:93273) was sent SIGINT!
-2025-02-07 18:30:21 [93270] [ERROR] Worker (pid:93272) was sent SIGINT!
-2025-02-07 18:30:21 [93270] [ERROR] Worker (pid:93553) was sent SIGINT!
-2025-02-07 18:30:21 [93270] [ERROR] Worker (pid:93275) was sent SIGINT!
-2025-02-07 18:30:21 [93270] [INFO] Shutting down: Master
-2025-02-07 18:31:45 [93695] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:31:45 [93695] [INFO] Listening at: http://0.0.0.0:8000 (93695)
-2025-02-07 18:31:45 [93695] [INFO] Using worker: sync
-2025-02-07 18:31:45 [93696] [INFO] Booting worker with pid: 93696
-2025-02-07 18:31:45 [93697] [INFO] Booting worker with pid: 93697
-2025-02-07 18:31:45 [93698] [INFO] Booting worker with pid: 93698
-2025-02-07 18:31:45 [93699] [INFO] Booting worker with pid: 93699
-2025-02-07 18:35:13 [93695] [INFO] Handling signal: int
-2025-02-07 18:35:13 [93695] [ERROR] Worker (pid:93699) was sent SIGINT!
-2025-02-07 18:35:13 [93695] [ERROR] Worker (pid:93698) was sent SIGINT!
-2025-02-07 18:35:13 [93695] [ERROR] Worker (pid:93696) was sent SIGINT!
-2025-02-07 18:35:13 [93695] [ERROR] Worker (pid:93697) was sent SIGINT!
-2025-02-07 18:35:13 [93695] [INFO] Shutting down: Master
-2025-02-07 18:35:15 [93903] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:35:15 [93903] [INFO] Listening at: http://0.0.0.0:8000 (93903)
-2025-02-07 18:35:15 [93903] [INFO] Using worker: sync
-2025-02-07 18:35:15 [93906] [INFO] Booting worker with pid: 93906
-2025-02-07 18:35:15 [93909] [INFO] Booting worker with pid: 93909
-2025-02-07 18:35:15 [93910] [INFO] Booting worker with pid: 93910
-2025-02-07 18:35:15 [93911] [INFO] Booting worker with pid: 93911
-2025-02-07 18:35:38 [93903] [INFO] Handling signal: int
-2025-02-07 18:35:38 [93903] [ERROR] Worker (pid:93909) was sent SIGINT!
-2025-02-07 18:35:38 [93903] [ERROR] Worker (pid:93906) was sent SIGINT!
-2025-02-07 18:35:38 [93903] [ERROR] Worker (pid:93910) was sent SIGINT!
-2025-02-07 18:35:38 [93903] [ERROR] Worker (pid:93911) was sent SIGINT!
-2025-02-07 18:35:38 [93903] [INFO] Shutting down: Master
-2025-02-07 18:36:48 [94200] [INFO] Starting gunicorn 21.2.0
-2025-02-07 18:36:48 [94200] [INFO] Listening at: http://0.0.0.0:8000 (94200)
-2025-02-07 18:36:48 [94200] [INFO] Using worker: sync
-2025-02-07 18:36:48 [94201] [INFO] Booting worker with pid: 94201
-2025-02-07 18:36:48 [94202] [INFO] Booting worker with pid: 94202
-2025-02-07 18:36:48 [94203] [INFO] Booting worker with pid: 94203
-2025-02-07 18:36:48 [94204] [INFO] Booting worker with pid: 94204
-2025-02-07 18:59:16 [ERROR] [PID:94204] [gunicorn.error] Error handling request /admin/manage-admins
+2025-02-08 04:29:35 [35655] [CRITICAL] WORKER TIMEOUT (pid:35656)
+2025-02-08 04:29:35 [35655] [ERROR] Worker (pid:35656) exited with code 1
+2025-02-08 04:29:35 [35655] [ERROR] Worker (pid:35656) exited with code 1.
+2025-02-08 04:29:35 [36323] [INFO] Booting worker with pid: 36323
+2025-02-08 04:30:36 [35655] [INFO] Handling signal: int
+2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:35658) was sent SIGINT!
+2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:35657) was sent SIGINT!
+2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:36323) was sent SIGINT!
+2025-02-08 04:30:37 [35655] [ERROR] Worker (pid:35659) was sent SIGINT!
+2025-02-08 04:30:37 [35655] [INFO] Shutting down: Master
+2025-02-08 04:30:39 [36423] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:30:39 [36423] [INFO] Listening at: http://0.0.0.0:8000 (36423)
+2025-02-08 04:30:39 [36423] [INFO] Using worker: sync
+2025-02-08 04:30:39 [36424] [INFO] Booting worker with pid: 36424
+2025-02-08 04:30:39 [36425] [INFO] Booting worker with pid: 36425
+2025-02-08 04:30:39 [36426] [INFO] Booting worker with pid: 36426
+2025-02-08 04:30:39 [36427] [INFO] Booting worker with pid: 36427
+2025-02-08 04:30:47 [ERROR] [PID:36425] [gunicorn.error] Error handling request /admin/users
 Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
     self.handle_request(listener, req, client, addr)
@@ -1496,7 +570,48 @@ Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 101, in manage_admins
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 15, in manage_users
+    logger.debug(f'Available endpoints: {[rule.endpoint for rule in current_app.url_map.iter_rules()]}')
+                                                                    ^^^^^^^^^^^
+NameError: name 'current_app' is not defined
+2025-02-08 04:32:45 [36423] [INFO] Handling signal: int
+2025-02-08 04:32:46 [36423] [INFO] Shutting down: Master
+2025-02-08 04:32:55 [36644] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:32:55 [36644] [INFO] Listening at: http://0.0.0.0:8000 (36644)
+2025-02-08 04:32:55 [36644] [INFO] Using worker: sync
+2025-02-08 04:32:55 [36645] [INFO] Booting worker with pid: 36645
+2025-02-08 04:32:55 [36646] [INFO] Booting worker with pid: 36646
+2025-02-08 04:32:55 [36647] [INFO] Booting worker with pid: 36647
+2025-02-08 04:32:55 [36648] [INFO] Booting worker with pid: 36648
+2025-02-08 04:34:05 [ERROR] [PID:36647] [gunicorn.error] Error handling request /admin/manage-admins
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 117, in manage_admins
     return render_template('manage_admins.html', users=users)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
@@ -1521,7 +636,24 @@ Traceback (most recent call last):
     return getattr(obj, attribute)
            ^^^^^^^^^^^^^^^^^^^^^^^
 jinja2.exceptions.UndefinedError: 'user' is undefined
-2025-02-07 18:59:20 [ERROR] [PID:94203] [gunicorn.error] Error handling request /admin/users
+2025-02-08 04:36:06 [36644] [CRITICAL] WORKER TIMEOUT (pid:36645)
+2025-02-08 04:36:06 [36644] [ERROR] Worker (pid:36645) exited with code 1
+2025-02-08 04:36:06 [36644] [ERROR] Worker (pid:36645) exited with code 1.
+2025-02-08 04:36:06 [36994] [INFO] Booting worker with pid: 36994
+2025-02-08 04:36:13 [36644] [INFO] Handling signal: int
+2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36994) was sent SIGINT!
+2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36646) was sent SIGINT!
+2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36648) was sent SIGINT!
+2025-02-08 04:36:13 [36644] [ERROR] Worker (pid:36647) was sent SIGINT!
+2025-02-08 04:36:13 [36644] [INFO] Shutting down: Master
+2025-02-08 04:36:15 [37066] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:36:15 [37066] [INFO] Listening at: http://0.0.0.0:8000 (37066)
+2025-02-08 04:36:15 [37066] [INFO] Using worker: sync
+2025-02-08 04:36:15 [37067] [INFO] Booting worker with pid: 37067
+2025-02-08 04:36:15 [37068] [INFO] Booting worker with pid: 37068
+2025-02-08 04:36:15 [37069] [INFO] Booting worker with pid: 37069
+2025-02-08 04:36:15 [37070] [INFO] Booting worker with pid: 37070
+2025-02-08 04:36:48 [ERROR] [PID:37069] [gunicorn.error] Error handling request /change-password
 Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
     self.handle_request(listener, req, client, addr)
@@ -1549,9 +681,9 @@ Traceback (most recent call last):
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/admin.py", line 16, in manage_users
-    return render_template('manage_users.html', users=users)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/auth.py", line 55, in change_password
+    return render_template('change_password.html')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
     return _render(app, template, context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1562,13 +694,13 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_users.html", line 1, in top-level template code
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/change_password.html", line 1, in top-level template code
     {% extends "base.html" %}
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 238, in top-level template code
     {% block content %}{% endblock %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/manage_users.html", line 42, in block 'content'
-    <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" style="display: inline;">
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/change_password.html", line 22, in block 'content'
+    <form method="POST" action="{{ url_for('change_password') }}" class="needs-validation" novalidate>
     ^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
     return self.handle_url_build_error(error, endpoint, values)
@@ -1578,448 +710,17 @@ Traceback (most recent call last):
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete_user' with values ['user_id']. Did you mean 'admin.delete_user' instead?
-2025-02-07 19:01:18 [94200] [CRITICAL] WORKER TIMEOUT (pid:94201)
-2025-02-07 19:01:19 [94200] [ERROR] Worker (pid:94201) exited with code 1
-2025-02-07 19:01:19 [94200] [ERROR] Worker (pid:94201) exited with code 1.
-2025-02-07 19:01:19 [95266] [INFO] Booting worker with pid: 95266
-2025-02-07 19:01:21 [94200] [CRITICAL] WORKER TIMEOUT (pid:94202)
-2025-02-07 19:01:22 [94200] [ERROR] Worker (pid:94202) exited with code 1
-2025-02-07 19:01:22 [94200] [ERROR] Worker (pid:94202) exited with code 1.
-2025-02-07 19:01:22 [95278] [INFO] Booting worker with pid: 95278
-2025-02-07 19:03:13 [94200] [INFO] Handling signal: int
-2025-02-07 19:03:13 [94200] [ERROR] Worker (pid:94203) was sent SIGINT!
-2025-02-07 19:03:13 [94200] [ERROR] Worker (pid:95278) was sent SIGINT!
-2025-02-07 19:03:13 [94200] [ERROR] Worker (pid:94204) was sent SIGINT!
-2025-02-07 19:03:13 [94200] [ERROR] Worker (pid:95266) was sent SIGINT!
-2025-02-07 19:03:13 [94200] [INFO] Shutting down: Master
-2025-02-07 19:03:16 [95441] [INFO] Starting gunicorn 21.2.0
-2025-02-07 19:03:16 [95441] [INFO] Listening at: http://0.0.0.0:8000 (95441)
-2025-02-07 19:03:16 [95441] [INFO] Using worker: sync
-2025-02-07 19:03:16 [95442] [INFO] Booting worker with pid: 95442
-2025-02-07 19:03:16 [95443] [INFO] Booting worker with pid: 95443
-2025-02-07 19:03:16 [95444] [INFO] Booting worker with pid: 95444
-2025-02-07 19:03:16 [95445] [INFO] Booting worker with pid: 95445
-2025-02-07 19:05:22 [95441] [INFO] Handling signal: int
-2025-02-07 19:05:22 [95441] [ERROR] Worker (pid:95443) was sent SIGINT!
-2025-02-07 19:05:22 [95441] [ERROR] Worker (pid:95442) was sent SIGINT!
-2025-02-07 19:05:22 [95441] [ERROR] Worker (pid:95444) was sent SIGINT!
-2025-02-07 19:05:22 [95441] [ERROR] Worker (pid:95445) was sent SIGINT!
-2025-02-07 19:05:22 [95441] [INFO] Shutting down: Master
-2025-02-07 19:05:24 [95780] [INFO] Starting gunicorn 21.2.0
-2025-02-07 19:05:24 [95780] [INFO] Listening at: http://0.0.0.0:8000 (95780)
-2025-02-07 19:05:24 [95780] [INFO] Using worker: sync
-2025-02-07 19:05:24 [95784] [INFO] Booting worker with pid: 95784
-2025-02-07 19:05:24 [95785] [INFO] Booting worker with pid: 95785
-2025-02-07 19:05:24 [95786] [INFO] Booting worker with pid: 95786
-2025-02-07 19:05:25 [95787] [INFO] Booting worker with pid: 95787
-2025-02-07 19:15:28 [95780] [INFO] Handling signal: int
-2025-02-07 19:15:29 [95780] [ERROR] Worker (pid:95784) was sent SIGINT!
-2025-02-07 19:15:29 [95780] [ERROR] Worker (pid:95785) was sent SIGINT!
-2025-02-07 19:15:29 [95780] [ERROR] Worker (pid:95787) was sent SIGINT!
-2025-02-07 19:15:29 [95780] [ERROR] Worker (pid:95786) was sent SIGINT!
-2025-02-07 19:15:29 [95780] [INFO] Shutting down: Master
-2025-02-07 19:15:31 [96380] [INFO] Starting gunicorn 21.2.0
-2025-02-07 19:15:31 [96380] [INFO] Listening at: http://0.0.0.0:8000 (96380)
-2025-02-07 19:15:31 [96380] [INFO] Using worker: sync
-2025-02-07 19:15:31 [96381] [INFO] Booting worker with pid: 96381
-2025-02-07 19:15:31 [96382] [INFO] Booting worker with pid: 96382
-2025-02-07 19:15:31 [96383] [INFO] Booting worker with pid: 96383
-2025-02-07 19:15:31 [96384] [INFO] Booting worker with pid: 96384
-2025-02-07 19:29:41 [96380] [CRITICAL] WORKER TIMEOUT (pid:96381)
-2025-02-07 19:29:41 [96380] [CRITICAL] WORKER TIMEOUT (pid:96382)
-2025-02-07 19:29:41 [96380] [CRITICAL] WORKER TIMEOUT (pid:96383)
-2025-02-07 19:29:41 [96380] [CRITICAL] WORKER TIMEOUT (pid:96384)
-2025-02-07 19:29:42 [96380] [ERROR] Worker (pid:96383) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 19:29:42 [96380] [ERROR] Worker (pid:96381) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 19:29:42 [96380] [ERROR] Worker (pid:96384) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 19:29:42 [96380] [ERROR] Worker (pid:96382) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 19:29:42 [97472] [INFO] Booting worker with pid: 97472
-2025-02-07 19:29:42 [97473] [INFO] Booting worker with pid: 97473
-2025-02-07 19:29:42 [97474] [INFO] Booting worker with pid: 97474
-2025-02-07 19:29:42 [97476] [INFO] Booting worker with pid: 97476
-2025-02-07 20:27:43 [96380] [CRITICAL] WORKER TIMEOUT (pid:97472)
-2025-02-07 20:27:44 [96380] [CRITICAL] WORKER TIMEOUT (pid:97473)
-2025-02-07 20:27:44 [96380] [CRITICAL] WORKER TIMEOUT (pid:97474)
-2025-02-07 20:27:44 [96380] [CRITICAL] WORKER TIMEOUT (pid:97476)
-2025-02-07 20:27:45 [96380] [ERROR] Worker (pid:97472) exited with code 1
-2025-02-07 20:27:45 [96380] [ERROR] Worker (pid:97472) exited with code 1.
-2025-02-07 20:27:45 [96380] [ERROR] Worker (pid:97476) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 20:27:45 [96380] [ERROR] Worker (pid:97474) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 20:27:45 [96380] [ERROR] Worker (pid:97473) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 20:27:45 [98126] [INFO] Booting worker with pid: 98126
-2025-02-07 20:27:45 [98134] [INFO] Booting worker with pid: 98134
-2025-02-07 20:27:45 [98141] [INFO] Booting worker with pid: 98141
-2025-02-07 20:27:45 [98149] [INFO] Booting worker with pid: 98149
-2025-02-07 21:06:20 [96380] [CRITICAL] WORKER TIMEOUT (pid:98126)
-2025-02-07 21:06:20 [96380] [CRITICAL] WORKER TIMEOUT (pid:98134)
-2025-02-07 21:06:20 [96380] [CRITICAL] WORKER TIMEOUT (pid:98141)
-2025-02-07 21:06:20 [96380] [CRITICAL] WORKER TIMEOUT (pid:98149)
-2025-02-07 21:06:21 [96380] [ERROR] Worker (pid:98149) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 21:06:21 [96380] [ERROR] Worker (pid:98141) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 21:06:21 [96380] [ERROR] Worker (pid:98126) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 21:06:21 [98282] [INFO] Booting worker with pid: 98282
-2025-02-07 21:06:21 [96380] [ERROR] Worker (pid:98134) was sent SIGKILL! Perhaps out of memory?
-2025-02-07 21:06:21 [98292] [INFO] Booting worker with pid: 98292
-2025-02-07 21:06:21 [98293] [INFO] Booting worker with pid: 98293
-2025-02-07 21:06:21 [98294] [INFO] Booting worker with pid: 98294
-2025-02-07 21:06:47 [96380] [INFO] Handling signal: int
-2025-02-07 21:06:47 [96380] [ERROR] Worker (pid:98292) was sent SIGINT!
-2025-02-07 21:06:47 [96380] [ERROR] Worker (pid:98282) was sent SIGINT!
-2025-02-07 21:06:47 [96380] [ERROR] Worker (pid:98293) was sent SIGINT!
-2025-02-07 21:06:47 [96380] [ERROR] Worker (pid:98294) was sent SIGINT!
-2025-02-07 21:06:47 [96380] [INFO] Shutting down: Master
-2025-02-07 21:06:54 [99010] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:06:54 [99010] [INFO] Listening at: http://0.0.0.0:8000 (99010)
-2025-02-07 21:06:54 [99010] [INFO] Using worker: sync
-2025-02-07 21:06:54 [99011] [INFO] Booting worker with pid: 99011
-2025-02-07 21:06:54 [99012] [INFO] Booting worker with pid: 99012
-2025-02-07 21:06:54 [99013] [INFO] Booting worker with pid: 99013
-2025-02-07 21:06:54 [99014] [INFO] Booting worker with pid: 99014
-2025-02-07 21:11:30 [ERROR] [PID:99014] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 347, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 21:11:30 [ERROR] [PID:99011] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 347, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 21:11:30 [ERROR] [PID:99011] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 347, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 21:11:31 [ERROR] [PID:99012] [gunicorn.error] Socket error processing request.
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
-    self.handle_request(listener, req, client, addr)
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 193, in handle_request
-    util.reraise(*sys.exc_info())
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/util.py", line 641, in reraise
-    raise value
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-    respiter = self.wsgi(environ, resp.start_response)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 347, in edit_shipment
-    return render_template('shipments/edit.html', shipment=shipment)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/loaders.py", line 125, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: shipments/edit.html
-2025-02-07 21:11:36 [99010] [INFO] Handling signal: int
-2025-02-07 21:11:37 [99010] [ERROR] Worker (pid:99012) was sent SIGINT!
-2025-02-07 21:11:37 [99010] [ERROR] Worker (pid:99011) was sent SIGINT!
-2025-02-07 21:11:37 [99010] [ERROR] Worker (pid:99013) was sent SIGINT!
-2025-02-07 21:11:37 [99010] [ERROR] Worker (pid:99014) was sent SIGINT!
-2025-02-07 21:11:37 [99010] [INFO] Shutting down: Master
-2025-02-07 21:11:40 [99960] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:11:40 [99960] [INFO] Listening at: http://0.0.0.0:8000 (99960)
-2025-02-07 21:11:40 [99960] [INFO] Using worker: sync
-2025-02-07 21:11:40 [99962] [INFO] Booting worker with pid: 99962
-2025-02-07 21:11:40 [99963] [INFO] Booting worker with pid: 99963
-2025-02-07 21:11:40 [99964] [INFO] Booting worker with pid: 99964
-2025-02-07 21:11:40 [99965] [INFO] Booting worker with pid: 99965
-2025-02-07 21:13:14 [ERROR] [PID:99962] [app.utils.appwrite] Error uploading file: InputFile.from_bytes() missing 1 required positional argument: 'filename'
-2025-02-07 21:13:14 [ERROR] [PID:99962] [app.routes.shipments] Error uploading image for item 1: InputFile.from_bytes() missing 1 required positional argument: 'filename'
-2025-02-07 21:18:14 [99960] [INFO] Handling signal: int
-2025-02-07 21:18:14 [99960] [ERROR] Worker (pid:99963) was sent SIGINT!
-2025-02-07 21:18:14 [99960] [ERROR] Worker (pid:99965) was sent SIGINT!
-2025-02-07 21:18:14 [99960] [ERROR] Worker (pid:99962) was sent SIGINT!
-2025-02-07 21:18:14 [99960] [ERROR] Worker (pid:99964) was sent SIGINT!
-2025-02-07 21:18:14 [99960] [INFO] Shutting down: Master
-2025-02-07 21:18:16 [1017] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:18:16 [1017] [INFO] Listening at: http://0.0.0.0:8000 (1017)
-2025-02-07 21:18:16 [1017] [INFO] Using worker: sync
-2025-02-07 21:18:16 [1018] [INFO] Booting worker with pid: 1018
-2025-02-07 21:18:16 [1019] [INFO] Booting worker with pid: 1019
-2025-02-07 21:18:16 [1020] [INFO] Booting worker with pid: 1020
-2025-02-07 21:18:16 [1021] [INFO] Booting worker with pid: 1021
-2025-02-07 21:20:41 [ERROR] [PID:1021] [app.utils.appwrite] Error uploading file: Invalid `fileId` param: Parameter must contain at most 36 chars. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char
-2025-02-07 21:20:41 [ERROR] [PID:1021] [app.routes.shipments] Error uploading image for item 1: Invalid `fileId` param: Parameter must contain at most 36 chars. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char
-2025-02-07 21:20:41 [ERROR] [PID:1021] [app.routes.shipments] Full traceback:
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 114, in call
-    response.raise_for_status()
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/models.py", line 1024, in raise_for_status
-    raise HTTPError(http_error_msg, response=self)
-requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://cloud.appwrite.io/v1/storage/buckets/67a1c36800254fdb77d8/files
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 129, in submit_shipment
-    file_id = upload_file(file_data, unique_filename)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/utils/appwrite.py", line 33, in upload_file
-    result = storage.create_file(
-             ^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/services/storage.py", line 156, in create_file
-    return self.client.chunked_upload(api_path, {
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 163, in chunked_upload
-    return self.call(
-           ^^^^^^^^^^
-  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 134, in call
-    raise AppwriteException(response.json()['message'], response.status_code, response.json().get('type'), response.json())
-appwrite.exception.AppwriteException: Invalid `fileId` param: Parameter must contain at most 36 chars. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char
-2025-02-07 21:23:18 [1017] [INFO] Handling signal: int
-2025-02-07 21:23:19 [1017] [ERROR] Worker (pid:1021) was sent SIGINT!
-2025-02-07 21:23:19 [1017] [ERROR] Worker (pid:1019) was sent SIGINT!
-2025-02-07 21:23:19 [1017] [ERROR] Worker (pid:1020) was sent SIGINT!
-2025-02-07 21:23:19 [1017] [ERROR] Worker (pid:1018) was sent SIGINT!
-2025-02-07 21:23:19 [1017] [INFO] Shutting down: Master
-2025-02-07 21:23:22 [1471] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:23:22 [1471] [INFO] Listening at: http://0.0.0.0:8000 (1471)
-2025-02-07 21:23:22 [1471] [INFO] Using worker: sync
-2025-02-07 21:23:22 [1472] [INFO] Booting worker with pid: 1472
-2025-02-07 21:23:22 [1473] [INFO] Booting worker with pid: 1473
-2025-02-07 21:23:22 [1474] [INFO] Booting worker with pid: 1474
-2025-02-07 21:23:22 [1475] [INFO] Booting worker with pid: 1475
-2025-02-07 21:27:05 [ERROR] [PID:1475] [app.routes.main] File not found: /Users/nonsonwune/Desktop/personal_projects/sgk_export/app/uploads/67a66c89002dbbc2f5f5
-2025-02-07 21:31:12 [1471] [INFO] Handling signal: int
-2025-02-07 21:31:12 [1471] [ERROR] Worker (pid:1472) was sent SIGINT!
-2025-02-07 21:31:12 [1471] [ERROR] Worker (pid:1475) was sent SIGINT!
-2025-02-07 21:31:12 [1471] [ERROR] Worker (pid:1474) was sent SIGINT!
-2025-02-07 21:31:12 [1471] [ERROR] Worker (pid:1473) was sent SIGINT!
-2025-02-07 21:31:12 [1471] [INFO] Shutting down: Master
-2025-02-07 21:31:15 [1983] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:31:15 [1983] [INFO] Listening at: http://0.0.0.0:8000 (1983)
-2025-02-07 21:31:15 [1983] [INFO] Using worker: sync
-2025-02-07 21:31:15 [1984] [INFO] Booting worker with pid: 1984
-2025-02-07 21:31:15 [1985] [INFO] Booting worker with pid: 1985
-2025-02-07 21:31:15 [1986] [INFO] Booting worker with pid: 1986
-2025-02-07 21:31:15 [1987] [INFO] Booting worker with pid: 1987
-2025-02-07 21:32:51 [1983] [INFO] Handling signal: int
-2025-02-07 21:32:51 [1983] [ERROR] Worker (pid:1987) was sent SIGINT!
-2025-02-07 21:32:51 [1983] [ERROR] Worker (pid:1984) was sent SIGINT!
-2025-02-07 21:32:51 [1983] [ERROR] Worker (pid:1985) was sent SIGINT!
-2025-02-07 21:32:51 [1983] [ERROR] Worker (pid:1986) was sent SIGINT!
-2025-02-07 21:32:51 [1983] [INFO] Shutting down: Master
-2025-02-07 21:32:53 [2147] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:32:53 [2147] [INFO] Listening at: http://0.0.0.0:8000 (2147)
-2025-02-07 21:32:53 [2147] [INFO] Using worker: sync
-2025-02-07 21:32:53 [2148] [INFO] Booting worker with pid: 2148
-2025-02-07 21:32:53 [2150] [INFO] Booting worker with pid: 2150
-2025-02-07 21:32:53 [2151] [INFO] Booting worker with pid: 2151
-2025-02-07 21:32:53 [2152] [INFO] Booting worker with pid: 2152
-2025-02-07 21:41:27 [2147] [INFO] Handling signal: int
-2025-02-07 21:41:28 [2147] [ERROR] Worker (pid:2151) was sent SIGINT!
-2025-02-07 21:41:28 [2147] [ERROR] Worker (pid:2152) was sent SIGINT!
-2025-02-07 21:41:28 [2147] [ERROR] Worker (pid:2148) was sent SIGINT!
-2025-02-07 21:41:28 [2147] [ERROR] Worker (pid:2150) was sent SIGINT!
-2025-02-07 21:41:28 [2147] [INFO] Shutting down: Master
-2025-02-07 21:41:30 [2708] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:41:30 [2708] [INFO] Listening at: http://0.0.0.0:8000 (2708)
-2025-02-07 21:41:30 [2708] [INFO] Using worker: sync
-2025-02-07 21:41:30 [2709] [INFO] Booting worker with pid: 2709
-2025-02-07 21:41:30 [2710] [INFO] Booting worker with pid: 2710
-2025-02-07 21:41:30 [2711] [INFO] Booting worker with pid: 2711
-2025-02-07 21:41:31 [2712] [INFO] Booting worker with pid: 2712
-2025-02-07 21:42:07 [ERROR] [PID:2709] [app.routes.main] Error getting file from Appwrite: a bytes-like object is required, not 'str'
-2025-02-07 21:44:31 [2708] [INFO] Handling signal: int
-2025-02-07 21:44:31 [2708] [ERROR] Worker (pid:2712) was sent SIGINT!
-2025-02-07 21:44:31 [2708] [ERROR] Worker (pid:2711) was sent SIGINT!
-2025-02-07 21:44:31 [2708] [ERROR] Worker (pid:2709) was sent SIGINT!
-2025-02-07 21:44:31 [2708] [ERROR] Worker (pid:2710) was sent SIGINT!
-2025-02-07 21:44:31 [2708] [INFO] Shutting down: Master
-2025-02-07 21:44:37 [3057] [INFO] Starting gunicorn 21.2.0
-2025-02-07 21:44:37 [3057] [INFO] Listening at: http://0.0.0.0:8000 (3057)
-2025-02-07 21:44:37 [3057] [INFO] Using worker: sync
-2025-02-07 21:44:37 [3058] [INFO] Booting worker with pid: 3058
-2025-02-07 21:44:37 [3059] [INFO] Booting worker with pid: 3059
-2025-02-07 21:44:37 [3060] [INFO] Booting worker with pid: 3060
-2025-02-07 21:44:37 [3061] [INFO] Booting worker with pid: 3061
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'change_password'. Did you mean 'auth.change_password' instead?
+2025-02-08 04:38:49 [37066] [CRITICAL] WORKER TIMEOUT (pid:37067)
+2025-02-08 04:38:49 [37066] [ERROR] Worker (pid:37067) exited with code 1
+2025-02-08 04:38:49 [37066] [ERROR] Worker (pid:37067) exited with code 1.
+2025-02-08 04:38:49 [37182] [INFO] Booting worker with pid: 37182
+2025-02-08 04:38:56 [37066] [INFO] Handling signal: int
+2025-02-08 04:38:56 [37066] [INFO] Shutting down: Master
+2025-02-08 04:39:20 [37254] [INFO] Starting gunicorn 21.2.0
+2025-02-08 04:39:20 [37254] [INFO] Listening at: http://0.0.0.0:8000 (37254)
+2025-02-08 04:39:20 [37254] [INFO] Using worker: sync
+2025-02-08 04:39:20 [37255] [INFO] Booting worker with pid: 37255
+2025-02-08 04:39:20 [37256] [INFO] Booting worker with pid: 37256
+2025-02-08 04:39:20 [37257] [INFO] Booting worker with pid: 37257
+2025-02-08 04:39:20 [37258] [INFO] Booting worker with pid: 37258

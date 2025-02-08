@@ -83,26 +83,33 @@ def profile():
         flash('An error occurred while loading the profile.', 'error')
         return render_template('error.html', error=str(e)), 500
 
-@bp.route('/print-form-template')
+@bp.route('/print_form_template')
 @login_required
 def print_form_template():
-    """Render the print form template with all available shipments"""
+    """Render the print form template."""
     try:
-        logger.debug('Accessing print form template')
-        logger.debug(f'Current user ID: {current_user.id}')
-        logger.debug('Attempting to query all shipments')
+        current_app.logger.debug("Accessing print form template")
+        current_app.logger.debug(f"Current user ID: {current_user.id}")
         
-        # Get all shipments ordered by creation date
-        shipments = Shipment.query.order_by(Shipment.created_at.desc()).all()
-        logger.debug(f'Found {len(shipments)} shipments')
+        current_app.logger.debug("Attempting to query all shipments")
+        shipments = Shipment.query.all()
+        current_app.logger.debug(f"Found {len(shipments)} shipments")
         
-        logger.debug('Rendering template print_form_template.html')
-        return render_template('shipments/print_form_template.html', shipments=shipments)
+        selected_shipment = None
+        shipment_id = request.args.get('shipment_id')
+        if shipment_id:
+            selected_shipment = Shipment.query.get(shipment_id)
+        
+        current_app.logger.debug("Rendering template print_form_template.html")
+        return render_template('shipments/print_form_template.html', 
+                             shipments=shipments,
+                             selected_shipment=selected_shipment,
+                             now=datetime.now)
     except Exception as e:
-        logger.error(f'Error loading print form template: {str(e)}')
-        logger.error('Stack trace:', exc_info=True)
-        flash('An error occurred while loading the print form template.', 'error')
-        return render_template('error.html', error=str(e)), 500
+        current_app.logger.error(f"Error loading print form template: {str(e)}")
+        current_app.logger.error("Stack trace:", exc_info=True)
+        flash('Error loading print form template', 'error')
+        return redirect(url_for('main.dashboard'))
 
 @bp.route('/reports')
 @login_required

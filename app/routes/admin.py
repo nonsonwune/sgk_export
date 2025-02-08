@@ -1,19 +1,35 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from flask_login import login_required, current_user
 from ..models.user import User
 from ..extensions import db
+import logging
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
+
+logger = logging.getLogger(__name__)
 
 @bp.route('/users')
 @login_required
 def manage_users():
-    if not current_user.is_admin:
-        flash('Access denied', 'danger')
-        return redirect(url_for('shipments.new_shipment'))
-    
-    users = User.query.all()
-    return render_template('manage_users.html', users=users)
+    try:
+        logger.debug('Accessing manage_users route')
+        logger.debug(f'Current user: {current_user.username} (ID: {current_user.id})')
+        
+        if not current_user.is_admin:
+            logger.warning(f'Access denied for user {current_user.id} - not an admin')
+            flash('Access denied', 'danger')
+            return redirect(url_for('shipments.new_shipment'))
+        
+        # Log available endpoints after verifying admin access
+        logger.debug(f'Available endpoints: {[rule.endpoint for rule in current_app.url_map.iter_rules()]}')
+        
+        users = User.query.all()
+        logger.debug(f'Found {len(users)} users')
+        return render_template('manage_users.html', users=users)
+    except Exception as e:
+        logger.error(f'Error in manage_users: {str(e)}', exc_info=True)
+        flash('An error occurred while loading the users list.', 'error')
+        return render_template('error.html', error=str(e)), 500
 
 @bp.route('/create-user', methods=['GET', 'POST'])
 @login_required
@@ -93,12 +109,24 @@ def delete_user(user_id):
 @bp.route('/manage-admins')
 @login_required
 def manage_admins():
-    if not current_user.is_superuser:
-        flash('Access denied. Superuser privileges required.', 'error')
-        return redirect(url_for('main.dashboard'))
-    
-    users = User.query.all()
-    return render_template('manage_admins.html', users=users)
+    try:
+        logger.debug('Accessing manage_admins route')
+        logger.debug(f'Current user: {current_user.username} (ID: {current_user.id})')
+        
+        if not current_user.is_superuser:
+            logger.warning(f'Access denied for user {current_user.id} - not a superuser')
+            flash('Access denied. Superuser privileges required.', 'error')
+            return redirect(url_for('main.dashboard'))
+        
+        users = User.query.all()
+        logger.debug(f'Found {len(users)} users')
+        logger.debug(f'Admin users: {[user.username for user in users if user.is_admin]}')
+        
+        return render_template('manage_admins.html', users=users)
+    except Exception as e:
+        logger.error(f'Error in manage_admins: {str(e)}', exc_info=True)
+        flash('An error occurred while loading the administrators list.', 'error')
+        return render_template('error.html', error=str(e)), 500
 
 @bp.route('/add-admin', methods=['POST'])
 @login_required

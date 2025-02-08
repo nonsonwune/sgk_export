@@ -71,8 +71,7 @@
 <div id="editAdminModal" class="modal">
     <div class="modal-content">
         <h2>Modify Administrator</h2>
-        <form method="POST" action="{{ url_for('admin.modify_admin', user_id=user.id) }}">
-            <input type="hidden" id="edit_user_id" name="user_id">
+        <form id="editAdminForm" method="POST">
             <div class="form-group">
                 <label for="edit_username">Username</label>
                 <input type="text" id="edit_username" name="username" required>
@@ -251,6 +250,25 @@ th {
 </style>
 
 <script>
+function showEditAdminForm(userId, username, name) {
+    const modal = document.getElementById('editAdminModal');
+    const form = document.getElementById('editAdminForm');
+    
+    // Set form action with the correct user ID
+    form.action = "{{ url_for('admin.modify_admin', user_id=0) }}".replace('0', userId);
+    
+    // Set form fields
+    document.getElementById('edit_username').value = username;
+    document.getElementById('edit_name').value = name;
+    document.getElementById('edit_password').value = '';
+    
+    modal.style.display = 'block';
+}
+
+function hideEditAdminForm() {
+    document.getElementById('editAdminModal').style.display = 'none';
+}
+
 function showAddAdminForm() {
     document.getElementById('addAdminModal').style.display = 'block';
 }
@@ -259,18 +277,7 @@ function hideAddAdminForm() {
     document.getElementById('addAdminModal').style.display = 'none';
 }
 
-function showEditAdminForm(userId, username, name) {
-    document.getElementById('edit_user_id').value = userId;
-    document.getElementById('edit_username').value = username;
-    document.getElementById('edit_name').value = name;
-    document.getElementById('editAdminModal').style.display = 'block';
-}
-
-function hideEditAdminForm() {
-    document.getElementById('editAdminModal').style.display = 'none';
-}
-
-// Close modals when clicking outside
+// Close modal when clicking outside
 window.onclick = function(event) {
     if (event.target.className === 'modal') {
         event.target.style.display = 'none';
