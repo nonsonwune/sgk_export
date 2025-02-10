@@ -28,99 +28,268 @@ def index():
 
 @bp.route('/dashboard')
 def dashboard():
+    """Dashboard route with improved error handling and data validation."""
     try:
-        # Get the start of the current month
+        current_app.logger.debug("=== Starting Dashboard Data Generation ===")
+        
+        # Get date ranges
         today = datetime.now()
         start_of_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
         start_of_prev_month = (start_of_month - timedelta(days=1)).replace(day=1)
         
-        # Calculate monthly statistics
-        current_month_stats = db.session.query(
-            func.count(ExportRequest.id).label('total_shipments'),
-            func.sum(ExportRequest.total).label('total_revenue'),
-            func.count(
-                case(
-                    (ExportRequest.status == 'Active', 1),
-                    else_=None
-                )
-            ).label('active_shipments'),
-            func.count(
-                case(
-                    (ExportRequest.status == 'Delivered', 1),
-                    else_=None
-                )
-            ).label('delivered_shipments')
-        ).filter(ExportRequest.created_at >= start_of_month).first()
-
-        # Calculate previous month statistics for comparison
-        prev_month_stats = db.session.query(
-            func.count(ExportRequest.id).label('total_shipments'),
-            func.sum(ExportRequest.total).label('total_revenue')
-        ).filter(
-            ExportRequest.created_at >= start_of_prev_month,
-            ExportRequest.created_at < start_of_month
-        ).first()
-
+        current_app.logger.debug(f"Date ranges - Current month: {start_of_month}, Previous month: {start_of_prev_month}")
+        
+        # Get current month stats
+        current_month_stats = get_monthly_stats(start_of_month, today)
+        current_month_validated = validate_monthly_stats(current_month_stats)
+        
+        # Get previous month stats
+        prev_month_stats = get_monthly_stats(start_of_prev_month, start_of_month)
+        prev_month_validated = validate_monthly_stats(prev_month_stats)
+        
         # Calculate percentage changes
         monthly_stats = {
-            'total_shipments': current_month_stats.total_shipments or 0,
-            'total_revenue': float(current_month_stats.total_revenue or 0),
-            'active_shipments': current_month_stats.active_shipments or 0,
-            'delivered_shipments': current_month_stats.delivered_shipments or 0,
+            'total_shipments': current_month_validated['total_shipments'],
+            'total_revenue': current_month_validated['total_revenue'],
+            'active_shipments': current_month_validated['active_shipments'],
+            'delivered_shipments': current_month_validated['delivered_shipments'],
             'shipment_change': calculate_percentage_change(
-                current_month_stats.total_shipments,
-                prev_month_stats.total_shipments
+                current_month_validated['total_shipments'],
+                prev_month_validated['total_shipments']
             ),
             'revenue_change': calculate_percentage_change(
-                current_month_stats.total_revenue,
-                prev_month_stats.total_revenue
+                current_month_validated['total_revenue'],
+                prev_month_validated['total_revenue']
             )
         }
-
-        # Get monthly trend data for charts
-        trend_data = get_monthly_trend_data()
-
+        
+        current_app.logger.debug(f"Final monthly stats: {monthly_stats}")
+        
+        # Get trend data with validation
+        try:
+            trend_data = get_monthly_trend_data()
+            if not trend_data or not all(k in trend_data for k in ['labels', 'shipments', 'revenue']):
+                current_app.logger.error("Invalid trend data structure")
+                trend_data = {
+                    'labels': [],
+                    'shipments': [],
+                    'revenue': []
+                }
+        except Exception as e:
+            current_app.logger.error(f"Error getting trend data: {str(e)}", exc_info=True)
+            trend_data = {
+                'labels': [],
+                'shipments': [],
+                'revenue': []
+            }
+            
         # Get recent shipments
-        recent_shipments = ExportRequest.query.order_by(
-            ExportRequest.created_at.desc()
-        ).limit(5).all()
-
-        return render_template('dashboard.html',
-                             monthly_stats=monthly_stats,
-                             trend_data=trend_data,
-                             recent_shipments=recent_shipments)
-
+        try:
+            recent_shipments = ExportRequest.query.order_by(
+                ExportRequest.created_at.desc()
+            ).limit(5).all()
+            current_app.logger.debug(f"Retrieved {len(recent_shipments)} recent shipments")
+        except Exception as e:
+            current_app.logger.error(f"Error getting recent shipments: {str(e)}", exc_info=True)
+            recent_shipments = []
+        
+        # Prepare template data
+        template_data = {
+            'monthly_stats': monthly_stats,
+            'trend_data': trend_data,
+            'recent_shipments': recent_shipments,
+            'error': False
+        }
+        
+        # Log template data for debugging
+        current_app.logger.debug("=== Template Data Debug ===")
+        current_app.logger.debug(f"Template data type: {type(template_data)}")
+        current_app.logger.debug(f"Monthly stats: {monthly_stats}")
+        current_app.logger.debug(f"Trend data type: {type(trend_data)}")
+        current_app.logger.debug(f"Trend data: {trend_data}")
+        current_app.logger.debug(f"Recent shipments count: {len(recent_shipments)}")
+        
+        # Ensure trend_data is not None
+        if trend_data is None:
+            current_app.logger.warning("Trend data is None, initializing empty structure")
+            trend_data = {
+                'labels': [],
+                'shipments': [],
+                'revenue': []
+            }
+            template_data['trend_data'] = trend_data
+        
+        return render_template('dashboard.html', **template_data)
+        
     except Exception as e:
-        current_app.logger.error(f"Error loading dashboard: {str(e)}")
+        current_app.logger.error(f"Error in dashboard route: {str(e)}", exc_info=True)
         return render_template('dashboard.html', error=True)
 
+def get_monthly_stats(start_date, end_date):
+    """Get monthly statistics with proper error handling."""
+    try:
+        current_app.logger.debug(f"Fetching monthly stats from {start_date} to {end_date}")
+        stats = db.session.query(
+            func.count(ExportRequest.id).label('total_shipments'),
+            func.sum(ExportRequest.total).label('total_revenue'),
+            func.count(case((ExportRequest.status == 'Active', 1))).label('active_shipments'),
+            func.count(case((ExportRequest.status == 'Delivered', 1))).label('delivered_shipments')
+        ).filter(
+            ExportRequest.created_at.between(start_date, end_date)
+        ).first()
+        
+        current_app.logger.debug(f"Monthly stats query result: {stats}")
+        return stats
+        
+    except Exception as e:
+        current_app.logger.error(f"Error getting monthly stats: {str(e)}", exc_info=True)
+        return None
+
+def validate_monthly_stats(stats):
+    """Validate and clean monthly statistics."""
+    default_stats = {
+        'total_shipments': 0,
+        'total_revenue': 0.0,
+        'active_shipments': 0,
+        'delivered_shipments': 0
+    }
+    
+    if not stats:
+        current_app.logger.warning("Monthly stats is None, returning defaults")
+        return default_stats
+        
+    try:
+        validated = {
+            'total_shipments': int(getattr(stats, 'total_shipments', 0) or 0),
+            'total_revenue': float(getattr(stats, 'total_revenue', 0) or 0),
+            'active_shipments': int(getattr(stats, 'active_shipments', 0) or 0),
+            'delivered_shipments': int(getattr(stats, 'delivered_shipments', 0) or 0)
+        }
+        current_app.logger.debug(f"Validated monthly stats: {validated}")
+        return validated
+        
+    except Exception as e:
+        current_app.logger.error(f"Error validating monthly stats: {str(e)}", exc_info=True)
+        return default_stats
+
 def calculate_percentage_change(current, previous):
-    if not previous or not current:
+    """Calculate percentage change with proper validation."""
+    try:
+        if not isinstance(current, (int, float)) or not isinstance(previous, (int, float)):
+            current_app.logger.warning(f"Invalid types for percentage change - current: {type(current)}, previous: {type(previous)}")
+            return 0
+        
+        if previous == 0:
+            return 100 if current > 0 else 0
+            
+        change = ((current - previous) / previous) * 100
+        current_app.logger.debug(f"Calculated percentage change: {change}% (current: {current}, previous: {previous})")
+        return change
+        
+    except Exception as e:
+        current_app.logger.error(f"Error calculating percentage change: {str(e)}", exc_info=True)
         return 0
-    return ((current - previous) / previous) * 100
 
 def get_monthly_trend_data():
-    # Get the last 6 months of data
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=180)
-    
-    monthly_data = db.session.query(
-        func.date_trunc('month', ExportRequest.created_at).label('month'),
-        func.count(ExportRequest.id).label('shipment_count'),
-        func.sum(ExportRequest.total).label('revenue')
-    ).filter(
-        ExportRequest.created_at >= start_date
-    ).group_by(
-        func.date_trunc('month', ExportRequest.created_at)
-    ).order_by(
-        func.date_trunc('month', ExportRequest.created_at)
-    ).all()
-
-    return {
-        'labels': [d.month.strftime('%b') for d in monthly_data],
-        'shipments': [d.shipment_count for d in monthly_data],
-        'revenue': [float(d.revenue or 0) for d in monthly_data]
-    }
+    """Get monthly trend data with comprehensive logging."""
+    try:
+        # Get the last 6 months of data
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=180)
+        
+        current_app.logger.debug(f"=== Starting Trend Data Generation ===")
+        current_app.logger.debug(f"Date range: {start_date} to {end_date}")
+        
+        try:
+            # Query the data
+            monthly_data = db.session.query(
+                func.date_trunc('month', ExportRequest.created_at).label('month'),
+                func.count(ExportRequest.id).label('shipment_count'),
+                func.sum(ExportRequest.total).label('revenue')
+            ).filter(
+                ExportRequest.created_at >= start_date
+            ).group_by(
+                func.date_trunc('month', ExportRequest.created_at)
+            ).order_by(
+                func.date_trunc('month', ExportRequest.created_at)
+            ).all()
+            
+            current_app.logger.debug(f"Query successful - Found {len(monthly_data)} months of data")
+            if monthly_data:
+                current_app.logger.debug(f"Sample month data: {monthly_data[0]}")
+                current_app.logger.debug(f"Data types - month: {type(monthly_data[0].month)}, count: {type(monthly_data[0].shipment_count)}, revenue: {type(monthly_data[0].revenue)}")
+            
+        except Exception as db_error:
+            current_app.logger.error(f"Database query error: {str(db_error)}", exc_info=True)
+            raise ValueError(f"Failed to fetch monthly trend data: {str(db_error)}")
+        
+        # Generate all months in the range
+        months = []
+        current_date = end_date
+        for _ in range(6):
+            months.append(current_date.replace(day=1))
+            current_date = current_date.replace(day=1) - timedelta(days=1)
+        months.reverse()
+        
+        current_app.logger.debug(f"Generated month range: {[m.strftime('%Y-%m') for m in months]}")
+        
+        try:
+            # Create a mapping of month to data
+            data_map = {}
+            for data in monthly_data:
+                month_key = data.month.strftime('%Y-%m')
+                data_map[month_key] = {
+                    'count': data.shipment_count,
+                    'revenue': float(data.revenue or 0)
+                }
+                current_app.logger.debug(f"Mapped data for {month_key}: {data_map[month_key]}")
+            
+        except Exception as mapping_error:
+            current_app.logger.error(f"Error creating data map: {str(mapping_error)}", exc_info=True)
+            raise ValueError(f"Failed to process monthly data: {str(mapping_error)}")
+        
+        try:
+            # Fill in the result using all months
+            result = {
+                'labels': [d.strftime('%b') for d in months],
+                'shipments': [],
+                'revenue': []
+            }
+            
+            # Fill data arrays
+            for month in months:
+                month_key = month.strftime('%Y-%m')
+                month_data = data_map.get(month_key, {'count': 0, 'revenue': 0.0})
+                result['shipments'].append(month_data['count'])
+                result['revenue'].append(month_data['revenue'])
+                
+                current_app.logger.debug(f"Month {month_key}: shipments={month_data['count']}, revenue={month_data['revenue']}")
+            
+            # Validate result structure
+            current_app.logger.debug("=== Validating Result Structure ===")
+            current_app.logger.debug(f"Labels length: {len(result['labels'])}")
+            current_app.logger.debug(f"Shipments length: {len(result['shipments'])}")
+            current_app.logger.debug(f"Revenue length: {len(result['revenue'])}")
+            current_app.logger.debug(f"Sample data - First month: {result['labels'][0]}, shipments: {result['shipments'][0]}, revenue: {result['revenue'][0]}")
+            
+            return result
+            
+        except Exception as result_error:
+            current_app.logger.error(f"Error creating result structure: {str(result_error)}", exc_info=True)
+            raise ValueError(f"Failed to structure trend data: {str(result_error)}")
+        
+    except Exception as e:
+        current_app.logger.error(f"=== Trend Data Generation Failed ===")
+        current_app.logger.error(f"Error type: {type(e)}")
+        current_app.logger.error(f"Error message: {str(e)}")
+        current_app.logger.error("Stack trace:", exc_info=True)
+        
+        # Return empty data structure on error
+        return {
+            'labels': [],
+            'shipments': [],
+            'revenue': []
+        }
 
 @bp.route('/profile')
 @login_required

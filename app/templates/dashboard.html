@@ -40,11 +40,38 @@
     .trend-down { color: #f56565; }
 
     .chart-container {
+        position: relative;
         background: white;
         border-radius: 10px;
         padding: 1.5rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         grid-column: span 2;
+        min-height: 300px;
+        transition: all 0.3s ease;
+    }
+
+    .chart-container h3 {
+        margin: 0 0 1.5rem 0;
+        color: #2d3748;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .chart-container canvas {
+        width: 100% !important;
+        height: 250px !important;
+        transition: opacity 0.3s ease;
+    }
+
+    .chart-container.loading {
+        background: linear-gradient(90deg, #f7fafc 25%, #edf2f7 50%, #f7fafc 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
     }
 
     .quick-actions {
@@ -144,23 +171,107 @@
         animation: loading 1.5s infinite;
     }
 
-    @keyframes loading {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
+    .chart-loading-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        text-align: center;
+        color: #4a5568;
+        padding: 2rem;
+    }
+
+    .chart-loading-state .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+    }
+
+    .chart-loading-state p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #718096;
+    }
+
+    .chart-error-state {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        text-align: center;
+        color: #e53e3e;
+        padding: 2rem;
+        background-color: #fff5f5;
+        border-radius: 8px;
+        border: 1px solid #feb2b2;
+    }
+
+    .chart-error-state i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #e53e3e;
+    }
+
+    .chart-error-state .error-message {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: #c53030;
+    }
+
+    .retry-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #4299e1;
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .retry-btn:hover {
+        background-color: #3182ce;
+        transform: translateY(-1px);
+    }
+
+    .retry-btn:active {
+        transform: translateY(0);
+    }
+
+    .retry-btn i {
+        font-size: 1rem;
+        margin: 0;
+        color: white;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container"
-     data-dashboard="{{ {
-         'error': error|default(false),
-         'chartData': {
-             'labels': trend_data.labels if trend_data else [],
-             'shipments': trend_data.shipments if trend_data else [],
-             'revenue': trend_data.revenue if trend_data else []
-         } if trend_data else {}
-     }|tojson|escape }}">
+<!-- Debug output -->
+<div id="debug-output" style="display: none;">
+    <pre>Raw trend_data: {{ trend_data }}</pre>
+    <pre>JSON trend_data: {{ trend_data|tojson }}</pre>
+    <pre>Safe JSON trend_data: {{ trend_data|tojson|safe }}</pre>
+</div>
+<div class="container" 
+     data-error="{{ error|default(false)|tojson|safe }}"
+     data-chart-data='{{ trend_data|tojson|safe }}'
+     data-debug='{{ {"test": 123}|tojson|safe }}'>
     <h1>Dashboard</h1>
 
     {% if error %}
@@ -211,12 +322,34 @@
         <!-- Charts -->
         <div class="chart-container">
             <h3>Shipment Volume Trend</h3>
-            <canvas id="shipmentTrendChart"></canvas>
+            <div class="chart-loading-state">
+                <div class="spinner"></div>
+                <p>Loading chart data...</p>
+            </div>
+            <div class="chart-error-state" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <p class="error-message"></p>
+                <button class="btn btn-sm btn-primary retry-btn">
+                    <i class="fas fa-sync"></i> Retry
+                </button>
+            </div>
+            <canvas id="shipmentTrendChart" width="400" height="200" style="display: none;"></canvas>
         </div>
 
         <div class="chart-container">
             <h3>Revenue Analysis</h3>
-            <canvas id="revenueChart"></canvas>
+            <div class="chart-loading-state">
+                <div class="spinner"></div>
+                <p>Loading chart data...</p>
+            </div>
+            <div class="chart-error-state" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <p class="error-message"></p>
+                <button class="btn btn-sm btn-primary retry-btn">
+                    <i class="fas fa-sync"></i> Retry
+                </button>
+            </div>
+            <canvas id="revenueChart" width="400" height="200" style="display: none;"></canvas>
         </div>
 
         <!-- Quick Actions -->
@@ -271,24 +404,194 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 <script>
-(function() {
-    // Get dashboard data from container element
-    const container = document.querySelector('.container');
-    const dashboardData = JSON.parse(container.dataset.dashboard || '{}');
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== Dashboard Initialization Start ===');
+    
+    // Initialize dashboard with retry mechanism
+    initializeDashboardWithRetry();
+});
 
-    if (dashboardData.error) {
+function initializeDashboardWithRetry(retryCount = 0, maxRetries = 3) {
+    console.log(`Initializing dashboard (attempt ${retryCount + 1}/${maxRetries})`);
+    
+    // Ensure Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js not loaded');
+        showChartError('Chart.js library failed to load. Please refresh the page.');
         return;
     }
-
-    function initializeCharts() {
-        const chartData = dashboardData.chartData;
-        if (!chartData) {
-            return;
+    
+    try {
+        initializeDashboard();
+    } catch (error) {
+        console.error('Error initializing dashboard:', error);
+        if (retryCount < maxRetries - 1) {
+            console.log(`Retrying initialization in 1 second... (${retryCount + 1}/${maxRetries})`);
+            setTimeout(() => {
+                initializeDashboardWithRetry(retryCount + 1, maxRetries);
+            }, 1000);
+        } else {
+            showChartError('Failed to initialize dashboard after multiple attempts. Please refresh the page.');
         }
+    }
+}
 
-        // Shipment Trend Chart
-        const shipmentCtx = document.getElementById('shipmentTrendChart').getContext('2d');
-        new Chart(shipmentCtx, {
+function initializeDashboard() {
+    console.log('=== Dashboard Initialization ===');
+    
+    // Get dashboard container
+    const container = document.querySelector('.container');
+    if (!container) {
+        console.error('Dashboard container not found');
+        throw new Error('Dashboard container not found');
+    }
+    
+    // Get and parse error state
+    const errorState = container.getAttribute('data-error');
+    console.log('Error state:', errorState);
+    
+    if (errorState === 'true') {
+        console.error('Dashboard in error state');
+        showChartError('Dashboard is currently in an error state');
+        return;
+    }
+    
+    // Get and validate chart data
+    const chartData = getValidatedChartData(container);
+    console.log('Validated chart data:', chartData);
+    
+    // Initialize charts if data is valid
+    if (chartData && Object.keys(chartData).length > 0) {
+        console.log('Initializing charts with data');
+        initializeCharts(chartData);
+    } else {
+        console.error('No valid chart data available');
+        showChartError('No chart data available');
+    }
+}
+
+function getValidatedChartData(container) {
+    console.log('=== Chart Data Validation Start ===');
+    console.log('Container:', container);
+    
+    // Get debug output
+    const debugOutput = document.getElementById('debug-output');
+    if (debugOutput) {
+        console.log('Debug output:', debugOutput.textContent);
+    }
+    
+    try {
+        // Initialize chartDataStr as let instead of const to allow reassignment
+        let chartDataStr = container.getAttribute('data-chart-data');
+        console.log('Raw chart data string:', chartDataStr);
+        
+        // Try to get data from debug output if attribute is empty
+        if (!chartDataStr && debugOutput) {
+            console.log('Attempting to get data from debug output');
+            const safeJsonMatch = debugOutput.textContent.match(/Safe JSON trend_data: (.*)/);
+            if (safeJsonMatch && safeJsonMatch[1]) {
+                console.log('Found data in debug output');
+                chartDataStr = safeJsonMatch[1].trim();
+                console.log('Using data from debug output:', chartDataStr);
+            }
+        }
+        
+        if (!chartDataStr) {
+            console.error('Chart data attribute is empty or null and no fallback data found');
+            throw new Error('No chart data found');
+        }
+        
+        // Parse data with additional error context
+        let chartData;
+        try {
+            chartData = JSON.parse(chartDataStr);
+            console.log('Successfully parsed chart data:', chartData);
+        } catch (parseError) {
+            console.error('Error parsing chart data:', parseError);
+            console.error('Raw string that failed to parse:', chartDataStr);
+            throw new Error(`Failed to parse chart data: ${parseError.message}`);
+        }
+        
+        // Validate structure with detailed logging
+        if (!validateChartData(chartData)) {
+            console.error('Invalid chart data structure:', chartData);
+            throw new Error('Invalid chart data structure');
+        }
+        
+        console.log('Chart data validation successful');
+        return chartData;
+        
+    } catch (error) {
+        console.error('Error processing chart data:', error);
+        console.error('Error details:', {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+        });
+        showChartError(error.message);
+        return null;
+    }
+}
+
+function validateChartData(data) {
+    if (!data || typeof data !== 'object') {
+        console.error('Chart data is not an object');
+        return false;
+    }
+    
+    const requiredKeys = ['labels', 'shipments', 'revenue'];
+    const hasAllKeys = requiredKeys.every(key => {
+        const hasKey = key in data;
+        if (!hasKey) console.error(`Missing required key: ${key}`);
+        return hasKey;
+    });
+    
+    if (!hasAllKeys) return false;
+    
+    const hasValidArrays = requiredKeys.every(key => {
+        const isArray = Array.isArray(data[key]);
+        if (!isArray) console.error(`${key} is not an array`);
+        return isArray;
+    });
+    
+    if (!hasValidArrays) return false;
+    
+    const arrayLength = data.labels.length;
+    const hasMatchingLengths = requiredKeys.every(key => {
+        const matches = data[key].length === arrayLength;
+        if (!matches) console.error(`${key} length doesn't match labels length`);
+        return matches;
+    });
+    
+    return hasMatchingLengths;
+}
+
+function initializeCharts(chartData) {
+    console.log('Initializing charts with data:', chartData);
+    
+    // Initialize Shipment Trend Chart
+    initializeShipmentChart(chartData);
+    
+    // Initialize Revenue Chart
+    initializeRevenueChart(chartData);
+}
+
+function initializeShipmentChart(chartData) {
+    const shipmentCtx = document.getElementById('shipmentTrendChart');
+    if (!shipmentCtx) {
+        console.error('Shipment chart canvas not found');
+        return;
+    }
+    
+    const container = shipmentCtx.closest('.chart-container');
+    const loadingState = container.querySelector('.chart-loading-state');
+    
+    try {
+        // Hide loading state and show canvas
+        if (loadingState) loadingState.style.display = 'none';
+        shipmentCtx.style.display = 'block';
+        
+        new Chart(shipmentCtx.getContext('2d'), {
             type: 'line',
             data: {
                 labels: chartData.labels,
@@ -304,21 +607,43 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
+                    legend: { position: 'bottom' }
                 },
                 scales: {
-                    y: {
-                        beginAtZero: true
+                    y: { 
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
                     }
                 }
             }
         });
+        
+        console.log('Shipment trend chart initialized successfully');
+        
+    } catch (error) {
+        console.error('Error initializing shipment chart:', error);
+        showChartError('Failed to initialize shipment chart', container);
+    }
+}
 
-        // Revenue Chart
-        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-        new Chart(revenueCtx, {
+function initializeRevenueChart(chartData) {
+    const revenueCtx = document.getElementById('revenueChart');
+    if (!revenueCtx) {
+        console.error('Revenue chart canvas not found');
+        return;
+    }
+    
+    const container = revenueCtx.closest('.chart-container');
+    const loadingState = container.querySelector('.chart-loading-state');
+    
+    try {
+        // Hide loading state and show canvas
+        if (loadingState) loadingState.style.display = 'none';
+        revenueCtx.style.display = 'block';
+        
+        new Chart(revenueCtx.getContext('2d'), {
             type: 'bar',
             data: {
                 labels: chartData.labels,
@@ -334,9 +659,7 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
+                    legend: { position: 'bottom' }
                 },
                 scales: {
                     y: {
@@ -350,10 +673,78 @@
                 }
             }
         });
+        
+        console.log('Revenue chart initialized successfully');
+        
+    } catch (error) {
+        console.error('Error initializing revenue chart:', error);
+        showChartError('Failed to initialize revenue chart', container);
     }
+}
 
-    // Initialize charts when DOM is loaded
-    document.addEventListener('DOMContentLoaded', initializeCharts);
-})();
+function showChartError(message, container = null) {
+    const containers = container ? [container] : document.querySelectorAll('.chart-container');
+    
+    containers.forEach(container => {
+        const loadingState = container.querySelector('.chart-loading-state');
+        const errorState = container.querySelector('.chart-error-state');
+        const canvas = container.querySelector('canvas');
+        
+        if (loadingState) loadingState.style.display = 'none';
+        if (canvas) canvas.style.display = 'none';
+        
+        if (errorState) {
+            const errorMessage = errorState.querySelector('.error-message');
+            if (errorMessage) errorMessage.textContent = message;
+            errorState.style.display = 'flex';
+        }
+    });
+}
+
+function hideChartError(container = null) {
+    const containers = container ? [container] : document.querySelectorAll('.chart-container');
+    
+    containers.forEach(container => {
+        const errorState = container.querySelector('.chart-error-state');
+        if (errorState) errorState.style.display = 'none';
+    });
+}
+
+function showChartLoading(container = null) {
+    const containers = container ? [container] : document.querySelectorAll('.chart-container');
+    
+    containers.forEach(container => {
+        const loadingState = container.querySelector('.chart-loading-state');
+        const errorState = container.querySelector('.chart-error-state');
+        const canvas = container.querySelector('canvas');
+        
+        if (loadingState) loadingState.style.display = 'flex';
+        if (errorState) errorState.style.display = 'none';
+        if (canvas) canvas.style.display = 'none';
+    });
+}
+
+// Add retry functionality
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.retry-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const container = this.closest('.chart-container');
+            console.log('Retrying chart initialization for container:', container);
+            
+            hideChartError(container);
+            showChartLoading(container);
+            
+            // Retry initialization after a short delay
+            setTimeout(() => {
+                try {
+                    initializeDashboard();
+                } catch (error) {
+                    console.error('Error during retry:', error);
+                    showChartError('Failed to reload chart data', container);
+                }
+            }, 100);
+        });
+    });
+});
 </script>
 {% endblock %} 
