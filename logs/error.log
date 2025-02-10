@@ -321,3 +321,14 @@ ImportError: cannot import name 'ExportRequest' from 'app.models' (unknown locat
 2025-02-10 22:26:34 [82540] [INFO] Booting worker with pid: 82540
 2025-02-10 22:26:34 [82541] [INFO] Booting worker with pid: 82541
 2025-02-10 22:26:34 [82542] [INFO] Booting worker with pid: 82542
+2025-02-10 22:29:11 [82535] [INFO] Handling signal: int
+2025-02-10 22:29:11 [82535] [INFO] Shutting down: Master
+2025-02-10 22:35:26 [83424] [INFO] Starting gunicorn 21.2.0
+2025-02-10 22:35:26 [83424] [INFO] Listening at: http://0.0.0.0:8000 (83424)
+2025-02-10 22:35:26 [83424] [INFO] Using worker: sync
+2025-02-10 22:35:26 [83425] [INFO] Booting worker with pid: 83425
+2025-02-10 22:35:26 [83427] [INFO] Booting worker with pid: 83427
+2025-02-10 22:35:26 [83428] [INFO] Booting worker with pid: 83428
+2025-02-10 22:35:26 [83429] [INFO] Booting worker with pid: 83429
+2025-02-10 22:38:24 [83424] [INFO] Handling signal: int
+2025-02-10 22:38:24 [83424] [INFO] Shutting down: Master

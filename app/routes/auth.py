@@ -16,7 +16,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
-            return redirect(url_for('shipments.new_shipment'))
+            return redirect(url_for('main.dashboard'))
         else:
             flash('Invalid username or password')
     
