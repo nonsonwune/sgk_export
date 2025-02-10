@@ -109,58 +109,77 @@ export function preparePrint() {
                 <style>
                     @page {
                         size: A4;
-                        margin: 20mm 10mm;
                     }
-                    html, body {
-                        margin: 0 auto !important;
+                    html {
+                        margin: 0 !important;
                         padding: 0 !important;
-                        width: 210mm !important;
+                    }
+                    body {
+                        margin: 0 !important;
+                        padding: 8mm !important;
+                        width: 100% !important;
+                        max-width: 100% !important;
                         background: white !important;
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;
                     }
                     .preview-container,
                     .print-form {
-                        width: 210mm !important;
-                        max-width: 210mm !important;
-                        margin: 0 auto !important;
-                        padding: 15mm 15mm 20mm !important;
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
                         background: white !important;
                         box-shadow: none !important;
                     }
-                    /* Ensure proper spacing after page breaks */
-                    .info-section > *,
-                    .form-section,
-                    .items-table,
-                    .pricing-summary,
-                    .signature-section {
-                        break-before: auto !important;
-                        break-after: auto !important;
-                        break-inside: avoid !important;
-                        margin-top: 15mm !important;
-                        margin-bottom: 15mm !important;
+                    .info-section {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        padding: 0 !important;
                     }
-                    /* Force page breaks before major sections */
-                    .items-table,
-                    .financial-summary {
-                        break-before: page !important;
-                        padding-top: 20mm !important;
+                    .info-cards-grid {
+                        display: grid !important;
+                        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                        gap: 4mm !important;
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        margin: 4mm 0 !important;
                     }
-                    /* Prevent unwanted breaks */
-                    .info-card,
-                    .info-row,
-                    .items-table tr,
-                    .pricing-details,
-                    .total-section {
-                        break-inside: avoid !important;
+                    .info-card {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .company-header {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        padding: 0 !important;
+                        margin-bottom: 4mm !important;
+                    }
+                    .company-info-section {
+                        max-width: calc(100% - 160px) !important;
+                    }
+                    .document-header {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        padding: 0 !important;
+                        margin-bottom: 4mm !important;
+                    }
+                    /* Remove any bootstrap container constraints */
+                    .container, 
+                    .container-fluid {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
                     }
                     @media print {
                         body {
-                            -webkit-print-color-adjust: exact !important;
-                            print-color-adjust: exact !important;
+                            width: 100% !important;
+                            max-width: 100% !important;
                         }
-                        .no-print {
-                            display: none !important;
+                        .preview-container {
+                            width: 100% !important;
+                            max-width: 100% !important;
                         }
                     }
                 </style>
