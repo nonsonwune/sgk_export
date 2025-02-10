@@ -90,6 +90,16 @@ export function preparePrint() {
             }
         }
 
+        // Handle company logo if present
+        const logoImg = clonedContent.querySelector('.company-logo');
+        if (logoImg) {
+            const originalLogo = contentToClone.querySelector('.company-logo');
+            if (originalLogo) {
+                logoImg.src = originalLogo.src;
+                console.debug('[Print] Company logo cloned successfully');
+            }
+        }
+
         console.debug('[Print] Cloned content successfully');
 
         // Setup iframe document with proper viewport and print styles
@@ -172,14 +182,39 @@ export function preparePrint() {
                         margin: 0 !important;
                         padding: 0 !important;
                     }
+                    /* Print form specific styles */
+                    .print-form {
+                        padding: 8mm !important;
+                    }
+                    .input-row {
+                        page-break-inside: avoid !important;
+                    }
+                    .signature-section {
+                        page-break-inside: avoid !important;
+                        margin-top: 10mm !important;
+                    }
+                    .items-table {
+                        page-break-inside: avoid !important;
+                    }
+                    .form-section {
+                        page-break-inside: avoid !important;
+                        margin-bottom: 6mm !important;
+                    }
                     @media print {
                         body {
                             width: 100% !important;
                             max-width: 100% !important;
                         }
-                        .preview-container {
+                        .preview-container,
+                        .print-form {
                             width: 100% !important;
                             max-width: 100% !important;
+                        }
+                        .screen-controls,
+                        .main-nav,
+                        .action-buttons,
+                        .no-print {
+                            display: none !important;
                         }
                     }
                 </style>

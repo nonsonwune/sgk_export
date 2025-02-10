@@ -2,290 +2,282 @@
 
 /* Print Preview Overlay */
 .print-preview-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    display: none;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .print-preview-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 0.5rem;
     text-align: center;
-    min-width: 300px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .print-preview-spinner {
     margin: 1rem 0;
+    font-size: 2rem;
+    color: #4169E1;
 }
 
-/* Print-specific styles */
+/* Print Form Styles */
+.print-form {
+    max-width: 210mm;  /* A4 width */
+    margin: 2rem auto;
+    padding: 20mm;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.company-header {
+    text-align: center;
+    margin-bottom: 8mm;
+    padding-bottom: 5mm;
+    border-bottom: 2px solid #4169E1;
+}
+
+.company-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 4mm;
+}
+
+.company-header h1 {
+    margin: 4mm 0 3mm;
+    color: #2d3748;
+    font-size: 24pt;
+    font-weight: 600;
+}
+
+.company-header p {
+    margin: 2mm 0;
+    color: #4a5568;
+    font-size: 12pt;
+}
+
+.form-section {
+    margin-bottom: 8mm;
+    page-break-inside: avoid;
+    padding-right: 5mm;
+}
+
+.section-title {
+    font-size: 12pt;
+    font-weight: 600;
+    margin-bottom: 4mm;
+    color: #2d3748;
+    background: #f8f9fe;
+    padding: 3mm 4mm;
+    border-left: 4px solid #4169E1;
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+}
+
+.section-title i {
+    color: #4169E1;
+}
+
+.input-row {
+    display: flex;
+    margin-bottom: 4mm;
+    align-items: baseline;
+    page-break-inside: avoid;
+    padding-right: 5mm;
+}
+
+.input-label {
+    width: 25%;
+    font-weight: 500;
+    color: #4a5568;
+    padding-right: 4mm;
+}
+
+.input-field {
+    width: 75%;
+    border-bottom: 1px solid #e2e8f0;
+    min-height: 7mm;
+    padding: 1.5mm 0;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 8mm;
+    page-break-inside: avoid;
+}
+
+.items-table th {
+    background: #f8f9fe;
+    color: #2d3748;
+    font-weight: 600;
+    text-align: left;
+    padding: 3mm 4mm;
+    border: 1px solid #e2e8f0;
+}
+
+.items-table td {
+    padding: 4mm;
+    border: 1px solid #e2e8f0;
+    height: 8mm;
+}
+
+.items-table tr:nth-child(even) td {
+    background: #f8f9fe;
+}
+
+.signature-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15mm;
+    page-break-inside: avoid;
+    padding-right: 5mm;
+}
+
+.signature-box {
+    width: 45%;
+}
+
+.signature-line {
+    border-top: 1px solid #4169E1;
+    margin-top: 20mm;
+    padding-top: 3mm;
+    text-align: center;
+    color: #4a5568;
+}
+
+.manual-input {
+    display: inline-block;
+    min-width: 150px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    margin: 0 2mm;
+}
+
+.required-note {
+    margin: 4mm 0;
+    color: #4a5568;
+    font-size: 0.9em;
+}
+
+.screen-controls {
+    margin-bottom: 6mm;
+    text-align: right;
+}
+
+.print-button {
+    padding: 2mm 4mm;
+    background: #4169E1;
+    color: white;
+    border: none;
+    border-radius: 2mm;
+    cursor: pointer;
+    font-size: 11pt;
+    display: inline-flex;
+    align-items: center;
+    gap: 2mm;
+}
+
+.print-button:hover {
+    background: #3154b4;
+}
+
+/* Print Media Queries */
 @media print {
-    /* Reset page margins and background */
     @page {
         size: A4;
-        /* Allow browser default margins for headers/footers */
+        margin: 15mm;  /* Add default page margins */
     }
 
-    /* Base setup */
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        box-sizing: border-box !important;
-    }
-
-    html {
+    html, body {
+        width: 100% !important;
+        height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
+        background: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
     body {
-        margin: 0 !important;
-        padding: 8mm !important; /* Keep content margin through padding */
-        width: 100% !important;
-        max-width: 100% !important;
-        background: white !important;
-        font-size: 9pt !important;
-        line-height: 1.4 !important;
+        padding: 0 !important;  /* Remove body padding since we're using @page margins */
     }
 
-    /* Container resets */
-    .container,
-    .container-fluid {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
+    .main-nav, 
+    .action-buttons, 
+    .screen-controls,
+    .no-print { 
+        display: none !important; 
     }
 
-    /* Preview container setup */
-    .preview-container {
-        width: 100% !important;
-        max-width: 100% !important;
+    .print-form {
         margin: 0 !important;
         padding: 0 !important;
-        background: white !important;
         box-shadow: none !important;
-    }
-
-    /* Document header */
-    .document-header {
-        width: 100% !important;
         max-width: 100% !important;
-        margin-bottom: 4mm !important;
-        padding: 0 !important;
+        width: 100% !important;
     }
 
     .company-header {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: flex-start !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-bottom: 4mm !important;
-        position: relative !important;
-        padding: 0 !important;
+        margin-bottom: 8mm !important;
     }
 
-    .company-info-section {
-        display: flex !important;
-        align-items: flex-start !important;
-        gap: 4mm !important;
-        max-width: calc(100% - 160px) !important;
-    }
-
-    .company-logo {
-        width: 120px !important;
-        height: auto !important;
-        flex-shrink: 0 !important;
-    }
-
-    .company-info {
-        min-width: 0 !important;  /* Allow text truncation prevention */
-    }
-
-    .company-info h1 {
-        font-size: 24pt !important;
-        margin: 0 0 0.5rem 0 !important;
-        color: #000 !important;
-        white-space: normal !important;
-        word-wrap: break-word !important;
-    }
-
-    /* Meta information */
-    .document-meta {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 1.5rem !important;
-        background: rgba(64, 0, 255, 0.05) !important;
-        padding: 0.75rem 1rem !important;
-        border-radius: 8px !important;
-        margin-top: 0.5rem !important;
-    }
-
-    .meta-item {
-        display: flex !important;
-        align-items: center !important;
-        gap: 0.5rem !important;
-        color: rgba(0, 0, 0, 0.7) !important;
-        white-space: nowrap !important;
-    }
-
-    /* QR Code section */
-    .qr-code-section {
-        position: absolute !important;
-        right: 0 !important;
-        top: 0 !important;
-        width: 150px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 0.5rem !important;
-    }
-
-    .qr-code-container {
-        width: 150px !important;
-        height: 150px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: white !important;
-        border-radius: 8px !important;
-        overflow: hidden !important;
-    }
-
-    .qr-code-image {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain !important;
-    }
-
-    .qr-code-label {
-        font-size: 0.8rem !important;
-        color: #718096 !important;
-        text-align: center !important;
-    }
-
-    /* Info section */
-    .info-section {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 !important;
-        margin-top: 4mm !important;
-    }
-
-    .info-cards-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 4mm !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 4mm 0 !important;
-    }
-
-    .info-card {
-        width: 100% !important;
-        max-width: 100% !important;
+    .form-section {
         page-break-inside: avoid !important;
-        background: white !important;
-        border: 1px solid #eef0f3 !important;
-        border-radius: 4px !important;
-        overflow: hidden !important;
+        margin-bottom: 8mm !important;
+        padding-right: 5mm !important;
     }
 
-    .card-header {
-        background: #f8f9fe !important;
-        padding: 0.5rem 0.75rem !important;
-        border-bottom: 1px solid #eef0f3 !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 0.5rem !important;
+    .input-row {
+        page-break-inside: avoid !important;
+        margin-bottom: 4mm !important;
+        padding-right: 5mm !important;
     }
 
-    .card-header i {
-        font-size: 1.2rem !important;
-        color: #4169E1 !important;
-        flex-shrink: 0 !important;
+    .items-table {
+        page-break-inside: avoid !important;
+        margin: 4mm 0 8mm !important;
     }
 
-    .card-header h2 {
-        margin: 0 !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        color: #2d3748 !important;
-        white-space: normal !important;
-        word-wrap: break-word !important;
+    .signature-section {
+        page-break-inside: avoid !important;
+        margin-top: 15mm !important;
+        padding-right: 5mm !important;
     }
 
-    .info-content {
-        padding: 2mm 3mm !important;
+    /* Ensure consistent font sizes in print */
+    body { 
+        font-size: 11pt !important;
+        line-height: 1.3 !important;
     }
 
-    .info-row {
-        display: grid !important;
-        grid-template-columns: 100px 1fr !important;
-        gap: 3mm !important;
-        padding: 1mm 0 !important;
-        border-bottom: 1px solid #f5f6f8 !important;
-        align-items: start !important;
+    h1 { font-size: 24pt !important; }
+    h2 { font-size: 18pt !important; }
+    h3 { font-size: 14pt !important; }
+    
+    .section-title {
+        font-size: 12pt !important;
+        margin-bottom: 4mm !important;
+        padding: 3mm 4mm !important;
     }
 
-    .info-row:last-child {
-        border-bottom: none !important;
+    .input-label,
+    .input-field {
+        font-size: 11pt !important;
     }
 
-    .label {
-        color: #718096 !important;
-        font-weight: 500 !important;
-        font-size: 0.9rem !important;
-        white-space: normal !important;
-    }
-
-    .value {
-        color: #2d3748 !important;
-        font-weight: 500 !important;
-        word-wrap: break-word !important;
-        white-space: normal !important;
-    }
-
-    /* Status badge */
-    .status-badge {
-        padding: 0.35rem 0.75rem !important;
-        border-radius: 20px !important;
-        font-size: 0.9rem !important;
-        font-weight: 600 !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 0.4rem !important;
-        white-space: nowrap !important;
-    }
-
-    .status-saved {
-        background: #28a745 !important;
-        color: white !important;
-    }
-
-    /* Hide elements */
-    .main-nav,
-    .action-buttons,
-    .view-images-btn,
-    .no-print,
-    th.no-print,
-    td.no-print,
-    .navbar,
-    .nav,
-    nav,
-    header nav,
-    .navigation {
-        display: none !important;
+    /* Ensure colors print correctly */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 }
 
@@ -293,7 +285,7 @@
 @media screen {
     .print-form {
         background: white;
-        padding: 2rem;
+        padding: 25mm;  /* Increased padding for better screen preview */
         margin: 2rem auto;
         max-width: 210mm;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
