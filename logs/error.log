@@ -1,13 +1,6 @@
-2025-02-08 13:10:42 [94982] [INFO] Starting gunicorn 21.2.0
-2025-02-08 13:10:42 [94982] [INFO] Listening at: http://0.0.0.0:8000 (94982)
-2025-02-08 13:10:42 [94982] [INFO] Using worker: sync
-2025-02-08 13:10:42 [94983] [INFO] Booting worker with pid: 94983
-2025-02-08 13:10:42 [94984] [INFO] Booting worker with pid: 94984
-2025-02-08 13:10:42 [94985] [INFO] Booting worker with pid: 94985
-2025-02-08 13:10:42 [94986] [INFO] Booting worker with pid: 94986
-2025-02-08 13:13:27 [94982] [INFO] Handling signal: int
-2025-02-08 13:13:27 [94982] [ERROR] Worker (pid:94986) was sent SIGINT!
-2025-02-08 13:13:27 [94982] [ERROR] Worker (pid:94984) was sent SIGINT!
-2025-02-08 13:13:27 [94982] [ERROR] Worker (pid:94983) was sent SIGINT!
-2025-02-08 13:13:27 [94982] [ERROR] Worker (pid:94985) was sent SIGINT!
-2025-02-08 13:13:27 [94982] [INFO] Shutting down: Master
+2025-02-10 21:59:41 [79523] [INFO] Handling signal: int
+2025-02-10 21:59:41 [79523] [ERROR] Worker (pid:79526) was sent SIGINT!
+2025-02-10 21:59:41 [79523] [ERROR] Worker (pid:79525) was sent SIGINT!
+2025-02-10 21:59:41 [79523] [ERROR] Worker (pid:79524) was sent SIGINT!
+2025-02-10 21:59:41 [79523] [ERROR] Worker (pid:79527) was sent SIGINT!
+2025-02-10 21:59:41 [79523] [INFO] Shutting down: Master

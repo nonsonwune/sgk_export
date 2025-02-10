@@ -2,6 +2,7 @@ venv/
 uploads/
 __pycache__/
 venv/
+logs/
 /venv
 migrate_to_render.txt
 .env
