@@ -1,33 +1,6 @@
-2025-02-11 00:05:17 [88713] [INFO] Starting gunicorn 21.2.0
-2025-02-11 00:05:17 [88713] [INFO] Listening at: http://0.0.0.0:8000 (88713)
-2025-02-11 00:05:17 [88713] [INFO] Using worker: sync
-2025-02-11 00:05:17 [88714] [INFO] Booting worker with pid: 88714
-2025-02-11 00:05:17 [88715] [INFO] Booting worker with pid: 88715
-2025-02-11 00:05:18 [88716] [INFO] Booting worker with pid: 88716
-2025-02-11 00:05:18 [88717] [INFO] Booting worker with pid: 88717
-2025-02-11 00:05:56 [88713] [INFO] Handling signal: int
-2025-02-11 00:05:56 [88713] [ERROR] Worker (pid:88714) was sent SIGINT!
-2025-02-11 00:05:56 [88713] [ERROR] Worker (pid:88715) was sent SIGINT!
-2025-02-11 00:05:56 [88713] [ERROR] Worker (pid:88716) was sent SIGINT!
-2025-02-11 00:05:56 [88713] [ERROR] Worker (pid:88717) was sent SIGINT!
-2025-02-11 00:05:56 [88713] [INFO] Shutting down: Master
-2025-02-11 00:05:57 [88793] [INFO] Starting gunicorn 21.2.0
-2025-02-11 00:05:57 [88793] [INFO] Listening at: http://0.0.0.0:8000 (88793)
-2025-02-11 00:05:57 [88793] [INFO] Using worker: sync
-2025-02-11 00:05:57 [88795] [INFO] Booting worker with pid: 88795
-2025-02-11 00:05:57 [88796] [INFO] Booting worker with pid: 88796
-2025-02-11 00:05:57 [88797] [INFO] Booting worker with pid: 88797
-2025-02-11 00:05:58 [88798] [INFO] Booting worker with pid: 88798
-2025-02-11 00:09:49 [88793] [INFO] Handling signal: int
-2025-02-11 00:09:49 [88793] [ERROR] Worker (pid:88796) was sent SIGINT!
-2025-02-11 00:09:49 [88793] [ERROR] Worker (pid:88797) was sent SIGINT!
-2025-02-11 00:09:49 [88793] [ERROR] Worker (pid:88795) was sent SIGINT!
-2025-02-11 00:09:49 [88793] [ERROR] Worker (pid:88798) was sent SIGINT!
-2025-02-11 00:09:49 [88793] [INFO] Shutting down: Master
-2025-02-11 00:09:53 [88968] [INFO] Starting gunicorn 21.2.0
-2025-02-11 00:09:53 [88968] [INFO] Listening at: http://0.0.0.0:8000 (88968)
-2025-02-11 00:09:53 [88968] [INFO] Using worker: sync
-2025-02-11 00:09:53 [88969] [INFO] Booting worker with pid: 88969
-2025-02-11 00:09:53 [88970] [INFO] Booting worker with pid: 88970
-2025-02-11 00:09:53 [88971] [INFO] Booting worker with pid: 88971
-2025-02-11 00:09:53 [88972] [INFO] Booting worker with pid: 88972
+2025-02-11 00:24:04 [90206] [INFO] Handling signal: int
+2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90215) was sent SIGINT!
+2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90214) was sent SIGINT!
+2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90213) was sent SIGINT!
+2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90216) was sent SIGINT!
+2025-02-11 00:24:04 [90206] [INFO] Shutting down: Master

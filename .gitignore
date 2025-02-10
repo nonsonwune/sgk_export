@@ -5,8 +5,11 @@ venv/
 logs/
 /logs
 /venv
-migrate_to_render.txt
-.env
-*.sql
 
+migrate_to_render.txt
 appWrite_bucket_docs.md
+
+.env
+
+*.sql
+*.log
