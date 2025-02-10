@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import os
 from appwrite.client import Client
 from ..utils.appwrite import init_appwrite
+from app.models import ExportRequest
 
 logger = logging.getLogger(__name__)
 
@@ -26,38 +27,100 @@ def index():
     return redirect(url_for('auth.login'))
 
 @bp.route('/dashboard')
-@login_required
 def dashboard():
-    """Dashboard view function"""
     try:
-        logger.debug("Starting dashboard view function")
-        logger.debug("Checking available endpoints")
-        logger.debug(f"Current registered blueprints: {[bp.name for bp in current_app.blueprints.values()]}")
-        logger.debug(f"Current registered view functions: {list(current_app.view_functions.keys())}")
+        # Get the start of the current month
+        today = datetime.now()
+        start_of_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        start_of_prev_month = (start_of_month - timedelta(days=1)).replace(day=1)
         
-        logger.debug("Checking database schema")
-        logger.debug(f"Available columns in export_request table: {[c.name for c in Shipment.__table__.columns]}")
-        
-        logger.debug("Fetching recent shipments for dashboard")
-        recent_shipments = Shipment.query.order_by(
-            Shipment.created_at.desc()
+        # Calculate monthly statistics
+        current_month_stats = db.session.query(
+            func.count(ExportRequest.id).label('total_shipments'),
+            func.sum(ExportRequest.total).label('total_revenue'),
+            func.count(
+                case(
+                    (ExportRequest.status == 'Active', 1),
+                    else_=None
+                )
+            ).label('active_shipments'),
+            func.count(
+                case(
+                    (ExportRequest.status == 'Delivered', 1),
+                    else_=None
+                )
+            ).label('delivered_shipments')
+        ).filter(ExportRequest.created_at >= start_of_month).first()
+
+        # Calculate previous month statistics for comparison
+        prev_month_stats = db.session.query(
+            func.count(ExportRequest.id).label('total_shipments'),
+            func.sum(ExportRequest.total).label('total_revenue')
+        ).filter(
+            ExportRequest.created_at >= start_of_prev_month,
+            ExportRequest.created_at < start_of_month
+        ).first()
+
+        # Calculate percentage changes
+        monthly_stats = {
+            'total_shipments': current_month_stats.total_shipments or 0,
+            'total_revenue': float(current_month_stats.total_revenue or 0),
+            'active_shipments': current_month_stats.active_shipments or 0,
+            'delivered_shipments': current_month_stats.delivered_shipments or 0,
+            'shipment_change': calculate_percentage_change(
+                current_month_stats.total_shipments,
+                prev_month_stats.total_shipments
+            ),
+            'revenue_change': calculate_percentage_change(
+                current_month_stats.total_revenue,
+                prev_month_stats.total_revenue
+            )
+        }
+
+        # Get monthly trend data for charts
+        trend_data = get_monthly_trend_data()
+
+        # Get recent shipments
+        recent_shipments = ExportRequest.query.order_by(
+            ExportRequest.created_at.desc()
         ).limit(5).all()
-        
-        # Get statistics
-        total_shipments = Shipment.query.count()
-        pending_shipments = Shipment.query.filter_by(status='pending').count()
-        completed_shipments = Shipment.query.filter_by(status='completed').count()
-        
+
         return render_template('dashboard.html',
-                             recent_shipments=recent_shipments,
-                             total_shipments=total_shipments,
-                             pending_shipments=pending_shipments,
-                             completed_shipments=completed_shipments)
-                             
+                             monthly_stats=monthly_stats,
+                             trend_data=trend_data,
+                             recent_shipments=recent_shipments)
+
     except Exception as e:
-        logger.error(f"Error loading dashboard: {str(e)}", exc_info=True)
-        flash('An error occurred while loading the dashboard.', 'error')
-        return render_template('error.html', error=str(e)), 500
+        current_app.logger.error(f"Error loading dashboard: {str(e)}")
+        return render_template('dashboard.html', error=True)
+
+def calculate_percentage_change(current, previous):
+    if not previous or not current:
+        return 0
+    return ((current - previous) / previous) * 100
+
+def get_monthly_trend_data():
+    # Get the last 6 months of data
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=180)
+    
+    monthly_data = db.session.query(
+        func.date_trunc('month', ExportRequest.created_at).label('month'),
+        func.count(ExportRequest.id).label('shipment_count'),
+        func.sum(ExportRequest.total).label('revenue')
+    ).filter(
+        ExportRequest.created_at >= start_date
+    ).group_by(
+        func.date_trunc('month', ExportRequest.created_at)
+    ).order_by(
+        func.date_trunc('month', ExportRequest.created_at)
+    ).all()
+
+    return {
+        'labels': [d.month.strftime('%b') for d in monthly_data],
+        'shipments': [d.shipment_count for d in monthly_data],
+        'revenue': [float(d.revenue or 0) for d in monthly_data]
+    }
 
 @bp.route('/profile')
 @login_required

@@ -1,87 +1,359 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css">
+<style>
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .metric-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .metric-card h3 {
+        margin: 0;
+        color: #4a5568;
+        font-size: 1.1rem;
+    }
+
+    .metric-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2d3748;
+        margin: 1rem 0;
+    }
+
+    .metric-trend {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+    }
+
+    .trend-up { color: #48bb78; }
+    .trend-down { color: #f56565; }
+
+    .chart-container {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        grid-column: span 2;
+    }
+
+    .quick-actions {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .action-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .action-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        background: #f7fafc;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #4a5568;
+        transition: all 0.2s;
+    }
+
+    .action-button:hover {
+        background: #edf2f7;
+        transform: translateY(-2px);
+    }
+
+    .action-button i {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .recent-activity {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .activity-list {
+        margin-top: 1rem;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .activity-icon {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: #ebf4ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+
+    .loading {
+        position: relative;
+        min-height: 200px;
+    }
+
+    .loading::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #4a5568;
+    }
+
+    .error-state {
+        text-align: center;
+        padding: 2rem;
+        color: #e53e3e;
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
+<div class="container"
+     data-dashboard="{{ {
+         'error': error|default(false),
+         'chartData': {
+             'labels': trend_data.labels if trend_data else [],
+             'shipments': trend_data.shipments if trend_data else [],
+             'revenue': trend_data.revenue if trend_data else []
+         } if trend_data else {}
+     }|tojson|escape }}">
+    <h1>Dashboard</h1>
+
     {% if error %}
-    <div class="alert alert-danger" role="alert">
-        An error occurred while loading the dashboard. Please try again later.
+    <div class="error-state">
+        <i class="fas fa-exclamation-circle fa-3x"></i>
+        <h2>Oops! Something went wrong</h2>
+        <p>We're having trouble loading your dashboard data. Please try refreshing the page.</p>
     </div>
     {% else %}
-    <h2>Dashboard</h2>
-    
-    <!-- Recent Shipments -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="card-title mb-0">Recent Shipments</h5>
-        </div>
-        <div class="card-body">
-            {% if recent_shipments %}
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Waybill</th>
-                            <th>Sender</th>
-                            <th>Receiver</th>
-                            <th>Status</th>
-                            <th>Created</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for shipment in recent_shipments %}
-                        <tr>
-                            <td><a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}">{{ shipment.waybill_number }}</a></td>
-                            <td>{{ shipment.sender_name }}</td>
-                            <td>{{ shipment.receiver_name }}</td>
-                            <td><span class="badge bg-{{ shipment.status|lower }}">{{ shipment.status }}</span></td>
-                            <td>{{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    <div class="dashboard-grid">
+        <!-- Key Metrics -->
+        <div class="metric-card">
+            <h3>Total Shipments</h3>
+            <div class="metric-value">{{ monthly_stats.total_shipments }}</div>
+            <div class="metric-trend {% if monthly_stats.shipment_change > 0 %}trend-up{% else %}trend-down{% endif %}">
+                <i class="fas fa-arrow-{% if monthly_stats.shipment_change > 0 %}up{% else %}down{% endif %}"></i>
+                <span>{{ "%.1f"|format(monthly_stats.shipment_change|abs) }}% vs last month</span>
             </div>
-            {% else %}
-            <p class="text-muted">No recent shipments found.</p>
-            {% endif %}
         </div>
-    </div>
 
-    <!-- Monthly Statistics -->
-    {% if monthly_stats %}
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title mb-0">Monthly Statistics</h5>
+        <div class="metric-card">
+            <h3>Revenue</h3>
+            <div class="metric-value">${{ "%.2f"|format(monthly_stats.total_revenue) }}</div>
+            <div class="metric-trend {% if monthly_stats.revenue_change > 0 %}trend-up{% else %}trend-down{% endif %}">
+                <i class="fas fa-arrow-{% if monthly_stats.revenue_change > 0 %}up{% else %}down{% endif %}"></i>
+                <span>{{ "%.1f"|format(monthly_stats.revenue_change|abs) }}% vs last month</span>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <h6>Total Shipments</h6>
-                        <p class="h3">{{ monthly_stats.total_shipments }}</p>
+
+        <div class="metric-card">
+            <h3>Active Shipments</h3>
+            <div class="metric-value">{{ monthly_stats.active_shipments }}</div>
+            <div class="metric-trend trend-neutral">
+                <i class="fas fa-clock"></i>
+                <span>Current Active</span>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <h3>Delivered Today</h3>
+            <div class="metric-value">{{ monthly_stats.delivered_shipments }}</div>
+            <div class="metric-trend trend-neutral">
+                <i class="fas fa-check"></i>
+                <span>Today's Deliveries</span>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="chart-container">
+            <h3>Shipment Volume Trend</h3>
+            <canvas id="shipmentTrendChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h3>Revenue Analysis</h3>
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-grid">
+                <a href="{{ url_for('shipments.new_shipment') }}" class="action-button">
+                    <i class="fas fa-plus"></i>
+                    <span>New Shipment</span>
+                </a>
+                <a href="{{ url_for('shipments.list_shipments') }}" class="action-button">
+                    <i class="fas fa-list"></i>
+                    <span>View All</span>
+                </a>
+                <a href="{{ url_for('contacts.list_all_contacts') }}" class="action-button">
+                    <i class="fas fa-address-book"></i>
+                    <span>Contacts</span>
+                </a>
+                <a href="{{ url_for('main.print_form_template') }}" class="action-button">
+                    <i class="fas fa-print"></i>
+                    <span>Print Form</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <h3>Recent Activity</h3>
+            <div class="activity-list">
+                {% if recent_shipments %}
+                    {% for shipment in recent_shipments %}
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div>
+                            <strong>{{ shipment.waybill_number }}</strong>
+                            <p class="text-muted">{{ shipment.status }} - {{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <h6>Total Revenue</h6>
-                        <p class="h3">${{ "%.2f"|format(monthly_stats.total_revenue or 0) }}</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <h6>Delivered Shipments</h6>
-                        <p class="h3">{{ monthly_stats.delivered_shipments }}</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <h6>Active Shipments</h6>
-                        <p class="h3">{{ monthly_stats.active_shipments }}</p>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted">No recent activity</p>
+                {% endif %}
             </div>
         </div>
     </div>
-    {% endif %}
     {% endif %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script>
+(function() {
+    // Get dashboard data from container element
+    const container = document.querySelector('.container');
+    const dashboardData = JSON.parse(container.dataset.dashboard || '{}');
+
+    if (dashboardData.error) {
+        return;
+    }
+
+    function initializeCharts() {
+        const chartData = dashboardData.chartData;
+        if (!chartData) {
+            return;
+        }
+
+        // Shipment Trend Chart
+        const shipmentCtx = document.getElementById('shipmentTrendChart').getContext('2d');
+        new Chart(shipmentCtx, {
+            type: 'line',
+            data: {
+                labels: chartData.labels,
+                datasets: [{
+                    label: 'Shipment Volume',
+                    data: chartData.shipments,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: chartData.revenue,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize charts when DOM is loaded
+    document.addEventListener('DOMContentLoaded', initializeCharts);
+})();
+</script>
 {% endblock %} 
