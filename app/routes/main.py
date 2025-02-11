@@ -469,3 +469,80 @@ def serve_image(file_id):
     except Exception as e:
         logger.error(f'Error serving image: {str(e)}', exc_info=True)
         return 'Error serving image', 500
+
+def calculate_avg_delivery_time(start_date, end_date):
+    logger.debug(f"Calculating average delivery time between {start_date} and {end_date}")
+    try:
+        delivered_shipments = Shipment.query.filter(
+            Shipment.status == 'delivered',
+            Shipment.created_at.between(start_date, end_date)
+        ).all()
+        
+        if not delivered_shipments:
+            logger.debug("No delivered shipments found in date range")
+            return 0.0
+            
+        total_days = 0
+        valid_shipments = 0
+        
+        for shipment in delivered_shipments:
+            if hasattr(shipment, 'delivery_date') and shipment.delivery_date:
+                days = (shipment.delivery_date - shipment.created_at).days
+                if days >= 0:  # Ensure valid delivery time
+                    total_days += days
+                    valid_shipments += 1
+        
+        avg_days = total_days / valid_shipments if valid_shipments > 0 else 0
+        logger.debug(f"Calculated average delivery time: {avg_days:.1f} days")
+        return avg_days
+    except Exception as e:
+        logger.error(f"Error calculating average delivery time: {str(e)}")
+        return 0.0
+
+def calculate_monthly_stats():
+    logger.debug("=== Starting Monthly Stats Calculation ===")
+    try:
+        current_month_start = datetime.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        previous_month_start = (current_month_start - timedelta(days=1)).replace(day=1)
+        
+        # Get current month stats
+        current_stats = get_period_stats(current_month_start, datetime.now())
+        previous_stats = get_period_stats(previous_month_start, current_month_start)
+        
+        # Calculate changes
+        shipment_change = calculate_percentage_change(
+            previous_stats['total_shipments'],
+            current_stats['total_shipments']
+        )
+        revenue_change = calculate_percentage_change(
+            previous_stats['total_revenue'],
+            current_stats['total_revenue']
+        )
+        
+        # Add average delivery time
+        current_stats['avg_delivery_time'] = calculate_avg_delivery_time(
+            current_month_start,
+            datetime.now()
+        )
+        
+        # Combine all stats
+        monthly_stats = {
+            **current_stats,
+            'shipment_change': shipment_change,
+            'revenue_change': revenue_change
+        }
+        
+        logger.debug(f"Final monthly stats: {monthly_stats}")
+        return monthly_stats
+        
+    except Exception as e:
+        logger.error(f"Error calculating monthly stats: {str(e)}")
+        return {
+            'total_shipments': 0,
+            'total_revenue': 0.0,
+            'active_shipments': 0,
+            'delivered_shipments': 0,
+            'avg_delivery_time': 0.0,
+            'shipment_change': 0,
+            'revenue_change': 0
+        }

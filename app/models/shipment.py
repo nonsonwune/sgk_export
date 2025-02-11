@@ -23,6 +23,7 @@ class Shipment(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     waybill_number = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    delivery_date = db.Column(db.DateTime)
     qr_code = db.Column(db.Text)
     
     # Relationships

@@ -6,17 +6,25 @@
 {% endblock %}
 
 {% block content %}
-<!-- Debug output -->
-<div id="debug-output" style="display: none;">
-    <pre>Raw trend_data: {{ trend_data }}</pre>
-    <pre>JSON trend_data: {{ trend_data|tojson }}</pre>
-    <pre>Safe JSON trend_data: {{ trend_data|tojson|safe }}</pre>
-</div>
-<div class="container" 
-     data-error="{{ error|default(false)|tojson|safe }}"
-     data-chart-data="{{ trend_data|tojson|safe }}"
-     data-debug='{{ {"test": 123}|tojson|safe }}'>
-    <h1>Dashboard</h1>
+<div class="container">
+    <div class="dashboard-header">
+        <div class="header-left">
+            <h1>Dashboard</h1>
+            <div class="date-filter">
+                <select id="timeRange" class="form-select">
+                    <option value="7">Last 7 Days</option>
+                    <option value="30" selected>Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                </select>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="refresh-info">
+                <i class="fas fa-sync"></i>
+                Last updated: <span id="lastUpdated">Just now</span>
+            </div>
+        </div>
+    </div>
 
     {% if error %}
     <div class="error-state">
@@ -26,77 +34,165 @@
     </div>
     {% else %}
     <div class="dashboard-grid">
+        <!-- Status Overview -->
+        <div class="status-overview">
+            <h3>Shipment Status Overview</h3>
+            <div class="status-cards">
+                <div class="status-card pending">
+                    <div class="status-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="status-details">
+                        <span class="status-count">{{ monthly_stats.pending_count }}</span>
+                        <span class="status-label">Pending</span>
+                    </div>
+                </div>
+                <div class="status-card processing">
+                    <div class="status-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="status-details">
+                        <span class="status-count">{{ monthly_stats.processing_count }}</span>
+                        <span class="status-label">Processing</span>
+                    </div>
+                </div>
+                <div class="status-card in-transit">
+                    <div class="status-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="status-details">
+                        <span class="status-count">{{ monthly_stats.in_transit_count }}</span>
+                        <span class="status-label">In Transit</span>
+                    </div>
+                </div>
+                <div class="status-card delivered">
+                    <div class="status-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="status-details">
+                        <span class="status-count">{{ monthly_stats.delivered_count }}</span>
+                        <span class="status-label">Delivered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Key Metrics -->
-        <div class="metric-card">
-            <h3>Total Shipments</h3>
-            <div class="metric-value">{{ monthly_stats.total_shipments }}</div>
-            <div class="metric-trend {% if monthly_stats.shipment_change > 0 %}trend-up{% else %}trend-down{% endif %}">
-                <i class="fas fa-arrow-{% if monthly_stats.shipment_change > 0 %}up{% else %}down{% endif %}"></i>
-                <span>{{ "%.1f"|format(monthly_stats.shipment_change|abs) }}% vs last month</span>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <h3>Total Shipments</h3>
+                    <div class="metric-sparkline" id="shipmentsSparkline"></div>
+                </div>
+                <div class="metric-value" id="shipments-total">{{ monthly_stats.total_shipments }}</div>
+                <div class="metric-trend {% if monthly_stats.shipment_change > 0 %}trend-up{% else %}trend-down{% endif %}">
+                    <i class="fas fa-arrow-{% if monthly_stats.shipment_change > 0 %}up{% else %}down{% endif %}"></i>
+                    <span>{{ "%.1f"|format(monthly_stats.shipment_change|abs) }}% vs last month</span>
+                </div>
             </div>
-        </div>
 
-        <div class="metric-card">
-            <h3>Revenue</h3>
-            <div class="metric-value">${{ "%.2f"|format(monthly_stats.total_revenue) }}</div>
-            <div class="metric-trend {% if monthly_stats.revenue_change > 0 %}trend-up{% else %}trend-down{% endif %}">
-                <i class="fas fa-arrow-{% if monthly_stats.revenue_change > 0 %}up{% else %}down{% endif %}"></i>
-                <span>{{ "%.1f"|format(monthly_stats.revenue_change|abs) }}% vs last month</span>
+            <div class="metric-card">
+                <div class="metric-header">
+                    <h3>Active Shipments</h3>
+                    <div class="metric-sparkline" id="activeShipmentsSparkline"></div>
+                </div>
+                <div class="metric-value" id="shipments-active">{{ monthly_stats.active_shipments }}</div>
+                <div class="metric-trend">
+                    <i class="fas fa-clock"></i>
+                    <span>Currently in progress</span>
+                </div>
             </div>
-        </div>
 
-        <div class="metric-card">
-            <h3>Active Shipments</h3>
-            <div class="metric-value">{{ monthly_stats.active_shipments }}</div>
-            <div class="metric-trend trend-neutral">
-                <i class="fas fa-clock"></i>
-                <span>Current Active</span>
+            <div class="metric-card">
+                <div class="metric-header">
+                    <h3>Delivered Shipments</h3>
+                    <div class="metric-sparkline" id="deliveredShipmentsSparkline"></div>
+                </div>
+                <div class="metric-value" id="shipments-delivered">{{ monthly_stats.delivered_shipments }}</div>
+                <div class="metric-trend">
+                    <i class="fas fa-check"></i>
+                    <span>Successfully completed</span>
+                </div>
             </div>
-        </div>
 
-        <div class="metric-card">
-            <h3>Delivered Today</h3>
-            <div class="metric-value">{{ monthly_stats.delivered_shipments }}</div>
-            <div class="metric-trend trend-neutral">
-                <i class="fas fa-check"></i>
-                <span>Today's Deliveries</span>
+            <div class="metric-card">
+                <div class="metric-header">
+                    <h3>Total Revenue</h3>
+                    <div class="metric-sparkline" id="revenueSparkline"></div>
+                </div>
+                <div class="metric-value" id="revenue-total">${{ "%.2f"|format(monthly_stats.total_revenue) }}</div>
+                <div class="metric-trend {% if monthly_stats.revenue_change > 0 %}trend-up{% else %}trend-down{% endif %}">
+                    <i class="fas fa-arrow-{% if monthly_stats.revenue_change > 0 %}up{% else %}down{% endif %}"></i>
+                    <span>{{ "%.1f"|format(monthly_stats.revenue_change|abs) }}% vs last month</span>
+                </div>
             </div>
         </div>
 
         <!-- Charts -->
-        <div class="chart-container">
-            <h3>Shipment Volume Trend</h3>
-            <div class="chart-loading-state">
-                <div class="spinner"></div>
-                <p>Loading chart data...</p>
+        <div class="charts-grid">
+            <!-- Shipment Trend Chart -->
+            <div class="chart-container" id="shipmentTrendChartContainer">
+                <div class="chart-header">
+                    <h3>Shipment Trend</h3>
+                    <div class="chart-controls">
+                        <button class="btn btn-sm" data-view="daily">Daily</button>
+                        <button class="btn btn-sm active" data-view="weekly">Weekly</button>
+                        <button class="btn btn-sm" data-view="monthly">Monthly</button>
+                    </div>
+                </div>
+                <div class="chart-loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading chart data...</p>
+                </div>
+                <div class="chart-error-state" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Failed to load chart data</p>
+                    <button class="retry-btn">Retry</button>
+                </div>
+                <canvas id="shipmentTrendChart"></canvas>
             </div>
-            <div class="chart-error-state" style="display: none;">
-                <i class="fas fa-exclamation-circle"></i>
-                <p class="error-message"></p>
-                <button class="btn btn-sm btn-primary retry-btn">
-                    <i class="fas fa-sync"></i> Retry
-                </button>
+
+            <!-- Revenue Chart -->
+            <div class="chart-container" id="revenueChartContainer">
+                <div class="chart-header">
+                    <h3>Revenue Analysis</h3>
+                    <div class="chart-controls">
+                        <button class="btn btn-sm" data-view="daily">Daily</button>
+                        <button class="btn btn-sm active" data-view="weekly">Weekly</button>
+                        <button class="btn btn-sm" data-view="monthly">Monthly</button>
+                    </div>
+                </div>
+                <div class="chart-loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading chart data...</p>
+                </div>
+                <div class="chart-error-state" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Failed to load chart data</p>
+                    <button class="retry-btn">Retry</button>
+                </div>
+                <canvas id="revenueChart"></canvas>
             </div>
-            <canvas id="shipmentTrendChart" width="400" height="200" style="display: none;"></canvas>
+
+            <!-- Status Distribution Chart -->
+            <div class="chart-container" id="statusDistributionChartContainer">
+                <div class="chart-header">
+                    <h3>Status Distribution</h3>
+                </div>
+                <div class="chart-loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading chart data...</p>
+                </div>
+                <div class="chart-error-state" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Failed to load chart data</p>
+                    <button class="retry-btn">Retry</button>
+                </div>
+                <canvas id="statusDistributionChart"></canvas>
+            </div>
         </div>
 
-        <div class="chart-container">
-            <h3>Revenue Analysis</h3>
-            <div class="chart-loading-state">
-                <div class="spinner"></div>
-                <p>Loading chart data...</p>
-            </div>
-            <div class="chart-error-state" style="display: none;">
-                <i class="fas fa-exclamation-circle"></i>
-                <p class="error-message"></p>
-                <button class="btn btn-sm btn-primary retry-btn">
-                    <i class="fas fa-sync"></i> Retry
-                </button>
-            </div>
-            <canvas id="revenueChart" width="400" height="200" style="display: none;"></canvas>
-        </div>
-
-        <!-- Quick Actions -->
+        <!-- Quick Actions with Counts -->
         <div class="quick-actions">
             <h3>Quick Actions</h3>
             <div class="action-grid">
@@ -106,37 +202,61 @@
                 </a>
                 <a href="{{ url_for('shipments.list_shipments') }}" class="action-button">
                     <i class="fas fa-list"></i>
-                    <span>View All</span>
+                    <span>View All ({{ monthly_stats.total_shipments }})</span>
                 </a>
-                <a href="{{ url_for('contacts.list_all_contacts') }}" class="action-button">
-                    <i class="fas fa-address-book"></i>
-                    <span>Contacts</span>
+                <a href="{{ url_for('shipments.list_shipments', status='pending') }}" class="action-button">
+                    <i class="fas fa-clock"></i>
+                    <span>Pending ({{ monthly_stats.pending_count }})</span>
                 </a>
-                <a href="{{ url_for('main.print_form_template') }}" class="action-button">
-                    <i class="fas fa-print"></i>
-                    <span>Print Form</span>
+                <a href="{{ url_for('shipments.list_shipments', status='in_transit') }}" class="action-button">
+                    <i class="fas fa-truck"></i>
+                    <span>In Transit ({{ monthly_stats.in_transit_count }})</span>
                 </a>
             </div>
         </div>
 
-        <!-- Recent Activity -->
+        <!-- Recent Activity with Enhanced Details -->
         <div class="recent-activity">
-            <h3>Recent Activity</h3>
+            <div class="section-header">
+                <h3>Recent Activity</h3>
+                <a href="{{ url_for('shipments.list_shipments') }}" class="view-all">View All</a>
+            </div>
             <div class="activity-list">
                 {% if recent_shipments %}
                     {% for shipment in recent_shipments %}
                     <div class="activity-item">
-                        <div class="activity-icon">
-                            <i class="fas fa-box"></i>
+                        <div class="activity-icon status-{{ shipment.status }}">
+                            <i class="fas fa-{{ {
+                                'pending': 'clock',
+                                'confirmed': 'check',
+                                'processing': 'cog',
+                                'in_transit': 'truck',
+                                'delivered': 'box-check',
+                                'cancelled': 'times'
+                            }[shipment.status] }}"></i>
                         </div>
-                        <div>
-                            <strong>{{ shipment.waybill_number }}</strong>
-                            <p class="text-muted">{{ shipment.status }} - {{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <div class="activity-details">
+                            <div class="activity-main">
+                                <strong>{{ shipment.waybill_number }}</strong>
+                                <span class="status-badge status-{{ shipment.status }}">
+                                    {{ shipment.status|title }}
+                                </span>
+                            </div>
+                            <div class="activity-meta">
+                                <span class="customer">{{ shipment.sender_name }} → {{ shipment.receiver_name }}</span>
+                                <span class="timestamp">{{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                            </div>
                         </div>
+                        <a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}" class="activity-action">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
                     </div>
                     {% endfor %}
                 {% else %}
-                    <p class="text-muted">No recent activity</p>
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No recent activity</p>
+                    </div>
                 {% endif %}
             </div>
         </div>

@@ -5,7 +5,7 @@ from ..utils.helpers import calculate_subtotal, calculate_vat
 from ..extensions import db
 from sqlalchemy import func, case
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import wraps
 import jwt
 
@@ -358,4 +358,116 @@ def get_stats():
         })
     except Exception as e:
         logger.error(f'API Error in get_stats: {str(e)}')
-        return jsonify({'error': 'Internal server error'}), 500 
+        return jsonify({'error': 'Internal server error'}), 500
+
+@bp.route('/dashboard/charts', methods=['GET'])
+def get_dashboard_charts():
+    try:
+        # Sample data structure
+        data = {
+            'labels': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            'shipments': [10, 15, 8, 12, 20],
+            'revenue': [1000, 1500, 800, 1200, 2000]
+        }
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@bp.route('/dashboard/chart-data', methods=['GET'])
+def get_chart_data():
+    try:
+        # Sample data structure
+        data = {
+            'labels': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            'shipments': [10, 15, 8, 12, 20],
+            'revenue': [1000, 1500, 800, 1200, 2000]
+        }
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@bp.route('/dashboard/data', methods=['GET'])
+def get_dashboard_data():
+    try:
+        time_range = request.args.get('timeRange', '30')
+        logger.debug('Processing timeRange parameter: %s', time_range)
+        
+        # Map string time ranges to days
+        time_range_map = {
+            'daily': '1',
+            'weekly': '7',
+            'monthly': '30',
+            'quarterly': '90'
+        }
+        
+        # Convert time range to days
+        days = time_range_map.get(time_range, time_range)
+        try:
+            days = int(days)
+            if days <= 0:
+                raise ValueError('Days must be positive')
+        except ValueError as e:
+            logger.error('Invalid timeRange parameter: %s - %s', time_range, str(e))
+            return jsonify({'error': 'Invalid time range parameter'}), 400
+            
+        logger.debug('Converted timeRange to days: %d', days)
+        
+        # Get the date range
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=days)
+        
+        logger.debug('Date range: %s to %s', start_date, end_date)
+        
+        # Get statistics with status counts
+        stats = db.session.query(
+            func.count(Shipment.id).label('total_shipments'),
+            func.sum(Shipment.total).label('total_revenue'),
+            func.count(case((Shipment.status == 'active', 1), else_=0)).label('active_shipments'),
+            func.count(case((Shipment.status == 'delivered', 1), else_=0)).label('delivered_shipments')
+        ).filter(
+            Shipment.created_at.between(start_date, end_date)
+        ).first()
+        
+        # Get status distribution
+        status_counts = db.session.query(
+            Shipment.status,
+            func.count(Shipment.id).label('count')
+        ).filter(
+            Shipment.created_at.between(start_date, end_date)
+        ).group_by(Shipment.status).all()
+        
+        # Get trend data
+        trend_data = db.session.query(
+            func.date_trunc('day', Shipment.created_at).label('date'),
+            func.count(Shipment.id).label('count'),
+            func.coalesce(func.sum(Shipment.total), 0).label('revenue')
+        ).filter(
+            Shipment.created_at.between(start_date, end_date)
+        ).group_by(
+            func.date_trunc('day', Shipment.created_at)
+        ).order_by('date').all()
+        
+        # Format response
+        response_data = {
+            'stats': {
+                'total_shipments': stats.total_shipments or 0,
+                'total_revenue': float(stats.total_revenue or 0),
+                'active_shipments': stats.active_shipments or 0,
+                'delivered_shipments': stats.delivered_shipments or 0
+            },
+            'status_distribution': {
+                status: count for status, count in status_counts
+            },
+            'trends': {
+                'dates': [t.date.strftime('%Y-%m-%d') for t in trend_data],
+                'shipments': [t.count for t in trend_data],
+                'revenue': [float(t.revenue or 0) for t in trend_data]
+            }
+        }
+        
+        logger.debug('Response data: %s', response_data)
+        return jsonify(response_data)
+        
+    except Exception as e:
+        logger.error('Error fetching dashboard data: %s', str(e), exc_info=True)
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500 
