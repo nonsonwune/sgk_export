@@ -387,44 +387,69 @@
 
     /* QR Code Print Optimizations */
     .qr-code-section {
-        margin-left: -10mm !important; /* Move slightly left */
-        margin-right: 5mm !important;  /* Ensure right margin */
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 130px !important; /* Ensure minimum width */
     }
 
     .qr-code-container {
-        width: 120px !important;  /* Reduced from 150px */
-        height: 120px !important; /* Reduced from 150px */
-        margin-right: 5mm !important;
+        width: 120px !important;
+        height: 120px !important;
+        margin: 0 !important;
+        padding: 5px !important; /* Add padding inside container */
+        background: white !important;
+        border: 1px solid #e2e8f0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: visible !important; /* Prevent truncation */
     }
 
     .qr-code-image {
-        max-width: 100% !important;
-        max-height: 100% !important;
-        width: auto !important;
-        height: auto !important;
+        width: 110px !important; /* Slightly smaller than container */
+        height: 110px !important;
         object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
     }
 
-    .qr-code-label {
-        font-size: 8pt !important;
-        margin-top: 1mm !important;
-        white-space: nowrap !important;
-    }
-
-    /* Ensure QR code container doesn't affect document header layout */
-    .document-header {
-        position: relative !important;
-        overflow: visible !important;
-    }
-
+    /* Adjust company header layout */
     .company-header {
-        position: relative !important;
+        display: flex !important;
         justify-content: space-between !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        margin: 0 0 5mm 0 !important;
+        padding: 0 !important;
+        gap: 10mm !important; /* Ensure space between content and QR */
     }
 
     .company-info-section {
         flex: 1 !important;
-        margin-right: 10mm !important; /* Space between content and QR code */
+        max-width: calc(100% - 140px) !important; /* Account for QR width */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure proper page margins */
+    .preview-container {
+        padding: 0 10mm !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .document-header {
+        margin: 0 0 5mm 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        overflow: visible !important;
     }
 }
 
@@ -436,5 +461,13 @@
         margin: 2rem auto;
         max-width: 210mm;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .qr-code-section {
+        min-width: 130px;
+    }
+
+    .company-header {
+        gap: 10mm;
     }
 } 

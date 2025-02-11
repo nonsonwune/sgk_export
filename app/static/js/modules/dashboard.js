@@ -167,15 +167,32 @@ function validateChartDataStructure(data) {
 async function getValidatedChartData() {
     debugLog('Fetching and validating chart data');
     try {
-        // Use the main dashboard data endpoint instead
         const timeRange = document.getElementById('timeRange').value;
         const response = await fetch(`/api/dashboard/data?timeRange=${timeRange}`);
+        
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            debugLog('API error response:', errorData);
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error || 'Unknown error'}`);
         }
         
         const data = await response.json();
         debugLog('Raw chart data received:', data);
+        
+        // Validate data structure
+        if (!data || !data.stats || !data.status_distribution || !data.trends) {
+            debugLog('Invalid data structure received:', data);
+            throw new Error('Invalid dashboard data structure');
+        }
+        
+        // Validate status distribution data
+        const validStatuses = ['pending', 'processing', 'in_transit', 'delivered', 'cancelled'];
+        const statusData = Object.entries(data.status_distribution);
+        debugLog('Status distribution validation:', {
+            receivedStatuses: Object.keys(data.status_distribution),
+            validStatuses,
+            statusCounts: statusData
+        });
         
         // Transform the data structure to match what the charts expect
         const chartData = {
@@ -377,11 +394,11 @@ async function initializeCharts() {
                     datasets: [{
                         data: [0, 0, 0, 0, 0],
                         backgroundColor: [
-                            '#FCD34D',
-                            '#60A5FA',
-                            '#34D399',
-                            '#A78BFA',
-                            '#F87171'
+                            '#FCD34D', // Pending - Yellow
+                            '#60A5FA', // Processing - Blue
+                            '#34D399', // In Transit - Green
+                            '#A78BFA', // Delivered - Purple
+                            '#F87171'  // Cancelled - Red
                         ],
                         borderWidth: 0
                     }]
@@ -588,7 +605,21 @@ function updateCharts(data) {
         const container = document.getElementById('statusDistributionChart').closest('.chart-container');
         hideChartLoading(container);
         hideChartError(container);
-        const statusData = Object.values(data.status_distribution);
+        
+        debugLog('Raw status distribution data:', data.status_distribution);
+        
+        // Map status data to chart format
+        const statusLabels = ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled'];
+        const statusData = statusLabels.map(label => {
+            const status = label.toLowerCase().replace(' ', '_');
+            return data.status_distribution[status] || 0;
+        });
+        
+        debugLog('Processed status data:', {
+            labels: statusLabels,
+            data: statusData
+        });
+        
         statusChart.data.datasets[0].data = statusData;
         statusChart.update();
     }

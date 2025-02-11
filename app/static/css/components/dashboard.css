@@ -1,8 +1,8 @@
 /* Dashboard Layout */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.25rem;
     margin-top: 1.5rem;
 }
 
@@ -167,8 +167,7 @@
     padding: 1.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    grid-column: span 2;
-    height: 400px; /* Fixed height */
+    height: 400px;
     max-width: 100%;
     position: relative;
     overflow: hidden;
@@ -197,9 +196,9 @@
 
 /* Status Distribution Chart */
 .status-distribution-chart {
-    height: 300px;
+    height: 350px;
+    max-width: 600px;
     margin: 0 auto;
-    max-width: 500px;
 }
 
 .chart-header {
@@ -386,10 +385,23 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (min-width: 1400px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .chart-container.wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 1399px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .chart-container {
         grid-column: 1 / -1;
-        height: 350px;
     }
 }
 
@@ -408,8 +420,12 @@
         grid-template-columns: repeat(2, 1fr);
     }
     
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .chart-container {
-        height: 300px;
+        height: 350px;
     }
 }
 
