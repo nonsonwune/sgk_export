@@ -3,45 +3,74 @@ from datetime import datetime
 import uuid
 from sqlalchemy.types import TypeDecorator, CHAR
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.sql.type_api import TypeEngine
 from ..extensions import db
 
 logger = logging.getLogger(__name__)
 
 class GUID(TypeDecorator):
     """Platform-independent GUID type.
-    Uses PostgreSQL's UUID type, otherwise uses CHAR(36), storing as stringified hex values.
+    Uses PostgreSQL's UUID type, otherwise uses CHAR(36).
     """
     impl = CHAR
     cache_ok = True
+    _isnull = False
+    
+    def __init__(self):
+        super(GUID, self).__init__(length=36)
+        self._is_uuid = True
+        self._is_native = True
+
+    @property
+    def python_type(self):
+        return uuid.UUID
 
     def load_dialect_impl(self, dialect):
+        logger.debug(f"\n=== GUID load_dialect_impl ===")
+        logger.debug(f"Dialect name: {dialect.name}")
         if dialect.name == 'postgresql':
-            return dialect.type_descriptor(UUID())
-        else:
-            return dialect.type_descriptor(CHAR(36))
+            logger.debug("Using PostgreSQL UUID type")
+            impl = dialect.type_descriptor(UUID(as_uuid=True))
+            impl._is_uuid = True
+            impl._isnull = False
+            return impl
+        logger.debug("Using CHAR type")
+        impl = dialect.type_descriptor(CHAR(36))
+        impl._is_uuid = True
+        impl._isnull = False
+        return impl
 
     def process_bind_param(self, value, dialect):
+        """Process a value being bound as a parameter.
+        Handles UUID conversion based on dialect type.
+        """
         logger.debug(f"\n=== GUID BIND PARAM ===")
         logger.debug(f"Input value: {value}")
         logger.debug(f"Input type: {type(value)}")
-        logger.debug(f"Dialect: {dialect.name}")
+        logger.debug(f"Dialect: {dialect.__class__.__name__ if dialect else 'None'}")
         
         if value is None:
             logger.debug("Returning None value")
             return value
-        elif dialect.name == 'postgresql':
-            result = str(value)
-            logger.debug(f"PostgreSQL: Converting to string: {result}")
-            return result
-        else:
+            
+        try:
+            # Convert to UUID if not already
             if not isinstance(value, uuid.UUID):
-                result = str(uuid.UUID(value))
-                logger.debug(f"Non-UUID input: Converting to UUID string: {result}")
-                return result
+                value = uuid.UUID(str(value))
+                logger.debug(f"Converted to UUID: {value}")
+            
+            if dialect.name == 'postgresql':
+                # For PostgreSQL, return UUID object directly
+                logger.debug(f"PostgreSQL: Returning UUID object: {value}")
+                return value
             else:
+                # For other dialects, convert to string
                 result = str(value)
-                logger.debug(f"UUID input: Converting to string: {result}")
+                logger.debug(f"Other dialect: Converting to string: {result}")
                 return result
+        except Exception as e:
+            logger.error(f"Error in process_bind_param: {str(e)}")
+            raise
 
     def process_result_value(self, value, dialect):
         logger.debug(f"\n=== GUID RESULT VALUE ===")
@@ -52,19 +81,80 @@ class GUID(TypeDecorator):
         if value is None:
             logger.debug("Returning None value")
             return value
-        else:
-            if not isinstance(value, uuid.UUID):
-                result = uuid.UUID(value)
-                logger.debug(f"Non-UUID input: Converting to UUID: {result}")
-                return result
-            else:
-                logger.debug(f"Returning UUID value: {value}")
+            
+        try:
+            if isinstance(value, uuid.UUID):
+                logger.debug(f"Returning existing UUID: {value}")
                 return value
+                
+            if dialect.name == 'postgresql':
+                # PostgreSQL may return UUID or string
+                if isinstance(value, str):
+                    result = uuid.UUID(value)
+                    logger.debug(f"PostgreSQL: Converted string to UUID: {result}")
+                    return result
+                return value
+            else:
+                # Other dialects will return string
+                result = uuid.UUID(value)
+                logger.debug(f"Other dialect: Converted to UUID: {result}")
+                return result
+        except Exception as e:
+            logger.error(f"Error in process_result_value: {str(e)}")
+            raise
+
+    def coerce_compared_value(self, op, value):
+        """Handle comparison operations between UUID types"""
+        logger.debug(f"\n=== GUID coerce_compared_value ===")
+        logger.debug(f"Operator: {op}, Value: {value}, Value type: {type(value)}")
+        
+        if value is None:
+            return None
+            
+        # Get dialect if available
+        dialect = getattr(op, 'dialect', None)
+        logger.debug(f"Coercion dialect: {dialect.__class__.__name__ if dialect else 'None'}")
+            
+        try:
+            # Return a new GUID type instance for proper comparison
+            if isinstance(value, uuid.UUID):
+                return self
+                
+            if isinstance(value, str):
+                return self
+                
+            return self
+        except (ValueError, AttributeError, TypeError) as e:
+            logger.error(f"Error in coerce_compared_value: {str(e)}")
+            raise
+
+    def compare_values(self, x, y):
+        """Implement comparison logic for UUID values"""
+        logger.debug(f"\n=== GUID compare_values ===")
+        logger.debug(f"Comparing x: {x} ({type(x)}) with y: {y} ({type(y)})")
+        
+        if x is None or y is None:
+            return x is y
+            
+        # Convert both values to UUID for comparison
+        try:
+            x_uuid = x if isinstance(x, uuid.UUID) else uuid.UUID(str(x))
+            y_uuid = y if isinstance(y, uuid.UUID) else uuid.UUID(str(y))
+            return x_uuid == y_uuid
+        except (ValueError, AttributeError, TypeError) as e:
+            logger.error(f"Error comparing values: {str(e)}")
+            return False
+
+    def get_dbapi_type(self, dbapi):
+        """Return the DBAPI type for UUID"""
+        if hasattr(dbapi, 'UUID'):
+            return dbapi.UUID
+        return self.impl.get_dbapi_type(dbapi)
 
 class ShipmentItem(db.Model):
     __tablename__ = 'item_detail'
     
-    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = db.Column(GUID(), primary_key=True, default=uuid.uuid4)
     export_request_id = db.Column(GUID(), db.ForeignKey('export_request.id'), nullable=False)
     description = db.Column(db.String(200))
     value = db.Column(db.Float)
@@ -105,7 +195,7 @@ class Shipment(db.Model):
         STATUS_SAVED: [STATUS_PENDING, STATUS_CANCELLED]
     }
     
-    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = db.Column(GUID(), primary_key=True, default=uuid.uuid4)
     waybill_number = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     delivery_date = db.Column(db.DateTime)

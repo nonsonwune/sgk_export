@@ -157,10 +157,10 @@ def dashboard():
             func.date_trunc('month', Shipment.created_at).label('month'),
             func.count(Shipment.id).label('count'),
             func.sum(Shipment.total).label('revenue')
-        ).filter(
+            ).filter(
             Shipment.created_at.between(start_date, end_date)
         ).group_by('month').order_by('month').all()
-        
+            
         current_app.logger.debug(f'Query successful - Found {len(trend_data)} months of data')
         
         trends = {
@@ -194,7 +194,7 @@ def dashboard():
         current_app.logger.debug(f'Recent shipments count: {len(recent_shipments)}')
         
         return render_template('dashboard.html', **template_data)
-        
+            
     except Exception as e:
         current_app.logger.error(f'Error generating dashboard: {str(e)}', exc_info=True)
         return render_template('error.html', error='Failed to load dashboard data'), 500

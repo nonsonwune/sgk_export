@@ -9,6 +9,7 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
 import time
+import uuid
 
 logger = logging.getLogger(__name__)
 
@@ -222,11 +223,8 @@ def view_shipment(shipment_id):
     """View a specific shipment"""
     logger.debug(f'Accessing shipment details for ID: {shipment_id}')
     try:
-        # Convert shipment_id to string for query
-        str_shipment_id = str(shipment_id)
-        logger.debug(f'Converted shipment ID to string: {str_shipment_id}')
-        
-        shipment = Shipment.query.get_or_404(str_shipment_id)
+        # Query shipment directly with UUID
+        shipment = Shipment.query.get_or_404(shipment_id)
         logger.debug(f'Found shipment with waybill: {shipment.waybill_number}')
         
         # Debug items relationship
@@ -259,7 +257,7 @@ def view_shipment(shipment_id):
             shipment.qr_code = generate_qr_code(qr_data, shipment.sender_mobile, shipment.receiver_mobile, shipment.order_booked_by)
             logger.debug('QR code generated and assigned to shipment')
             db.session.commit()
-            
+        
         logger.debug('Preparing to render template with shipment data')
         return render_template('shipments/preview.html', 
                              shipment=shipment,
@@ -284,8 +282,8 @@ def edit_shipment(shipment_id):
         return redirect(url_for('shipments.list_shipments'))
         
     try:
-        str_shipment_id = str(shipment_id)
-        shipment = Shipment.query.get_or_404(str_shipment_id)
+        # Query shipment directly with UUID
+        shipment = Shipment.query.get_or_404(shipment_id)
         logger.debug(f'Found shipment with waybill: {shipment.waybill_number}')
         
         if request.method == 'POST':
@@ -304,32 +302,22 @@ def edit_shipment(shipment_id):
                 shipment.receiver_email = data['receiver_email']
                 shipment.receiver_mobile = data['receiver_mobile']
                 shipment.receiver_business = data.get('receiver_business')
-                shipment.receiver_address = data['receiver_address']
-                shipment.destination = data['destination']
-                shipment.shipping_cost = float(data.get('shipping_cost', 0))
-                shipment.insurance_cost = float(data.get('insurance_cost', 0))
-                shipment.packaging_cost = float(data.get('packaging_cost', 0))
-                shipment.other_charges = float(data.get('other_charges', 0))
-                shipment.customer_group = data.get('customer_group', 'regular')
-                shipment.notes = data.get('notes')
-                
-                logger.debug('Updated shipment details successfully')
+                shipment.destination_address = data['destination_address']
+                shipment.destination_country = data['destination_country']
+                shipment.destination_postcode = data['destination_postcode']
                 
                 db.session.commit()
                 flash('Shipment updated successfully', 'success')
-                return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
-                
+                return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
             except Exception as e:
                 db.session.rollback()
-                logger.error(f'Error updating shipment {shipment_id}: {str(e)}', exc_info=True)
+                logger.error(f'Error updating shipment: {str(e)}')
                 flash('Error updating shipment', 'error')
         
-        logger.debug('Rendering modify_export.html template')
-        return render_template('shipments/modify_export.html', shipment=shipment)
-        
+        return render_template('shipments/edit.html', shipment=shipment)
     except Exception as e:
-        logger.error(f'Error accessing edit form for shipment {shipment_id}: {str(e)}', exc_info=True)
-        flash('Error accessing edit form', 'error')
+        logger.error(f'Error accessing shipment: {str(e)}')
+        flash('Error accessing shipment', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
 @bp.route('/delete/<uuid:shipment_id>', methods=['POST'])
@@ -344,23 +332,73 @@ def delete_shipment(shipment_id):
         return redirect(url_for('shipments.list_shipments'))
         
     try:
-        str_shipment_id = str(shipment_id)
-        shipment = Shipment.query.get_or_404(str_shipment_id)
+        logger.debug(f'=== Starting Shipment Deletion Process ===')
+        logger.debug(f'Shipment ID: {shipment_id}, Type: {type(shipment_id)}')
         
-        # First delete all associated items
-        for item in shipment.items:
-            db.session.delete(item)
+        # Convert shipment_id to UUID if needed
+        if not isinstance(shipment_id, uuid.UUID):
+            shipment_id = uuid.UUID(str(shipment_id))
+            logger.debug(f'Converted shipment_id to UUID: {shipment_id}')
         
-        # Then delete the shipment
-        db.session.delete(shipment)
-        db.session.commit()
+        # Get shipment with items
+        shipment = Shipment.query.options(
+            db.joinedload(Shipment.items)
+        ).get_or_404(shipment_id)
+        logger.debug(f'Found shipment with {len(shipment.items)} items')
         
-        flash('Shipment deleted successfully', 'success')
-        return redirect(url_for('shipments.list_shipments'))
+        try:
+            # Start a nested transaction
+            with db.session.begin_nested():
+                # First delete all associated items
+                logger.debug('=== Deleting Associated Items ===')
+                for item in shipment.items:
+                    logger.debug(f'Processing item {item.id} (Type: {type(item.id)})')
+                    
+                    # Delete associated files if they exist
+                    if item.image_file_id:
+                        try:
+                            delete_file(item.image_file_id)
+                            logger.debug(f'Deleted file {item.image_file_id}')
+                        except Exception as e:
+                            logger.error(f'Error deleting file: {str(e)}')
+                            # Continue with item deletion even if file deletion fails
+                    
+                    # Log item details before deletion
+                    logger.debug(f'Item details before deletion:')
+                    logger.debug(f'- ID: {item.id} (Type: {type(item.id)})')
+                    logger.debug(f'- Export Request ID: {item.export_request_id} (Type: {type(item.export_request_id)})')
+                    
+                    # Delete the item
+                    db.session.delete(item)
+                    logger.debug(f'Deleted item {item.id}')
+                
+                logger.debug('All items deleted successfully')
+                
+                # Log shipment details before deletion
+                logger.debug(f'Shipment details before deletion:')
+                logger.debug(f'- ID: {shipment.id} (Type: {type(shipment.id)})')
+                logger.debug(f'- Created By: {shipment.created_by} (Type: {type(shipment.created_by)})')
+                
+                # Then delete the shipment
+                logger.debug('=== Deleting Shipment ===')
+                db.session.delete(shipment)
+                logger.debug(f'Deleted shipment {shipment.id}')
+            
+            # Commit the transaction
+            db.session.commit()
+            logger.debug('=== Deletion Process Completed Successfully ===')
+            
+            flash('Shipment deleted successfully', 'success')
+            return redirect(url_for('shipments.list_shipments'))
+            
+        except Exception as nested_error:
+            logger.error(f'Error in nested transaction: {str(nested_error)}', exc_info=True)
+            raise
+            
     except Exception as e:
         db.session.rollback()
-        current_app.logger.error(f"Error deleting shipment {shipment_id}: {str(e)}")
-        flash('Error deleting shipment', 'error')
+        logger.error(f'Error deleting shipment: {str(e)}', exc_info=True)
+        flash('Error deleting shipment. Please try again.', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
 @bp.route('/<uuid:shipment_id>/status', methods=['POST'])
@@ -368,8 +406,8 @@ def delete_shipment(shipment_id):
 def update_status(shipment_id):
     logger.debug(f'Processing status update for shipment {shipment_id}')
     try:
-        str_shipment_id = str(shipment_id)
-        shipment = Shipment.query.get_or_404(str_shipment_id)
+        # Query shipment directly with UUID
+        shipment = Shipment.query.get_or_404(shipment_id)
         new_status = request.form.get('status')
         logger.debug(f'Current status: {shipment.status}, Requested new status: {new_status}')
         

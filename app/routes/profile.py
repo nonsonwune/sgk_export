@@ -36,21 +36,16 @@ def index():
         except Exception as e:
             logger.error(f"Database verification error: {str(e)}")
 
-        # Debug raw shipment count with explicit type casting
+        # Debug raw shipment count
         logger.debug("\n=== USER SHIPMENTS QUERY ===")
-        user_id_str = str(current_user.id)
-        logger.debug(f"Querying with user_id: {user_id_str}")
+        logger.debug(f"Querying with user_id: {current_user.id}")
         
-        # Try both with and without type casting for debugging
-        count_with_cast = db.session.query(Shipment).filter(
-            Shipment.created_by == str(current_user.id)
-        ).count()
-        count_without_cast = db.session.query(Shipment).filter(
+        # Query shipments directly with UUID
+        shipment_count = db.session.query(Shipment).filter(
             Shipment.created_by == current_user.id
         ).count()
         
-        logger.debug(f"Count with string casting: {count_with_cast}")
-        logger.debug(f"Count without string casting: {count_without_cast}")
+        logger.debug(f"Direct shipment count: {shipment_count}")
         
         # Get all shipments for debugging
         logger.debug("\n=== ALL SHIPMENTS CHECK ===")
@@ -59,7 +54,7 @@ def index():
         for ship in all_shipments:
             logger.debug(f"Shipment ID: {ship.id}, created_by: {ship.created_by}, created_by type: {type(ship.created_by)}")
         
-        # Original stats query with enhanced logging
+        # Stats query with enhanced logging
         logger.debug("\n=== STATS QUERY ===")
         active_case = case(
             (Shipment.status.in_(['processing', 'in_transit']), 1),
@@ -110,9 +105,9 @@ def index():
         # Verify total counts match
         total_by_status = sum(status_distribution.values())
         logger.debug(f"Total by status distribution: {total_by_status}")
-        logger.debug(f"Total by direct count: {count_without_cast}")
-        if total_by_status != count_without_cast:
-            logger.warning(f"Count mismatch: status distribution total ({total_by_status}) != direct count ({count_without_cast})")
+        logger.debug(f"Total by direct count: {shipment_count}")
+        if total_by_status != shipment_count:
+            logger.warning(f"Count mismatch: status distribution total ({total_by_status}) != direct count ({shipment_count})")
         
         # Get recent shipments with debug logging
         logger.debug("Querying recent shipments")

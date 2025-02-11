@@ -72,7 +72,11 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
     
     def get_id(self):
-        """Override get_id to ensure UUID format"""
+        """Override get_id to ensure UUID format.
+        
+        Flask-Login requires the user ID to be returned as a string.
+        We validate the UUID format before converting to ensure data integrity.
+        """
         if not self.is_valid_uuid(self.id):
             logger.error(f"Invalid UUID format detected for user {self.username}")
             return None

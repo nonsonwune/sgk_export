@@ -80,11 +80,12 @@ def list_shipments():
         logger.error(f'API Error in list_shipments: {str(e)}')
         return jsonify({'error': 'Internal server error'}), 500
 
-@bp.route('/shipments/<string:shipment_id>', methods=['GET'])
+@bp.route('/shipments/<uuid:shipment_id>', methods=['GET'])
 @token_required
 def get_shipment(shipment_id):
     logger.debug(f'API: Accessing shipment details for ID: {shipment_id}')
     try:
+        # Query shipment directly with UUID
         shipment = Shipment.query.get_or_404(shipment_id)
         return jsonify(shipment.to_dict(include_items=True))
     except Exception as e:
