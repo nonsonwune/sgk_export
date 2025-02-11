@@ -53,12 +53,34 @@ def new_shipment():
 @login_required
 def submit_shipment():
     try:
-        logger.debug("Starting shipment submission")
+        logger.debug("\n=== SHIPMENT SUBMISSION START ===")
+        logger.debug("=== USER INFORMATION ===")
+        logger.debug(f"Current User ID: {current_user.id}")
+        logger.debug(f"User ID Type: {type(current_user.id)}")
+        logger.debug(f"User Object: {current_user.__dict__}")
+        
         form_data = request.form.to_dict()
+        logger.debug("\n=== FORM DATA ===")
         logger.debug(f"Received form data: {form_data}")
         logger.debug(f"Files in request: {list(request.files.keys())}")
         
-        # Create shipment object
+        # Create shipment object with enhanced debug logging
+        logger.debug("\n=== SHIPMENT CREATION ===")
+        created_by_value = current_user.id  # Remove string conversion
+        logger.debug(f"Created By - Value: {created_by_value}")
+        logger.debug(f"Created By - Type: {type(created_by_value)}")
+        
+        # Verify user exists in database
+        logger.debug("\n=== USER VERIFICATION ===")
+        from ..models.user import User
+        user = User.query.get(current_user.id)
+        if user:
+            logger.debug(f"Found user in database - ID: {user.id}")
+            logger.debug(f"User database ID type: {type(user.id)}")
+        else:
+            logger.error(f"User not found in database: {current_user.id}")
+            raise ValueError("Invalid user ID")
+        
         shipment = Shipment(
             waybill_number=Shipment.generate_waybill_number(),
             sender_name=form_data.get('sender_name'),
@@ -84,19 +106,42 @@ def submit_shipment():
             customer_group=form_data.get('customer_group'),
             order_booked_by=form_data.get('order_booked_by'),
             sender_signature=form_data.get('sender_signature'),
-            status='pending'
+            status='pending',
+            created_by=created_by_value
         )
         
-        logger.debug(f"Created shipment object with waybill: {shipment.waybill_number}")
+        logger.debug("\n=== SHIPMENT OBJECT CREATED ===")
+        logger.debug(f"Waybill Number: {shipment.waybill_number}")
+        logger.debug(f"Created By (before save): {shipment.created_by}")
+        logger.debug(f"Created By Type (before save): {type(shipment.created_by)}")
         
-        # Process items
+        # Before database operations
+        logger.debug("\n=== PRE-DATABASE OPERATIONS ===")
+        logger.debug("Attempting to add shipment to session")
+        db.session.add(shipment)
+        logger.debug("Shipment added to session")
+        
+        try:
+            logger.debug("Attempting to flush session")
+            db.session.flush()
+            logger.debug("Session flush successful")
+            logger.debug(f"Shipment ID after flush: {shipment.id}")
+            logger.debug(f"Created By after flush: {shipment.created_by}")
+            logger.debug(f"Created By Type after flush: {type(shipment.created_by)}")
+        except Exception as e:
+            logger.error(f"Session flush error: {str(e)}")
+            db.session.rollback()
+            raise
+        
+        # Process items with enhanced logging
+        logger.debug("\n=== PROCESSING ITEMS ===")
         descriptions = request.form.getlist('description[]')
         values = request.form.getlist('value[]')
         quantities = request.form.getlist('quantity[]')
         weights = request.form.getlist('weight[]')
         images = request.files.getlist('item_image[]')
         
-        logger.debug(f"Processing {len(descriptions)} items")
+        logger.debug(f"Number of items to process: {len(descriptions)}")
         logger.debug(f"Number of images received: {len(images)}")
         
         for i in range(len(descriptions)):
@@ -142,23 +187,27 @@ def submit_shipment():
         shipment.total = shipment.calculated_total
         logger.debug(f"Calculated total: {shipment.total}")
         
-        # After all items are processed
-        db.session.add(shipment)
-        logger.debug(f"Added shipment to database session")
-
-        # Log item details before commit
-        for item in shipment.items:
-            logger.debug(f"Item before commit - id: {item.id}, description: {item.description}, image_file_id: {getattr(item, 'image_file_id', None)}")
-
-        db.session.commit()
-        logger.debug(f"Committed changes to database")
-
-        # Log item details after commit
-        for item in shipment.items:
-            logger.debug(f"Item after commit - id: {item.id}, description: {item.description}, image_file_id: {getattr(item, 'image_file_id', None)}")
-
-        logger.debug(f"Shipment created successfully with {len(shipment.items)} items")
+        # Final commit with verification
+        logger.debug("\n=== FINAL COMMIT ===")
+        try:
+            db.session.commit()
+            logger.debug("Database commit successful")
+            
+            # Verify shipment was saved correctly
+            saved_shipment = Shipment.query.get(shipment.id)
+            if saved_shipment:
+                logger.debug(f"Verification - Found saved shipment")
+                logger.debug(f"Saved shipment created_by: {saved_shipment.created_by}")
+                logger.debug(f"Saved shipment created_by type: {type(saved_shipment.created_by)}")
+            else:
+                logger.error("Verification failed - Could not find saved shipment")
+                
+        except Exception as e:
+            logger.error(f"Commit error: {str(e)}")
+            db.session.rollback()
+            raise
         
+        logger.debug("=== SHIPMENT SUBMISSION COMPLETE ===\n")
         flash('Shipment created successfully!', 'success')
         return redirect(url_for('shipments.list_shipments'))
         
@@ -168,12 +217,16 @@ def submit_shipment():
         flash('An error occurred while creating the shipment.', 'error')
         return render_template('error.html', error=str(e)), 500
 
-@bp.route('/view/<string:shipment_id>')
+@bp.route('/view/<uuid:shipment_id>')
 def view_shipment(shipment_id):
     """View a specific shipment"""
     logger.debug(f'Accessing shipment details for ID: {shipment_id}')
     try:
-        shipment = Shipment.query.get_or_404(shipment_id)
+        # Convert shipment_id to string for query
+        str_shipment_id = str(shipment_id)
+        logger.debug(f'Converted shipment ID to string: {str_shipment_id}')
+        
+        shipment = Shipment.query.get_or_404(str_shipment_id)
         logger.debug(f'Found shipment with waybill: {shipment.waybill_number}')
         
         # Debug items relationship
@@ -219,7 +272,7 @@ def view_shipment(shipment_id):
         flash('Error viewing shipment details', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
-@bp.route('/<string:shipment_id>/edit', methods=['GET', 'POST'])
+@bp.route('/<uuid:shipment_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_shipment(shipment_id):
     logger.debug(f'Accessing edit form for shipment {shipment_id}')
@@ -231,7 +284,8 @@ def edit_shipment(shipment_id):
         return redirect(url_for('shipments.list_shipments'))
         
     try:
-        shipment = Shipment.query.get_or_404(shipment_id)
+        str_shipment_id = str(shipment_id)
+        shipment = Shipment.query.get_or_404(str_shipment_id)
         logger.debug(f'Found shipment with waybill: {shipment.waybill_number}')
         
         if request.method == 'POST':
@@ -278,7 +332,7 @@ def edit_shipment(shipment_id):
         flash('Error accessing edit form', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
-@bp.route('/delete/<string:shipment_id>', methods=['POST'])
+@bp.route('/delete/<uuid:shipment_id>', methods=['POST'])
 @login_required
 def delete_shipment(shipment_id):
     """Delete a shipment and its associated items"""
@@ -290,7 +344,8 @@ def delete_shipment(shipment_id):
         return redirect(url_for('shipments.list_shipments'))
         
     try:
-        shipment = Shipment.query.get_or_404(shipment_id)
+        str_shipment_id = str(shipment_id)
+        shipment = Shipment.query.get_or_404(str_shipment_id)
         
         # First delete all associated items
         for item in shipment.items:
@@ -308,24 +363,25 @@ def delete_shipment(shipment_id):
         flash('Error deleting shipment', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
-@bp.route('/<string:shipment_id>/status', methods=['POST'])
+@bp.route('/<uuid:shipment_id>/status', methods=['POST'])
 @login_required
 def update_status(shipment_id):
     logger.debug(f'Processing status update for shipment {shipment_id}')
     try:
-        shipment = Shipment.query.get_or_404(shipment_id)
+        str_shipment_id = str(shipment_id)
+        shipment = Shipment.query.get_or_404(str_shipment_id)
         new_status = request.form.get('status')
         logger.debug(f'Current status: {shipment.status}, Requested new status: {new_status}')
         
         if new_status not in Shipment.VALID_STATUSES:
             logger.error(f'Invalid status value received: {new_status}')
             flash('Invalid status value', 'error')
-            return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
+            return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
             
         if not shipment.can_transition_to(new_status):
             logger.error(f'Invalid status transition from {shipment.status} to {new_status}')
             flash(f'Cannot change status from {shipment.status} to {new_status}', 'error')
-            return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
+            return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
             
         logger.debug(f'Updating status from {shipment.status} to {new_status}')
         shipment.status = new_status
@@ -333,7 +389,7 @@ def update_status(shipment_id):
         logger.debug('Status update successful')
         flash('Shipment status updated successfully', 'success')
             
-        return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
+        return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
     except Exception as e:
         db.session.rollback()
         logger.error(f'Error updating shipment status: {str(e)}')

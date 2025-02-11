@@ -7,6 +7,7 @@ from .extensions import db, login_manager
 from .models.user import User
 from .utils.logging_config import setup_logging
 from .config import config
+from uuid import UUID
 
 logger = logging.getLogger(__name__)
 
@@ -57,14 +58,15 @@ def create_app(config_name=None):
     # Register blueprints
     try:
         logger.debug("Registering blueprints")
-        from .routes import auth, admin, contacts, shipments, api, tracking, main
-        app.register_blueprint(auth.bp)
-        app.register_blueprint(admin.bp)
-        app.register_blueprint(contacts.bp)
-        app.register_blueprint(shipments.bp)
-        app.register_blueprint(api.bp)
-        app.register_blueprint(tracking.bp)
+        from .routes import main, auth, shipments, tracking, contacts, admin, api, profile
         app.register_blueprint(main.bp)
+        app.register_blueprint(auth.bp)
+        app.register_blueprint(shipments.bp)
+        app.register_blueprint(tracking.bp)
+        app.register_blueprint(contacts.bp)
+        app.register_blueprint(admin.bp)
+        app.register_blueprint(api.bp)
+        app.register_blueprint(profile.bp)
         logger.debug("Blueprints registered")
     except Exception as e:
         logger.error(f"Failed to register blueprints: {str(e)}", exc_info=True)
@@ -73,7 +75,14 @@ def create_app(config_name=None):
     # User loader callback
     @login_manager.user_loader
     def load_user(user_id):
-        return db.session.get(User, user_id)
+        try:
+            # Attempt to convert the user_id to UUID
+            uuid_id = UUID(user_id)
+            return db.session.get(User, uuid_id)
+        except (ValueError, TypeError):
+            # If the user_id is not a valid UUID, return None
+            # This will cause Flask-Login to treat the user as not authenticated
+            return None
     
     logger.debug("Application initialization completed")
     logger.debug(f"Final app object type: {type(app)}")

@@ -1,15 +1,71 @@
 import logging
 from datetime import datetime
 import uuid
+from sqlalchemy.types import TypeDecorator, CHAR
+from sqlalchemy.dialects.postgresql import UUID
 from ..extensions import db
 
 logger = logging.getLogger(__name__)
 
+class GUID(TypeDecorator):
+    """Platform-independent GUID type.
+    Uses PostgreSQL's UUID type, otherwise uses CHAR(36), storing as stringified hex values.
+    """
+    impl = CHAR
+    cache_ok = True
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == 'postgresql':
+            return dialect.type_descriptor(UUID())
+        else:
+            return dialect.type_descriptor(CHAR(36))
+
+    def process_bind_param(self, value, dialect):
+        logger.debug(f"\n=== GUID BIND PARAM ===")
+        logger.debug(f"Input value: {value}")
+        logger.debug(f"Input type: {type(value)}")
+        logger.debug(f"Dialect: {dialect.name}")
+        
+        if value is None:
+            logger.debug("Returning None value")
+            return value
+        elif dialect.name == 'postgresql':
+            result = str(value)
+            logger.debug(f"PostgreSQL: Converting to string: {result}")
+            return result
+        else:
+            if not isinstance(value, uuid.UUID):
+                result = str(uuid.UUID(value))
+                logger.debug(f"Non-UUID input: Converting to UUID string: {result}")
+                return result
+            else:
+                result = str(value)
+                logger.debug(f"UUID input: Converting to string: {result}")
+                return result
+
+    def process_result_value(self, value, dialect):
+        logger.debug(f"\n=== GUID RESULT VALUE ===")
+        logger.debug(f"Input value: {value}")
+        logger.debug(f"Input type: {type(value)}")
+        logger.debug(f"Dialect: {dialect.name}")
+        
+        if value is None:
+            logger.debug("Returning None value")
+            return value
+        else:
+            if not isinstance(value, uuid.UUID):
+                result = uuid.UUID(value)
+                logger.debug(f"Non-UUID input: Converting to UUID: {result}")
+                return result
+            else:
+                logger.debug(f"Returning UUID value: {value}")
+                return value
+
 class ShipmentItem(db.Model):
     __tablename__ = 'item_detail'
     
-    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    export_request_id = db.Column(db.String(36), db.ForeignKey('export_request.id'), nullable=False)
+    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
+    export_request_id = db.Column(GUID(), db.ForeignKey('export_request.id'), nullable=False)
     description = db.Column(db.String(200))
     value = db.Column(db.Float)
     quantity = db.Column(db.Integer)
@@ -49,11 +105,15 @@ class Shipment(db.Model):
         STATUS_SAVED: [STATUS_PENDING, STATUS_CANCELLED]
     }
     
-    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
     waybill_number = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     delivery_date = db.Column(db.DateTime)
     qr_code = db.Column(db.Text)
+    
+    # User relationship
+    created_by = db.Column(GUID(), db.ForeignKey('user.id'), nullable=False, index=True)
+    creator = db.relationship('User', backref=db.backref('shipments', lazy=True))
     
     # Relationships
     items = db.relationship('ShipmentItem', backref='shipment', lazy=True, foreign_keys=[ShipmentItem.export_request_id])
@@ -91,7 +151,7 @@ class Shipment(db.Model):
     is_collection = db.Column(db.Boolean, default=False)
     customer_group = db.Column(db.String(100))
     order_booked_by = db.Column(db.String(100))
-    status = db.Column(db.String(50), default='draft')
+    status = db.Column(db.String(50), default=STATUS_PENDING)
     
     @property
     def calculated_total(self):

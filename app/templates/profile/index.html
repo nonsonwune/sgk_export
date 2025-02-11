@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - {{ user.name }} - SGK Global Shipping{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-info">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle fa-4x"></i>
+            </div>
+            <div class="profile-details">
+                <h1>{{ user.name }}</h1>
+                <p class="username">@{{ user.username }}</p>
+                {% if user.is_admin %}
+                <span class="badge badge-admin">Administrator</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="profile-actions">
+            <a href="{{ url_for('auth.change_password') }}" class="btn btn-outline">
+                <i class="fas fa-key"></i>
+                Change Password
+            </a>
+        </div>
+    </div>
+
+    <!-- Shipment Statistics -->
+    <div class="stats-grid">
+        <div class="stat-card total">
+            <div class="stat-icon">
+                <i class="fas fa-box"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">{{ stats.total_shipments or 0 }}</span>
+                <span class="stat-label">Total Shipments</span>
+            </div>
+        </div>
+        <div class="stat-card active">
+            <div class="stat-icon">
+                <i class="fas fa-shipping-fast"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">{{ stats.active_shipments or 0 }}</span>
+                <span class="stat-label">Active Shipments</span>
+            </div>
+        </div>
+        <div class="stat-card delivered">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">{{ stats.delivered_shipments or 0 }}</span>
+                <span class="stat-label">Delivered</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Distribution -->
+    <div class="status-overview">
+        <div class="section-header">
+            <h2>Shipment Status Overview</h2>
+            <a href="{{ url_for('profile.shipments') }}" class="btn btn-link">View All Shipments</a>
+        </div>
+        <div class="status-grid">
+            <div class="status-card">
+                <div class="status-icon pending">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="status-details">
+                    <span class="status-count">{{ status_distribution.get('pending', 0) }}</span>
+                    <span class="status-label">Pending</span>
+                </div>
+            </div>
+            <div class="status-card">
+                <div class="status-icon processing">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="status-details">
+                    <span class="status-count">{{ status_distribution.get('processing', 0) }}</span>
+                    <span class="status-label">Processing</span>
+                </div>
+            </div>
+            <div class="status-card">
+                <div class="status-icon in-transit">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="status-details">
+                    <span class="status-count">{{ status_distribution.get('in_transit', 0) }}</span>
+                    <span class="status-label">In Transit</span>
+                </div>
+            </div>
+            <div class="status-card">
+                <div class="status-icon delivered">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="status-details">
+                    <span class="status-count">{{ status_distribution.get('delivered', 0) }}</span>
+                    <span class="status-label">Delivered</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Shipments -->
+    <div class="recent-shipments">
+        <div class="section-header">
+            <h2>Recent Shipments</h2>
+            <a href="{{ url_for('profile.shipments') }}" class="btn btn-link">View All</a>
+        </div>
+        {% if recent_shipments %}
+        <div class="shipments-list">
+            {% for shipment in recent_shipments %}
+            <div class="shipment-item">
+                <div class="shipment-status {{ shipment.status }}">
+                    <i class="fas fa-{{ {
+                        'pending': 'clock',
+                        'processing': 'cog',
+                        'in_transit': 'truck',
+                        'delivered': 'check-circle',
+                        'cancelled': 'times-circle'
+                    }[shipment.status] }}"></i>
+                </div>
+                <div class="shipment-details">
+                    <div class="shipment-header">
+                        <h3>{{ shipment.waybill_number }}</h3>
+                        <span class="status-badge {{ shipment.status }}">{{ shipment.status|title }}</span>
+                    </div>
+                    <div class="shipment-info">
+                        <span>{{ shipment.sender_name }} → {{ shipment.receiver_name }}</span>
+                        <span class="date">{{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                    </div>
+                </div>
+                <a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}" class="btn btn-icon">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-box-open fa-3x"></i>
+            <p>No shipments yet</p>
+            <a href="{{ url_for('shipments.new_shipment') }}" class="btn btn-primary">Create New Shipment</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/modules/profile.js') }}"></script>
+{% endblock %} 

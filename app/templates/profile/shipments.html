@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}My Shipments - SGK Global Shipping{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="shipments-container">
+    <div class="page-header">
+        <div class="header-content">
+            <h1>My Shipments</h1>
+            <p class="subtitle">Manage and track your shipments</p>
+        </div>
+        <div class="header-actions">
+            <a href="{{ url_for('shipments.new_shipment') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                New Shipment
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-section">
+        <form class="filters-form" method="GET">
+            <div class="search-box">
+                <input type="text" name="search" value="{{ search or '' }}" placeholder="Search shipments..." class="form-control">
+                <button type="submit" class="btn btn-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="status-filter">
+                <select name="status" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Statuses</option>
+                    {% for status in ['pending', 'processing', 'in_transit', 'delivered', 'cancelled'] %}
+                    <option value="{{ status }}" {% if status == request.args.get('status') %}selected{% endif %}>
+                        {{ status|title }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <!-- Shipments List -->
+    {% if shipments %}
+    <div class="shipments-list">
+        {% for shipment in shipments %}
+        <div class="shipment-card">
+            <div class="shipment-header">
+                <div class="shipment-id">
+                    <h3>{{ shipment.waybill_number }}</h3>
+                    <span class="status-badge {{ shipment.status }}">{{ shipment.status|title }}</span>
+                </div>
+                <div class="shipment-actions">
+                    <a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}" class="btn btn-outline btn-sm">
+                        <i class="fas fa-eye"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+            <div class="shipment-body">
+                <div class="shipment-info">
+                    <div class="info-group">
+                        <label>From</label>
+                        <p>{{ shipment.sender_name }}</p>
+                        <small>{{ shipment.sender_address }}</small>
+                    </div>
+                    <div class="info-group">
+                        <label>To</label>
+                        <p>{{ shipment.receiver_name }}</p>
+                        <small>{{ shipment.receiver_address }}</small>
+                    </div>
+                </div>
+                <div class="shipment-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>{{ shipment.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                    </div>
+                    {% if shipment.delivery_date %}
+                    <div class="meta-item">
+                        <i class="fas fa-truck-loading"></i>
+                        <span>Delivery: {{ shipment.delivery_date.strftime('%Y-%m-%d') }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if pagination.pages > 1 %}
+    <div class="pagination-container">
+        <div class="pagination-info">
+            Showing {{ pagination.items|length }} of {{ pagination.total }} shipments
+        </div>
+        <nav class="pagination">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('profile.shipments', page=pagination.prev_num, status=status, search=search) }}" class="btn btn-outline btn-sm">
+                <i class="fas fa-chevron-left"></i>
+                Previous
+            </a>
+            {% endif %}
+
+            <span class="page-info">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+
+            {% if pagination.has_next %}
+            <a href="{{ url_for('profile.shipments', page=pagination.next_num, status=status, search=search) }}" class="btn btn-outline btn-sm">
+                Next
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-box-open fa-4x"></i>
+        <h2>No shipments found</h2>
+        {% if search or status %}
+        <p>Try adjusting your search filters</p>
+        <a href="{{ url_for('profile.shipments') }}" class="btn btn-outline">Clear Filters</a>
+        {% else %}
+        <p>You haven't created any shipments yet</p>
+        <a href="{{ url_for('shipments.new_shipment') }}" class="btn btn-primary">Create New Shipment</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/modules/profile.js') }}"></script>
+{% endblock %} 

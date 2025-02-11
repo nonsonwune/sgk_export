@@ -21,12 +21,42 @@ def get_critical_css():
 
 @bp.route('/')
 def index():
-    critical_css = get_critical_css()
-    if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
-    return redirect(url_for('auth.login'))
+    """Root route with enhanced error tracking"""
+    logger.debug("=== Starting Root Route Handler ===")
+    try:
+        logger.debug("=== Application State ===")
+        logger.debug(f"Debug mode: {current_app.debug}")
+        logger.debug(f"Testing mode: {current_app.testing}")
+        logger.debug(f"Secret key set: {'SECRET_KEY' in current_app.config}")
+        
+        logger.debug("\n=== Database Configuration ===")
+        logger.debug(f"Database URL configured: {'SQLALCHEMY_DATABASE_URI' in current_app.config}")
+        logger.debug(f"Database connection options: {current_app.config.get('SQLALCHEMY_ENGINE_OPTIONS', {})}")
+        
+        logger.debug("\n=== Authentication State ===")
+        logger.debug(f"Login manager configured: {hasattr(current_app, 'login_manager')}")
+        logger.debug(f"Current user: {current_user}")
+        logger.debug(f"User authenticated: {current_user.is_authenticated if hasattr(current_user, 'is_authenticated') else 'No auth attribute'}")
+        
+        if current_user.is_authenticated:
+            logger.debug("\n=== Authenticated User Details ===")
+            logger.debug(f"User ID: {current_user.id}")
+            logger.debug(f"Username: {current_user.username}")
+            logger.debug("Redirecting to dashboard")
+            return redirect(url_for('main.dashboard'))
+        
+        logger.debug("User not authenticated, redirecting to login")
+        return redirect(url_for('auth.login'))
+    except Exception as e:
+        logger.error("\n=== Error in Root Route ===")
+        logger.error(f"Error type: {type(e).__name__}")
+        logger.error(f"Error message: {str(e)}")
+        logger.error("Stack trace:", exc_info=True)
+        logger.error(f"Request details: {request.environ}")
+        return render_template('error.html', error=f"An error occurred: {str(e)}"), 500
 
 @bp.route('/dashboard')
+@login_required
 def dashboard():
     """Dashboard route with improved error handling and data validation."""
     try:
@@ -129,13 +159,25 @@ def get_monthly_stats(start_date, end_date):
     """Get monthly statistics with proper error handling."""
     try:
         current_app.logger.debug(f"Fetching monthly stats from {start_date} to {end_date}")
+        
+        # Update case expressions to use new syntax
+        active_case = case(
+            (Shipment.status == 'active', 1),
+            else_=0
+        )
+        
+        delivered_case = case(
+            (Shipment.status == 'delivered', 1),
+            else_=0
+        )
+        
         stats = db.session.query(
-            func.count(ExportRequest.id).label('total_shipments'),
-            func.sum(ExportRequest.total).label('total_revenue'),
-            func.count(case((ExportRequest.status == 'Active', 1))).label('active_shipments'),
-            func.count(case((ExportRequest.status == 'Delivered', 1))).label('delivered_shipments')
+            func.count(Shipment.id).label('total_shipments'),
+            func.sum(Shipment.total).label('total_revenue'),
+            func.sum(active_case).label('active_shipments'),
+            func.sum(delivered_case).label('delivered_shipments')
         ).filter(
-            ExportRequest.created_at.between(start_date, end_date)
+            Shipment.created_at.between(start_date, end_date)
         ).first()
         
         current_app.logger.debug(f"Monthly stats query result: {stats}")
@@ -159,12 +201,30 @@ def validate_monthly_stats(stats):
         return default_stats
         
     try:
+        # Get raw values with proper null handling
+        total_shipments = int(getattr(stats, 'total_shipments', 0) or 0)
+        total_revenue = float(getattr(stats, 'total_revenue', 0) or 0)
+        active_shipments = int(getattr(stats, 'active_shipments', 0) or 0)
+        delivered_shipments = int(getattr(stats, 'delivered_shipments', 0) or 0)
+        
+        # Validate status counts
+        if active_shipments + delivered_shipments > total_shipments:
+            current_app.logger.warning(
+                f"Status count validation failed: active={active_shipments}, "
+                f"delivered={delivered_shipments}, total={total_shipments}"
+            )
+            # Adjust counts to match total
+            factor = total_shipments / (active_shipments + delivered_shipments) if (active_shipments + delivered_shipments) > 0 else 0
+            active_shipments = int(active_shipments * factor)
+            delivered_shipments = int(delivered_shipments * factor)
+        
         validated = {
-            'total_shipments': int(getattr(stats, 'total_shipments', 0) or 0),
-            'total_revenue': float(getattr(stats, 'total_revenue', 0) or 0),
-            'active_shipments': int(getattr(stats, 'active_shipments', 0) or 0),
-            'delivered_shipments': int(getattr(stats, 'delivered_shipments', 0) or 0)
+            'total_shipments': total_shipments,
+            'total_revenue': total_revenue,
+            'active_shipments': active_shipments,
+            'delivered_shipments': delivered_shipments
         }
+        
         current_app.logger.debug(f"Validated monthly stats: {validated}")
         return validated
         
@@ -201,11 +261,11 @@ def get_monthly_trend_data():
         current_app.logger.debug(f"Date range: {start_date} to {end_date}")
         
         try:
-            # Query the data
+            # Query the data with coalesce to handle null values
             monthly_data = db.session.query(
                 func.date_trunc('month', ExportRequest.created_at).label('month'),
-                func.count(ExportRequest.id).label('shipment_count'),
-                func.sum(ExportRequest.total).label('revenue')
+                func.coalesce(func.count(ExportRequest.id), 0).label('shipment_count'),
+                func.coalesce(func.sum(ExportRequest.total), 0).label('revenue')
             ).filter(
                 ExportRequest.created_at >= start_date
             ).group_by(
@@ -215,76 +275,37 @@ def get_monthly_trend_data():
             ).all()
             
             current_app.logger.debug(f"Query successful - Found {len(monthly_data)} months of data")
-            if monthly_data:
-                current_app.logger.debug(f"Sample month data: {monthly_data[0]}")
-                current_app.logger.debug(f"Data types - month: {type(monthly_data[0].month)}, count: {type(monthly_data[0].shipment_count)}, revenue: {type(monthly_data[0].revenue)}")
             
-        except Exception as db_error:
-            current_app.logger.error(f"Database query error: {str(db_error)}", exc_info=True)
-            raise ValueError(f"Failed to fetch monthly trend data: {str(db_error)}")
-        
-        # Generate all months in the range
-        months = []
-        current_date = end_date
-        for _ in range(6):
-            months.append(current_date.replace(day=1))
-            current_date = current_date.replace(day=1) - timedelta(days=1)
-        months.reverse()
-        
-        current_app.logger.debug(f"Generated month range: {[m.strftime('%Y-%m') for m in months]}")
-        
-        try:
-            # Create a mapping of month to data
-            data_map = {}
-            for data in monthly_data:
-                month_key = data.month.strftime('%Y-%m')
-                data_map[month_key] = {
-                    'count': data.shipment_count,
-                    'revenue': float(data.revenue or 0)
-                }
-                current_app.logger.debug(f"Mapped data for {month_key}: {data_map[month_key]}")
-            
-        except Exception as mapping_error:
-            current_app.logger.error(f"Error creating data map: {str(mapping_error)}", exc_info=True)
-            raise ValueError(f"Failed to process monthly data: {str(mapping_error)}")
-        
-        try:
-            # Fill in the result using all months
-            result = {
-                'labels': [d.strftime('%b') for d in months],
+            # Prepare the trend data with validation
+            trend_data = {
+                'labels': [],
                 'shipments': [],
                 'revenue': []
             }
             
-            # Fill data arrays
-            for month in months:
-                month_key = month.strftime('%Y-%m')
-                month_data = data_map.get(month_key, {'count': 0, 'revenue': 0.0})
-                result['shipments'].append(month_data['count'])
-                result['revenue'].append(month_data['revenue'])
+            if monthly_data:
+                for data in monthly_data:
+                    if data.month:
+                        trend_data['labels'].append(data.month.strftime('%Y-%m-%d'))
+                        trend_data['shipments'].append(int(data.shipment_count or 0))
+                        trend_data['revenue'].append(float(data.revenue or 0))
                 
-                current_app.logger.debug(f"Month {month_key}: shipments={month_data['count']}, revenue={month_data['revenue']}")
+                current_app.logger.debug(f"Processed trend data: {trend_data}")
+            else:
+                current_app.logger.warning("No monthly data found")
             
-            # Validate result structure
-            current_app.logger.debug("=== Validating Result Structure ===")
-            current_app.logger.debug(f"Labels length: {len(result['labels'])}")
-            current_app.logger.debug(f"Shipments length: {len(result['shipments'])}")
-            current_app.logger.debug(f"Revenue length: {len(result['revenue'])}")
-            current_app.logger.debug(f"Sample data - First month: {result['labels'][0]}, shipments: {result['shipments'][0]}, revenue: {result['revenue'][0]}")
+            return trend_data
             
-            return result
+        except Exception as e:
+            current_app.logger.error(f"Error in trend data query: {str(e)}", exc_info=True)
+            return {
+                'labels': [],
+                'shipments': [],
+                'revenue': []
+            }
             
-        except Exception as result_error:
-            current_app.logger.error(f"Error creating result structure: {str(result_error)}", exc_info=True)
-            raise ValueError(f"Failed to structure trend data: {str(result_error)}")
-        
     except Exception as e:
-        current_app.logger.error(f"=== Trend Data Generation Failed ===")
-        current_app.logger.error(f"Error type: {type(e)}")
-        current_app.logger.error(f"Error message: {str(e)}")
-        current_app.logger.error("Stack trace:", exc_info=True)
-        
-        # Return empty data structure on error
+        current_app.logger.error(f"Error in trend data generation: {str(e)}", exc_info=True)
         return {
             'labels': [],
             'shipments': [],

@@ -1,0 +1,512 @@
+/* Profile Container */
+.profile-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-avatar {
+    color: #4169E1;
+}
+
+.profile-details h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1a202c;
+}
+
+.username {
+    color: #718096;
+    margin: 0.25rem 0;
+}
+
+.badge-admin {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #4169E1;
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.stat-card.total .stat-icon {
+    background: #EBF4FF;
+    color: #4169E1;
+}
+
+.stat-card.active .stat-icon {
+    background: #E6FFFA;
+    color: #38B2AC;
+}
+
+.stat-card.delivered .stat-icon {
+    background: #F0FFF4;
+    color: #48BB78;
+}
+
+.stat-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.stat-label {
+    color: #718096;
+    font-size: 0.875rem;
+}
+
+/* Status Overview */
+.status-overview {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #1a202c;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.status-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #F7FAFC;
+    border-radius: 8px;
+}
+
+.status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+}
+
+.status-icon.pending {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.status-icon.processing {
+    background: #E6FFFA;
+    color: #38B2AC;
+}
+
+.status-icon.in-transit {
+    background: #EBF4FF;
+    color: #4169E1;
+}
+
+.status-icon.delivered {
+    background: #F0FFF4;
+    color: #48BB78;
+}
+
+/* Recent Shipments */
+.recent-shipments {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shipments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.shipment-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #F7FAFC;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.shipment-item:hover {
+    background: #EDF2F7;
+}
+
+.shipment-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 1rem;
+}
+
+.shipment-status.pending {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.shipment-status.processing {
+    background: #E6FFFA;
+    color: #38B2AC;
+}
+
+.shipment-status.in-transit {
+    background: #EBF4FF;
+    color: #4169E1;
+}
+
+.shipment-status.delivered {
+    background: #F0FFF4;
+    color: #48BB78;
+}
+
+.shipment-details {
+    flex: 1;
+}
+
+.shipment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.shipment-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #1a202c;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.status-badge.processing {
+    background: #E6FFFA;
+    color: #38B2AC;
+}
+
+.status-badge.in-transit {
+    background: #EBF4FF;
+    color: #4169E1;
+}
+
+.status-badge.delivered {
+    background: #F0FFF4;
+    color: #48BB78;
+}
+
+.shipment-info {
+    display: flex;
+    justify-content: space-between;
+    color: #718096;
+    font-size: 0.875rem;
+}
+
+.date {
+    color: #A0AEC0;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #718096;
+}
+
+.empty-state i {
+    color: #A0AEC0;
+    margin-bottom: 1rem;
+}
+
+/* Shipments List Page */
+.shipments-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1a202c;
+}
+
+.subtitle {
+    color: #718096;
+    margin: 0.5rem 0 0;
+}
+
+.filters-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-box {
+    flex: 1;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+}
+
+.status-filter select {
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    background-color: white;
+    color: #1a202c;
+}
+
+/* Shipment Cards */
+.shipment-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shipment-body {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #E2E8F0;
+}
+
+.info-group {
+    margin-bottom: 1rem;
+}
+
+.info-group label {
+    display: block;
+    color: #718096;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.info-group p {
+    margin: 0;
+    color: #1a202c;
+    font-weight: 500;
+}
+
+.info-group small {
+    color: #718096;
+}
+
+.shipment-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    color: #718096;
+    font-size: 0.875rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.page-info {
+    color: #718096;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: #4169E1;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #3154b4;
+}
+
+.btn-outline {
+    background: white;
+    color: #4169E1;
+    border: 1px solid #4169E1;
+}
+
+.btn-outline:hover {
+    background: #EBF4FF;
+}
+
+.btn-link {
+    color: #4169E1;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+.btn-icon {
+    padding: 0.5rem;
+    color: #718096;
+}
+
+.btn-icon:hover {
+    color: #4169E1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .filters-form {
+        flex-direction: column;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .status-filter {
+        width: 100%;
+    }
+
+    .status-filter select {
+        width: 100%;
+    }
+
+    .pagination-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+} 
