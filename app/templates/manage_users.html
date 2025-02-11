@@ -57,7 +57,7 @@
     <div class="modal-content">
         <h2>Reset Password</h2>
         <p>Reset password for: <span id="resetUsername"></span></p>
-        <form id="resetPasswordForm" method="POST" action="{{ url_for('admin.reset_user_password', user_id=0) }}">
+        <form id="resetPasswordForm" method="POST" action="{{ url_for('admin.reset_user_password', user_id='') }}">
             <div class="form-group">
                 <label for="new_password">New Password</label>
                 <input type="password" id="new_password" name="new_password" required>
@@ -279,7 +279,7 @@ th {
 function showResetPasswordForm(userId, username) {
     document.getElementById('resetPasswordModal').style.display = 'block';
     document.getElementById('resetUsername').textContent = username;
-    document.getElementById('resetPasswordForm').action = "{{ url_for('admin.reset_user_password', user_id=0) }}".replace('0', userId);
+    document.getElementById('resetPasswordForm').action = "{{ url_for('admin.reset_user_password', user_id='') }}" + userId;
 }
 
 function hideResetPasswordForm() {

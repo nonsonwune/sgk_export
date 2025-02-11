@@ -168,7 +168,7 @@ def submit_shipment():
         flash('An error occurred while creating the shipment.', 'error')
         return render_template('error.html', error=str(e)), 500
 
-@bp.route('/view/<int:shipment_id>')
+@bp.route('/view/<string:shipment_id>')
 def view_shipment(shipment_id):
     """View a specific shipment"""
     logger.debug(f'Accessing shipment details for ID: {shipment_id}')
@@ -219,7 +219,7 @@ def view_shipment(shipment_id):
         flash('Error viewing shipment details', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
-@bp.route('/<int:shipment_id>/edit', methods=['GET', 'POST'])
+@bp.route('/<string:shipment_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_shipment(shipment_id):
     logger.debug(f'Accessing edit form for shipment {shipment_id}')
@@ -278,7 +278,7 @@ def edit_shipment(shipment_id):
         flash('Error accessing edit form', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
-@bp.route('/delete/<int:shipment_id>', methods=['POST'])
+@bp.route('/delete/<string:shipment_id>', methods=['POST'])
 @login_required
 def delete_shipment(shipment_id):
     """Delete a shipment and its associated items"""
@@ -308,7 +308,7 @@ def delete_shipment(shipment_id):
         flash('Error deleting shipment', 'error')
         return redirect(url_for('shipments.list_shipments'))
 
-@bp.route('/<int:shipment_id>/status', methods=['POST'])
+@bp.route('/<string:shipment_id>/status', methods=['POST'])
 @login_required
 def update_status(shipment_id):
     logger.debug(f'Processing status update for shipment {shipment_id}')

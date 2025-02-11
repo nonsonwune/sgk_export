@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+import uuid
 from ..extensions import db
 
 logger = logging.getLogger(__name__)
@@ -7,22 +8,22 @@ logger = logging.getLogger(__name__)
 class ShipmentItem(db.Model):
     __tablename__ = 'item_detail'
     
-    id = db.Column(db.Integer, primary_key=True)
-    export_request_id = db.Column(db.Integer, db.ForeignKey('export_request.id'), nullable=False)
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    export_request_id = db.Column(db.String(36), db.ForeignKey('export_request.id'), nullable=False)
     description = db.Column(db.String(200))
     value = db.Column(db.Float)
     quantity = db.Column(db.Integer)
     weight = db.Column(db.Float)
     image_filename = db.Column(db.String(255))
-    image_file_id = db.Column(db.String(255))  # Add this field for storing file IDs
+    image_file_id = db.Column(db.String(255))
 
 class Shipment(db.Model):
     __tablename__ = 'export_request'
     
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     waybill_number = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    qr_code = db.Column(db.Text)  # Changed from String(500) to Text
+    qr_code = db.Column(db.Text)
     
     # Relationships
     items = db.relationship('ShipmentItem', backref='shipment', lazy=True, foreign_keys=[ShipmentItem.export_request_id])
@@ -33,7 +34,7 @@ class Shipment(db.Model):
     sender_address = db.Column(db.String(200))
     sender_business = db.Column(db.String(100))
     sender_mobile = db.Column(db.String(20), nullable=False)
-    sender_signature = db.Column(db.Text)  # Changed from String(500) to Text
+    sender_signature = db.Column(db.Text)
     
     # Receiver Information
     receiver_name = db.Column(db.String(100), nullable=False)
@@ -60,7 +61,7 @@ class Shipment(db.Model):
     is_collection = db.Column(db.Boolean, default=False)
     customer_group = db.Column(db.String(100))
     order_booked_by = db.Column(db.String(100))
-    status = db.Column(db.String(50), default='draft')  # draft, saved, completed
+    status = db.Column(db.String(50), default='draft')
     
     @property
     def calculated_total(self):
@@ -78,7 +79,7 @@ class Shipment(db.Model):
     def generate_waybill_number(cls):
         """Generate the next waybill number in sequence"""
         try:
-            last_request = cls.query.order_by(cls.id.desc()).first()
+            last_request = cls.query.order_by(cls.created_at.desc()).first()
             if not last_request:
                 return 'EX000001'
             

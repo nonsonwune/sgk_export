@@ -55,7 +55,7 @@ def create_user():
             
     return render_template('create_user.html')
 
-@bp.route('/reset-password/<int:user_id>', methods=['POST'])
+@bp.route('/reset-password/<string:user_id>', methods=['POST'])
 @login_required
 def reset_user_password(user_id):
     logger.debug(f'Password reset attempt for user {user_id} by {current_user.id}')
@@ -135,7 +135,7 @@ def superuser_recovery():
             
     return render_template('admin/superuser_recovery.html')
 
-@bp.route('/delete-user/<int:user_id>', methods=['POST'])
+@bp.route('/delete-user/<string:user_id>', methods=['POST'])
 @login_required
 def delete_user(user_id):
     if not current_user.is_admin:
@@ -223,7 +223,7 @@ def add_admin():
     
     return redirect(url_for('admin.manage_admins'))
 
-@bp.route('/modify-admin/<int:user_id>', methods=['POST'])
+@bp.route('/modify-admin/<string:user_id>', methods=['POST'])
 @login_required
 def modify_admin(user_id):
     if not current_user.is_superuser:
@@ -264,7 +264,7 @@ def modify_admin(user_id):
     
     return redirect(url_for('admin.manage_admins'))
 
-@bp.route('/delete-admin/<int:user_id>', methods=['POST'])
+@bp.route('/delete-admin/<string:user_id>', methods=['POST'])
 @login_required
 def delete_admin(user_id):
     if not current_user.is_superuser:

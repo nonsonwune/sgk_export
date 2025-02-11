@@ -73,7 +73,7 @@ def create_app(config_name=None):
     # User loader callback
     @login_manager.user_loader
     def load_user(user_id):
-        return db.session.get(User, int(user_id))
+        return db.session.get(User, user_id)
     
     logger.debug("Application initialization completed")
     logger.debug(f"Final app object type: {type(app)}")

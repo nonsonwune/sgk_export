@@ -80,7 +80,7 @@ def list_shipments():
         logger.error(f'API Error in list_shipments: {str(e)}')
         return jsonify({'error': 'Internal server error'}), 500
 
-@bp.route('/shipments/<int:shipment_id>', methods=['GET'])
+@bp.route('/shipments/<string:shipment_id>', methods=['GET'])
 @token_required
 def get_shipment(shipment_id):
     logger.debug(f'API: Accessing shipment details for ID: {shipment_id}')
@@ -177,7 +177,7 @@ def create_shipment():
         logger.error(f'API Error in create_shipment: {str(e)}')
         return jsonify({'error': 'Internal server error'}), 500
 
-@bp.route('/shipments/<int:shipment_id>', methods=['PUT'])
+@bp.route('/shipments/<string:shipment_id>', methods=['PUT'])
 @token_required
 def update_shipment(shipment_id):
     logger.debug(f'API: Updating shipment {shipment_id}')
@@ -244,7 +244,7 @@ def update_shipment(shipment_id):
         logger.error(f'API Error in update_shipment: {str(e)}')
         return jsonify({'error': 'Internal server error'}), 500
 
-@bp.route('/shipments/<int:shipment_id>', methods=['DELETE'])
+@bp.route('/shipments/<string:shipment_id>', methods=['DELETE'])
 @token_required
 def delete_shipment(shipment_id):
     logger.debug(f'API: Deleting shipment {shipment_id}')
