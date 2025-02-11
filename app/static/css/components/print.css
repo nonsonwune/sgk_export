@@ -297,6 +297,135 @@
     .screen-controls {
         display: none !important;
     }
+
+    /* Typography Optimizations */
+    .preview-container {
+        font-size: 9pt !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Card Content Typography */
+    .info-card {
+        font-size: 9pt !important;
+    }
+
+    .card-header h2 {
+        font-size: 11pt !important;
+        margin-bottom: 2mm !important;
+    }
+
+    /* Info Row Typography */
+    .info-row {
+        line-height: 1.3 !important;
+    }
+
+    .info-row .label {
+        font-size: 9pt !important;
+        white-space: nowrap !important;
+    }
+
+    .info-row .value {
+        font-size: 9pt !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    /* Table Typography */
+    .items-table th {
+        font-size: 9pt !important;
+        padding: 2mm 3mm !important;
+        white-space: nowrap !important;
+    }
+
+    .items-table td {
+        font-size: 9pt !important;
+        padding: 2mm 3mm !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    /* Document Header Typography */
+    .document-header h1 {
+        font-size: 16pt !important;
+    }
+
+    .meta-item {
+        font-size: 9pt !important;
+        white-space: nowrap !important;
+    }
+
+    /* Company Info Typography */
+    .company-info h1 {
+        font-size: 14pt !important;
+        margin-bottom: 2mm !important;
+    }
+
+    /* Status Badge Typography */
+    .status-badge {
+        font-size: 8pt !important;
+        padding: 1mm 2mm !important;
+    }
+
+    /* Ensure all text containers handle overflow properly */
+    .info-card,
+    .info-content,
+    .info-row,
+    td,
+    .value {
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        -ms-word-break: break-all !important;
+        word-break: break-word !important;
+        -ms-hyphens: auto !important;
+        -moz-hyphens: auto !important;
+        -webkit-hyphens: auto !important;
+        hyphens: auto !important;
+    }
+
+    /* QR Code Print Optimizations */
+    .qr-code-section {
+        margin-left: -10mm !important; /* Move slightly left */
+        margin-right: 5mm !important;  /* Ensure right margin */
+    }
+
+    .qr-code-container {
+        width: 120px !important;  /* Reduced from 150px */
+        height: 120px !important; /* Reduced from 150px */
+        margin-right: 5mm !important;
+    }
+
+    .qr-code-image {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+
+    .qr-code-label {
+        font-size: 8pt !important;
+        margin-top: 1mm !important;
+        white-space: nowrap !important;
+    }
+
+    /* Ensure QR code container doesn't affect document header layout */
+    .document-header {
+        position: relative !important;
+        overflow: visible !important;
+    }
+
+    .company-header {
+        position: relative !important;
+        justify-content: space-between !important;
+    }
+
+    .company-info-section {
+        flex: 1 !important;
+        margin-right: 10mm !important; /* Space between content and QR code */
+    }
 }
 
 /* Screen-only styles */
