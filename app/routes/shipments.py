@@ -317,18 +317,21 @@ def update_status(shipment_id):
         new_status = request.form.get('status')
         logger.debug(f'Current status: {shipment.status}, Requested new status: {new_status}')
         
-        valid_statuses = ['pending', 'in_transit', 'delivered', 'cancelled', 'saved']
-        logger.debug(f'Valid statuses: {valid_statuses}')
-        
-        if new_status in valid_statuses:
-            logger.debug(f'Updating status from {shipment.status} to {new_status}')
-            shipment.status = new_status
-            db.session.commit()
-            logger.debug('Status update successful')
-            flash('Shipment status updated successfully', 'success')
-        else:
+        if new_status not in Shipment.VALID_STATUSES:
             logger.error(f'Invalid status value received: {new_status}')
             flash('Invalid status value', 'error')
+            return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
+            
+        if not shipment.can_transition_to(new_status):
+            logger.error(f'Invalid status transition from {shipment.status} to {new_status}')
+            flash(f'Cannot change status from {shipment.status} to {new_status}', 'error')
+            return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
+            
+        logger.debug(f'Updating status from {shipment.status} to {new_status}')
+        shipment.status = new_status
+        db.session.commit()
+        logger.debug('Status update successful')
+        flash('Shipment status updated successfully', 'success')
             
         return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
     except Exception as e:

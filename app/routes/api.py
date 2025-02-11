@@ -270,8 +270,12 @@ def update_status(shipment_id):
             return jsonify({'error': 'Status not provided'}), 400
             
         new_status = data['status']
-        if new_status not in ['pending', 'in_transit', 'delivered', 'cancelled']:
+        
+        if new_status not in Shipment.VALID_STATUSES:
             return jsonify({'error': 'Invalid status value'}), 400
+            
+        if not shipment.can_transition_to(new_status):
+            return jsonify({'error': f'Cannot change status from {shipment.status} to {new_status}'}), 400
             
         shipment.status = new_status
         db.session.commit()

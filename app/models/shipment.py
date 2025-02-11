@@ -20,6 +20,35 @@ class ShipmentItem(db.Model):
 class Shipment(db.Model):
     __tablename__ = 'export_request'
     
+    # Status Constants
+    STATUS_PENDING = 'pending'
+    STATUS_CONFIRMED = 'confirmed'
+    STATUS_PROCESSING = 'processing'
+    STATUS_IN_TRANSIT = 'in_transit'
+    STATUS_DELIVERED = 'delivered'
+    STATUS_CANCELLED = 'cancelled'
+    STATUS_SAVED = 'saved'
+    
+    VALID_STATUSES = [
+        STATUS_PENDING,
+        STATUS_CONFIRMED,
+        STATUS_PROCESSING,
+        STATUS_IN_TRANSIT,
+        STATUS_DELIVERED,
+        STATUS_CANCELLED,
+        STATUS_SAVED
+    ]
+    
+    STATUS_TRANSITIONS = {
+        STATUS_PENDING: [STATUS_CONFIRMED, STATUS_CANCELLED],
+        STATUS_CONFIRMED: [STATUS_PROCESSING, STATUS_CANCELLED],
+        STATUS_PROCESSING: [STATUS_IN_TRANSIT, STATUS_CANCELLED],
+        STATUS_IN_TRANSIT: [STATUS_DELIVERED, STATUS_CANCELLED],
+        STATUS_DELIVERED: [],  # No further transitions allowed
+        STATUS_CANCELLED: [],  # No further transitions allowed
+        STATUS_SAVED: [STATUS_PENDING, STATUS_CANCELLED]
+    }
+    
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     waybill_number = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
@@ -90,3 +119,7 @@ class Shipment(db.Model):
         except Exception as e:
             logger.error(f"Error generating waybill number: {str(e)}")
             raise 
+
+    def can_transition_to(self, new_status):
+        """Check if the shipment can transition to the given status"""
+        return new_status in self.STATUS_TRANSITIONS.get(self.status, []) 
