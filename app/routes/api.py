@@ -495,6 +495,18 @@ def get_dashboard_data():
         
         current_app.logger.debug(f"Raw status counts: {status_counts}")
         
+        # Format status counts with defaults
+        formatted_status_counts = {
+            'pending': 0,
+            'processing': 0,
+            'in_transit': 0,
+            'delivered': 0,
+            'cancelled': 0
+        }
+        formatted_status_counts.update(dict(status_counts))
+        
+        current_app.logger.debug(f"Formatted status counts: {formatted_status_counts}")
+        
         # Get aggregated data
         stats = db.session.query(
             func.count(Shipment.id).label('total_shipments'),
@@ -506,7 +518,9 @@ def get_dashboard_data():
             Shipment.created_at.between(start_date, end_date)
         ).first()
         
-        # Get trend data
+        current_app.logger.debug(f"Stats query result: {stats}")
+        
+        # Get daily trend data
         trend_data = db.session.query(
             func.date_trunc('day', Shipment.created_at).label('date'),
             func.count(Shipment.id).label('count'),
@@ -517,7 +531,36 @@ def get_dashboard_data():
             func.date_trunc('day', Shipment.created_at)
         ).order_by('date').all()
         
-        # Format response in the structure expected by frontend
+        # Generate date range for all days
+        all_dates = []
+        current_date = start_date
+        while current_date <= end_date:
+            all_dates.append(current_date.date())
+            current_date += timedelta(days=1)
+        
+        # Create a mapping of existing data
+        trend_map = {t.date.date(): {'count': t.count, 'revenue': float(t.revenue or 0)} 
+                    for t in trend_data}
+        
+        # Fill in missing dates with zeros
+        trends = {
+            'labels': [],
+            'shipments': [],
+            'revenue': []
+        }
+        
+        for date in all_dates:
+            trends['labels'].append(date.strftime('%Y-%m-%d'))
+            if date in trend_map:
+                trends['shipments'].append(trend_map[date]['count'])
+                trends['revenue'].append(trend_map[date]['revenue'])
+            else:
+                trends['shipments'].append(0)
+                trends['revenue'].append(0)
+        
+        current_app.logger.debug(f"Generated trend data with {len(trends['labels'])} days")
+        
+        # Format response
         response = {
             'stats': {
                 'total_shipments': stats.total_shipments or 0,
@@ -526,20 +569,15 @@ def get_dashboard_data():
                 'active_shipments': stats.active_shipments or 0,
                 'delivered_shipments': stats.delivered_shipments or 0
             },
-            'status_distribution': dict(status_counts),
-            'trends': {
-                'labels': [t.date.strftime('%Y-%m-%d') for t in trend_data],
-                'shipments': [t.count for t in trend_data],
-                'revenue': [float(t.revenue or 0) for t in trend_data]
-            }
+            'status_distribution': formatted_status_counts,
+            'trends': trends
         }
+        
+        current_app.logger.debug(f"Response data: {response}")
         
         # Validate response structure
         if not all(key in response for key in ['stats', 'status_distribution', 'trends']):
             raise ValueError("Invalid response structure")
-        
-        if not all(key in response['trends'] for key in ['labels', 'shipments', 'revenue']):
-            raise ValueError("Invalid trends structure")
         
         current_app.logger.debug("Response validation passed")
         return jsonify(response)

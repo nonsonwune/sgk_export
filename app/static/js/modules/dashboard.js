@@ -312,27 +312,64 @@ async function initializeCharts() {
         // Initialize status distribution chart
         const statusCtx = document.getElementById('statusDistributionChart');
         if (statusCtx) {
-            const statusLabels = Object.keys(data.status_distribution);
-            const statusData = Object.values(data.status_distribution);
+            const statusConfig = {
+                labels: ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled'],
+                colors: {
+                    'Pending': '#f1c40f',      // Yellow
+                    'Processing': '#3498db',    // Blue
+                    'In Transit': '#e67e22',    // Orange
+                    'Delivered': '#2ecc71',     // Green
+                    'Cancelled': '#e74c3c'      // Red
+                }
+            };
+            
+            const statusData = statusConfig.labels.map(label => {
+                const key = label.toLowerCase().replace(' ', '_');
+                return data.status_distribution[key] || 0;
+            });
             
             const statusChart = new Chart(statusCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: statusLabels,
+                    labels: statusConfig.labels,
                     datasets: [{
                         data: statusData,
-                        backgroundColor: [
-                            '#f1c40f',
-                            '#3498db',
-                            '#e74c3c',
-                            '#2ecc71',
-                            '#95a5a6'
-                        ]
+                        backgroundColor: statusConfig.labels.map(label => statusConfig.colors[label]),
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
                 }
             });
             chartRegistry.register('statusDistributionChart', statusChart);
@@ -446,29 +483,23 @@ async function refreshDashboardData(timeRange) {
         debugLog('Dashboard data received', data);
         
         // Validate data structure
-        if (!data || !data.stats || !data.trends) {
+        if (!data || !data.stats || !data.status_distribution) {
             debugLog('Invalid data structure received', data);
             throw new Error('Invalid dashboard data structure');
         }
         
-        // Log data structure before updates
-        debugLog('Stats data structure:', data.stats);
-        debugLog('Trends data structure:', data.trends);
-        debugLog('Status distribution:', data.status_distribution);
-        
+        // Update components
         debugLog('Updating dashboard components');
         await Promise.all([
             updateDashboardMetrics(data.stats),
+            updateStatusCounts(data.status_distribution),
             updateCharts(data)
         ]);
         
         debugLog('Dashboard refresh complete');
     } catch (error) {
         debugLog('Error refreshing dashboard data', error);
-        // Show error in all chart containers
-        document.querySelectorAll('.chart-container').forEach(container => {
-            showChartError(container, 'Failed to refresh dashboard data. Please try again.');
-        });
+        showError('Failed to refresh dashboard data. Please try again.');
         throw error;
     }
 }
@@ -481,8 +512,13 @@ function updateCharts(data) {
         return;
     }
 
-    const { dates, shipments, revenue } = data.trends;
-    const labels = dates || data.trends.labels;
+    const { labels, shipments, revenue } = data.trends;
+    debugLog('Processing trend data', { labels, shipments, revenue });
+
+    if (!labels || !shipments || !revenue) {
+        debugLog('Missing trend data components');
+        return;
+    }
 
     // Show all chart canvases
     document.querySelectorAll('.chart-container canvas').forEach(canvas => {
@@ -491,7 +527,7 @@ function updateCharts(data) {
 
     // Update shipment trend chart
     const shipmentChart = chartRegistry.get('shipmentTrendChart');
-    if (shipmentChart && labels && shipments) {
+    if (shipmentChart) {
         debugLog('Updating shipment trend chart');
         const container = document.getElementById('shipmentTrendChart').closest('.chart-container');
         hideChartLoading(container);
@@ -499,11 +535,12 @@ function updateCharts(data) {
         shipmentChart.data.labels = labels;
         shipmentChart.data.datasets[0].data = shipments;
         shipmentChart.update('none');
+        debugLog('Shipment trend chart updated', { labels: labels.length, data: shipments.length });
     }
 
     // Update revenue chart
     const revenueChart = chartRegistry.get('revenueChart');
-    if (revenueChart && labels && revenue) {
+    if (revenueChart) {
         debugLog('Updating revenue chart');
         const container = document.getElementById('revenueChart').closest('.chart-container');
         hideChartLoading(container);
@@ -511,6 +548,7 @@ function updateCharts(data) {
         revenueChart.data.labels = labels;
         revenueChart.data.datasets[0].data = revenue;
         revenueChart.update('none');
+        debugLog('Revenue chart updated', { labels: labels.length, data: revenue.length });
     }
 
     // Update status distribution chart
@@ -521,22 +559,28 @@ function updateCharts(data) {
         hideChartLoading(container);
         hideChartError(container);
         
-        debugLog('Raw status distribution data:', data.status_distribution);
+        const statusConfig = {
+            labels: ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled']
+        };
         
-        // Map status data to chart format
-        const statusLabels = ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled'];
-        const statusData = statusLabels.map(label => {
-            const status = label.toLowerCase().replace(' ', '_');
-            return data.status_distribution[status] || 0;
-        });
-        
-        debugLog('Processed status data:', {
-            labels: statusLabels,
-            data: statusData
+        const statusData = statusConfig.labels.map(label => {
+            const key = label.toLowerCase().replace(' ', '_');
+            return data.status_distribution[key] || 0;
         });
         
         statusChart.data.datasets[0].data = statusData;
-        statusChart.update();
+        statusChart.update('none');
+        
+        const total = statusData.reduce((a, b) => a + b, 0);
+        debugLog('Status distribution chart updated', {
+            data: statusData,
+            total: total,
+            distribution: statusData.map((value, index) => ({
+                status: statusConfig.labels[index],
+                count: value,
+                percentage: total > 0 ? Math.round((value / total) * 100) : 0
+            }))
+        });
     }
 }
 
@@ -629,7 +673,7 @@ function validateRequiredElements() {
 }
 
 // Update dashboard metrics
-async function updateDashboardMetrics(stats) {
+function updateDashboardMetrics(stats) {
     debugLog('Updating dashboard metrics');
     try {
         const metrics = {
@@ -655,6 +699,36 @@ async function updateDashboardMetrics(stats) {
     } catch (error) {
         debugLog('Error updating dashboard metrics', error);
         throw error;
+    }
+}
+
+// Add new function to update status counts
+function updateStatusCounts(statusDistribution) {
+    debugLog('Updating status counts', statusDistribution);
+    try {
+        const statusMapping = {
+            'pending': 'pending-count',
+            'processing': 'processing-count',
+            'in_transit': 'in-transit-count',
+            'delivered': 'delivered-count',
+            'cancelled': 'cancelled-count'
+        };
+        
+        Object.entries(statusMapping).forEach(([status, elementId]) => {
+            const element = document.getElementById(elementId);
+            if (element) {
+                const count = statusDistribution[status] || 0;
+                element.textContent = count.toLocaleString();
+                debugLog(`Updated ${status} count to ${count}`);
+            } else {
+                debugLog(`Element not found for status: ${status}`);
+            }
+        });
+        
+        debugLog('Status counts updated successfully');
+    } catch (error) {
+        debugLog('Error updating status counts', error);
+        console.error('Failed to update status counts:', error);
     }
 }
 

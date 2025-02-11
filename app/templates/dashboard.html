@@ -74,6 +74,15 @@
                         <span class="status-label">Delivered</span>
                     </div>
                 </div>
+                <div class="status-card cancelled">
+                    <div class="status-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="status-details">
+                        <span class="status-count" id="cancelled-count">{{ monthly_stats.cancelled_count|default(0) }}</span>
+                        <span class="status-label">Cancelled</span>
+                    </div>
+                </div>
             </div>
         </div>
 
