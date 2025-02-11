@@ -484,7 +484,7 @@ def get_dashboard_data():
         start_date = end_date - timedelta(days=days)
         current_app.logger.debug(f"Date range: {start_date} to {end_date}")
         
-        # Get status counts
+        # Get status counts with validation
         current_app.logger.debug("=== Starting Status Count Query ===")
         status_counts = db.session.query(
             Shipment.status,
@@ -499,21 +499,54 @@ def get_dashboard_data():
         stats = db.session.query(
             func.count(Shipment.id).label('total_shipments'),
             func.sum(Shipment.total).label('total_revenue'),
-            func.avg(Shipment.total).label('average_revenue')
+            func.avg(Shipment.total).label('average_revenue'),
+            func.count(case((Shipment.status.in_(['processing', 'in_transit']), 1))).label('active_shipments'),
+            func.count(case((Shipment.status == 'delivered', 1))).label('delivered_shipments')
         ).filter(
             Shipment.created_at.between(start_date, end_date)
         ).first()
         
-        # Format response
+        # Get trend data
+        trend_data = db.session.query(
+            func.date_trunc('day', Shipment.created_at).label('date'),
+            func.count(Shipment.id).label('count'),
+            func.sum(Shipment.total).label('revenue')
+        ).filter(
+            Shipment.created_at.between(start_date, end_date)
+        ).group_by(
+            func.date_trunc('day', Shipment.created_at)
+        ).order_by('date').all()
+        
+        # Format response in the structure expected by frontend
         response = {
+            'stats': {
+                'total_shipments': stats.total_shipments or 0,
+                'total_revenue': float(stats.total_revenue or 0),
+                'average_revenue': float(stats.average_revenue or 0),
+                'active_shipments': stats.active_shipments or 0,
+                'delivered_shipments': stats.delivered_shipments or 0
+            },
             'status_distribution': dict(status_counts),
-            'total_shipments': stats.total_shipments or 0,
-            'total_revenue': float(stats.total_revenue or 0),
-            'average_revenue': float(stats.average_revenue or 0)
+            'trends': {
+                'labels': [t.date.strftime('%Y-%m-%d') for t in trend_data],
+                'shipments': [t.count for t in trend_data],
+                'revenue': [float(t.revenue or 0) for t in trend_data]
+            }
         }
         
+        # Validate response structure
+        if not all(key in response for key in ['stats', 'status_distribution', 'trends']):
+            raise ValueError("Invalid response structure")
+        
+        if not all(key in response['trends'] for key in ['labels', 'shipments', 'revenue']):
+            raise ValueError("Invalid trends structure")
+        
+        current_app.logger.debug("Response validation passed")
         return jsonify(response)
         
     except Exception as e:
         current_app.logger.error(f"Error fetching dashboard data: {str(e)}", exc_info=True)
-        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500 
+        return jsonify({
+            'error': 'Internal server error',
+            'details': str(e)
+        }), 500 

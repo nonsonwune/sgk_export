@@ -130,6 +130,7 @@ function handleInitializationError(error) {
     console.error('Dashboard initialization failed:', error);
 }
 
+// Validate chart data structure
 function validateChartDataStructure(data) {
     debugLog('Validating chart data structure');
     if (!data) {
@@ -137,16 +138,26 @@ function validateChartDataStructure(data) {
         return false;
     }
     
-    const requiredFields = ['labels', 'shipments', 'revenue'];
-    const missingFields = requiredFields.filter(field => !data[field]);
+    // Validate required sections
+    const requiredSections = ['stats', 'status_distribution', 'trends'];
+    const missingSections = requiredSections.filter(section => !data[section]);
     
-    if (missingFields.length > 0) {
-        debugLog('Missing required fields in chart data', missingFields);
+    if (missingSections.length > 0) {
+        debugLog('Missing required sections in chart data', missingSections);
         return false;
     }
     
-    // Validate data arrays have matching lengths and are not too large
-    const lengths = requiredFields.map(field => data[field].length);
+    // Validate trends data
+    const trendFields = ['labels', 'shipments', 'revenue'];
+    const missingTrendFields = trendFields.filter(field => !data.trends[field]);
+    
+    if (missingTrendFields.length > 0) {
+        debugLog('Missing required trend fields', missingTrendFields);
+        return false;
+    }
+    
+    // Validate data arrays have matching lengths
+    const lengths = trendFields.map(field => data.trends[field].length);
     const allLengthsMatch = lengths.every(len => len === lengths[0]);
     
     if (!allLengthsMatch) {
@@ -179,33 +190,11 @@ async function getValidatedChartData() {
         const data = await response.json();
         debugLog('Raw chart data received:', data);
         
-        // Validate data structure
-        if (!data || !data.stats || !data.status_distribution || !data.trends) {
-            debugLog('Invalid data structure received:', data);
+        if (!validateChartDataStructure(data)) {
             throw new Error('Invalid dashboard data structure');
         }
         
-        // Validate status distribution data
-        const validStatuses = ['pending', 'processing', 'in_transit', 'delivered', 'cancelled'];
-        const statusData = Object.entries(data.status_distribution);
-        debugLog('Status distribution validation:', {
-            receivedStatuses: Object.keys(data.status_distribution),
-            validStatuses,
-            statusCounts: statusData
-        });
-        
-        // Transform the data structure to match what the charts expect
-        const chartData = {
-            labels: data.trends.dates || [],
-            shipments: data.trends.shipments || [],
-            revenue: data.trends.revenue || []
-        };
-        
-        if (!validateChartDataStructure(chartData)) {
-            throw new Error('Invalid chart data structure received from API');
-        }
-        
-        return chartData;
+        return data;
     } catch (error) {
         debugLog('Error fetching chart data', error);
         throw error;
@@ -264,168 +253,94 @@ function destroyChart(chartId) {
     chartRegistry.destroy(chartId);
 }
 
-// Update chart initialization
+// Initialize charts with validated data
 async function initializeCharts() {
     debugLog('Starting chart initialization with registry');
     try {
         // Clean up existing charts
         ['shipmentTrendChart', 'revenueChart', 'statusDistributionChart'].forEach(chartId => {
+            debugLog(`Cleanup requested for chart: ${chartId}`);
             destroyChart(chartId);
         });
-
-        const chartData = await getValidatedChartData();
-        debugLog('Chart data received', chartData);
         
-        if (!validateChartDataStructure(chartData)) {
-            throw new Error('Invalid chart data structure');
-        }
-
+        const data = await getValidatedChartData();
+        
         // Initialize shipment trend chart
-        const shipmentCtx = document.getElementById('shipmentTrendChart');
-        if (shipmentCtx) {
-            debugLog('Initializing shipment trend chart');
-            // Show canvas
-            shipmentCtx.style.display = 'block';
-            const shipmentChart = new Chart(shipmentCtx, {
+        const shipmentTrendCtx = document.getElementById('shipmentTrendChart');
+        if (shipmentTrendCtx) {
+            const shipmentChart = new Chart(shipmentTrendCtx, {
                 type: 'line',
                 data: {
-                    labels: chartData.labels,
+                    labels: data.trends.labels,
                     datasets: [{
                         label: 'Shipments',
-                        data: chartData.shipments,
-                        borderColor: '#4299E1',
-                        backgroundColor: 'rgba(66, 153, 225, 0.1)',
-                        borderWidth: 2,
+                        data: data.trends.shipments,
+                        borderColor: '#4169E1',
                         tension: 0.4
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: chartData.labels.length > 50 ? 0 : 1000
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
+                    maintainAspectRatio: false
                 }
             });
             chartRegistry.register('shipmentTrendChart', shipmentChart);
-            hideChartLoading(shipmentCtx.closest('.chart-container'));
         }
-
+        
         // Initialize revenue chart
         const revenueCtx = document.getElementById('revenueChart');
         if (revenueCtx) {
-            debugLog('Initializing revenue chart');
-            // Show canvas
-            revenueCtx.style.display = 'block';
             const revenueChart = new Chart(revenueCtx, {
-                type: 'bar',
+                type: 'line',
                 data: {
-                    labels: chartData.labels,
+                    labels: data.trends.labels,
                     datasets: [{
                         label: 'Revenue',
-                        data: chartData.revenue,
-                        backgroundColor: '#48BB78',
-                        borderRadius: 4
+                        data: data.trends.revenue,
+                        borderColor: '#2ecc71',
+                        tension: 0.4
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: chartData.labels.length > 50 ? 0 : 1000
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return '$' + value.toLocaleString();
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
+                    maintainAspectRatio: false
                 }
             });
             chartRegistry.register('revenueChart', revenueChart);
-            hideChartLoading(revenueCtx.closest('.chart-container'));
         }
-
+        
         // Initialize status distribution chart
         const statusCtx = document.getElementById('statusDistributionChart');
         if (statusCtx) {
-            debugLog('Initializing status distribution chart');
-            // Show canvas
-            statusCtx.style.display = 'block';
+            const statusLabels = Object.keys(data.status_distribution);
+            const statusData = Object.values(data.status_distribution);
+            
             const statusChart = new Chart(statusCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled'],
+                    labels: statusLabels,
                     datasets: [{
-                        data: [0, 0, 0, 0, 0],
+                        data: statusData,
                         backgroundColor: [
-                            '#FCD34D', // Pending - Yellow
-                            '#60A5FA', // Processing - Blue
-                            '#34D399', // In Transit - Green
-                            '#A78BFA', // Delivered - Purple
-                            '#F87171'  // Cancelled - Red
-                        ],
-                        borderWidth: 0
+                            '#f1c40f',
+                            '#3498db',
+                            '#e74c3c',
+                            '#2ecc71',
+                            '#95a5a6'
+                        ]
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                usePointStyle: true
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 500
-                    },
-                    cutout: '70%'
+                    maintainAspectRatio: false
                 }
             });
             chartRegistry.register('statusDistributionChart', statusChart);
-            hideChartLoading(statusCtx.closest('.chart-container'));
         }
-
-        debugLog('Charts initialized successfully');
+        
+        // Update dashboard metrics
+        updateDashboardMetrics(data.stats);
+        
     } catch (error) {
         debugLog('Error initializing charts', error);
         throw error;
@@ -651,11 +566,11 @@ async function updateChartView(containerId, view) {
         }
         
         // Update chart data
-        chart.data.labels = data.labels;
+        chart.data.labels = data.trends.labels;
         if (chartId === 'shipmentTrendChart') {
-            chart.data.datasets[0].data = data.shipments;
+            chart.data.datasets[0].data = data.trends.shipments;
         } else if (chartId === 'revenueChart') {
-            chart.data.datasets[0].data = data.revenue;
+            chart.data.datasets[0].data = data.trends.revenue;
         }
         
         chart.update();
@@ -715,61 +630,27 @@ function validateRequiredElements() {
 
 // Update dashboard metrics
 async function updateDashboardMetrics(stats) {
-    debugLog('Updating dashboard metrics', stats);
+    debugLog('Updating dashboard metrics');
     try {
-        // Validate stats object
-        if (!stats || typeof stats !== 'object') {
-            throw new Error('Invalid stats data');
-        }
-
-        debugLog('=== Status Count Update ===');
-        
-        // Update status overview counts
-        const statusElements = {
-            pending: document.getElementById('pending-count'),
-            processing: document.getElementById('processing-count'),
-            in_transit: document.getElementById('in-transit-count'),
-            delivered: document.getElementById('delivered-count')
+        const metrics = {
+            'totalShipments': stats.total_shipments,
+            'activeShipments': stats.active_shipments,
+            'deliveredShipments': stats.delivered_shipments,
+            'totalRevenue': stats.total_revenue,
+            'averageRevenue': stats.average_revenue
         };
-
-        // Log current DOM elements
-        debugLog('Status count elements:', statusElements);
-
-        // Update each status count
-        Object.entries(statusElements).forEach(([status, element]) => {
+        
+        Object.entries(metrics).forEach(([id, value]) => {
+            const element = document.getElementById(id);
             if (element) {
-                const count = stats[`${status}_count`] || 0;
-                element.textContent = count;
-                debugLog(`Updating ${status} count to:`, count);
+                if (id.includes('Revenue')) {
+                    element.textContent = formatCurrency(value);
+                } else {
+                    element.textContent = value.toLocaleString();
+                }
             }
         });
-
-        // Update main metrics
-        const totalShipments = document.getElementById('shipments-total');
-        if (totalShipments) {
-            totalShipments.textContent = stats.total_shipments || '0';
-            debugLog('Updated total shipments:', stats.total_shipments);
-        }
-
-        const activeShipments = document.getElementById('shipments-active');
-        if (activeShipments) {
-            activeShipments.textContent = stats.active_shipments || '0';
-            debugLog('Updated active shipments:', stats.active_shipments);
-        }
-
-        const deliveredShipments = document.getElementById('shipments-delivered');
-        if (deliveredShipments) {
-            deliveredShipments.textContent = stats.delivered_shipments || '0';
-            debugLog('Updated delivered shipments:', stats.delivered_shipments);
-        }
-
-        const totalRevenue = document.getElementById('revenue-total');
-        if (totalRevenue) {
-            const revenue = parseFloat(stats.total_revenue || 0);
-            totalRevenue.textContent = `$${revenue.toFixed(2)}`;
-            debugLog('Updated total revenue:', revenue);
-        }
-
+        
         debugLog('Dashboard metrics updated successfully');
     } catch (error) {
         debugLog('Error updating dashboard metrics', error);
@@ -807,4 +688,13 @@ function hideChartError(container) {
     
     if (errorState) errorState.style.display = 'none';
     if (canvas) canvas.style.display = 'block';
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value);
 } 
