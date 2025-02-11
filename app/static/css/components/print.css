@@ -193,13 +193,13 @@
 /* Print Media Queries */
 @media print {
     @page {
-        size: A4;
-        margin: 15mm;  /* Add default page margins */
+        margin: 0.5in 0 !important; /* Only top/bottom margins for headers/footers */
     }
 
+    /* Reset all containers to full width */
     html, body {
         width: 100% !important;
-        height: 100% !important;
+        max-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         background: white !important;
@@ -207,77 +207,95 @@
         print-color-adjust: exact !important;
     }
 
-    body {
-        padding: 0 !important;  /* Remove body padding since we're using @page margins */
-    }
-
+    /* Hide navigation */
     .main-nav, 
-    .action-buttons, 
-    .screen-controls,
-    .no-print { 
-        display: none !important; 
+    nav,
+    .navbar,
+    .nav-section {
+        display: none !important;
     }
 
-    .print-form {
+    /* Reset container constraints */
+    .preview-container,
+    .container,
+    .container-fluid {
+        width: 100% !important;
+        max-width: none !important;
         margin: 0 !important;
         padding: 0 !important;
         box-shadow: none !important;
-        max-width: 100% !important;
+    }
+
+    /* Center content with minimal margins */
+    .info-section {
         width: 100% !important;
+        padding: 0 10mm !important; /* Minimal side padding */
+        margin: 0 auto !important;
+        max-width: 100% !important;
+    }
+
+    /* Optimize info cards grid */
+    .info-cards-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 5mm !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 5mm 0 !important;
+    }
+
+    /* Adjust card layouts */
+    .info-card {
+        page-break-inside: avoid !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 3mm !important;
+    }
+
+    /* Header adjustments */
+    .document-header {
+        width: 100% !important;
+        padding: 0 10mm !important;
+        margin-bottom: 5mm !important;
     }
 
     .company-header {
-        margin-bottom: 8mm !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 5mm !important;
     }
 
-    .form-section {
-        page-break-inside: avoid !important;
-        margin-bottom: 8mm !important;
-        padding-right: 5mm !important;
+    /* Table adjustments */
+    .items-table,
+    .items-table table {
+        width: 100% !important;
+        margin: 5mm 0 !important;
     }
 
-    .input-row {
-        page-break-inside: avoid !important;
-        margin-bottom: 4mm !important;
-        padding-right: 5mm !important;
+    /* Remove all Bootstrap container constraints */
+    .container, 
+    .container-fluid,
+    .row,
+    .col,
+    [class^="col-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .items-table {
-        page-break-inside: avoid !important;
-        margin: 4mm 0 8mm !important;
-    }
-
+    /* Ensure proper page breaks */
+    .info-card,
+    .items-table,
     .signature-section {
         page-break-inside: avoid !important;
-        margin-top: 15mm !important;
-        padding-right: 5mm !important;
     }
 
-    /* Ensure consistent font sizes in print */
-    body { 
-        font-size: 11pt !important;
-        line-height: 1.3 !important;
-    }
-
-    h1 { font-size: 24pt !important; }
-    h2 { font-size: 18pt !important; }
-    h3 { font-size: 14pt !important; }
-    
-    .section-title {
-        font-size: 12pt !important;
-        margin-bottom: 4mm !important;
-        padding: 3mm 4mm !important;
-    }
-
-    .input-label,
-    .input-field {
-        font-size: 11pt !important;
-    }
-
-    /* Ensure colors print correctly */
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    /* Hide screen-only elements */
+    .no-print,
+    .action-buttons,
+    .screen-controls {
+        display: none !important;
     }
 }
 

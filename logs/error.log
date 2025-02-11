@@ -1,6 +1,0 @@
-2025-02-11 00:24:04 [90206] [INFO] Handling signal: int
-2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90215) was sent SIGINT!
-2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90214) was sent SIGINT!
-2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90213) was sent SIGINT!
-2025-02-11 00:24:04 [90206] [ERROR] Worker (pid:90216) was sent SIGINT!
-2025-02-11 00:24:04 [90206] [INFO] Shutting down: Master
