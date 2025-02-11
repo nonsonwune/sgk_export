@@ -717,28 +717,57 @@ function validateRequiredElements() {
 async function updateDashboardMetrics(stats) {
     debugLog('Updating dashboard metrics', stats);
     try {
-        // Update total shipments
+        // Validate stats object
+        if (!stats || typeof stats !== 'object') {
+            throw new Error('Invalid stats data');
+        }
+
+        debugLog('=== Status Count Update ===');
+        
+        // Update status overview counts
+        const statusElements = {
+            pending: document.getElementById('pending-count'),
+            processing: document.getElementById('processing-count'),
+            in_transit: document.getElementById('in-transit-count'),
+            delivered: document.getElementById('delivered-count')
+        };
+
+        // Log current DOM elements
+        debugLog('Status count elements:', statusElements);
+
+        // Update each status count
+        Object.entries(statusElements).forEach(([status, element]) => {
+            if (element) {
+                const count = stats[`${status}_count`] || 0;
+                element.textContent = count;
+                debugLog(`Updating ${status} count to:`, count);
+            }
+        });
+
+        // Update main metrics
         const totalShipments = document.getElementById('shipments-total');
         if (totalShipments) {
-            totalShipments.textContent = stats.total_shipments;
+            totalShipments.textContent = stats.total_shipments || '0';
+            debugLog('Updated total shipments:', stats.total_shipments);
         }
 
-        // Update active shipments
         const activeShipments = document.getElementById('shipments-active');
         if (activeShipments) {
-            activeShipments.textContent = stats.active_shipments;
+            activeShipments.textContent = stats.active_shipments || '0';
+            debugLog('Updated active shipments:', stats.active_shipments);
         }
 
-        // Update delivered shipments
         const deliveredShipments = document.getElementById('shipments-delivered');
         if (deliveredShipments) {
-            deliveredShipments.textContent = stats.delivered_shipments;
+            deliveredShipments.textContent = stats.delivered_shipments || '0';
+            debugLog('Updated delivered shipments:', stats.delivered_shipments);
         }
 
-        // Update total revenue
         const totalRevenue = document.getElementById('revenue-total');
         if (totalRevenue) {
-            totalRevenue.textContent = `$${stats.total_revenue.toFixed(2)}`;
+            const revenue = parseFloat(stats.total_revenue || 0);
+            totalRevenue.textContent = `$${revenue.toFixed(2)}`;
+            debugLog('Updated total revenue:', revenue);
         }
 
         debugLog('Dashboard metrics updated successfully');

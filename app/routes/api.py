@@ -318,19 +318,18 @@ def get_stats():
             Shipment.created_at.between(start_date, end_date)
         ).first()
         
-        # Log raw query for debugging
-        logger.debug('Raw SQL Query: %s', 
-            db.session.query(
-                func.count(Shipment.id).label('total_shipments'),
-                func.count(case(
-                    (Shipment.status == 'delivered', 1),
-                    else_=0
-                )).label('delivered_count')
-            ).filter(
-                Shipment.created_at.between(start_date, end_date)
-            ).statement.compile(compile_kwargs={"literal_binds": True})
-        )
-
+        logger.debug('=== Detailed Stats Query Debug ===')
+        logger.debug('Individual counts:')
+        logger.debug('- Total shipments: %d', stats.total_shipments or 0)
+        logger.debug('- Active shipments: %d', stats.active_shipments or 0)
+        logger.debug('- Delivered shipments: %d', stats.delivered_shipments or 0)
+        
+        logger.debug('Stats query result: %s', {
+            'total_shipments': stats.total_shipments or 0,
+            'active_shipments': stats.active_shipments or 0,
+            'delivered_shipments': stats.delivered_shipments or 0
+        })
+        
         # Get status distribution with debug logging
         status_counts = db.session.query(
             Shipment.status,
@@ -485,27 +484,29 @@ def get_dashboard_data():
         
         logger.debug('Date range: %s to %s', start_date, end_date)
         
-        # Debug: Log the SQL query for active shipments
-        active_shipments_query = db.session.query(
-            func.count(case((Shipment.status.in_(['pending', 'confirmed', 'processing', 'in_transit']), 1), else_=0))
+        # Get statistics with corrected status counts using updated case syntax
+        logger.debug('=== Starting Status Count Query ===')
+        
+        # First get raw status counts for verification
+        raw_status_counts = db.session.query(
+            Shipment.status,
+            func.count(Shipment.id)
         ).filter(
             Shipment.created_at.between(start_date, end_date)
-        )
-        logger.debug('Active shipments query: %s', str(active_shipments_query))
+        ).group_by(Shipment.status).all()
         
-        # Get statistics with status counts
+        logger.debug('Raw status counts: %s', 
+                    [(status, count) for status, count in raw_status_counts])
+        
+        # Get statistics with corrected counting logic
         stats = db.session.query(
             func.count(Shipment.id).label('total_shipments'),
             func.sum(Shipment.total).label('total_revenue'),
-            func.count(case(
-                (and_(
-                    Shipment.status.in_(['pending', 'confirmed', 'processing', 'in_transit']),
-                    Shipment.status != 'delivered',
-                    Shipment.status != 'cancelled'
-                ), 1),
+            func.sum(case(
+                (Shipment.status.in_(['processing', 'in_transit']), 1),
                 else_=0
             )).label('active_shipments'),
-            func.count(case(
+            func.sum(case(
                 (Shipment.status == 'delivered', 1),
                 else_=0
             )).label('delivered_shipments')
@@ -513,22 +514,37 @@ def get_dashboard_data():
             Shipment.created_at.between(start_date, end_date)
         ).first()
         
-        logger.debug('Stats query result: %s', {
-            'total_shipments': stats.total_shipments,
-            'active_shipments': stats.active_shipments,
-            'delivered_shipments': stats.delivered_shipments
-        })
+        logger.debug('=== Detailed Stats Query Debug ===')
+        logger.debug('Raw query stats:')
+        logger.debug('- Total shipments: %d', stats.total_shipments or 0)
+        logger.debug('- Active shipments: %d', stats.active_shipments or 0)
+        logger.debug('- Delivered shipments: %d', stats.delivered_shipments or 0)
         
-        # Get trend data
-        trend_data = db.session.query(
-            func.date_trunc('day', Shipment.created_at).label('date'),
-            func.count(Shipment.id).label('count'),
-            func.coalesce(func.sum(Shipment.total), 0).label('revenue')
-        ).filter(
-            Shipment.created_at.between(start_date, end_date)
-        ).group_by(
-            func.date_trunc('day', Shipment.created_at)
-        ).order_by('date').all()
+        # Verify counts match raw status counts
+        active_count = sum(count for status, count in raw_status_counts 
+                         if status in ['processing', 'in_transit'])
+        delivered_count = sum(count for status, count in raw_status_counts 
+                            if status == 'delivered')
+        
+        logger.debug('Count verification:')
+        logger.debug('- Raw active count: %d', active_count)
+        logger.debug('- Raw delivered count: %d', delivered_count)
+        
+        if active_count != (stats.active_shipments or 0):
+            logger.error('Active shipments count mismatch: raw=%d, query=%d',
+                        active_count, stats.active_shipments or 0)
+            
+        if delivered_count != (stats.delivered_shipments or 0):
+            logger.error('Delivered shipments count mismatch: raw=%d, query=%d',
+                        delivered_count, stats.delivered_shipments or 0)
+        
+        # Initialize status counts with default values
+        default_status_counts = {
+            'pending': 0,
+            'processing': 0,
+            'in_transit': 0,
+            'delivered': 0
+        }
         
         # Get status distribution
         status_counts = db.session.query(
@@ -541,17 +557,40 @@ def get_dashboard_data():
         logger.debug('Status distribution raw data: %s', 
                     [(status, count) for status, count in status_counts])
         
-        # Format response
+        # Update default counts with actual values
+        for status, count in status_counts:
+            if status in default_status_counts:
+                default_status_counts[status] = count
+        
+        logger.debug('Final status counts with defaults: %s', default_status_counts)
+        
+        # Get trend data
+        trend_data = db.session.query(
+            func.date_trunc('day', Shipment.created_at).label('date'),
+            func.count(Shipment.id).label('count'),
+            func.coalesce(func.sum(Shipment.total), 0).label('revenue')
+        ).filter(
+            Shipment.created_at.between(start_date, end_date)
+        ).group_by(
+            func.date_trunc('day', Shipment.created_at)
+        ).order_by('date').all()
+        
+        logger.debug('Trend data query results: %s', 
+                    [(t.date.strftime('%Y-%m-%d'), t.count, t.revenue) for t in trend_data])
+        
+        # Format response with safe status count access
         response_data = {
             'stats': {
                 'total_shipments': stats.total_shipments or 0,
                 'total_revenue': float(stats.total_revenue or 0),
                 'active_shipments': stats.active_shipments or 0,
-                'delivered_shipments': stats.delivered_shipments or 0
+                'delivered_shipments': stats.delivered_shipments or 0,
+                'pending_count': default_status_counts['pending'],
+                'processing_count': default_status_counts['processing'],
+                'in_transit_count': default_status_counts['in_transit'],
+                'delivered_count': default_status_counts['delivered']
             },
-            'status_distribution': {
-                status: count for status, count in status_counts
-            },
+            'status_distribution': default_status_counts,
             'trends': {
                 'dates': [t.date.strftime('%Y-%m-%d') for t in trend_data],
                 'shipments': [t.count for t in trend_data],
@@ -559,24 +598,22 @@ def get_dashboard_data():
             }
         }
         
-        # Data validation
-        logger.debug('Validating response data')
+        # Validate final counts
+        logger.debug('=== Final Count Validation ===')
+        logger.debug('Response data stats: %s', response_data['stats'])
+        logger.debug('Status distribution: %s', response_data['status_distribution'])
         
-        # Verify counts add up
-        total_by_status = sum(count for _, count in status_counts)
-        if total_by_status != stats.total_shipments:
-            logger.error('Count mismatch: status_distribution total (%d) != total_shipments (%d)',
-                        total_by_status, stats.total_shipments)
+        # Verify count consistency
+        active_count = default_status_counts['processing'] + default_status_counts['in_transit']
+        if active_count != response_data['stats']['active_shipments']:
+            logger.warning('Active shipments count mismatch: %d != %d', 
+                         active_count, response_data['stats']['active_shipments'])
         
-        # Verify active + delivered + cancelled = total
-        status_sum = (stats.active_shipments or 0) + (stats.delivered_shipments or 0)
-        if status_sum != stats.total_shipments:
-            logger.error('Status count mismatch: active (%d) + delivered (%d) != total (%d)',
-                        stats.active_shipments or 0,
-                        stats.delivered_shipments or 0,
-                        stats.total_shipments)
+        if default_status_counts['delivered'] != response_data['stats']['delivered_shipments']:
+            logger.warning('Delivered shipments count mismatch: %d != %d',
+                         default_status_counts['delivered'], 
+                         response_data['stats']['delivered_shipments'])
         
-        logger.debug('Response data validation complete')
         return jsonify(response_data)
         
     except Exception as e:

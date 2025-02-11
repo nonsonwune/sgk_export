@@ -1555,3 +1555,593 @@ ValueError: invalid literal for int() with base 10: 'weekly'
 2025-02-11 11:40:20 [17969] [INFO] Booting worker with pid: 17969
 2025-02-11 11:40:20 [17970] [INFO] Booting worker with pid: 17970
 2025-02-11 11:40:20 [17971] [INFO] Booting worker with pid: 17971
+2025-02-11 11:44:22 [17966] [INFO] Handling signal: int
+2025-02-11 11:44:23 [17966] [ERROR] Worker (pid:17971) was sent SIGINT!
+2025-02-11 11:44:23 [17966] [ERROR] Worker (pid:17970) was sent SIGINT!
+2025-02-11 11:44:23 [17966] [ERROR] Worker (pid:17969) was sent SIGINT!
+2025-02-11 11:44:23 [17966] [ERROR] Worker (pid:17968) was sent SIGINT!
+2025-02-11 11:44:23 [17966] [INFO] Shutting down: Master
+2025-02-11 11:44:24 [18760] [INFO] Starting gunicorn 21.2.0
+2025-02-11 11:44:24 [18760] [INFO] Listening at: http://0.0.0.0:8000 (18760)
+2025-02-11 11:44:24 [18760] [INFO] Using worker: sync
+2025-02-11 11:44:24 [18762] [INFO] Booting worker with pid: 18762
+2025-02-11 11:44:24 [18763] [INFO] Booting worker with pid: 18763
+2025-02-11 11:44:24 [18764] [INFO] Booting worker with pid: 18764
+2025-02-11 11:44:24 [18765] [INFO] Booting worker with pid: 18765
+2025-02-11 11:51:42 [18760] [INFO] Handling signal: int
+2025-02-11 11:51:42 [18760] [INFO] Shutting down: Master
+2025-02-11 11:57:07 [19257] [INFO] Starting gunicorn 21.2.0
+2025-02-11 11:57:07 [19257] [INFO] Listening at: http://0.0.0.0:8000 (19257)
+2025-02-11 11:57:07 [19257] [INFO] Using worker: sync
+2025-02-11 11:57:07 [19258] [INFO] Booting worker with pid: 19258
+2025-02-11 11:57:07 [19259] [INFO] Booting worker with pid: 19259
+2025-02-11 11:57:07 [19260] [INFO] Booting worker with pid: 19260
+2025-02-11 11:57:07 [19261] [INFO] Booting worker with pid: 19261
+2025-02-11 11:58:53 [19257] [INFO] Handling signal: int
+2025-02-11 11:58:53 [19257] [ERROR] Worker (pid:19258) was sent SIGINT!
+2025-02-11 11:58:53 [19257] [ERROR] Worker (pid:19259) was sent SIGINT!
+2025-02-11 11:58:53 [19257] [ERROR] Worker (pid:19261) was sent SIGINT!
+2025-02-11 11:58:53 [19257] [ERROR] Worker (pid:19260) was sent SIGINT!
+2025-02-11 11:58:53 [19257] [INFO] Shutting down: Master
+2025-02-11 12:01:02 [19927] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:01:02 [19927] [INFO] Listening at: http://0.0.0.0:8000 (19927)
+2025-02-11 12:01:02 [19927] [INFO] Using worker: sync
+2025-02-11 12:01:02 [19928] [INFO] Booting worker with pid: 19928
+2025-02-11 12:01:02 [19929] [INFO] Booting worker with pid: 19929
+2025-02-11 12:01:02 [19930] [INFO] Booting worker with pid: 19930
+2025-02-11 12:01:02 [19931] [INFO] Booting worker with pid: 19931
+2025-02-11 12:20:02 [ERROR] [PID:19928] [app.routes.shipments] Invalid status value received: confirmed
+2025-02-11 12:23:06 [ERROR] [PID:19929] [app.routes.shipments] Invalid status value received: confirmed
+2025-02-11 12:24:00 [ERROR] [PID:19930] [app.routes.shipments] Invalid status value received: confirmed
+2025-02-11 12:25:30 [ERROR] [PID:19929] [app.routes.shipments] Invalid status value received: confirmed
+2025-02-11 12:26:43 [19927] [INFO] Handling signal: int
+2025-02-11 12:26:43 [19927] [ERROR] Worker (pid:19929) was sent SIGINT!
+2025-02-11 12:26:43 [19927] [ERROR] Worker (pid:19928) was sent SIGINT!
+2025-02-11 12:26:43 [19927] [ERROR] Worker (pid:19930) was sent SIGINT!
+2025-02-11 12:26:43 [19927] [ERROR] Worker (pid:19931) was sent SIGINT!
+2025-02-11 12:26:43 [19927] [INFO] Shutting down: Master
+2025-02-11 12:27:37 [21460] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:27:37 [21460] [INFO] Listening at: http://0.0.0.0:8000 (21460)
+2025-02-11 12:27:37 [21460] [INFO] Using worker: sync
+2025-02-11 12:27:37 [21462] [INFO] Booting worker with pid: 21462
+2025-02-11 12:27:37 [21463] [INFO] Booting worker with pid: 21463
+2025-02-11 12:27:38 [21464] [INFO] Booting worker with pid: 21464
+2025-02-11 12:27:38 [21465] [INFO] Booting worker with pid: 21465
+2025-02-11 12:27:39 [21460] [INFO] Handling signal: int
+2025-02-11 12:27:40 [21460] [ERROR] Worker (pid:21464) was sent SIGINT!
+2025-02-11 12:27:40 [21460] [ERROR] Worker (pid:21463) was sent SIGINT!
+2025-02-11 12:27:40 [21460] [ERROR] Worker (pid:21462) was sent SIGINT!
+2025-02-11 12:27:40 [21460] [ERROR] Worker (pid:21465) was sent SIGINT!
+2025-02-11 12:27:40 [21460] [INFO] Shutting down: Master
+2025-02-11 12:30:36 [21692] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:30:36 [21692] [INFO] Listening at: http://0.0.0.0:8000 (21692)
+2025-02-11 12:30:36 [21692] [INFO] Using worker: sync
+2025-02-11 12:30:36 [21693] [INFO] Booting worker with pid: 21693
+2025-02-11 12:30:36 [21694] [INFO] Booting worker with pid: 21694
+2025-02-11 12:30:36 [21695] [INFO] Booting worker with pid: 21695
+2025-02-11 12:30:36 [21696] [INFO] Booting worker with pid: 21696
+2025-02-11 12:33:16 [21692] [INFO] Handling signal: int
+2025-02-11 12:33:17 [21692] [ERROR] Worker (pid:21694) was sent SIGINT!
+2025-02-11 12:33:17 [21692] [ERROR] Worker (pid:21693) was sent SIGINT!
+2025-02-11 12:33:17 [21692] [ERROR] Worker (pid:21696) was sent SIGINT!
+2025-02-11 12:33:17 [21692] [ERROR] Worker (pid:21695) was sent SIGINT!
+2025-02-11 12:33:17 [21692] [INFO] Shutting down: Master
+2025-02-11 12:33:25 [22284] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:33:25 [22284] [INFO] Listening at: http://0.0.0.0:8000 (22284)
+2025-02-11 12:33:25 [22284] [INFO] Using worker: sync
+2025-02-11 12:33:25 [22285] [INFO] Booting worker with pid: 22285
+2025-02-11 12:33:25 [22286] [INFO] Booting worker with pid: 22286
+2025-02-11 12:33:25 [22287] [INFO] Booting worker with pid: 22287
+2025-02-11 12:33:25 [22288] [INFO] Booting worker with pid: 22288
+2025-02-11 12:40:39 [22284] [INFO] Handling signal: int
+2025-02-11 12:40:40 [22284] [INFO] Shutting down: Master
+2025-02-11 12:40:41 [22878] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:40:41 [22878] [INFO] Listening at: http://0.0.0.0:8000 (22878)
+2025-02-11 12:40:41 [22878] [INFO] Using worker: sync
+2025-02-11 12:40:41 [22884] [INFO] Booting worker with pid: 22884
+2025-02-11 12:40:41 [22885] [INFO] Booting worker with pid: 22885
+2025-02-11 12:40:41 [22886] [INFO] Booting worker with pid: 22886
+2025-02-11 12:40:41 [22887] [INFO] Booting worker with pid: 22887
+2025-02-11 12:48:09 [22878] [INFO] Handling signal: int
+2025-02-11 12:48:09 [22878] [INFO] Shutting down: Master
+2025-02-11 12:48:11 [23624] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:48:11 [23624] [INFO] Listening at: http://0.0.0.0:8000 (23624)
+2025-02-11 12:48:11 [23624] [INFO] Using worker: sync
+2025-02-11 12:48:11 [23626] [INFO] Booting worker with pid: 23626
+2025-02-11 12:48:11 [23627] [INFO] Booting worker with pid: 23627
+2025-02-11 12:48:11 [23628] [INFO] Booting worker with pid: 23628
+2025-02-11 12:48:11 [23629] [INFO] Booting worker with pid: 23629
+2025-02-11 12:50:19 [23624] [INFO] Handling signal: int
+2025-02-11 12:50:19 [23624] [ERROR] Worker (pid:23627) was sent SIGINT!
+2025-02-11 12:50:19 [23624] [ERROR] Worker (pid:23626) was sent SIGINT!
+2025-02-11 12:50:19 [23624] [ERROR] Worker (pid:23628) was sent SIGINT!
+2025-02-11 12:50:19 [23624] [ERROR] Worker (pid:23629) was sent SIGINT!
+2025-02-11 12:50:19 [23624] [INFO] Shutting down: Master
+2025-02-11 12:50:29 [24184] [INFO] Starting gunicorn 21.2.0
+2025-02-11 12:50:29 [24184] [INFO] Listening at: http://0.0.0.0:8000 (24184)
+2025-02-11 12:50:29 [24184] [INFO] Using worker: sync
+2025-02-11 12:50:29 [24185] [INFO] Booting worker with pid: 24185
+2025-02-11 12:50:29 [24186] [INFO] Booting worker with pid: 24186
+2025-02-11 12:50:29 [24187] [INFO] Booting worker with pid: 24187
+2025-02-11 12:50:29 [24188] [INFO] Booting worker with pid: 24188
+2025-02-11 12:52:39 [24184] [INFO] Handling signal: int
+2025-02-11 12:52:39 [24184] [ERROR] Worker (pid:24186) was sent SIGINT!
+2025-02-11 12:52:39 [24184] [ERROR] Worker (pid:24185) was sent SIGINT!
+2025-02-11 12:52:39 [24184] [ERROR] Worker (pid:24187) was sent SIGINT!
+2025-02-11 12:52:39 [24184] [ERROR] Worker (pid:24188) was sent SIGINT!
+2025-02-11 12:52:40 [24184] [INFO] Shutting down: Master
+2025-02-11 13:00:56 [24938] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:00:56 [24938] [INFO] Listening at: http://0.0.0.0:8000 (24938)
+2025-02-11 13:00:56 [24938] [INFO] Using worker: sync
+2025-02-11 13:00:56 [24939] [INFO] Booting worker with pid: 24939
+2025-02-11 13:00:56 [24940] [INFO] Booting worker with pid: 24940
+2025-02-11 13:00:57 [24941] [INFO] Booting worker with pid: 24941
+2025-02-11 13:00:57 [24942] [INFO] Booting worker with pid: 24942
+2025-02-11 13:02:39 [24938] [INFO] Handling signal: int
+2025-02-11 13:02:39 [24938] [INFO] Shutting down: Master
+2025-02-11 13:03:52 [25283] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:03:52 [25283] [INFO] Listening at: http://0.0.0.0:8000 (25283)
+2025-02-11 13:03:52 [25283] [INFO] Using worker: sync
+2025-02-11 13:03:52 [25284] [INFO] Booting worker with pid: 25284
+2025-02-11 13:03:52 [25285] [INFO] Booting worker with pid: 25285
+2025-02-11 13:03:52 [25286] [INFO] Booting worker with pid: 25286
+2025-02-11 13:03:52 [25287] [INFO] Booting worker with pid: 25287
+2025-02-11 13:04:24 [25283] [INFO] Handling signal: int
+2025-02-11 13:04:25 [25283] [ERROR] Worker (pid:25285) was sent SIGINT!
+2025-02-11 13:04:25 [25283] [ERROR] Worker (pid:25287) was sent SIGINT!
+2025-02-11 13:04:25 [25283] [ERROR] Worker (pid:25284) was sent SIGINT!
+2025-02-11 13:04:25 [25283] [ERROR] Worker (pid:25286) was sent SIGINT!
+2025-02-11 13:04:25 [25283] [INFO] Shutting down: Master
+2025-02-11 13:07:03 [25514] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:07:03 [25514] [INFO] Listening at: http://0.0.0.0:8000 (25514)
+2025-02-11 13:07:03 [25514] [INFO] Using worker: sync
+2025-02-11 13:07:03 [25515] [INFO] Booting worker with pid: 25515
+2025-02-11 13:07:03 [25516] [INFO] Booting worker with pid: 25516
+2025-02-11 13:07:04 [25517] [INFO] Booting worker with pid: 25517
+2025-02-11 13:07:04 [25518] [INFO] Booting worker with pid: 25518
+2025-02-11 13:07:11 [ERROR] [PID:25518] [app.routes.api] Error fetching dashboard data: The "whens" argument to case(), when referring to a sequence of items, is now passed as a series of positional elements, rather than as a list. 
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/api.py", line 439, in get_dashboard_data
+    func.count(case([(
+               ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/_elements_constructors.py", line 846, in case
+    return Case(*whens, value=value, else_=else_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 3304, in __init__
+    new_whens: Iterable[Any] = coercions._expression_collection_was_a_list(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 152, in _expression_collection_was_a_list
+    raise exc.ArgumentError(
+sqlalchemy.exc.ArgumentError: The "whens" argument to case(), when referring to a sequence of items, is now passed as a series of positional elements, rather than as a list. 
+2025-02-11 13:11:34 [25514] [INFO] Handling signal: int
+2025-02-11 13:11:34 [25514] [INFO] Shutting down: Master
+2025-02-11 13:11:36 [25978] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:11:36 [25978] [INFO] Listening at: http://0.0.0.0:8000 (25978)
+2025-02-11 13:11:36 [25978] [INFO] Using worker: sync
+2025-02-11 13:11:36 [25979] [INFO] Booting worker with pid: 25979
+2025-02-11 13:11:36 [25983] [INFO] Booting worker with pid: 25983
+2025-02-11 13:11:36 [25984] [INFO] Booting worker with pid: 25984
+2025-02-11 13:11:36 [25985] [INFO] Booting worker with pid: 25985
+2025-02-11 13:11:42 [ERROR] [PID:25984] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:11:42 [ERROR] [PID:25984] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:15:37 [ERROR] [PID:25983] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:15:38 [ERROR] [PID:25979] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:15:52 [ERROR] [PID:25984] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:15:52 [ERROR] [PID:25985] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:20:53 [ERROR] [PID:25984] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:21:27 [25978] [INFO] Handling signal: int
+2025-02-11 13:21:27 [25978] [ERROR] Worker (pid:25984) was sent SIGINT!
+2025-02-11 13:21:27 [25978] [ERROR] Worker (pid:25979) was sent SIGINT!
+2025-02-11 13:21:27 [25978] [ERROR] Worker (pid:25983) was sent SIGINT!
+2025-02-11 13:21:27 [25978] [ERROR] Worker (pid:25985) was sent SIGINT!
+2025-02-11 13:21:27 [25978] [INFO] Shutting down: Master
+2025-02-11 13:21:28 [26460] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:21:28 [26460] [INFO] Listening at: http://0.0.0.0:8000 (26460)
+2025-02-11 13:21:28 [26460] [INFO] Using worker: sync
+2025-02-11 13:21:28 [26461] [INFO] Booting worker with pid: 26461
+2025-02-11 13:21:28 [26462] [INFO] Booting worker with pid: 26462
+2025-02-11 13:21:28 [26466] [INFO] Booting worker with pid: 26466
+2025-02-11 13:21:28 [26469] [INFO] Booting worker with pid: 26469
+2025-02-11 13:21:33 [ERROR] [PID:26462] [app] Error in dashboard route: 'dict object' has no attribute 'pending_count'
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 122, in dashboard
+    return render_template('dashboard.html', **template_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 182, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/dashboard.html", line 46, in block 'content'
+    <span class="status-count">{{ monthly_stats.pending_count + monthly_stats.processing_count }}</span>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'pending_count'
+2025-02-11 13:24:52 [26460] [INFO] Handling signal: int
+2025-02-11 13:24:53 [26460] [INFO] Shutting down: Master
+2025-02-11 13:24:55 [26836] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:24:55 [26836] [INFO] Listening at: http://0.0.0.0:8000 (26836)
+2025-02-11 13:24:55 [26836] [INFO] Using worker: sync
+2025-02-11 13:24:55 [26837] [INFO] Booting worker with pid: 26837
+2025-02-11 13:24:55 [26838] [INFO] Booting worker with pid: 26838
+2025-02-11 13:24:56 [26839] [INFO] Booting worker with pid: 26839
+2025-02-11 13:24:56 [26840] [INFO] Booting worker with pid: 26840
+2025-02-11 13:25:02 [ERROR] [PID:26840] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:25:02 [ERROR] [PID:26837] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:29:42 [26836] [INFO] Handling signal: int
+2025-02-11 13:29:42 [26836] [INFO] Shutting down: Master
+2025-02-11 13:29:43 [27030] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:29:43 [27030] [INFO] Listening at: http://0.0.0.0:8000 (27030)
+2025-02-11 13:29:43 [27030] [INFO] Using worker: sync
+2025-02-11 13:29:43 [27032] [INFO] Booting worker with pid: 27032
+2025-02-11 13:29:43 [27033] [INFO] Booting worker with pid: 27033
+2025-02-11 13:29:43 [27035] [INFO] Booting worker with pid: 27035
+2025-02-11 13:29:44 [27036] [INFO] Booting worker with pid: 27036
+2025-02-11 13:29:48 [ERROR] [PID:27035] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:29:48 [ERROR] [PID:27035] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:31:21 [27030] [INFO] Handling signal: int
+2025-02-11 13:31:21 [27030] [ERROR] Worker (pid:27036) was sent SIGINT!
+2025-02-11 13:31:21 [27030] [ERROR] Worker (pid:27032) was sent SIGINT!
+2025-02-11 13:31:21 [27030] [ERROR] Worker (pid:27033) was sent SIGINT!
+2025-02-11 13:31:21 [27030] [ERROR] Worker (pid:27035) was sent SIGINT!
+2025-02-11 13:31:21 [27030] [INFO] Shutting down: Master
+2025-02-11 13:31:22 [27344] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:31:22 [27344] [INFO] Listening at: http://0.0.0.0:8000 (27344)
+2025-02-11 13:31:22 [27344] [INFO] Using worker: sync
+2025-02-11 13:31:22 [27349] [INFO] Booting worker with pid: 27349
+2025-02-11 13:31:22 [27350] [INFO] Booting worker with pid: 27350
+2025-02-11 13:31:22 [27351] [INFO] Booting worker with pid: 27351
+2025-02-11 13:31:22 [27352] [INFO] Booting worker with pid: 27352
+2025-02-11 13:31:27 [ERROR] [PID:27351] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:31:27 [ERROR] [PID:27352] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:35:02 [27344] [INFO] Handling signal: int
+2025-02-11 13:35:03 [27344] [INFO] Shutting down: Master
+2025-02-11 13:35:13 [27582] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:35:13 [27582] [INFO] Listening at: http://0.0.0.0:8000 (27582)
+2025-02-11 13:35:13 [27582] [INFO] Using worker: sync
+2025-02-11 13:35:13 [27583] [INFO] Booting worker with pid: 27583
+2025-02-11 13:35:14 [27584] [INFO] Booting worker with pid: 27584
+2025-02-11 13:35:14 [27585] [INFO] Booting worker with pid: 27585
+2025-02-11 13:35:14 [27586] [INFO] Booting worker with pid: 27586
+2025-02-11 13:35:23 [ERROR] [PID:27584] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:35:24 [ERROR] [PID:27585] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:35:39 [27582] [INFO] Handling signal: int
+2025-02-11 13:35:39 [27582] [ERROR] Worker (pid:27586) was sent SIGINT!
+2025-02-11 13:35:39 [27582] [ERROR] Worker (pid:27583) was sent SIGINT!
+2025-02-11 13:35:39 [27582] [ERROR] Worker (pid:27584) was sent SIGINT!
+2025-02-11 13:35:39 [27582] [ERROR] Worker (pid:27585) was sent SIGINT!
+2025-02-11 13:35:39 [27582] [INFO] Shutting down: Master
+2025-02-11 13:38:13 [27756] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:38:13 [27756] [INFO] Listening at: http://0.0.0.0:8000 (27756)
+2025-02-11 13:38:13 [27756] [INFO] Using worker: sync
+2025-02-11 13:38:13 [27757] [INFO] Booting worker with pid: 27757
+2025-02-11 13:38:13 [27758] [INFO] Booting worker with pid: 27758
+2025-02-11 13:38:13 [27759] [INFO] Booting worker with pid: 27759
+2025-02-11 13:38:13 [27760] [INFO] Booting worker with pid: 27760
+2025-02-11 13:38:20 [ERROR] [PID:27760] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:38:20 [ERROR] [PID:27760] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:39:51 [27756] [INFO] Handling signal: int
+2025-02-11 13:39:52 [27756] [INFO] Shutting down: Master
+2025-02-11 13:41:14 [28180] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:41:14 [28180] [INFO] Listening at: http://0.0.0.0:8000 (28180)
+2025-02-11 13:41:14 [28180] [INFO] Using worker: sync
+2025-02-11 13:41:14 [28181] [INFO] Booting worker with pid: 28181
+2025-02-11 13:41:14 [28182] [INFO] Booting worker with pid: 28182
+2025-02-11 13:41:14 [28183] [INFO] Booting worker with pid: 28183
+2025-02-11 13:41:14 [28184] [INFO] Booting worker with pid: 28184
+2025-02-11 13:41:18 [ERROR] [PID:28181] [app.routes.api] Error fetching dashboard data: name 'status_counts' is not defined
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/api.py", line 505, in get_dashboard_data
+    status: count for status, count in status_counts
+                                       ^^^^^^^^^^^^^
+NameError: name 'status_counts' is not defined
+2025-02-11 13:43:42 [28180] [INFO] Handling signal: int
+2025-02-11 13:43:42 [28180] [ERROR] Worker (pid:28182) was sent SIGINT!
+2025-02-11 13:43:42 [28180] [ERROR] Worker (pid:28181) was sent SIGINT!
+2025-02-11 13:43:42 [28180] [ERROR] Worker (pid:28183) was sent SIGINT!
+2025-02-11 13:43:42 [28180] [ERROR] Worker (pid:28184) was sent SIGINT!
+2025-02-11 13:43:42 [28180] [INFO] Shutting down: Master
+2025-02-11 13:43:44 [28329] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:43:44 [28329] [INFO] Listening at: http://0.0.0.0:8000 (28329)
+2025-02-11 13:43:44 [28329] [INFO] Using worker: sync
+2025-02-11 13:43:44 [28330] [INFO] Booting worker with pid: 28330
+2025-02-11 13:43:44 [28332] [INFO] Booting worker with pid: 28332
+2025-02-11 13:43:44 [28333] [INFO] Booting worker with pid: 28333
+2025-02-11 13:43:44 [28334] [INFO] Booting worker with pid: 28334
+2025-02-11 13:43:49 [ERROR] [PID:28330] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:43:49 [ERROR] [PID:28333] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:48:50 [ERROR] [PID:28330] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:50:46 [28329] [INFO] Handling signal: int
+2025-02-11 13:50:46 [28329] [ERROR] Worker (pid:28332) was sent SIGINT!
+2025-02-11 13:50:46 [28329] [ERROR] Worker (pid:28330) was sent SIGINT!
+2025-02-11 13:50:46 [28329] [ERROR] Worker (pid:28334) was sent SIGINT!
+2025-02-11 13:50:46 [28329] [ERROR] Worker (pid:28333) was sent SIGINT!
+2025-02-11 13:50:46 [28329] [INFO] Shutting down: Master
+2025-02-11 13:50:48 [28760] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:50:48 [28760] [INFO] Listening at: http://0.0.0.0:8000 (28760)
+2025-02-11 13:50:48 [28760] [INFO] Using worker: sync
+2025-02-11 13:50:48 [28767] [INFO] Booting worker with pid: 28767
+2025-02-11 13:50:48 [28768] [INFO] Booting worker with pid: 28768
+2025-02-11 13:50:48 [28769] [INFO] Booting worker with pid: 28769
+2025-02-11 13:50:48 [28770] [INFO] Booting worker with pid: 28770
+2025-02-11 13:51:03 [28760] [INFO] Handling signal: int
+2025-02-11 13:51:03 [28760] [ERROR] Worker (pid:28770) was sent SIGINT!
+2025-02-11 13:51:03 [28760] [ERROR] Worker (pid:28768) was sent SIGINT!
+2025-02-11 13:51:03 [28760] [ERROR] Worker (pid:28767) was sent SIGINT!
+2025-02-11 13:51:03 [28760] [ERROR] Worker (pid:28769) was sent SIGINT!
+2025-02-11 13:51:03 [28760] [INFO] Shutting down: Master
+2025-02-11 13:51:04 [28800] [INFO] Starting gunicorn 21.2.0
+2025-02-11 13:51:04 [28800] [INFO] Listening at: http://0.0.0.0:8000 (28800)
+2025-02-11 13:51:04 [28800] [INFO] Using worker: sync
+2025-02-11 13:51:04 [28805] [INFO] Booting worker with pid: 28805
+2025-02-11 13:51:05 [28806] [INFO] Booting worker with pid: 28806
+2025-02-11 13:51:05 [28807] [INFO] Booting worker with pid: 28807
+2025-02-11 13:51:05 [28808] [INFO] Booting worker with pid: 28808
+2025-02-11 13:51:09 [ERROR] [PID:28806] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:51:09 [ERROR] [PID:28807] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 13:51:45 [28800] [INFO] Handling signal: int
+2025-02-11 13:51:45 [28800] [ERROR] Worker (pid:28807) was sent SIGINT!
+2025-02-11 13:51:45 [28800] [ERROR] Worker (pid:28805) was sent SIGINT!
+2025-02-11 13:51:45 [28800] [ERROR] Worker (pid:28806) was sent SIGINT!
+2025-02-11 13:51:45 [28800] [ERROR] Worker (pid:28808) was sent SIGINT!
+2025-02-11 13:51:45 [28800] [INFO] Shutting down: Master
+2025-02-11 14:00:32 [29489] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:00:32 [29489] [INFO] Listening at: http://0.0.0.0:8000 (29489)
+2025-02-11 14:00:32 [29489] [INFO] Using worker: sync
+2025-02-11 14:00:32 [29490] [INFO] Booting worker with pid: 29490
+2025-02-11 14:00:32 [29491] [INFO] Booting worker with pid: 29491
+2025-02-11 14:00:32 [29492] [INFO] Booting worker with pid: 29492
+2025-02-11 14:00:32 [29493] [INFO] Booting worker with pid: 29493
+2025-02-11 14:00:39 [ERROR] [PID:29491] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 14:00:39 [ERROR] [PID:29491] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 14:03:23 [29489] [INFO] Handling signal: int
+2025-02-11 14:03:23 [29489] [ERROR] Worker (pid:29493) was sent SIGINT!
+2025-02-11 14:03:23 [29489] [ERROR] Worker (pid:29491) was sent SIGINT!
+2025-02-11 14:03:23 [29489] [ERROR] Worker (pid:29492) was sent SIGINT!
+2025-02-11 14:03:23 [29489] [ERROR] Worker (pid:29490) was sent SIGINT!
+2025-02-11 14:03:23 [29489] [INFO] Shutting down: Master
+2025-02-11 14:03:24 [29644] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:03:24 [29644] [INFO] Listening at: http://0.0.0.0:8000 (29644)
+2025-02-11 14:03:24 [29644] [INFO] Using worker: sync
+2025-02-11 14:03:24 [29649] [INFO] Booting worker with pid: 29649
+2025-02-11 14:03:24 [29650] [INFO] Booting worker with pid: 29650
+2025-02-11 14:03:24 [29651] [INFO] Booting worker with pid: 29651
+2025-02-11 14:03:24 [29652] [INFO] Booting worker with pid: 29652
+2025-02-11 14:03:29 [ERROR] [PID:29651] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 14:03:29 [ERROR] [PID:29651] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 14:06:43 [ERROR] [PID:29650] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 14:06:43 [ERROR] [PID:29652] [app.routes.api] Status count mismatch: active (1) + delivered (1) != total (1)
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:09:02 [29644] [INFO] Handling signal: winch
+2025-02-11 14:13:39 [ERROR] [PID:29652] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:13:39 [ERROR] [PID:29651] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:17:37 [29644] [INFO] Handling signal: int
+2025-02-11 14:17:37 [29644] [ERROR] Worker (pid:29649) was sent SIGINT!
+2025-02-11 14:17:37 [29644] [ERROR] Worker (pid:29652) was sent SIGINT!
+2025-02-11 14:17:37 [29644] [ERROR] Worker (pid:29651) was sent SIGINT!
+2025-02-11 14:17:37 [29644] [ERROR] Worker (pid:29650) was sent SIGINT!
+2025-02-11 14:17:37 [29644] [INFO] Shutting down: Master
+2025-02-11 14:19:57 [31146] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:19:57 [31146] [INFO] Listening at: http://0.0.0.0:8000 (31146)
+2025-02-11 14:19:57 [31146] [INFO] Using worker: sync
+2025-02-11 14:19:57 [31147] [INFO] Booting worker with pid: 31147
+2025-02-11 14:19:57 [31148] [INFO] Booting worker with pid: 31148
+2025-02-11 14:19:57 [31149] [INFO] Booting worker with pid: 31149
+2025-02-11 14:19:57 [31150] [INFO] Booting worker with pid: 31150
+2025-02-11 14:20:00 [ERROR] [PID:31148] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:20:03 [ERROR] [PID:31148] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:20:04 [ERROR] [PID:31147] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:21:12 [31146] [INFO] Handling signal: int
+2025-02-11 14:21:12 [31146] [INFO] Shutting down: Master
+2025-02-11 14:21:17 [31255] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:21:17 [31255] [INFO] Listening at: http://0.0.0.0:8000 (31255)
+2025-02-11 14:21:17 [31255] [INFO] Using worker: sync
+2025-02-11 14:21:17 [31256] [INFO] Booting worker with pid: 31256
+2025-02-11 14:21:17 [31257] [INFO] Booting worker with pid: 31257
+2025-02-11 14:21:17 [31258] [INFO] Booting worker with pid: 31258
+2025-02-11 14:21:17 [31259] [INFO] Booting worker with pid: 31259
+2025-02-11 14:21:20 [ERROR] [PID:31258] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:21:21 [ERROR] [PID:31258] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:21:31 [ERROR] [PID:31257] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:21:31 [ERROR] [PID:31258] [app.routes.api] Status count mismatch: active (2) + delivered (2) != total (2)
+2025-02-11 14:24:29 [31255] [INFO] Handling signal: int
+2025-02-11 14:24:29 [31255] [ERROR] Worker (pid:31259) was sent SIGINT!
+2025-02-11 14:24:29 [31255] [ERROR] Worker (pid:31256) was sent SIGINT!
+2025-02-11 14:24:29 [31255] [ERROR] Worker (pid:31258) was sent SIGINT!
+2025-02-11 14:24:29 [31255] [ERROR] Worker (pid:31257) was sent SIGINT!
+2025-02-11 14:24:29 [31255] [INFO] Shutting down: Master
+2025-02-11 14:24:30 [31696] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:24:30 [31696] [INFO] Listening at: http://0.0.0.0:8000 (31696)
+2025-02-11 14:24:30 [31696] [INFO] Using worker: sync
+2025-02-11 14:24:30 [31701] [INFO] Booting worker with pid: 31701
+2025-02-11 14:24:30 [31702] [INFO] Booting worker with pid: 31702
+2025-02-11 14:24:30 [31703] [INFO] Booting worker with pid: 31703
+2025-02-11 14:24:31 [31704] [INFO] Booting worker with pid: 31704
+2025-02-11 14:24:35 [ERROR] [PID:31703] [app.routes.api] Error fetching dashboard data: The "whens" argument to case(), when referring to a sequence of items, is now passed as a series of positional elements, rather than as a list. 
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/api.py", line 492, in get_dashboard_data
+    func.count(case([(
+               ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/_elements_constructors.py", line 846, in case
+    return Case(*whens, value=value, else_=else_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 3304, in __init__
+    new_whens: Iterable[Any] = coercions._expression_collection_was_a_list(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 152, in _expression_collection_was_a_list
+    raise exc.ArgumentError(
+sqlalchemy.exc.ArgumentError: The "whens" argument to case(), when referring to a sequence of items, is now passed as a series of positional elements, rather than as a list. 
+2025-02-11 14:27:12 [31696] [INFO] Handling signal: int
+2025-02-11 14:27:13 [31696] [INFO] Shutting down: Master
+2025-02-11 14:27:16 [31873] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:27:16 [31873] [INFO] Listening at: http://0.0.0.0:8000 (31873)
+2025-02-11 14:27:16 [31873] [INFO] Using worker: sync
+2025-02-11 14:27:16 [31874] [INFO] Booting worker with pid: 31874
+2025-02-11 14:27:16 [31875] [INFO] Booting worker with pid: 31875
+2025-02-11 14:27:16 [31876] [INFO] Booting worker with pid: 31876
+2025-02-11 14:27:16 [31877] [INFO] Booting worker with pid: 31877
+2025-02-11 14:27:21 [ERROR] [PID:31876] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:27:21 [ERROR] [PID:31875] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:28:00 [ERROR] [PID:31874] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:28:00 [ERROR] [PID:31877] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:30:30 [31873] [INFO] Handling signal: int
+2025-02-11 14:30:30 [31873] [ERROR] Worker (pid:31876) was sent SIGINT!
+2025-02-11 14:30:30 [31873] [ERROR] Worker (pid:31875) was sent SIGINT!
+2025-02-11 14:30:30 [31873] [ERROR] Worker (pid:31874) was sent SIGINT!
+2025-02-11 14:30:30 [31873] [ERROR] Worker (pid:31877) was sent SIGINT!
+2025-02-11 14:30:31 [31873] [INFO] Shutting down: Master
+2025-02-11 14:30:48 [32278] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:30:48 [32278] [INFO] Listening at: http://0.0.0.0:8000 (32278)
+2025-02-11 14:30:48 [32278] [INFO] Using worker: sync
+2025-02-11 14:30:48 [32279] [INFO] Booting worker with pid: 32279
+2025-02-11 14:30:48 [32280] [INFO] Booting worker with pid: 32280
+2025-02-11 14:30:48 [32281] [INFO] Booting worker with pid: 32281
+2025-02-11 14:30:48 [32282] [INFO] Booting worker with pid: 32282
+2025-02-11 14:31:02 [ERROR] [PID:32279] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:31:02 [ERROR] [PID:32279] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:31:56 [32278] [INFO] Handling signal: int
+2025-02-11 14:31:56 [32278] [ERROR] Worker (pid:32282) was sent SIGINT!
+2025-02-11 14:31:56 [32278] [ERROR] Worker (pid:32281) was sent SIGINT!
+2025-02-11 14:31:56 [32278] [ERROR] Worker (pid:32280) was sent SIGINT!
+2025-02-11 14:31:56 [32278] [ERROR] Worker (pid:32279) was sent SIGINT!
+2025-02-11 14:31:56 [32278] [INFO] Shutting down: Master
+2025-02-11 14:31:59 [32387] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:31:59 [32387] [INFO] Listening at: http://0.0.0.0:8000 (32387)
+2025-02-11 14:31:59 [32387] [INFO] Using worker: sync
+2025-02-11 14:31:59 [32388] [INFO] Booting worker with pid: 32388
+2025-02-11 14:31:59 [32389] [INFO] Booting worker with pid: 32389
+2025-02-11 14:31:59 [32390] [INFO] Booting worker with pid: 32390
+2025-02-11 14:31:59 [32391] [INFO] Booting worker with pid: 32391
+2025-02-11 14:32:03 [ERROR] [PID:32390] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:33:23 [32387] [INFO] Handling signal: int
+2025-02-11 14:33:23 [32387] [ERROR] Worker (pid:32391) was sent SIGINT!
+2025-02-11 14:33:23 [32387] [ERROR] Worker (pid:32389) was sent SIGINT!
+2025-02-11 14:33:23 [32387] [ERROR] Worker (pid:32388) was sent SIGINT!
+2025-02-11 14:33:23 [32387] [ERROR] Worker (pid:32390) was sent SIGINT!
+2025-02-11 14:33:23 [32387] [INFO] Shutting down: Master
+2025-02-11 14:33:36 [32498] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:33:36 [32498] [INFO] Listening at: http://0.0.0.0:8000 (32498)
+2025-02-11 14:33:36 [32498] [INFO] Using worker: sync
+2025-02-11 14:33:36 [32499] [INFO] Booting worker with pid: 32499
+2025-02-11 14:33:36 [32501] [INFO] Booting worker with pid: 32501
+2025-02-11 14:33:37 [32502] [INFO] Booting worker with pid: 32502
+2025-02-11 14:33:37 [32503] [INFO] Booting worker with pid: 32503
+2025-02-11 14:33:42 [ERROR] [PID:32503] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:33:43 [ERROR] [PID:32502] [app.routes.api] Status count validation failed: active_count=0, delivered_count=1, stats.active=2, stats.delivered=2
+2025-02-11 14:36:09 [32498] [INFO] Handling signal: int
+2025-02-11 14:36:10 [32498] [ERROR] Worker (pid:32503) was sent SIGINT!
+2025-02-11 14:36:10 [32498] [ERROR] Worker (pid:32499) was sent SIGINT!
+2025-02-11 14:36:10 [32498] [ERROR] Worker (pid:32501) was sent SIGINT!
+2025-02-11 14:36:10 [32498] [ERROR] Worker (pid:32502) was sent SIGINT!
+2025-02-11 14:36:10 [32498] [INFO] Shutting down: Master
+2025-02-11 14:36:12 [32874] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:36:12 [32874] [INFO] Listening at: http://0.0.0.0:8000 (32874)
+2025-02-11 14:36:12 [32874] [INFO] Using worker: sync
+2025-02-11 14:36:12 [32875] [INFO] Booting worker with pid: 32875
+2025-02-11 14:36:12 [32876] [INFO] Booting worker with pid: 32876
+2025-02-11 14:36:12 [32877] [INFO] Booting worker with pid: 32877
+2025-02-11 14:36:12 [32878] [INFO] Booting worker with pid: 32878
+2025-02-11 14:40:25 [32874] [INFO] Handling signal: int
+2025-02-11 14:40:26 [32874] [ERROR] Worker (pid:32878) was sent SIGINT!
+2025-02-11 14:40:26 [32874] [ERROR] Worker (pid:32875) was sent SIGINT!
+2025-02-11 14:40:26 [32874] [ERROR] Worker (pid:32876) was sent SIGINT!
+2025-02-11 14:40:26 [32874] [ERROR] Worker (pid:32877) was sent SIGINT!
+2025-02-11 14:40:26 [32874] [INFO] Shutting down: Master
+2025-02-11 14:40:31 [33093] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:40:31 [33093] [INFO] Listening at: http://0.0.0.0:8000 (33093)
+2025-02-11 14:40:31 [33093] [INFO] Using worker: sync
+2025-02-11 14:40:31 [33094] [INFO] Booting worker with pid: 33094
+2025-02-11 14:40:31 [33095] [INFO] Booting worker with pid: 33095
+2025-02-11 14:40:31 [33096] [INFO] Booting worker with pid: 33096
+2025-02-11 14:40:31 [33097] [INFO] Booting worker with pid: 33097
+2025-02-11 14:41:34 [33093] [INFO] Handling signal: int
+2025-02-11 14:41:34 [33093] [ERROR] Worker (pid:33096) was sent SIGINT!
+2025-02-11 14:41:34 [33093] [ERROR] Worker (pid:33094) was sent SIGINT!
+2025-02-11 14:41:34 [33093] [ERROR] Worker (pid:33095) was sent SIGINT!
+2025-02-11 14:41:34 [33093] [ERROR] Worker (pid:33097) was sent SIGINT!
+2025-02-11 14:41:34 [33093] [INFO] Shutting down: Master
+2025-02-11 14:42:27 [33238] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:42:27 [33238] [INFO] Listening at: http://0.0.0.0:8000 (33238)
+2025-02-11 14:42:27 [33238] [INFO] Using worker: sync
+2025-02-11 14:42:27 [33239] [INFO] Booting worker with pid: 33239
+2025-02-11 14:42:27 [33240] [INFO] Booting worker with pid: 33240
+2025-02-11 14:42:27 [33241] [INFO] Booting worker with pid: 33241
+2025-02-11 14:42:27 [33242] [INFO] Booting worker with pid: 33242
+2025-02-11 14:42:47 [33238] [INFO] Handling signal: int
+2025-02-11 14:42:47 [33238] [INFO] Shutting down: Master
+2025-02-11 14:42:53 [33361] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:42:53 [33361] [INFO] Listening at: http://0.0.0.0:8000 (33361)
+2025-02-11 14:42:53 [33361] [INFO] Using worker: sync
+2025-02-11 14:42:53 [33362] [INFO] Booting worker with pid: 33362
+2025-02-11 14:42:53 [33363] [INFO] Booting worker with pid: 33363
+2025-02-11 14:42:53 [33364] [INFO] Booting worker with pid: 33364
+2025-02-11 14:42:53 [33365] [INFO] Booting worker with pid: 33365
+2025-02-11 14:44:58 [33361] [INFO] Handling signal: int
+2025-02-11 14:44:59 [33361] [INFO] Shutting down: Master
+2025-02-11 14:45:02 [33776] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:45:02 [33776] [INFO] Listening at: http://0.0.0.0:8000 (33776)
+2025-02-11 14:45:02 [33776] [INFO] Using worker: sync
+2025-02-11 14:45:02 [33777] [INFO] Booting worker with pid: 33777
+2025-02-11 14:45:02 [33778] [INFO] Booting worker with pid: 33778
+2025-02-11 14:45:02 [33779] [INFO] Booting worker with pid: 33779
+2025-02-11 14:45:02 [33780] [INFO] Booting worker with pid: 33780
+2025-02-11 14:45:07 [ERROR] [PID:33779] [app.routes.api] Error fetching dashboard data: 'processing'
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/api.py", line 569, in get_dashboard_data
+    response_data['stats']['processing_count'] = response_data['status_counts']['processing']
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'processing'
+2025-02-11 14:47:09 [33776] [INFO] Handling signal: winch
+2025-02-11 14:48:16 [33776] [INFO] Handling signal: int
+2025-02-11 14:48:17 [33776] [INFO] Shutting down: Master
+2025-02-11 14:48:21 [33934] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:48:21 [33934] [INFO] Listening at: http://0.0.0.0:8000 (33934)
+2025-02-11 14:48:21 [33934] [INFO] Using worker: sync
+2025-02-11 14:48:21 [33936] [INFO] Booting worker with pid: 33936
+2025-02-11 14:48:22 [33937] [INFO] Booting worker with pid: 33937
+2025-02-11 14:48:22 [33938] [INFO] Booting worker with pid: 33938
+2025-02-11 14:48:22 [33939] [INFO] Booting worker with pid: 33939
+2025-02-11 14:48:26 [ERROR] [PID:33938] [app.routes.api] Error fetching dashboard data: name 'trend_data' is not defined
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/api.py", line 549, in get_dashboard_data
+    'dates': [t.date.strftime('%Y-%m-%d') for t in trend_data],
+                                                   ^^^^^^^^^^
+NameError: name 'trend_data' is not defined
+2025-02-11 14:50:22 [33934] [INFO] Handling signal: int
+2025-02-11 14:50:22 [33934] [INFO] Shutting down: Master
+2025-02-11 14:50:25 [34091] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:50:25 [34091] [INFO] Listening at: http://0.0.0.0:8000 (34091)
+2025-02-11 14:50:25 [34091] [INFO] Using worker: sync
+2025-02-11 14:50:25 [34092] [INFO] Booting worker with pid: 34092
+2025-02-11 14:50:26 [34093] [INFO] Booting worker with pid: 34093
+2025-02-11 14:50:26 [34094] [INFO] Booting worker with pid: 34094
+2025-02-11 14:50:26 [34095] [INFO] Booting worker with pid: 34095
+2025-02-11 14:55:29 [34091] [INFO] Handling signal: int
+2025-02-11 14:55:29 [34091] [ERROR] Worker (pid:34093) was sent SIGINT!
+2025-02-11 14:55:29 [34091] [ERROR] Worker (pid:34094) was sent SIGINT!
+2025-02-11 14:55:29 [34091] [ERROR] Worker (pid:34092) was sent SIGINT!
+2025-02-11 14:55:29 [34091] [ERROR] Worker (pid:34095) was sent SIGINT!
+2025-02-11 14:55:29 [34091] [INFO] Shutting down: Master
+2025-02-11 14:55:31 [34464] [INFO] Starting gunicorn 21.2.0
+2025-02-11 14:55:31 [34464] [INFO] Listening at: http://0.0.0.0:8000 (34464)
+2025-02-11 14:55:31 [34464] [INFO] Using worker: sync
+2025-02-11 14:55:31 [34467] [INFO] Booting worker with pid: 34467
+2025-02-11 14:55:31 [34468] [INFO] Booting worker with pid: 34468
+2025-02-11 14:55:31 [34469] [INFO] Booting worker with pid: 34469
+2025-02-11 14:55:31 [34470] [INFO] Booting worker with pid: 34470

@@ -43,7 +43,7 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="status-details">
-                        <span class="status-count">{{ monthly_stats.pending_count }}</span>
+                        <span class="status-count" id="pending-count">{{ monthly_stats.pending_count|default(0) }}</span>
                         <span class="status-label">Pending</span>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <i class="fas fa-cog"></i>
                     </div>
                     <div class="status-details">
-                        <span class="status-count">{{ monthly_stats.processing_count }}</span>
+                        <span class="status-count" id="processing-count">{{ monthly_stats.processing_count|default(0) }}</span>
                         <span class="status-label">Processing</span>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <i class="fas fa-truck"></i>
                     </div>
                     <div class="status-details">
-                        <span class="status-count">{{ monthly_stats.in_transit_count }}</span>
+                        <span class="status-count" id="in-transit-count">{{ monthly_stats.in_transit_count|default(0) }}</span>
                         <span class="status-label">In Transit</span>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <div class="status-details">
-                        <span class="status-count">{{ monthly_stats.delivered_count }}</span>
+                        <span class="status-count" id="delivered-count">{{ monthly_stats.delivered_count|default(0) }}</span>
                         <span class="status-label">Delivered</span>
                     </div>
                 </div>
