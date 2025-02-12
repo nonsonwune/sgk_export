@@ -451,6 +451,60 @@
         width: 100% !important;
         overflow: visible !important;
     }
+
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Other print styles */
+    body {
+        background: white;
+        font-size: 12pt;
+    }
+    
+    .preview-container {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .action-buttons {
+        display: none;
+    }
+    
+    .view-images-btn {
+        display: none;
+    }
+    
+    /* Ensure proper page breaks */
+    .info-card {
+        page-break-inside: avoid;
+    }
+    
+    /* Remove unnecessary backgrounds and borders */
+    .info-card,
+    .card-header,
+    .info-content {
+        border: none;
+        background: none;
+    }
+    
+    /* Optimize table display */
+    .items-table {
+        page-break-inside: avoid;
+        border-collapse: collapse;
+    }
+    
+    .items-table th,
+    .items-table td {
+        border: 1px solid #000;
+    }
+    
+    /* Ensure QR code prints clearly */
+    .qr-code-image {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
 }
 
 /* Screen-only styles */

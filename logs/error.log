@@ -1,0 +1,459 @@
+2025-02-11 20:16:05 [91278] [INFO] Starting gunicorn 21.2.0
+2025-02-11 20:16:05 [91278] [INFO] Listening at: http://0.0.0.0:8000 (91278)
+2025-02-11 20:16:05 [91278] [INFO] Using worker: sync
+2025-02-11 20:16:05 [91279] [INFO] Booting worker with pid: 91279
+2025-02-11 20:16:05 [91280] [INFO] Booting worker with pid: 91280
+2025-02-11 20:16:05 [91281] [INFO] Booting worker with pid: 91281
+2025-02-11 20:16:05 [91282] [INFO] Booting worker with pid: 91282
+2025-02-11 20:16:35 [ERROR] [PID:91279] [app.utils.appwrite] Error deleting file: The requested file could not be found.
+2025-02-11 20:16:43 [ERROR] [PID:91280] [app.utils.appwrite] Error deleting file: The requested file could not be found.
+2025-02-11 20:16:57 [ERROR] [PID:91280] [app.utils.appwrite] Error deleting file: The requested file could not be found.
+2025-02-11 22:39:13 [91278] [INFO] Handling signal: int
+2025-02-11 22:39:14 [91278] [ERROR] Worker (pid:91282) was sent SIGINT!
+2025-02-11 22:39:14 [91278] [ERROR] Worker (pid:91281) was sent SIGINT!
+2025-02-11 22:39:14 [91278] [ERROR] Worker (pid:91279) was sent SIGINT!
+2025-02-11 22:39:14 [91278] [ERROR] Worker (pid:91280) was sent SIGINT!
+2025-02-11 22:39:14 [91278] [INFO] Shutting down: Master
+2025-02-11 23:05:22 [ERROR] [PID:95315] [app.migrations.add_status_tracking] Error adding status tracking columns: Textual SQL expression '\n                ALTER TA...' should be explicitly declared as text('\n                ALTER TA...')
+2025-02-11 23:05:22 [ERROR] [PID:95315] [app.migrations.run_status_tracking_migration] Error running status tracking migration: Textual SQL expression '\n                ALTER TA...' should be explicitly declared as text('\n                ALTER TA...')
+2025-02-12 12:27:13 [9329] [INFO] Starting gunicorn 21.2.0
+2025-02-12 12:27:13 [9329] [INFO] Listening at: http://0.0.0.0:8000 (9329)
+2025-02-12 12:27:13 [9329] [INFO] Using worker: sync
+2025-02-12 12:27:13 [9330] [INFO] Booting worker with pid: 9330
+2025-02-12 12:27:13 [9331] [INFO] Booting worker with pid: 9331
+2025-02-12 12:27:13 [9332] [INFO] Booting worker with pid: 9332
+2025-02-12 12:27:13 [9333] [INFO] Booting worker with pid: 9333
+2025-02-12 12:27:28 [ERROR] [PID:9331] [app.routes.main] 
+=== Error in Root Route ===
+2025-02-12 12:27:28 [ERROR] [PID:9331] [app.routes.main] Error type: AmbiguousForeignKeysError
+2025-02-12 12:27:28 [ERROR] [PID:9331] [app.routes.main] Error message: Could not determine join condition between parent/child tables on relationship Shipment.creator - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2025-02-12 12:27:28 [ERROR] [PID:9331] [app.routes.main] Stack trace:
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2423, in _determine_joins
+    self.primaryjoin = join_condition(
+                       ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/util.py", line 123, in join_condition
+    return Join._join_condition(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/selectable.py", line 1343, in _join_condition
+    cls._joincond_trim_constraints(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/selectable.py", line 1488, in _joincond_trim_constraints
+    raise exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'export_request' and 'user'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 38, in index
+    logger.debug(f"Current user: {current_user}")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 318, in __get__
+    obj = instance._get_current_object()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/__init__.py", line 81, in load_user
+    return db.session.get(User, uuid_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
+    return self._proxied.get(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3637, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1622, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 701, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 314, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 1424, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 865, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 910, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 4641, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 684, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 1091, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2546, in to_compile_state
+    _MapperEntity(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2626, in __init__
+    entity._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4244, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2405, in _post_configure_properties
+    prop.init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/interfaces.py", line 579, in init
+    self.do_init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 1642, in do_init
+    self._setup_join_conditions()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 1884, in _setup_join_conditions
+    self._join_condition = jc = JoinCondition(
+                                ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2310, in __init__
+    self._determine_joins()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2467, in _determine_joins
+    raise sa_exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine join condition between parent/child tables on relationship Shipment.creator - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2025-02-12 12:27:28 [ERROR] [PID:9331] [app.routes.main] Request details: {'wsgi.errors': <gunicorn.http.wsgi.WSGIErrorsWrapper object at 0x111ed5d50>, 'wsgi.version': (1, 0), 'wsgi.multithread': False, 'wsgi.multiprocess': True, 'wsgi.run_once': False, 'wsgi.file_wrapper': <class 'gunicorn.http.wsgi.FileWrapper'>, 'wsgi.input_terminated': True, 'SERVER_SOFTWARE': 'gunicorn/21.2.0', 'wsgi.input': <gunicorn.http.body.Body object at 0x111f2d6d0>, 'gunicorn.socket': <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 8000), raddr=('127.0.0.1', 59737)>, 'REQUEST_METHOD': 'GET', 'QUERY_STRING': '', 'RAW_URI': '/', 'SERVER_PROTOCOL': 'HTTP/1.1', 'HTTP_HOST': 'localhost:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_SEC_CH_UA': '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"macOS"', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'HTTP_SEC_FETCH_SITE': 'none', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_ACCEPT_LANGUAGE': 'en-US,en;q=0.9', 'HTTP_COOKIE': 'session=.eJwlzsutAjEMAMBecmalOHbshGaQv3pcFzghegfpVTDzbrc68_HXrs_zlZd2u0e7toXbZDFgOBMg-F66EijTNIhW99o8ewWEg7MM6LiDzCbsUcthIslE4-5qkAuA3HKyVAqpb9YUj5-xqcpW74kxioAj3Ei4_SKvR57_m3JG5dEPce0HEeqhgXVIjC0wV2h5-3wB28M5QA.Z6vDNQ.mhOYG-iueth7Fv3tYxyP6H6vZqw', 'wsgi.url_scheme': 'http', 'REMOTE_ADDR': '127.0.0.1', 'REMOTE_PORT': '59737', 'SERVER_NAME': '0.0.0.0', 'SERVER_PORT': '8000', 'PATH_INFO': '/', 'SCRIPT_NAME': '', 'werkzeug.request': <Request 'http://localhost:8000/' [GET]>}
+2025-02-12 12:27:28 [ERROR] [PID:9331] [gunicorn.error] Error handling request /
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2423, in _determine_joins
+    self.primaryjoin = join_condition(
+                       ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/util.py", line 123, in join_condition
+    return Join._join_condition(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/selectable.py", line 1343, in _join_condition
+    cls._joincond_trim_constraints(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/selectable.py", line 1488, in _joincond_trim_constraints
+    raise exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'export_request' and 'user'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 38, in index
+    logger.debug(f"Current user: {current_user}")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 318, in __get__
+    obj = instance._get_current_object()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/__init__.py", line 81, in load_user
+    return db.session.get(User, uuid_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
+    return self._proxied.get(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3637, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1622, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 701, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 314, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 1424, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 865, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 910, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 4641, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 684, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 1091, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2546, in to_compile_state
+    _MapperEntity(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2626, in __init__
+    entity._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4244, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2405, in _post_configure_properties
+    prop.init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/interfaces.py", line 579, in init
+    self.do_init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 1642, in do_init
+    self._setup_join_conditions()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 1884, in _setup_join_conditions
+    self._join_condition = jc = JoinCondition(
+                                ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2310, in __init__
+    self._determine_joins()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2467, in _determine_joins
+    raise sa_exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine join condition between parent/child tables on relationship Shipment.creator - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 56, in index
+    return render_template('error.html', error=f"An error occurred: {str(e)}"), 500
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 129, in _render
+    app.update_template_context(context)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 480, in update_template_context
+    context.update(self.ensure_sync(func)())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 405, in _user_context_processor
+    return dict(current_user=_get_user())
+                             ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/__init__.py", line 81, in load_user
+    return db.session.get(User, uuid_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
+    return self._proxied.get(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3637, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1622, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 701, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 314, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 1424, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 865, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 910, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 4641, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 684, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 1091, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2546, in to_compile_state
+    _MapperEntity(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2626, in __init__
+    entity._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4240, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Shipment(export_request)]'. Original exception was: Could not determine join condition between parent/child tables on relationship Shipment.creator - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2025-02-12 12:29:15 [9329] [INFO] Handling signal: int
+2025-02-12 12:29:15 [9329] [INFO] Shutting down: Master
+2025-02-12 12:29:17 [9573] [INFO] Starting gunicorn 21.2.0
+2025-02-12 12:29:17 [9573] [INFO] Listening at: http://0.0.0.0:8000 (9573)
+2025-02-12 12:29:17 [9573] [INFO] Using worker: sync
+2025-02-12 12:29:17 [9574] [INFO] Booting worker with pid: 9574
+2025-02-12 12:29:17 [9575] [INFO] Booting worker with pid: 9575
+2025-02-12 12:29:18 [9576] [INFO] Booting worker with pid: 9576
+2025-02-12 12:29:18 [9577] [INFO] Booting worker with pid: 9577
+2025-02-12 13:34:33 [9573] [INFO] Handling signal: winch
+2025-02-12 13:34:33 [9573] [INFO] Handling signal: winch
+2025-02-12 13:34:33 [9573] [INFO] Handling signal: winch
+2025-02-12 13:34:33 [9573] [INFO] Handling signal: winch
+2025-02-12 13:49:29 [9573] [INFO] Handling signal: int
+2025-02-12 13:49:29 [9573] [ERROR] Worker (pid:9575) was sent SIGINT!
+2025-02-12 13:49:29 [9573] [ERROR] Worker (pid:9574) was sent SIGINT!
+2025-02-12 13:49:29 [9573] [ERROR] Worker (pid:9576) was sent SIGINT!
+2025-02-12 13:49:29 [9573] [ERROR] Worker (pid:9577) was sent SIGINT!
+2025-02-12 13:49:29 [9573] [INFO] Shutting down: Master
+2025-02-12 13:49:31 [11761] [INFO] Starting gunicorn 21.2.0
+2025-02-12 13:49:31 [11761] [INFO] Listening at: http://0.0.0.0:8000 (11761)
+2025-02-12 13:49:31 [11761] [INFO] Using worker: sync
+2025-02-12 13:49:31 [11762] [INFO] Booting worker with pid: 11762
+2025-02-12 13:49:31 [11763] [INFO] Booting worker with pid: 11763
+2025-02-12 13:49:31 [11764] [INFO] Booting worker with pid: 11764
+2025-02-12 13:49:31 [11765] [INFO] Booting worker with pid: 11765
+2025-02-12 16:50:44 [11761] [INFO] Handling signal: int
+2025-02-12 16:50:44 [11761] [ERROR] Worker (pid:11764) was sent SIGINT!
+2025-02-12 16:50:44 [11761] [ERROR] Worker (pid:11763) was sent SIGINT!
+2025-02-12 16:50:44 [11761] [ERROR] Worker (pid:11762) was sent SIGINT!
+2025-02-12 16:50:44 [11761] [ERROR] Worker (pid:11765) was sent SIGINT!
+2025-02-12 16:50:44 [11761] [INFO] Shutting down: Master
+2025-02-12 16:56:15 [15384] [INFO] Starting gunicorn 21.2.0
+2025-02-12 16:56:15 [15384] [INFO] Listening at: http://0.0.0.0:8000 (15384)
+2025-02-12 16:56:15 [15384] [INFO] Using worker: sync
+2025-02-12 16:56:15 [15385] [INFO] Booting worker with pid: 15385
+2025-02-12 16:56:15 [15386] [INFO] Booting worker with pid: 15386
+2025-02-12 16:56:15 [15387] [INFO] Booting worker with pid: 15387
+2025-02-12 16:56:15 [15388] [INFO] Booting worker with pid: 15388
+2025-02-12 17:08:35 [15384] [INFO] Handling signal: int
+2025-02-12 17:08:36 [15384] [INFO] Shutting down: Master
+2025-02-12 17:08:37 [15839] [INFO] Starting gunicorn 21.2.0
+2025-02-12 17:08:37 [15839] [INFO] Listening at: http://0.0.0.0:8000 (15839)
+2025-02-12 17:08:37 [15839] [INFO] Using worker: sync
+2025-02-12 17:08:37 [15840] [INFO] Booting worker with pid: 15840
+2025-02-12 17:08:37 [15841] [INFO] Booting worker with pid: 15841
+2025-02-12 17:08:37 [15842] [INFO] Booting worker with pid: 15842
+2025-02-12 17:08:37 [15843] [INFO] Booting worker with pid: 15843
+2025-02-12 17:31:05 [15839] [INFO] Handling signal: int
+2025-02-12 17:31:05 [15839] [INFO] Shutting down: Master
+2025-02-12 17:31:08 [16536] [INFO] Starting gunicorn 21.2.0
+2025-02-12 17:31:08 [16536] [INFO] Listening at: http://0.0.0.0:8000 (16536)
+2025-02-12 17:31:08 [16536] [INFO] Using worker: sync
+2025-02-12 17:31:08 [16537] [INFO] Booting worker with pid: 16537
+2025-02-12 17:31:08 [16538] [INFO] Booting worker with pid: 16538
+2025-02-12 17:31:08 [16539] [INFO] Booting worker with pid: 16539
+2025-02-12 17:31:08 [16540] [INFO] Booting worker with pid: 16540
+2025-02-12 17:37:29 [16536] [INFO] Handling signal: int
+2025-02-12 17:37:29 [16536] [ERROR] Worker (pid:16539) was sent SIGINT!
+2025-02-12 17:37:29 [16536] [ERROR] Worker (pid:16537) was sent SIGINT!
+2025-02-12 17:37:29 [16536] [ERROR] Worker (pid:16538) was sent SIGINT!
+2025-02-12 17:37:29 [16536] [ERROR] Worker (pid:16540) was sent SIGINT!
+2025-02-12 17:37:29 [16536] [INFO] Shutting down: Master
+2025-02-12 17:37:31 [16806] [INFO] Starting gunicorn 21.2.0
+2025-02-12 17:37:31 [16806] [INFO] Listening at: http://0.0.0.0:8000 (16806)
+2025-02-12 17:37:31 [16806] [INFO] Using worker: sync
+2025-02-12 17:37:31 [16807] [INFO] Booting worker with pid: 16807
+2025-02-12 17:37:31 [16808] [INFO] Booting worker with pid: 16808
+2025-02-12 17:37:31 [16809] [INFO] Booting worker with pid: 16809
+2025-02-12 17:37:31 [16810] [INFO] Booting worker with pid: 16810

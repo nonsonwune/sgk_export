@@ -203,7 +203,9 @@ class Shipment(db.Model):
     
     # User relationship
     created_by = db.Column(GUID(), db.ForeignKey('user.id'), nullable=False, index=True)
-    creator = db.relationship('User', backref=db.backref('shipments', lazy=True))
+    creator = db.relationship('User', 
+                            backref=db.backref('shipments', lazy=True),
+                            foreign_keys=[created_by])
     
     # Relationships
     items = db.relationship('ShipmentItem', backref='shipment', lazy=True, foreign_keys=[ShipmentItem.export_request_id])
@@ -243,6 +245,13 @@ class Shipment(db.Model):
     order_booked_by = db.Column(db.String(100))
     status = db.Column(db.String(50), default=STATUS_PENDING)
     
+    # Status tracking fields
+    status_changed_by = db.Column(GUID(), db.ForeignKey('user.id'), index=True)
+    status_changed_at = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
+    status_changer = db.relationship('User', 
+                                   backref=db.backref('status_changes', lazy=True),
+                                   foreign_keys=[status_changed_by])
+    
     @property
     def calculated_total(self):
         """Calculate total from individual components"""
@@ -273,3 +282,19 @@ class Shipment(db.Model):
     def can_transition_to(self, new_status):
         """Check if the shipment can transition to the given status"""
         return new_status in self.STATUS_TRANSITIONS.get(self.status, []) 
+
+    def update_status(self, new_status, user_id):
+        """Update shipment status with tracking information"""
+        if self.can_transition_to(new_status):
+            try:
+                self.status = new_status
+                self.status_changed_by = user_id
+                self.status_changed_at = datetime.utcnow()
+                db.session.add(self)
+                db.session.commit()
+                return True
+            except Exception as e:
+                db.session.rollback()
+                logger.error(f"Error updating shipment status: {str(e)}")
+                raise
+        return False 

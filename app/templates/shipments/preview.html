@@ -261,6 +261,12 @@
                         {% endif %}
                     </span>
                 </div>
+                {% if shipment.status_changed_by %}
+                <div class="info-row no-print">
+                    <span class="label">Status Last Changed:</span>
+                    <span class="value">By {{ shipment.status_changer.name }} on {{ shipment.status_changed_at.strftime('%B %d, %Y %H:%M') }}</span>
+                </div>
+                {% endif %}
             </div>
         </div>
 

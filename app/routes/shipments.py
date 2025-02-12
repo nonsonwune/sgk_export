@@ -404,32 +404,24 @@ def delete_shipment(shipment_id):
 @bp.route('/<uuid:shipment_id>/status', methods=['POST'])
 @login_required
 def update_status(shipment_id):
-    logger.debug(f'Processing status update for shipment {shipment_id}')
+    """Update shipment status with user tracking"""
     try:
-        # Query shipment directly with UUID
         shipment = Shipment.query.get_or_404(shipment_id)
         new_status = request.form.get('status')
-        logger.debug(f'Current status: {shipment.status}, Requested new status: {new_status}')
         
         if new_status not in Shipment.VALID_STATUSES:
-            logger.error(f'Invalid status value received: {new_status}')
-            flash('Invalid status value', 'error')
-            return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
+            flash('Invalid status provided.', 'error')
+            return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
             
-        if not shipment.can_transition_to(new_status):
-            logger.error(f'Invalid status transition from {shipment.status} to {new_status}')
-            flash(f'Cannot change status from {shipment.status} to {new_status}', 'error')
-            return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
+        if shipment.update_status(new_status, current_user.id):
+            flash(f'Shipment status updated to {new_status}.', 'success')
+        else:
+            flash('Invalid status transition.', 'error')
             
-        logger.debug(f'Updating status from {shipment.status} to {new_status}')
-        shipment.status = new_status
-        db.session.commit()
-        logger.debug('Status update successful')
-        flash('Shipment status updated successfully', 'success')
-            
-        return redirect(url_for('shipments.view_shipment', shipment_id=shipment.id))
+        return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id))
+        
     except Exception as e:
+        logger.error(f"Error updating shipment status: {str(e)}", exc_info=True)
         db.session.rollback()
-        logger.error(f'Error updating shipment status: {str(e)}')
-        flash('Error updating shipment status', 'error')
+        flash('An error occurred while updating the status.', 'error')
         return redirect(url_for('shipments.view_shipment', shipment_id=shipment_id)) 

@@ -253,6 +253,24 @@ function destroyChart(chartId) {
     chartRegistry.destroy(chartId);
 }
 
+// Status color definitions for consistent theming
+const statusColors = {
+    'pending': '#fef3c7',     // Light amber from status-card.pending
+    'processing': '#dbeafe',  // Light blue from status-card.processing
+    'in_transit': '#dcfce7',  // Light green from status-card.in-transit
+    'delivered': '#f3e8ff',   // Light purple from status-card.delivered
+    'cancelled': '#fee2e2'    // Light red for cancelled status
+};
+
+// Status text colors for consistent theming
+const statusTextColors = {
+    'pending': '#d97706',     // Amber text from status-card.pending
+    'processing': '#2563eb',  // Blue text from status-card.processing
+    'in_transit': '#16a34a',  // Green text from status-card.in-transit
+    'delivered': '#7e22ce',   // Purple text from status-card.delivered
+    'cancelled': '#dc2626'    // Red text for cancelled status
+};
+
 // Initialize charts with validated data
 async function initializeCharts() {
     debugLog('Starting chart initialization with registry');
@@ -312,37 +330,22 @@ async function initializeCharts() {
         // Initialize status distribution chart
         const statusCtx = document.getElementById('statusDistributionChart');
         if (statusCtx) {
-            const statusConfig = {
-                labels: ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled'],
-                colors: {
-                    'Pending': '#f1c40f',      // Yellow
-                    'Processing': '#3498db',    // Blue
-                    'In Transit': '#e67e22',    // Orange
-                    'Delivered': '#2ecc71',     // Green
-                    'Cancelled': '#e74c3c'      // Red
-                }
+            const statusData = {
+                labels: Object.keys(statusColors),
+                datasets: [{
+                    data: [0, 0, 0, 0, 0], // Will be updated with real data
+                    backgroundColor: Object.values(statusColors),
+                    borderColor: Object.values(statusTextColors),
+                    borderWidth: 1
+                }]
             };
-            
-            const statusData = statusConfig.labels.map(label => {
-                const key = label.toLowerCase().replace(' ', '_');
-                return data.status_distribution[key] || 0;
-            });
             
             const statusChart = new Chart(statusCtx, {
                 type: 'doughnut',
-                data: {
-                    labels: statusConfig.labels,
-                    datasets: [{
-                        data: statusData,
-                        backgroundColor: statusConfig.labels.map(label => statusConfig.colors[label]),
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
-                },
+                data: statusData,
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '60%',
                     plugins: {
                         legend: {
                             position: 'right',
@@ -360,18 +363,15 @@ async function initializeCharts() {
                                     const label = context.label || '';
                                     const value = context.raw || 0;
                                     const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                                    const percentage = ((value / total) * 100).toFixed(1);
                                     return `${label}: ${value} (${percentage}%)`;
                                 }
                             }
                         }
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
                     }
                 }
             });
+            
             chartRegistry.register('statusDistributionChart', statusChart);
         }
         
@@ -559,24 +559,31 @@ function updateCharts(data) {
         hideChartLoading(container);
         hideChartError(container);
         
-        const statusConfig = {
-            labels: ['Pending', 'Processing', 'In Transit', 'Delivered', 'Cancelled']
+        const statusData = {
+            labels: Object.keys(statusColors),
+            datasets: [{
+                data: [0, 0, 0, 0, 0], // Will be updated with real data
+                backgroundColor: Object.values(statusColors),
+                borderColor: Object.values(statusTextColors),
+                borderWidth: 1
+            }]
         };
         
-        const statusData = statusConfig.labels.map(label => {
+        const statusDataValues = statusData.labels.map(label => {
             const key = label.toLowerCase().replace(' ', '_');
             return data.status_distribution[key] || 0;
         });
         
-        statusChart.data.datasets[0].data = statusData;
+        statusData.datasets[0].data = statusDataValues;
+        statusChart.data.datasets[0].data = statusDataValues;
         statusChart.update('none');
         
-        const total = statusData.reduce((a, b) => a + b, 0);
+        const total = statusDataValues.reduce((a, b) => a + b, 0);
         debugLog('Status distribution chart updated', {
-            data: statusData,
+            data: statusDataValues,
             total: total,
-            distribution: statusData.map((value, index) => ({
-                status: statusConfig.labels[index],
+            distribution: statusDataValues.map((value, index) => ({
+                status: statusData.labels[index],
                 count: value,
                 percentage: total > 0 ? Math.round((value / total) * 100) : 0
             }))
