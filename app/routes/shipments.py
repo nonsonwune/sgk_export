@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
 from flask_login import login_required, current_user
-from ..models.shipment import Shipment, ShipmentItem
+from ..models.shipment import Shipment, ShipmentItem, ShipmentStatusHistory
 from ..utils.appwrite import upload_file, delete_file
 from ..utils.helpers import calculate_subtotal, calculate_vat, generate_qr_code
 from ..extensions import db
@@ -233,6 +233,9 @@ def view_shipment(shipment_id):
         logger.debug(f'Items relationship type: {type(items)}')
         logger.debug(f'Items data: {[{"id": item.id, "description": item.description} for item in items]}')
         
+        # Get ordered status history
+        status_history = shipment.status_history.order_by(ShipmentStatusHistory.changed_at.asc()).all()
+        
         # Calculate financial values
         logger.debug('Calculating financial values')
         subtotal = calculate_subtotal(shipment)
@@ -262,6 +265,7 @@ def view_shipment(shipment_id):
         return render_template('shipments/preview.html', 
                              shipment=shipment,
                              items=items,
+                             status_history=status_history,
                              subtotal=subtotal,
                              vat=vat,
                              total=total)

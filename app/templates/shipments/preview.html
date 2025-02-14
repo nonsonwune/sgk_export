@@ -241,6 +241,21 @@
                     <span class="label">Order Booked By:</span>
                     <span class="value">{{ shipment.order_booked_by }}</span>
                 </div>
+                <div class="info-row no-print">
+                    <span class="label">Status History:</span>
+                    <span class="value">
+                        <div class="status-history">
+                            <div class="history-entry">
+                                Submitted by {{ shipment.creator.name }} on {{ shipment.created_at.strftime('%B %d, %Y %H:%M') }}
+                            </div>
+                            {% for history in status_history %}
+                            <div class="history-entry">
+                                Marked as {{ history.new_status|title }} by {{ history.user.name }} on {{ history.changed_at.strftime('%B %d, %Y %H:%M') }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </span>
+                </div>
                 <div class="info-row">
                     <span class="label">Sender Signature:</span>
                     <span class="value">

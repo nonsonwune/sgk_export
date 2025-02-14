@@ -457,3 +457,1085 @@ sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - c
 2025-02-12 17:37:31 [16808] [INFO] Booting worker with pid: 16808
 2025-02-12 17:37:31 [16809] [INFO] Booting worker with pid: 16809
 2025-02-12 17:37:31 [16810] [INFO] Booting worker with pid: 16810
+2025-02-12 18:33:18 [16806] [INFO] Handling signal: int
+2025-02-12 18:33:19 [16806] [ERROR] Worker (pid:16808) was sent SIGINT!
+2025-02-12 18:33:19 [16806] [ERROR] Worker (pid:16810) was sent SIGINT!
+2025-02-12 18:33:19 [16806] [ERROR] Worker (pid:16807) was sent SIGINT!
+2025-02-12 18:33:19 [16806] [ERROR] Worker (pid:16809) was sent SIGINT!
+2025-02-12 18:33:19 [16806] [INFO] Shutting down: Master
+2025-02-12 18:37:05 [18802] [INFO] Starting gunicorn 21.2.0
+2025-02-12 18:37:05 [18802] [INFO] Listening at: http://0.0.0.0:8000 (18802)
+2025-02-12 18:37:05 [18802] [INFO] Using worker: sync
+2025-02-12 18:37:05 [18804] [INFO] Booting worker with pid: 18804
+2025-02-12 18:37:05 [18805] [INFO] Booting worker with pid: 18805
+2025-02-12 18:37:05 [18806] [INFO] Booting worker with pid: 18806
+2025-02-12 18:37:05 [18807] [INFO] Booting worker with pid: 18807
+2025-02-12 18:37:10 [ERROR] [PID:18804] [app.routes.shipments] Error viewing shipment: Error creating backref 'status_changes' on relationship 'Shipment.status_changer': property of that name exists on mapper 'Mapper[User(user)]'
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 227, in view_shipment
+    shipment = Shipment.query.get_or_404(shipment_id)
+               ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_sqlalchemy/model.py", line 22, in __get__
+    return cls.query_class(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 275, in __init__
+    self._set_entities(entities)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 287, in _set_entities
+    self._raw_columns = [
+                        ^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 288, in <listcomp>
+    coercions.expect(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 389, in expect
+    insp._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4244, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2405, in _post_configure_properties
+    prop.init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/interfaces.py", line 579, in init
+    self.do_init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 1645, in do_init
+    self._generate_backref()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2075, in _generate_backref
+    raise sa_exc.ArgumentError(
+sqlalchemy.exc.ArgumentError: Error creating backref 'status_changes' on relationship 'Shipment.status_changer': property of that name exists on mapper 'Mapper[User(user)]'
+2025-02-12 18:37:10 [ERROR] [PID:18807] [gunicorn.error] Error handling request /shipments/list
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 284, in decorated_view
+    elif not current_user.is_authenticated:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 318, in __get__
+    obj = instance._get_current_object()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/__init__.py", line 81, in load_user
+    return db.session.get(User, uuid_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
+    return self._proxied.get(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3637, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1622, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 701, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 314, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 1424, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 865, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 910, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 4641, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 684, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 1091, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2546, in to_compile_state
+    _MapperEntity(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2626, in __init__
+    entity._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4244, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2405, in _post_configure_properties
+    prop.init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/interfaces.py", line 579, in init
+    self.do_init()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 1645, in do_init
+    self._generate_backref()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/relationships.py", line 2075, in _generate_backref
+    raise sa_exc.ArgumentError(
+sqlalchemy.exc.ArgumentError: Error creating backref 'status_changes' on relationship 'Shipment.status_changer': property of that name exists on mapper 'Mapper[User(user)]'
+2025-02-12 18:37:15 [ERROR] [PID:18807] [gunicorn.error] Error handling request /dashboard
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 284, in decorated_view
+    elif not current_user.is_authenticated:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 318, in __get__
+    obj = instance._get_current_object()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/__init__.py", line 81, in load_user
+    return db.session.get(User, uuid_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
+    return self._proxied.get(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3637, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1622, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 701, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 314, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 1424, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 865, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 910, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 4641, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 684, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 1091, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2546, in to_compile_state
+    _MapperEntity(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2626, in __init__
+    entity._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4240, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Shipment(export_request)]'. Original exception was: Error creating backref 'status_changes' on relationship 'Shipment.status_changer': property of that name exists on mapper 'Mapper[User(user)]'
+2025-02-12 18:37:16 [ERROR] [PID:18804] [gunicorn.error] Error handling request /dashboard
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 135, in handle
+    self.handle_request(listener, req, client, addr)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
+    respiter = self.wsgi(environ, resp.start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1478, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 284, in decorated_view
+    elif not current_user.is_authenticated:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 318, in __get__
+    obj = instance._get_current_object()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/local.py", line 526, in _get_current_object
+    return get_name(local())
+                    ^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+                                      ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask_login/login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/__init__.py", line 81, in load_user
+    return db.session.get(User, uuid_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
+    return self._proxied.get(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3637, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1622, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 701, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 314, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 1424, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 865, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 910, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/compiler.py", line 4641, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 684, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 1091, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2546, in to_compile_state
+    _MapperEntity(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 2626, in __init__
+    entity._post_inspect
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 1252, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2711, in _post_inspect
+    self._check_configure()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 2388, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4203, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/mapper.py", line 4240, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Shipment(export_request)]'. Original exception was: Error creating backref 'status_changes' on relationship 'Shipment.status_changer': property of that name exists on mapper 'Mapper[User(user)]'
+2025-02-12 18:39:17 [18802] [CRITICAL] WORKER TIMEOUT (pid:18807)
+2025-02-12 18:39:17 [18802] [ERROR] Worker (pid:18807) exited with code 1
+2025-02-12 18:39:17 [18802] [ERROR] Worker (pid:18807) exited with code 1.
+2025-02-12 18:39:17 [18962] [INFO] Booting worker with pid: 18962
+2025-02-12 18:44:22 [18802] [INFO] Handling signal: int
+2025-02-12 18:44:22 [18802] [INFO] Shutting down: Master
+2025-02-12 18:44:24 [19496] [INFO] Starting gunicorn 21.2.0
+2025-02-12 18:44:24 [19496] [INFO] Listening at: http://0.0.0.0:8000 (19496)
+2025-02-12 18:44:24 [19496] [INFO] Using worker: sync
+2025-02-12 18:44:24 [19497] [INFO] Booting worker with pid: 19497
+2025-02-12 18:44:24 [19498] [INFO] Booting worker with pid: 19498
+2025-02-12 18:44:24 [19499] [INFO] Booting worker with pid: 19499
+2025-02-12 18:44:24 [19500] [INFO] Booting worker with pid: 19500
+2025-02-12 18:44:39 [ERROR] [PID:19497] [app.routes.shipments] Error viewing shipment: (psycopg2.errors.UndefinedTable) relation "shipment_status_history" does not exist
+LINE 2: FROM shipment_status_history 
+             ^
+
+[SQL: SELECT shipment_status_history.id AS shipment_status_history_id, shipment_status_history.shipment_id AS shipment_status_history_shipment_id, shipment_status_history.status AS shipment_status_history_status, shipment_status_history.changed_by AS shipment_status_history_changed_by, shipment_status_history.changed_at AS shipment_status_history_changed_at 
+FROM shipment_status_history 
+WHERE %(param_1)s::UUID = shipment_status_history.shipment_id ORDER BY shipment_status_history.changed_at]
+[parameters: {'param_1': UUID('dfa662fd-a8cf-492b-8dc9-037a03b00cb8')}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "shipment_status_history" does not exist
+LINE 2: FROM shipment_status_history 
+             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 262, in view_shipment
+    return render_template('shipments/preview.html',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 188, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 267, in block 'content'
+    {% for history in shipment.status_history %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/attributes.py", line 1121, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/strategies.py", line 967, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/strategies.py", line 1130, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1630, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1979, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2335, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "shipment_status_history" does not exist
+LINE 2: FROM shipment_status_history 
+             ^
+
+[SQL: SELECT shipment_status_history.id AS shipment_status_history_id, shipment_status_history.shipment_id AS shipment_status_history_shipment_id, shipment_status_history.status AS shipment_status_history_status, shipment_status_history.changed_by AS shipment_status_history_changed_by, shipment_status_history.changed_at AS shipment_status_history_changed_at 
+FROM shipment_status_history 
+WHERE %(param_1)s::UUID = shipment_status_history.shipment_id ORDER BY shipment_status_history.changed_at]
+[parameters: {'param_1': UUID('dfa662fd-a8cf-492b-8dc9-037a03b00cb8')}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-12 18:47:29 [19496] [INFO] Handling signal: int
+2025-02-12 18:47:29 [19496] [ERROR] Worker (pid:19498) was sent SIGINT!
+2025-02-12 18:47:29 [19496] [ERROR] Worker (pid:19497) was sent SIGINT!
+2025-02-12 18:47:29 [19496] [ERROR] Worker (pid:19499) was sent SIGINT!
+2025-02-12 18:47:29 [19496] [ERROR] Worker (pid:19500) was sent SIGINT!
+2025-02-12 18:47:29 [19496] [INFO] Shutting down: Master
+2025-02-12 18:53:11 [20294] [INFO] Starting gunicorn 21.2.0
+2025-02-12 18:53:11 [20294] [INFO] Listening at: http://0.0.0.0:8000 (20294)
+2025-02-12 18:53:11 [20294] [INFO] Using worker: sync
+2025-02-12 18:53:11 [20295] [INFO] Booting worker with pid: 20295
+2025-02-12 18:53:11 [20296] [INFO] Booting worker with pid: 20296
+2025-02-12 18:53:11 [20297] [INFO] Booting worker with pid: 20297
+2025-02-12 18:53:11 [20298] [INFO] Booting worker with pid: 20298
+2025-02-12 18:53:17 [ERROR] [PID:20295] [app.routes.shipments] Error viewing shipment: 'ShipmentStatusHistory' is undefined
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 262, in view_shipment
+    return render_template('shipments/preview.html',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 188, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/preview.html", line 251, in block 'content'
+    {% for history in shipment.status_history.order_by(ShipmentStatusHistory.changed_at.asc()).all() %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'ShipmentStatusHistory' is undefined
+2025-02-12 18:54:55 [20294] [INFO] Handling signal: int
+2025-02-12 18:54:55 [20294] [INFO] Shutting down: Master
+2025-02-12 18:55:02 [20456] [INFO] Starting gunicorn 21.2.0
+2025-02-12 18:55:02 [20456] [INFO] Listening at: http://0.0.0.0:8000 (20456)
+2025-02-12 18:55:02 [20456] [INFO] Using worker: sync
+2025-02-12 18:55:02 [20457] [INFO] Booting worker with pid: 20457
+2025-02-12 18:55:02 [20458] [INFO] Booting worker with pid: 20458
+2025-02-12 18:55:02 [20459] [INFO] Booting worker with pid: 20459
+2025-02-12 18:55:02 [20460] [INFO] Booting worker with pid: 20460
+2025-02-12 18:55:07 [ERROR] [PID:20458] [app.routes.shipments] Error viewing shipment: (psycopg2.errors.UndefinedTable) relation "shipment_status_history" does not exist
+LINE 2: FROM shipment_status_history 
+             ^
+
+[SQL: SELECT shipment_status_history.id AS shipment_status_history_id, shipment_status_history.shipment_id AS shipment_status_history_shipment_id, shipment_status_history.old_status AS shipment_status_history_old_status, shipment_status_history.new_status AS shipment_status_history_new_status, shipment_status_history.changed_by AS shipment_status_history_changed_by, shipment_status_history.changed_at AS shipment_status_history_changed_at 
+FROM shipment_status_history 
+WHERE %(param_1)s::UUID = shipment_status_history.shipment_id ORDER BY shipment_status_history.changed_at, shipment_status_history.changed_at ASC]
+[parameters: {'param_1': UUID('dfa662fd-a8cf-492b-8dc9-037a03b00cb8')}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "shipment_status_history" does not exist
+LINE 2: FROM shipment_status_history 
+             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 237, in view_shipment
+    status_history = shipment.status_history.order_by(ShipmentStatusHistory.changed_at.asc()).all()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2672, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2826, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1408, in execute
+    return meth(
+           ^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 513, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1630, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1979, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2335, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1960, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "shipment_status_history" does not exist
+LINE 2: FROM shipment_status_history 
+             ^
+
+[SQL: SELECT shipment_status_history.id AS shipment_status_history_id, shipment_status_history.shipment_id AS shipment_status_history_shipment_id, shipment_status_history.old_status AS shipment_status_history_old_status, shipment_status_history.new_status AS shipment_status_history_new_status, shipment_status_history.changed_by AS shipment_status_history_changed_by, shipment_status_history.changed_at AS shipment_status_history_changed_at 
+FROM shipment_status_history 
+WHERE %(param_1)s::UUID = shipment_status_history.shipment_id ORDER BY shipment_status_history.changed_at, shipment_status_history.changed_at ASC]
+[parameters: {'param_1': UUID('dfa662fd-a8cf-492b-8dc9-037a03b00cb8')}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-12 18:57:12 [ERROR] [PID:20964] [flask_migrate] Error: Directory migrations already exists and is not empty
+2025-02-12 18:59:11 [20456] [INFO] Handling signal: int
+2025-02-12 18:59:11 [20456] [ERROR] Worker (pid:20457) was sent SIGINT!
+2025-02-12 18:59:11 [20456] [ERROR] Worker (pid:20460) was sent SIGINT!
+2025-02-12 18:59:11 [20456] [ERROR] Worker (pid:20459) was sent SIGINT!
+2025-02-12 18:59:11 [20456] [ERROR] Worker (pid:20458) was sent SIGINT!
+2025-02-12 18:59:11 [20456] [INFO] Shutting down: Master
+2025-02-12 18:59:33 [21681] [INFO] Starting gunicorn 21.2.0
+2025-02-12 18:59:33 [21681] [INFO] Listening at: http://0.0.0.0:8000 (21681)
+2025-02-12 18:59:33 [21681] [INFO] Using worker: sync
+2025-02-12 18:59:33 [21682] [INFO] Booting worker with pid: 21682
+2025-02-12 18:59:33 [21683] [INFO] Booting worker with pid: 21683
+2025-02-12 18:59:33 [21684] [INFO] Booting worker with pid: 21684
+2025-02-12 18:59:33 [21685] [INFO] Booting worker with pid: 21685
+2025-02-12 22:21:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:21682)
+2025-02-12 22:21:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:21683)
+2025-02-12 22:21:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:21684)
+2025-02-12 22:21:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:21685)
+2025-02-12 22:21:45 [21681] [ERROR] Worker (pid:21683) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:21:45 [21681] [ERROR] Worker (pid:21682) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:21:45 [21681] [ERROR] Worker (pid:21684) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:21:45 [21681] [ERROR] Worker (pid:21685) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:21:45 [25189] [INFO] Booting worker with pid: 25189
+2025-02-12 22:21:45 [25191] [INFO] Booting worker with pid: 25191
+2025-02-12 22:21:46 [25193] [INFO] Booting worker with pid: 25193
+2025-02-12 22:21:46 [25196] [INFO] Booting worker with pid: 25196
+2025-02-12 22:38:55 [21681] [CRITICAL] WORKER TIMEOUT (pid:25189)
+2025-02-12 22:38:56 [21681] [CRITICAL] WORKER TIMEOUT (pid:25191)
+2025-02-12 22:38:56 [21681] [CRITICAL] WORKER TIMEOUT (pid:25193)
+2025-02-12 22:38:56 [21681] [CRITICAL] WORKER TIMEOUT (pid:25196)
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25193) exited with code 1
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25193) exited with code 1.
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25196) exited with code 1
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25196) exited with code 1.
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25191) exited with code 1
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25191) exited with code 1.
+2025-02-12 22:38:57 [21681] [ERROR] Worker (pid:25189) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:38:57 [25258] [INFO] Booting worker with pid: 25258
+2025-02-12 22:38:57 [25262] [INFO] Booting worker with pid: 25262
+2025-02-12 22:38:57 [25263] [INFO] Booting worker with pid: 25263
+2025-02-12 22:38:57 [25264] [INFO] Booting worker with pid: 25264
+2025-02-12 22:58:52 [21681] [CRITICAL] WORKER TIMEOUT (pid:25258)
+2025-02-12 22:58:53 [21681] [CRITICAL] WORKER TIMEOUT (pid:25262)
+2025-02-12 22:58:53 [21681] [CRITICAL] WORKER TIMEOUT (pid:25263)
+2025-02-12 22:58:53 [21681] [CRITICAL] WORKER TIMEOUT (pid:25264)
+2025-02-12 22:58:54 [21681] [ERROR] Worker (pid:25264) exited with code 1
+2025-02-12 22:58:54 [21681] [ERROR] Worker (pid:25264) exited with code 1.
+2025-02-12 22:58:54 [21681] [ERROR] Worker (pid:25263) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:58:54 [21681] [ERROR] Worker (pid:25262) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:58:54 [21681] [ERROR] Worker (pid:25258) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 22:58:54 [25330] [INFO] Booting worker with pid: 25330
+2025-02-12 22:58:54 [25333] [INFO] Booting worker with pid: 25333
+2025-02-12 22:58:54 [25334] [INFO] Booting worker with pid: 25334
+2025-02-12 22:58:54 [25335] [INFO] Booting worker with pid: 25335
+2025-02-12 23:16:30 [21681] [CRITICAL] WORKER TIMEOUT (pid:25330)
+2025-02-12 23:16:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:25333)
+2025-02-12 23:16:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:25334)
+2025-02-12 23:16:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:25335)
+2025-02-12 23:16:32 [21681] [ERROR] Worker (pid:25330) exited with code 1
+2025-02-12 23:16:32 [21681] [ERROR] Worker (pid:25330) exited with code 1.
+2025-02-12 23:16:32 [21681] [ERROR] Worker (pid:25335) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:16:32 [21681] [ERROR] Worker (pid:25333) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:16:32 [21681] [ERROR] Worker (pid:25334) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:16:32 [25389] [INFO] Booting worker with pid: 25389
+2025-02-12 23:16:32 [25393] [INFO] Booting worker with pid: 25393
+2025-02-12 23:16:32 [25394] [INFO] Booting worker with pid: 25394
+2025-02-12 23:16:32 [25396] [INFO] Booting worker with pid: 25396
+2025-02-12 23:35:43 [21681] [CRITICAL] WORKER TIMEOUT (pid:25389)
+2025-02-12 23:35:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:25393)
+2025-02-12 23:35:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:25394)
+2025-02-12 23:35:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:25396)
+2025-02-12 23:35:45 [21681] [ERROR] Worker (pid:25389) exited with code 1
+2025-02-12 23:35:45 [21681] [ERROR] Worker (pid:25389) exited with code 1.
+2025-02-12 23:35:45 [21681] [ERROR] Worker (pid:25394) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:35:45 [21681] [ERROR] Worker (pid:25393) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:35:45 [21681] [ERROR] Worker (pid:25396) exited with code 1
+2025-02-12 23:35:45 [21681] [ERROR] Worker (pid:25396) exited with code 1.
+2025-02-12 23:35:45 [25467] [INFO] Booting worker with pid: 25467
+2025-02-12 23:35:45 [25470] [INFO] Booting worker with pid: 25470
+2025-02-12 23:35:45 [25471] [INFO] Booting worker with pid: 25471
+2025-02-12 23:35:45 [25473] [INFO] Booting worker with pid: 25473
+2025-02-12 23:52:28 [21681] [CRITICAL] WORKER TIMEOUT (pid:25467)
+2025-02-12 23:52:29 [21681] [CRITICAL] WORKER TIMEOUT (pid:25470)
+2025-02-12 23:52:29 [21681] [CRITICAL] WORKER TIMEOUT (pid:25471)
+2025-02-12 23:52:29 [21681] [CRITICAL] WORKER TIMEOUT (pid:25473)
+2025-02-12 23:52:30 [21681] [ERROR] Worker (pid:25467) exited with code 1
+2025-02-12 23:52:30 [21681] [ERROR] Worker (pid:25467) exited with code 1.
+2025-02-12 23:52:30 [21681] [ERROR] Worker (pid:25471) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:52:30 [21681] [ERROR] Worker (pid:25470) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:52:30 [21681] [ERROR] Worker (pid:25473) was sent SIGKILL! Perhaps out of memory?
+2025-02-12 23:52:30 [25528] [INFO] Booting worker with pid: 25528
+2025-02-12 23:52:30 [25530] [INFO] Booting worker with pid: 25530
+2025-02-12 23:52:30 [25531] [INFO] Booting worker with pid: 25531
+2025-02-12 23:52:30 [25533] [INFO] Booting worker with pid: 25533
+2025-02-13 00:12:01 [21681] [CRITICAL] WORKER TIMEOUT (pid:25528)
+2025-02-13 00:12:02 [21681] [CRITICAL] WORKER TIMEOUT (pid:25530)
+2025-02-13 00:12:02 [21681] [CRITICAL] WORKER TIMEOUT (pid:25531)
+2025-02-13 00:12:02 [21681] [CRITICAL] WORKER TIMEOUT (pid:25533)
+2025-02-13 00:12:03 [21681] [ERROR] Worker (pid:25528) exited with code 1
+2025-02-13 00:12:03 [21681] [ERROR] Worker (pid:25528) exited with code 1.
+2025-02-13 00:12:03 [21681] [ERROR] Worker (pid:25533) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 00:12:03 [21681] [ERROR] Worker (pid:25531) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 00:12:03 [21681] [ERROR] Worker (pid:25530) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 00:12:03 [25583] [INFO] Booting worker with pid: 25583
+2025-02-13 00:12:03 [25584] [INFO] Booting worker with pid: 25584
+2025-02-13 00:12:03 [25586] [INFO] Booting worker with pid: 25586
+2025-02-13 00:12:03 [25593] [INFO] Booting worker with pid: 25593
+2025-02-13 00:28:49 [21681] [CRITICAL] WORKER TIMEOUT (pid:25583)
+2025-02-13 00:28:50 [21681] [CRITICAL] WORKER TIMEOUT (pid:25584)
+2025-02-13 00:28:50 [21681] [CRITICAL] WORKER TIMEOUT (pid:25586)
+2025-02-13 00:28:50 [21681] [CRITICAL] WORKER TIMEOUT (pid:25593)
+2025-02-13 00:28:51 [21681] [ERROR] Worker (pid:25584) exited with code 1
+2025-02-13 00:28:51 [21681] [ERROR] Worker (pid:25584) exited with code 1.
+2025-02-13 00:28:51 [21681] [ERROR] Worker (pid:25593) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 00:28:51 [21681] [ERROR] Worker (pid:25586) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 00:28:51 [21681] [ERROR] Worker (pid:25583) exited with code 1
+2025-02-13 00:28:51 [21681] [ERROR] Worker (pid:25583) exited with code 1.
+2025-02-13 00:28:51 [25624] [INFO] Booting worker with pid: 25624
+2025-02-13 00:28:51 [25625] [INFO] Booting worker with pid: 25625
+2025-02-13 00:28:51 [25626] [INFO] Booting worker with pid: 25626
+2025-02-13 00:28:51 [25629] [INFO] Booting worker with pid: 25629
+2025-02-13 00:48:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:25624)
+2025-02-13 00:48:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:25625)
+2025-02-13 00:48:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:25626)
+2025-02-13 00:48:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:25629)
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25626) exited with code 1
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25626) exited with code 1.
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25624) exited with code 1
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25624) exited with code 1.
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25629) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 00:48:46 [25715] [INFO] Booting worker with pid: 25715
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25625) exited with code 1
+2025-02-13 00:48:46 [21681] [ERROR] Worker (pid:25625) exited with code 1.
+2025-02-13 00:48:46 [25716] [INFO] Booting worker with pid: 25716
+2025-02-13 00:48:46 [25718] [INFO] Booting worker with pid: 25718
+2025-02-13 00:48:46 [25721] [INFO] Booting worker with pid: 25721
+2025-02-13 00:53:30 [21681] [CRITICAL] WORKER TIMEOUT (pid:25715)
+2025-02-13 00:53:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:25716)
+2025-02-13 00:53:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:25718)
+2025-02-13 00:53:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:25721)
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25718) exited with code 1
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25718) exited with code 1.
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25716) exited with code 1
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25716) exited with code 1.
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25715) exited with code 1
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25715) exited with code 1.
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25721) exited with code 1
+2025-02-13 00:53:32 [21681] [ERROR] Worker (pid:25721) exited with code 1.
+2025-02-13 00:53:32 [25769] [INFO] Booting worker with pid: 25769
+2025-02-13 00:53:32 [25770] [INFO] Booting worker with pid: 25770
+2025-02-13 00:53:32 [25771] [INFO] Booting worker with pid: 25771
+2025-02-13 00:53:32 [25772] [INFO] Booting worker with pid: 25772
+2025-02-13 01:21:58 [21681] [CRITICAL] WORKER TIMEOUT (pid:25769)
+2025-02-13 01:21:59 [21681] [CRITICAL] WORKER TIMEOUT (pid:25770)
+2025-02-13 01:21:59 [21681] [CRITICAL] WORKER TIMEOUT (pid:25771)
+2025-02-13 01:21:59 [21681] [CRITICAL] WORKER TIMEOUT (pid:25772)
+2025-02-13 01:22:00 [21681] [ERROR] Worker (pid:25772) exited with code 1
+2025-02-13 01:22:00 [21681] [ERROR] Worker (pid:25772) exited with code 1.
+2025-02-13 01:22:00 [21681] [ERROR] Worker (pid:25769) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 01:22:00 [21681] [ERROR] Worker (pid:25770) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 01:22:00 [21681] [ERROR] Worker (pid:25771) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 01:22:00 [25985] [INFO] Booting worker with pid: 25985
+2025-02-13 01:22:00 [25986] [INFO] Booting worker with pid: 25986
+2025-02-13 01:22:00 [25987] [INFO] Booting worker with pid: 25987
+2025-02-13 01:22:00 [25988] [INFO] Booting worker with pid: 25988
+2025-02-13 01:42:05 [21681] [CRITICAL] WORKER TIMEOUT (pid:25985)
+2025-02-13 01:42:06 [21681] [CRITICAL] WORKER TIMEOUT (pid:25986)
+2025-02-13 01:42:06 [21681] [CRITICAL] WORKER TIMEOUT (pid:25987)
+2025-02-13 01:42:06 [21681] [CRITICAL] WORKER TIMEOUT (pid:25988)
+2025-02-13 01:42:07 [21681] [ERROR] Worker (pid:25986) exited with code 1
+2025-02-13 01:42:07 [21681] [ERROR] Worker (pid:25986) exited with code 1.
+2025-02-13 01:42:07 [26057] [INFO] Booting worker with pid: 26057
+2025-02-13 01:42:07 [21681] [ERROR] Worker (pid:25987) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 01:42:07 [21681] [ERROR] Worker (pid:25985) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 01:42:07 [21681] [ERROR] Worker (pid:25988) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 01:42:07 [26058] [INFO] Booting worker with pid: 26058
+2025-02-13 01:42:07 [26059] [INFO] Booting worker with pid: 26059
+2025-02-13 01:42:07 [26060] [INFO] Booting worker with pid: 26060
+2025-02-13 01:51:54 [21681] [CRITICAL] WORKER TIMEOUT (pid:26057)
+2025-02-13 01:51:55 [21681] [CRITICAL] WORKER TIMEOUT (pid:26058)
+2025-02-13 01:51:55 [21681] [CRITICAL] WORKER TIMEOUT (pid:26059)
+2025-02-13 01:51:55 [21681] [CRITICAL] WORKER TIMEOUT (pid:26060)
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26058) exited with code 1
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26057) exited with code 1
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26057) exited with code 1.
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26058) exited with code 1.
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26059) exited with code 1
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26059) exited with code 1.
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26060) exited with code 1
+2025-02-13 01:51:56 [21681] [ERROR] Worker (pid:26060) exited with code 1.
+2025-02-13 01:51:56 [26116] [INFO] Booting worker with pid: 26116
+2025-02-13 01:51:56 [26117] [INFO] Booting worker with pid: 26117
+2025-02-13 01:51:56 [26118] [INFO] Booting worker with pid: 26118
+2025-02-13 01:51:56 [26119] [INFO] Booting worker with pid: 26119
+2025-02-13 02:09:24 [21681] [CRITICAL] WORKER TIMEOUT (pid:26116)
+2025-02-13 02:09:25 [21681] [CRITICAL] WORKER TIMEOUT (pid:26117)
+2025-02-13 02:09:25 [21681] [CRITICAL] WORKER TIMEOUT (pid:26118)
+2025-02-13 02:09:25 [21681] [CRITICAL] WORKER TIMEOUT (pid:26119)
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26116) exited with code 1
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26116) exited with code 1.
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26119) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26118) exited with code 1
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26118) exited with code 1.
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26117) exited with code 1
+2025-02-13 02:09:26 [21681] [ERROR] Worker (pid:26117) exited with code 1.
+2025-02-13 02:09:26 [26167] [INFO] Booting worker with pid: 26167
+2025-02-13 02:09:26 [26168] [INFO] Booting worker with pid: 26168
+2025-02-13 02:09:26 [26169] [INFO] Booting worker with pid: 26169
+2025-02-13 02:09:26 [26171] [INFO] Booting worker with pid: 26171
+2025-02-13 02:29:48 [21681] [CRITICAL] WORKER TIMEOUT (pid:26167)
+2025-02-13 02:29:49 [21681] [CRITICAL] WORKER TIMEOUT (pid:26168)
+2025-02-13 02:29:49 [21681] [CRITICAL] WORKER TIMEOUT (pid:26169)
+2025-02-13 02:29:49 [21681] [CRITICAL] WORKER TIMEOUT (pid:26171)
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26167) exited with code 1
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26168) exited with code 1
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26168) exited with code 1.
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26167) exited with code 1.
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26171) exited with code 1
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26171) exited with code 1.
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26169) exited with code 1
+2025-02-13 02:29:50 [21681] [ERROR] Worker (pid:26169) exited with code 1.
+2025-02-13 02:29:50 [26238] [INFO] Booting worker with pid: 26238
+2025-02-13 02:29:50 [26240] [INFO] Booting worker with pid: 26240
+2025-02-13 02:29:50 [26244] [INFO] Booting worker with pid: 26244
+2025-02-13 02:29:50 [26245] [INFO] Booting worker with pid: 26245
+2025-02-13 02:47:13 [21681] [CRITICAL] WORKER TIMEOUT (pid:26238)
+2025-02-13 02:47:14 [21681] [CRITICAL] WORKER TIMEOUT (pid:26240)
+2025-02-13 02:47:14 [21681] [CRITICAL] WORKER TIMEOUT (pid:26244)
+2025-02-13 02:47:14 [21681] [CRITICAL] WORKER TIMEOUT (pid:26245)
+2025-02-13 02:47:15 [21681] [ERROR] Worker (pid:26245) exited with code 1
+2025-02-13 02:47:15 [21681] [ERROR] Worker (pid:26245) exited with code 1.
+2025-02-13 02:47:15 [21681] [ERROR] Worker (pid:26244) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 02:47:15 [21681] [ERROR] Worker (pid:26238) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 02:47:15 [21681] [ERROR] Worker (pid:26240) exited with code 1
+2025-02-13 02:47:15 [21681] [ERROR] Worker (pid:26240) exited with code 1.
+2025-02-13 02:47:15 [26305] [INFO] Booting worker with pid: 26305
+2025-02-13 02:47:15 [26306] [INFO] Booting worker with pid: 26306
+2025-02-13 02:47:15 [26307] [INFO] Booting worker with pid: 26307
+2025-02-13 02:47:15 [26309] [INFO] Booting worker with pid: 26309
+2025-02-13 02:54:31 [21681] [CRITICAL] WORKER TIMEOUT (pid:26305)
+2025-02-13 02:54:32 [21681] [CRITICAL] WORKER TIMEOUT (pid:26306)
+2025-02-13 02:54:32 [21681] [CRITICAL] WORKER TIMEOUT (pid:26307)
+2025-02-13 02:54:32 [21681] [CRITICAL] WORKER TIMEOUT (pid:26309)
+2025-02-13 02:54:33 [21681] [ERROR] Worker (pid:26307) exited with code 1
+2025-02-13 02:54:33 [21681] [ERROR] Worker (pid:26307) exited with code 1.
+2025-02-13 02:54:33 [21681] [ERROR] Worker (pid:26306) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 02:54:33 [21681] [ERROR] Worker (pid:26305) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 02:54:33 [21681] [ERROR] Worker (pid:26309) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 02:54:33 [26362] [INFO] Booting worker with pid: 26362
+2025-02-13 02:54:33 [26364] [INFO] Booting worker with pid: 26364
+2025-02-13 02:54:33 [26365] [INFO] Booting worker with pid: 26365
+2025-02-13 02:54:33 [26366] [INFO] Booting worker with pid: 26366
+2025-02-13 03:10:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:26362)
+2025-02-13 03:10:46 [21681] [CRITICAL] WORKER TIMEOUT (pid:26364)
+2025-02-13 03:10:46 [21681] [CRITICAL] WORKER TIMEOUT (pid:26365)
+2025-02-13 03:10:46 [21681] [CRITICAL] WORKER TIMEOUT (pid:26366)
+2025-02-13 03:10:47 [21681] [ERROR] Worker (pid:26362) exited with code 1
+2025-02-13 03:10:47 [21681] [ERROR] Worker (pid:26362) exited with code 1.
+2025-02-13 03:10:47 [21681] [ERROR] Worker (pid:26365) exited with code 1
+2025-02-13 03:10:47 [21681] [ERROR] Worker (pid:26365) exited with code 1.
+2025-02-13 03:10:47 [21681] [ERROR] Worker (pid:26364) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 03:10:47 [21681] [ERROR] Worker (pid:26366) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 03:10:47 [26391] [INFO] Booting worker with pid: 26391
+2025-02-13 03:10:47 [26394] [INFO] Booting worker with pid: 26394
+2025-02-13 03:10:47 [26395] [INFO] Booting worker with pid: 26395
+2025-02-13 03:10:47 [26396] [INFO] Booting worker with pid: 26396
+2025-02-13 03:19:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:26391)
+2025-02-13 03:19:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:26394)
+2025-02-13 03:19:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:26395)
+2025-02-13 03:19:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:26396)
+2025-02-13 03:19:52 [21681] [ERROR] Worker (pid:26391) exited with code 1
+2025-02-13 03:19:52 [21681] [ERROR] Worker (pid:26394) exited with code 1
+2025-02-13 03:19:52 [21681] [ERROR] Worker (pid:26394) exited with code 1.
+2025-02-13 03:19:52 [21681] [ERROR] Worker (pid:26391) exited with code 1.
+2025-02-13 03:19:52 [26443] [INFO] Booting worker with pid: 26443
+2025-02-13 03:19:52 [26444] [INFO] Booting worker with pid: 26444
+2025-02-13 03:19:52 [26446] [INFO] Booting worker with pid: 26446
+2025-02-13 03:19:52 [26447] [INFO] Booting worker with pid: 26447
+2025-02-13 03:37:44 [21681] [CRITICAL] WORKER TIMEOUT (pid:26443)
+2025-02-13 03:37:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:26444)
+2025-02-13 03:37:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:26446)
+2025-02-13 03:37:45 [21681] [CRITICAL] WORKER TIMEOUT (pid:26447)
+2025-02-13 03:37:46 [21681] [ERROR] Worker (pid:26443) exited with code 1
+2025-02-13 03:37:46 [21681] [ERROR] Worker (pid:26443) exited with code 1.
+2025-02-13 03:37:46 [21681] [ERROR] Worker (pid:26446) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 03:37:46 [21681] [ERROR] Worker (pid:26444) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 03:37:46 [21681] [ERROR] Worker (pid:26447) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 03:37:46 [26502] [INFO] Booting worker with pid: 26502
+2025-02-13 03:37:46 [26505] [INFO] Booting worker with pid: 26505
+2025-02-13 03:37:46 [26506] [INFO] Booting worker with pid: 26506
+2025-02-13 03:37:46 [26508] [INFO] Booting worker with pid: 26508
+2025-02-13 04:55:34 [21681] [CRITICAL] WORKER TIMEOUT (pid:26502)
+2025-02-13 04:55:34 [21681] [CRITICAL] WORKER TIMEOUT (pid:26505)
+2025-02-13 04:55:34 [21681] [CRITICAL] WORKER TIMEOUT (pid:26506)
+2025-02-13 04:55:34 [21681] [CRITICAL] WORKER TIMEOUT (pid:26508)
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26508) exited with code 1
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26506) exited with code 1
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26506) exited with code 1.
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26508) exited with code 1.
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26505) exited with code 1
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26505) exited with code 1.
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26502) exited with code 1
+2025-02-13 04:55:35 [21681] [ERROR] Worker (pid:26502) exited with code 1.
+2025-02-13 04:55:35 [27822] [INFO] Booting worker with pid: 27822
+2025-02-13 04:55:35 [27823] [INFO] Booting worker with pid: 27823
+2025-02-13 04:55:35 [27825] [INFO] Booting worker with pid: 27825
+2025-02-13 04:55:35 [27826] [INFO] Booting worker with pid: 27826
+2025-02-13 05:13:47 [21681] [CRITICAL] WORKER TIMEOUT (pid:27822)
+2025-02-13 05:13:48 [21681] [CRITICAL] WORKER TIMEOUT (pid:27823)
+2025-02-13 05:13:48 [21681] [CRITICAL] WORKER TIMEOUT (pid:27825)
+2025-02-13 05:13:48 [21681] [CRITICAL] WORKER TIMEOUT (pid:27826)
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27822) exited with code 1
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27825) exited with code 1
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27825) exited with code 1.
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27822) exited with code 1.
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27826) exited with code 1
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27826) exited with code 1.
+2025-02-13 05:13:49 [21681] [ERROR] Worker (pid:27823) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 05:13:49 [27909] [INFO] Booting worker with pid: 27909
+2025-02-13 05:13:49 [27910] [INFO] Booting worker with pid: 27910
+2025-02-13 05:13:49 [27911] [INFO] Booting worker with pid: 27911
+2025-02-13 05:13:49 [27912] [INFO] Booting worker with pid: 27912
+2025-02-13 05:31:57 [21681] [CRITICAL] WORKER TIMEOUT (pid:27909)
+2025-02-13 05:31:58 [21681] [CRITICAL] WORKER TIMEOUT (pid:27910)
+2025-02-13 05:31:58 [21681] [CRITICAL] WORKER TIMEOUT (pid:27911)
+2025-02-13 05:31:58 [21681] [CRITICAL] WORKER TIMEOUT (pid:27912)
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27911) exited with code 1
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27911) exited with code 1.
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27910) exited with code 1
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27910) exited with code 1.
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27909) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27912) exited with code 1
+2025-02-13 05:31:59 [21681] [ERROR] Worker (pid:27912) exited with code 1.
+2025-02-13 05:31:59 [27964] [INFO] Booting worker with pid: 27964
+2025-02-13 05:31:59 [27965] [INFO] Booting worker with pid: 27965
+2025-02-13 05:31:59 [27967] [INFO] Booting worker with pid: 27967
+2025-02-13 05:31:59 [27969] [INFO] Booting worker with pid: 27969
+2025-02-13 05:49:34 [21681] [CRITICAL] WORKER TIMEOUT (pid:27964)
+2025-02-13 05:49:35 [21681] [CRITICAL] WORKER TIMEOUT (pid:27965)
+2025-02-13 05:49:35 [21681] [CRITICAL] WORKER TIMEOUT (pid:27967)
+2025-02-13 05:49:35 [21681] [CRITICAL] WORKER TIMEOUT (pid:27969)
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27969) exited with code 1
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27969) exited with code 1.
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27964) exited with code 1
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27964) exited with code 1.
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27967) exited with code 1
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27967) exited with code 1.
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27965) exited with code 1
+2025-02-13 05:49:36 [21681] [ERROR] Worker (pid:27965) exited with code 1.
+2025-02-13 05:49:36 [28021] [INFO] Booting worker with pid: 28021
+2025-02-13 05:49:36 [28022] [INFO] Booting worker with pid: 28022
+2025-02-13 05:49:36 [28023] [INFO] Booting worker with pid: 28023
+2025-02-13 05:49:36 [28025] [INFO] Booting worker with pid: 28025
+2025-02-13 05:56:34 [21681] [CRITICAL] WORKER TIMEOUT (pid:28021)
+2025-02-13 05:56:35 [21681] [CRITICAL] WORKER TIMEOUT (pid:28022)
+2025-02-13 05:56:35 [21681] [CRITICAL] WORKER TIMEOUT (pid:28023)
+2025-02-13 05:56:35 [21681] [CRITICAL] WORKER TIMEOUT (pid:28025)
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28021) exited with code 1
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28021) exited with code 1.
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28023) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28022) exited with code 1
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28022) exited with code 1.
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28025) exited with code 1
+2025-02-13 05:56:36 [21681] [ERROR] Worker (pid:28025) exited with code 1.
+2025-02-13 05:56:36 [28102] [INFO] Booting worker with pid: 28102
+2025-02-13 05:56:36 [28103] [INFO] Booting worker with pid: 28103
+2025-02-13 05:56:36 [28104] [INFO] Booting worker with pid: 28104
+2025-02-13 05:56:36 [28105] [INFO] Booting worker with pid: 28105
+2025-02-13 06:14:50 [21681] [CRITICAL] WORKER TIMEOUT (pid:28102)
+2025-02-13 06:14:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:28103)
+2025-02-13 06:14:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:28104)
+2025-02-13 06:14:51 [21681] [CRITICAL] WORKER TIMEOUT (pid:28105)
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28104) exited with code 1
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28105) exited with code 1
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28105) exited with code 1.
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28103) exited with code 1
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28103) exited with code 1.
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28102) exited with code 1
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28102) exited with code 1.
+2025-02-13 06:14:52 [21681] [ERROR] Worker (pid:28104) exited with code 1.
+2025-02-13 06:14:52 [28156] [INFO] Booting worker with pid: 28156
+2025-02-13 06:14:52 [28157] [INFO] Booting worker with pid: 28157
+2025-02-13 06:14:52 [28158] [INFO] Booting worker with pid: 28158
+2025-02-13 06:14:52 [28159] [INFO] Booting worker with pid: 28159
+2025-02-13 06:36:17 [21681] [CRITICAL] WORKER TIMEOUT (pid:28156)
+2025-02-13 06:36:18 [21681] [CRITICAL] WORKER TIMEOUT (pid:28157)
+2025-02-13 06:36:18 [21681] [CRITICAL] WORKER TIMEOUT (pid:28158)
+2025-02-13 06:36:18 [21681] [CRITICAL] WORKER TIMEOUT (pid:28159)
+2025-02-13 06:36:19 [21681] [ERROR] Worker (pid:28156) exited with code 1
+2025-02-13 06:36:19 [21681] [ERROR] Worker (pid:28156) exited with code 1.
+2025-02-13 06:36:19 [21681] [ERROR] Worker (pid:28159) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 06:36:19 [21681] [ERROR] Worker (pid:28158) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 06:36:19 [21681] [ERROR] Worker (pid:28157) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 06:36:19 [28327] [INFO] Booting worker with pid: 28327
+2025-02-13 06:36:19 [28328] [INFO] Booting worker with pid: 28328
+2025-02-13 06:36:19 [28329] [INFO] Booting worker with pid: 28329
+2025-02-13 06:36:19 [28330] [INFO] Booting worker with pid: 28330
+2025-02-13 06:55:40 [21681] [CRITICAL] WORKER TIMEOUT (pid:28327)
+2025-02-13 06:55:41 [21681] [CRITICAL] WORKER TIMEOUT (pid:28328)
+2025-02-13 06:55:41 [21681] [CRITICAL] WORKER TIMEOUT (pid:28329)
+2025-02-13 06:55:41 [21681] [CRITICAL] WORKER TIMEOUT (pid:28330)
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28329) exited with code 1
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28329) exited with code 1.
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28330) exited with code 1
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28330) exited with code 1.
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28327) exited with code 1
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28327) exited with code 1.
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28328) exited with code 1
+2025-02-13 06:55:42 [21681] [ERROR] Worker (pid:28328) exited with code 1.
+2025-02-13 06:55:42 [28385] [INFO] Booting worker with pid: 28385
+2025-02-13 06:55:42 [28386] [INFO] Booting worker with pid: 28386
+2025-02-13 06:55:42 [28387] [INFO] Booting worker with pid: 28387
+2025-02-13 06:55:42 [28388] [INFO] Booting worker with pid: 28388
+2025-02-13 07:15:04 [21681] [CRITICAL] WORKER TIMEOUT (pid:28385)
+2025-02-13 07:15:05 [21681] [CRITICAL] WORKER TIMEOUT (pid:28386)
+2025-02-13 07:15:05 [21681] [CRITICAL] WORKER TIMEOUT (pid:28387)
+2025-02-13 07:15:05 [21681] [CRITICAL] WORKER TIMEOUT (pid:28388)
+2025-02-13 07:15:06 [21681] [ERROR] Worker (pid:28387) exited with code 1
+2025-02-13 07:15:06 [21681] [ERROR] Worker (pid:28387) exited with code 1.
+2025-02-13 07:15:06 [21681] [ERROR] Worker (pid:28388) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 07:15:06 [21681] [ERROR] Worker (pid:28386) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 07:15:06 [21681] [ERROR] Worker (pid:28385) was sent SIGKILL! Perhaps out of memory?
+2025-02-13 07:15:06 [28480] [INFO] Booting worker with pid: 28480
+2025-02-13 07:15:06 [28481] [INFO] Booting worker with pid: 28481
+2025-02-13 07:15:06 [28482] [INFO] Booting worker with pid: 28482
+2025-02-13 07:15:06 [28483] [INFO] Booting worker with pid: 28483
+2025-02-13 07:19:07 [21681] [CRITICAL] WORKER TIMEOUT (pid:28480)
+2025-02-13 07:19:07 [21681] [CRITICAL] WORKER TIMEOUT (pid:28481)
+2025-02-13 07:19:07 [21681] [CRITICAL] WORKER TIMEOUT (pid:28482)
+2025-02-13 07:19:07 [21681] [CRITICAL] WORKER TIMEOUT (pid:28483)
+2025-02-13 07:19:07 [21681] [INFO] Handling signal: int
+2025-02-13 07:19:08 [21681] [ERROR] Worker (pid:28482) was sent SIGINT!
+2025-02-13 07:19:08 [21681] [ERROR] Worker (pid:28480) was sent SIGINT!
+2025-02-13 07:19:08 [21681] [ERROR] Worker (pid:28483) was sent SIGINT!
+2025-02-13 07:19:08 [21681] [ERROR] Worker (pid:28481) was sent SIGINT!
+2025-02-13 07:19:08 [21681] [INFO] Shutting down: Master
+2025-02-14 11:17:21 [43631] [INFO] Starting gunicorn 21.2.0
+2025-02-14 11:17:21 [43631] [INFO] Listening at: http://0.0.0.0:8000 (43631)
+2025-02-14 11:17:21 [43631] [INFO] Using worker: sync
+2025-02-14 11:17:21 [43632] [INFO] Booting worker with pid: 43632
+2025-02-14 11:17:21 [43633] [INFO] Booting worker with pid: 43633
+2025-02-14 11:17:21 [43634] [INFO] Booting worker with pid: 43634
+2025-02-14 11:17:21 [43635] [INFO] Booting worker with pid: 43635
+2025-02-14 11:24:10 [43631] [INFO] Handling signal: int
+2025-02-14 11:24:10 [43631] [ERROR] Worker (pid:43635) was sent SIGINT!
+2025-02-14 11:24:10 [43631] [ERROR] Worker (pid:43634) was sent SIGINT!
+2025-02-14 11:24:10 [43631] [ERROR] Worker (pid:43632) was sent SIGINT!
+2025-02-14 11:24:10 [43631] [ERROR] Worker (pid:43633) was sent SIGINT!
+2025-02-14 11:24:10 [43631] [INFO] Shutting down: Master

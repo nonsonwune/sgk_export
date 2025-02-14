@@ -3,7 +3,7 @@ import os
 import sys
 import logging
 from flask import Flask
-from .extensions import db, login_manager
+from .extensions import db, login_manager, migrate
 from .models.user import User
 from .utils.logging_config import setup_logging
 from .config import config
@@ -49,6 +49,7 @@ def create_app(config_name=None):
     try:
         logger.debug("Initializing extensions")
         db.init_app(app)
+        migrate.init_app(app, db)
         login_manager.init_app(app)
         logger.debug("Extensions initialized")
     except Exception as e:

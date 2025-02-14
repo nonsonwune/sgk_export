@@ -163,6 +163,20 @@ class ShipmentItem(db.Model):
     image_filename = db.Column(db.String(255))
     image_file_id = db.Column(db.String(255))
 
+class ShipmentStatusHistory(db.Model):
+    __tablename__ = 'shipment_status_history'
+    
+    id = db.Column(GUID(), primary_key=True, default=uuid.uuid4)
+    shipment_id = db.Column(GUID(), db.ForeignKey('export_request.id'), nullable=False)
+    old_status = db.Column(db.String(50))
+    new_status = db.Column(db.String(50), nullable=False)
+    changed_by = db.Column(GUID(), db.ForeignKey('user.id'), nullable=False)
+    changed_at = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
+    
+    # Relationships
+    shipment = db.relationship('Shipment', backref=db.backref('status_history', lazy='dynamic', order_by='ShipmentStatusHistory.changed_at'))
+    user = db.relationship('User', backref=db.backref('status_changes_made', lazy='dynamic'))
+
 class Shipment(db.Model):
     __tablename__ = 'export_request'
     
@@ -287,10 +301,17 @@ class Shipment(db.Model):
         """Update shipment status with tracking information"""
         if self.can_transition_to(new_status):
             try:
+                old_status = self.status
                 self.status = new_status
-                self.status_changed_by = user_id
-                self.status_changed_at = datetime.utcnow()
-                db.session.add(self)
+                
+                # Create status history entry
+                history_entry = ShipmentStatusHistory(
+                    shipment_id=self.id,
+                    old_status=old_status,
+                    new_status=new_status,
+                    changed_by=user_id
+                )
+                db.session.add(history_entry)
                 db.session.commit()
                 return True
             except Exception as e:
