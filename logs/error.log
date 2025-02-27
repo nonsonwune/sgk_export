@@ -2969,3 +2969,254 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'shipme
 2025-02-27 06:21:23 [350] [ERROR] Worker (pid:356) was sent SIGINT!
 2025-02-27 06:21:23 [350] [ERROR] Worker (pid:360) was sent SIGINT!
 2025-02-27 06:21:23 [350] [INFO] Shutting down: Master
+2025-02-27 06:28:30 [2149] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:28:30 [2149] [INFO] Listening at: http://0.0.0.0:8000 (2149)
+2025-02-27 06:28:30 [2149] [INFO] Using worker: sync
+2025-02-27 06:28:30 [2150] [INFO] Booting worker with pid: 2150
+2025-02-27 06:28:30 [2151] [INFO] Booting worker with pid: 2151
+2025-02-27 06:28:30 [2152] [INFO] Booting worker with pid: 2152
+2025-02-27 06:28:30 [2153] [INFO] Booting worker with pid: 2153
+2025-02-27 06:31:01 [2149] [INFO] Handling signal: winch
+2025-02-27 06:31:40 [2149] [INFO] Handling signal: winch
+2025-02-27 06:33:10 [2149] [INFO] Handling signal: int
+2025-02-27 06:33:10 [2149] [ERROR] Worker (pid:2152) was sent SIGINT!
+2025-02-27 06:33:10 [2149] [ERROR] Worker (pid:2151) was sent SIGINT!
+2025-02-27 06:33:10 [2149] [ERROR] Worker (pid:2150) was sent SIGINT!
+2025-02-27 06:33:10 [2149] [ERROR] Worker (pid:2153) was sent SIGINT!
+2025-02-27 06:33:10 [2149] [INFO] Shutting down: Master
+2025-02-27 06:34:23 [2790] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:34:23 [2790] [INFO] Listening at: http://0.0.0.0:8000 (2790)
+2025-02-27 06:34:23 [2790] [INFO] Using worker: sync
+2025-02-27 06:34:23 [2793] [INFO] Booting worker with pid: 2793
+2025-02-27 06:34:23 [2794] [INFO] Booting worker with pid: 2794
+2025-02-27 06:34:23 [2795] [INFO] Booting worker with pid: 2795
+2025-02-27 06:34:23 [2796] [INFO] Booting worker with pid: 2796
+2025-02-27 06:37:44 [ERROR] [PID:2794] [app.utils.appwrite] Error uploading file CITYPNG.COM3D_Gold_Queen_King_Crown_PNG_-_8000x8000.png: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x110f6e950>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x110f6e950>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x110f6e950>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 103, in call
+    response = requests.request(  # call method dynamically https://stackoverflow.com/a/4246075/2299554
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x110f6e950>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/utils/appwrite.py", line 48, in upload_file
+    result = storage.create_file(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/services/storage.py", line 156, in create_file
+    return self.client.chunked_upload(api_path, {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 163, in chunked_upload
+    return self.call(
+           ^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 138, in call
+    raise AppwriteException(e)
+appwrite.exception.AppwriteException: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x110f6e950>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-02-27 06:37:44 [ERROR] [PID:2794] [app.routes.shipments] Failed to upload image for item 1
+2025-02-27 06:46:59 [2790] [INFO] Handling signal: int
+2025-02-27 06:46:59 [2790] [ERROR] Worker (pid:2796) was sent SIGINT!
+2025-02-27 06:46:59 [2790] [ERROR] Worker (pid:2794) was sent SIGINT!
+2025-02-27 06:46:59 [2790] [ERROR] Worker (pid:2793) was sent SIGINT!
+2025-02-27 06:46:59 [2790] [ERROR] Worker (pid:2795) was sent SIGINT!
+2025-02-27 06:46:59 [2790] [INFO] Shutting down: Master
+2025-02-27 06:47:06 [3586] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:47:06 [3586] [INFO] Listening at: http://0.0.0.0:8000 (3586)
+2025-02-27 06:47:06 [3586] [INFO] Using worker: sync
+2025-02-27 06:47:06 [3587] [INFO] Booting worker with pid: 3587
+2025-02-27 06:47:07 [3588] [INFO] Booting worker with pid: 3588
+2025-02-27 06:47:07 [3589] [INFO] Booting worker with pid: 3589
+2025-02-27 06:47:07 [3590] [INFO] Booting worker with pid: 3590
+2025-02-27 06:52:13 [3586] [INFO] Handling signal: int
+2025-02-27 06:52:14 [3586] [ERROR] Worker (pid:3589) was sent SIGINT!
+2025-02-27 06:52:14 [3586] [ERROR] Worker (pid:3588) was sent SIGINT!
+2025-02-27 06:52:14 [3586] [ERROR] Worker (pid:3587) was sent SIGINT!
+2025-02-27 06:52:14 [3586] [ERROR] Worker (pid:3590) was sent SIGINT!
+2025-02-27 06:52:14 [3586] [INFO] Shutting down: Master
+2025-02-27 06:52:16 [4046] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:52:16 [4046] [INFO] Listening at: http://0.0.0.0:8000 (4046)
+2025-02-27 06:52:16 [4046] [INFO] Using worker: sync
+2025-02-27 06:52:16 [4047] [INFO] Booting worker with pid: 4047
+2025-02-27 06:52:17 [4048] [INFO] Booting worker with pid: 4048
+2025-02-27 06:52:17 [4049] [INFO] Booting worker with pid: 4049
+2025-02-27 06:52:17 [4050] [INFO] Booting worker with pid: 4050
+2025-02-27 06:54:31 [4046] [INFO] Handling signal: int
+2025-02-27 06:54:31 [4046] [ERROR] Worker (pid:4048) was sent SIGINT!
+2025-02-27 06:54:31 [4046] [ERROR] Worker (pid:4049) was sent SIGINT!
+2025-02-27 06:54:31 [4046] [ERROR] Worker (pid:4047) was sent SIGINT!
+2025-02-27 06:54:31 [4046] [ERROR] Worker (pid:4050) was sent SIGINT!
+2025-02-27 06:54:31 [4046] [INFO] Shutting down: Master
+2025-02-27 06:54:33 [4250] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:54:33 [4250] [INFO] Listening at: http://0.0.0.0:8000 (4250)
+2025-02-27 06:54:33 [4250] [INFO] Using worker: sync
+2025-02-27 06:54:33 [4251] [INFO] Booting worker with pid: 4251
+2025-02-27 06:54:33 [4252] [INFO] Booting worker with pid: 4252
+2025-02-27 06:54:33 [4253] [INFO] Booting worker with pid: 4253
+2025-02-27 06:54:33 [4254] [INFO] Booting worker with pid: 4254
+2025-02-27 06:56:11 [4250] [INFO] Handling signal: int
+2025-02-27 06:56:12 [4250] [ERROR] Worker (pid:4253) was sent SIGINT!
+2025-02-27 06:56:12 [4250] [ERROR] Worker (pid:4251) was sent SIGINT!
+2025-02-27 06:56:12 [4250] [ERROR] Worker (pid:4254) was sent SIGINT!
+2025-02-27 06:56:12 [4250] [ERROR] Worker (pid:4252) was sent SIGINT!
+2025-02-27 06:56:12 [4250] [INFO] Shutting down: Master
+2025-02-27 06:56:15 [4434] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:56:15 [4434] [INFO] Listening at: http://0.0.0.0:8000 (4434)
+2025-02-27 06:56:15 [4434] [INFO] Using worker: sync
+2025-02-27 06:56:15 [4435] [INFO] Booting worker with pid: 4435
+2025-02-27 06:56:15 [4436] [INFO] Booting worker with pid: 4436
+2025-02-27 06:56:15 [4437] [INFO] Booting worker with pid: 4437
+2025-02-27 06:56:15 [4438] [INFO] Booting worker with pid: 4438
+2025-02-27 06:57:02 [4434] [INFO] Handling signal: int
+2025-02-27 06:57:03 [4434] [ERROR] Worker (pid:4436) was sent SIGINT!
+2025-02-27 06:57:03 [4434] [ERROR] Worker (pid:4437) was sent SIGINT!
+2025-02-27 06:57:03 [4434] [INFO] Shutting down: Master
+2025-02-27 06:57:04 [4520] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:57:04 [4520] [INFO] Listening at: http://0.0.0.0:8000 (4520)
+2025-02-27 06:57:04 [4520] [INFO] Using worker: sync
+2025-02-27 06:57:04 [4521] [INFO] Booting worker with pid: 4521
+2025-02-27 06:57:04 [4522] [INFO] Booting worker with pid: 4522
+2025-02-27 06:57:04 [4523] [INFO] Booting worker with pid: 4523
+2025-02-27 06:57:04 [4524] [INFO] Booting worker with pid: 4524
+2025-02-27 07:01:21 [4520] [INFO] Handling signal: int
+2025-02-27 07:01:21 [4520] [ERROR] Worker (pid:4524) was sent SIGINT!
+2025-02-27 07:01:21 [4520] [ERROR] Worker (pid:4521) was sent SIGINT!
+2025-02-27 07:01:21 [4520] [ERROR] Worker (pid:4522) was sent SIGINT!
+2025-02-27 07:01:21 [4520] [ERROR] Worker (pid:4523) was sent SIGINT!
+2025-02-27 07:01:21 [4520] [INFO] Shutting down: Master
+2025-02-27 07:01:23 [4949] [INFO] Starting gunicorn 21.2.0
+2025-02-27 07:01:23 [4949] [INFO] Listening at: http://0.0.0.0:8000 (4949)
+2025-02-27 07:01:23 [4949] [INFO] Using worker: sync
+2025-02-27 07:01:23 [4950] [INFO] Booting worker with pid: 4950
+2025-02-27 07:01:23 [4951] [INFO] Booting worker with pid: 4951
+2025-02-27 07:01:24 [4952] [INFO] Booting worker with pid: 4952
+2025-02-27 07:01:24 [4953] [INFO] Booting worker with pid: 4953
+2025-02-27 07:27:48 [4949] [CRITICAL] WORKER TIMEOUT (pid:4950)
+2025-02-27 07:27:49 [4949] [CRITICAL] WORKER TIMEOUT (pid:4951)
+2025-02-27 07:27:49 [4949] [CRITICAL] WORKER TIMEOUT (pid:4952)
+2025-02-27 07:27:49 [4949] [CRITICAL] WORKER TIMEOUT (pid:4953)
+2025-02-27 07:27:50 [4949] [ERROR] Worker (pid:4951) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:27:50 [4949] [ERROR] Worker (pid:4953) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:27:50 [4949] [ERROR] Worker (pid:4950) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:27:50 [4949] [ERROR] Worker (pid:4952) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:27:50 [6059] [INFO] Booting worker with pid: 6059
+2025-02-27 07:27:50 [6063] [INFO] Booting worker with pid: 6063
+2025-02-27 07:27:50 [6064] [INFO] Booting worker with pid: 6064
+2025-02-27 07:27:50 [6069] [INFO] Booting worker with pid: 6069
+2025-02-27 07:58:35 [4949] [CRITICAL] WORKER TIMEOUT (pid:6059)
+2025-02-27 07:58:35 [4949] [CRITICAL] WORKER TIMEOUT (pid:6063)
+2025-02-27 07:58:35 [4949] [CRITICAL] WORKER TIMEOUT (pid:6064)
+2025-02-27 07:58:35 [4949] [CRITICAL] WORKER TIMEOUT (pid:6069)
+2025-02-27 07:58:36 [4949] [ERROR] Worker (pid:6064) exited with code 1
+2025-02-27 07:58:36 [4949] [ERROR] Worker (pid:6064) exited with code 1.
+2025-02-27 07:58:36 [6752] [INFO] Booting worker with pid: 6752
+2025-02-27 07:58:36 [4949] [ERROR] Worker (pid:6063) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:58:36 [4949] [ERROR] Worker (pid:6059) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:58:36 [4949] [ERROR] Worker (pid:6069) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 07:58:36 [6755] [INFO] Booting worker with pid: 6755
+2025-02-27 07:58:36 [6756] [INFO] Booting worker with pid: 6756
+2025-02-27 07:58:36 [6757] [INFO] Booting worker with pid: 6757
+2025-02-27 11:21:31 [4949] [CRITICAL] WORKER TIMEOUT (pid:6752)
+2025-02-27 11:21:31 [4949] [CRITICAL] WORKER TIMEOUT (pid:6755)
+2025-02-27 11:21:31 [4949] [CRITICAL] WORKER TIMEOUT (pid:6756)
+2025-02-27 11:21:31 [4949] [CRITICAL] WORKER TIMEOUT (pid:6757)
+2025-02-27 11:21:32 [4949] [ERROR] Worker (pid:6752) exited with code 1
+2025-02-27 11:21:32 [4949] [ERROR] Worker (pid:6752) exited with code 1.
+2025-02-27 11:21:32 [4949] [ERROR] Worker (pid:6755) exited with code 1
+2025-02-27 11:21:32 [4949] [ERROR] Worker (pid:6757) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 11:21:32 [4949] [ERROR] Worker (pid:6756) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 11:21:32 [4949] [ERROR] Worker (pid:6755) exited with code 1.
+2025-02-27 11:21:32 [15261] [INFO] Booting worker with pid: 15261
+2025-02-27 11:21:32 [15262] [INFO] Booting worker with pid: 15262
+2025-02-27 11:21:32 [15264] [INFO] Booting worker with pid: 15264
+2025-02-27 11:21:32 [15267] [INFO] Booting worker with pid: 15267
+2025-02-27 12:17:38 [4949] [CRITICAL] WORKER TIMEOUT (pid:15261)
+2025-02-27 12:17:41 [4949] [ERROR] Worker (pid:15261) exited with code 1
+2025-02-27 12:17:41 [4949] [ERROR] Worker (pid:15261) exited with code 1.
+2025-02-27 12:17:41 [18047] [INFO] Booting worker with pid: 18047
+2025-02-27 12:29:11 [4949] [CRITICAL] WORKER TIMEOUT (pid:15262)
+2025-02-27 12:29:11 [4949] [CRITICAL] WORKER TIMEOUT (pid:15264)
+2025-02-27 12:29:11 [4949] [CRITICAL] WORKER TIMEOUT (pid:15267)
+2025-02-27 12:29:11 [4949] [CRITICAL] WORKER TIMEOUT (pid:18047)
+2025-02-27 12:29:12 [4949] [ERROR] Worker (pid:15264) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 12:29:12 [4949] [ERROR] Worker (pid:15262) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 12:29:12 [4949] [ERROR] Worker (pid:18047) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 12:29:12 [4949] [ERROR] Worker (pid:15267) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 12:29:12 [18494] [INFO] Booting worker with pid: 18494
+2025-02-27 12:29:12 [18496] [INFO] Booting worker with pid: 18496
+2025-02-27 12:29:12 [18498] [INFO] Booting worker with pid: 18498
+2025-02-27 12:29:12 [18499] [INFO] Booting worker with pid: 18499
+2025-02-27 13:04:51 [4949] [CRITICAL] WORKER TIMEOUT (pid:18494)
+2025-02-27 13:04:52 [4949] [CRITICAL] WORKER TIMEOUT (pid:18496)
+2025-02-27 13:04:52 [4949] [CRITICAL] WORKER TIMEOUT (pid:18498)
+2025-02-27 13:04:52 [4949] [CRITICAL] WORKER TIMEOUT (pid:18499)
+2025-02-27 13:04:53 [4949] [ERROR] Worker (pid:18494) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 13:04:53 [4949] [ERROR] Worker (pid:18499) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 13:04:53 [18534] [INFO] Booting worker with pid: 18534
+2025-02-27 13:04:53 [18535] [INFO] Booting worker with pid: 18535
+2025-02-27 13:04:53 [4949] [ERROR] Worker (pid:18496) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 13:04:53 [18536] [INFO] Booting worker with pid: 18536
+2025-02-27 13:04:53 [18537] [INFO] Booting worker with pid: 18537
+2025-02-27 13:58:19 [4949] [INFO] Handling signal: int
+2025-02-27 13:58:19 [4949] [ERROR] Worker (pid:18536) was sent SIGINT!
+2025-02-27 13:58:19 [4949] [ERROR] Worker (pid:18535) was sent SIGINT!
+2025-02-27 13:58:19 [4949] [ERROR] Worker (pid:18537) was sent SIGINT!
+2025-02-27 13:58:19 [4949] [ERROR] Worker (pid:18534) was sent SIGINT!
+2025-02-27 13:58:19 [4949] [INFO] Shutting down: Master

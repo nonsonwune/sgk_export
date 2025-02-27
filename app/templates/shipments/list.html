@@ -215,6 +215,114 @@
     .action-button:hover {
         background-color: #3154b4;
     }
+    
+    /* Status tab styles */
+    .status-tabs {
+        display: flex;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #e2e8f0;
+        overflow-x: auto;
+    }
+    
+    .status-tab {
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        font-weight: 500;
+        color: #718096;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+    
+    .status-tab:hover {
+        color: #4169E1;
+    }
+    
+    .status-tab.active {
+        color: #4169E1;
+        border-bottom-color: #4169E1;
+    }
+    
+    .status-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #e2e8f0;
+        color: #4a5568;
+        border-radius: 9999px;
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+        min-width: 1.5rem;
+    }
+    
+    .status-tab.active .status-count {
+        background-color: #4169E1;
+        color: white;
+    }
+    
+    /* Status colors */
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    
+    .status-pending {
+        background-color: #f59e0b;
+        color: white;
+    }
+    
+    .status-processing {
+        background-color: #3b82f6;
+        color: white;
+    }
+    
+    .status-shipped {
+        background-color: #10b981;
+        color: white;
+    }
+    
+    .status-delivered {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .status-cancelled {
+        background-color: #ef4444;
+        color: white;
+    }
+    
+    .status-draft {
+        background-color: #ffd700;
+        color: #856404;
+    }
+    
+    .status-saved {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .search-container {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    
+    .search-input:focus {
+        outline: none;
+        border-color: #4169E1;
+        box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
+    }
 </style>
 {% endblock %}
 
@@ -222,11 +330,35 @@
 <div class="container">
     <h1>Shipment List</h1>
     
-    <div class="mb-4">
+    <div class="mb-4 d-flex justify-content-between align-items-center">
         <a href="{{ url_for('shipments.new_shipment') }}" class="btn btn-primary">Create New Shipment</a>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by waybill, sender, or receiver...">
+        </div>
     </div>
     
     {% if shipments %}
+    <div class="status-tabs">
+        <div class="status-tab active" data-status="all">
+            All <span class="status-count">{{ shipments|length }}</span>
+        </div>
+        
+        {% set statuses = {} %}
+        {% for shipment in shipments %}
+            {% if shipment.status not in statuses %}
+                {% set _ = statuses.update({shipment.status: 1}) %}
+            {% else %}
+                {% set _ = statuses.update({shipment.status: statuses[shipment.status] + 1}) %}
+            {% endif %}
+        {% endfor %}
+        
+        {% for status, count in statuses.items() %}
+        <div class="status-tab" data-status="{{ status|lower }}">
+            {{ status }} <span class="status-count">{{ count }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    
     <div class="table-container">
         <table>
             <thead>
@@ -241,11 +373,11 @@
             </thead>
             <tbody>
                 {% for shipment in shipments %}
-                <tr>
+                <tr class="shipment-row" data-status="{{ shipment.status|lower }}">
                     <td>{{ shipment.waybill_number }}</td>
                     <td>{{ shipment.sender_name }}</td>
                     <td>{{ shipment.receiver_name }}</td>
-                    <td>{{ shipment.status }}</td>
+                    <td><span class="status-badge status-{{ shipment.status|lower }}">{{ shipment.status }}</span></td>
                     <td>{{ shipment.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                     <td class="actions">
                         <a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}" class="action-button">View</a>
@@ -289,19 +421,50 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
+    // Tab functionality
+    $('.status-tab').click(function() {
+        // Update active tab
+        $('.status-tab').removeClass('active');
+        $(this).addClass('active');
+        
+        // Get the selected status
+        const status = $(this).data('status');
+        
+        // Filter the table rows
+        if (status === 'all') {
+            $('.shipment-row').show();
+        } else {
+            $('.shipment-row').hide();
+            $(`.shipment-row[data-status="${status}"]`).show();
+        }
+        
+        // If no items are visible in the current tab, show a message
+        if (status !== 'all' && $(`.shipment-row[data-status="${status}"]:visible`).length === 0) {
+            // Could add an empty state message for each tab if desired
+        }
+    });
+    
+    // Search functionality
     $('#searchInput').on('input', function() {
         var query = $(this).val().toLowerCase();
         
-        $('.export-item').each(function() {
-            var $item = $(this);
-            var waybill = $item.data('waybill').toLowerCase();
-            var sender = $item.data('sender').toLowerCase();
-            var receiver = $item.data('receiver').toLowerCase();
+        // Get active tab status
+        const activeStatus = $('.status-tab.active').data('status');
+        
+        $('.shipment-row').each(function() {
+            var $row = $(this);
+            var rowStatus = $row.data('status');
+            var waybill = $row.find('td:first-child').text().toLowerCase();
+            var sender = $row.find('td:nth-child(2)').text().toLowerCase();
+            var receiver = $row.find('td:nth-child(3)').text().toLowerCase();
             
-            if (waybill.includes(query) || sender.includes(query) || receiver.includes(query)) {
-                $item.show();
+            var statusMatch = activeStatus === 'all' || rowStatus === activeStatus;
+            var textMatch = waybill.includes(query) || sender.includes(query) || receiver.includes(query);
+            
+            if (statusMatch && textMatch) {
+                $row.show();
             } else {
-                $item.hide();
+                $row.hide();
             }
         });
     });
