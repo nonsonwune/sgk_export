@@ -1539,3 +1539,1433 @@ WHERE %(param_1)s::UUID = shipment_status_history.shipment_id ORDER BY shipment_
 2025-02-14 11:24:10 [43631] [ERROR] Worker (pid:43632) was sent SIGINT!
 2025-02-14 11:24:10 [43631] [ERROR] Worker (pid:43633) was sent SIGINT!
 2025-02-14 11:24:10 [43631] [INFO] Shutting down: Master
+2025-02-23 14:22:30 [41194] [INFO] Starting gunicorn 21.2.0
+2025-02-23 14:22:30 [41194] [INFO] Listening at: http://0.0.0.0:8000 (41194)
+2025-02-23 14:22:30 [41194] [INFO] Using worker: sync
+2025-02-23 14:22:30 [41195] [INFO] Booting worker with pid: 41195
+2025-02-23 14:22:30 [41196] [INFO] Booting worker with pid: 41196
+2025-02-23 14:22:30 [41197] [INFO] Booting worker with pid: 41197
+2025-02-23 14:22:30 [41198] [INFO] Booting worker with pid: 41198
+2025-02-23 14:28:45 [ERROR] [PID:41196] [app.utils.appwrite] Error uploading file IMG_2166.JPG: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x107174d90>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x107174d90>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x107174d90>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 103, in call
+    response = requests.request(  # call method dynamically https://stackoverflow.com/a/4246075/2299554
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x107174d90>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/utils/appwrite.py", line 48, in upload_file
+    result = storage.create_file(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/services/storage.py", line 156, in create_file
+    return self.client.chunked_upload(api_path, {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 163, in chunked_upload
+    return self.call(
+           ^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/appwrite/client.py", line 138, in call
+    raise AppwriteException(e)
+appwrite.exception.AppwriteException: HTTPSConnectionPool(host='cloud.appwrite.io', port=443): Max retries exceeded with url: /v1/storage/buckets/67a1c36800254fdb77d8/files (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x107174d90>: Failed to resolve 'cloud.appwrite.io' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-02-23 14:28:45 [ERROR] [PID:41196] [app.routes.shipments] Failed to upload image for item 1
+2025-02-23 15:30:25 [41194] [CRITICAL] WORKER TIMEOUT (pid:41195)
+2025-02-23 15:30:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:41196)
+2025-02-23 15:30:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:41197)
+2025-02-23 15:30:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:41198)
+2025-02-23 15:30:27 [41194] [ERROR] Worker (pid:41198) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 15:30:27 [41194] [ERROR] Worker (pid:41195) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 15:30:27 [41194] [ERROR] Worker (pid:41196) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 15:30:27 [41194] [ERROR] Worker (pid:41197) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 15:30:27 [42061] [INFO] Booting worker with pid: 42061
+2025-02-23 15:30:27 [42068] [INFO] Booting worker with pid: 42068
+2025-02-23 15:30:27 [42069] [INFO] Booting worker with pid: 42069
+2025-02-23 15:30:27 [42070] [INFO] Booting worker with pid: 42070
+2025-02-23 16:31:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:42061)
+2025-02-23 16:31:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:42068)
+2025-02-23 16:31:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:42069)
+2025-02-23 16:31:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:42070)
+2025-02-23 16:31:33 [41194] [ERROR] Worker (pid:42061) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 16:31:33 [41194] [ERROR] Worker (pid:42069) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 16:31:33 [42289] [INFO] Booting worker with pid: 42289
+2025-02-23 16:31:33 [41194] [ERROR] Worker (pid:42070) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 16:31:33 [41194] [ERROR] Worker (pid:42068) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 16:31:33 [42290] [INFO] Booting worker with pid: 42290
+2025-02-23 16:31:33 [42291] [INFO] Booting worker with pid: 42291
+2025-02-23 16:31:33 [42292] [INFO] Booting worker with pid: 42292
+2025-02-23 22:22:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:42289)
+2025-02-23 22:22:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:42290)
+2025-02-23 22:22:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:42291)
+2025-02-23 22:22:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:42292)
+2025-02-23 22:22:54 [41194] [ERROR] Worker (pid:42289) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:22:54 [42654] [INFO] Booting worker with pid: 42654
+2025-02-23 22:22:54 [41194] [ERROR] Worker (pid:42291) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:22:54 [41194] [ERROR] Worker (pid:42292) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:22:54 [41194] [ERROR] Worker (pid:42290) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:22:54 [42655] [INFO] Booting worker with pid: 42655
+2025-02-23 22:22:54 [42656] [INFO] Booting worker with pid: 42656
+2025-02-23 22:22:54 [42657] [INFO] Booting worker with pid: 42657
+2025-02-23 22:28:22 [41194] [CRITICAL] WORKER TIMEOUT (pid:42654)
+2025-02-23 22:28:22 [41194] [CRITICAL] WORKER TIMEOUT (pid:42655)
+2025-02-23 22:28:22 [41194] [CRITICAL] WORKER TIMEOUT (pid:42656)
+2025-02-23 22:28:22 [41194] [CRITICAL] WORKER TIMEOUT (pid:42657)
+2025-02-23 22:28:23 [41194] [ERROR] Worker (pid:42656) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:28:23 [41194] [ERROR] Worker (pid:42655) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:28:23 [43637] [INFO] Booting worker with pid: 43637
+2025-02-23 22:28:23 [43638] [INFO] Booting worker with pid: 43638
+2025-02-23 22:28:23 [41194] [ERROR] Worker (pid:42654) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:28:23 [41194] [ERROR] Worker (pid:42657) was sent SIGKILL! Perhaps out of memory?
+2025-02-23 22:28:23 [43643] [INFO] Booting worker with pid: 43643
+2025-02-23 22:28:23 [43645] [INFO] Booting worker with pid: 43645
+2025-02-23 23:53:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:43637)
+2025-02-23 23:53:51 [41194] [ERROR] Worker (pid:43637) exited with code 1
+2025-02-23 23:53:51 [41194] [ERROR] Worker (pid:43637) exited with code 1.
+2025-02-23 23:53:51 [56129] [INFO] Booting worker with pid: 56129
+2025-02-24 01:54:22 [41194] [CRITICAL] WORKER TIMEOUT (pid:43638)
+2025-02-24 01:54:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:43643)
+2025-02-24 01:54:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:43645)
+2025-02-24 01:54:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:56129)
+2025-02-24 01:54:24 [41194] [ERROR] Worker (pid:43643) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 01:54:24 [41194] [ERROR] Worker (pid:43645) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 01:54:24 [41194] [ERROR] Worker (pid:43638) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 01:54:24 [56529] [INFO] Booting worker with pid: 56529
+2025-02-24 01:54:24 [41194] [ERROR] Worker (pid:56129) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 01:54:24 [56537] [INFO] Booting worker with pid: 56537
+2025-02-24 01:54:24 [56538] [INFO] Booting worker with pid: 56538
+2025-02-24 01:54:24 [56540] [INFO] Booting worker with pid: 56540
+2025-02-24 02:55:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:56529)
+2025-02-24 02:55:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:56537)
+2025-02-24 02:55:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:56538)
+2025-02-24 02:55:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:56540)
+2025-02-24 02:55:30 [41194] [ERROR] Worker (pid:56538) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 02:55:30 [41194] [ERROR] Worker (pid:56529) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 02:55:31 [41194] [ERROR] Worker (pid:56540) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 02:55:31 [56859] [INFO] Booting worker with pid: 56859
+2025-02-24 02:55:31 [56860] [INFO] Booting worker with pid: 56860
+2025-02-24 02:55:31 [56861] [INFO] Booting worker with pid: 56861
+2025-02-24 02:55:31 [56862] [INFO] Booting worker with pid: 56862
+2025-02-24 03:56:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:56859)
+2025-02-24 03:56:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:56860)
+2025-02-24 03:56:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:56861)
+2025-02-24 03:56:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:56862)
+2025-02-24 03:56:36 [41194] [ERROR] Worker (pid:56860) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 03:56:36 [41194] [ERROR] Worker (pid:56862) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 03:56:36 [41194] [ERROR] Worker (pid:56859) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 03:56:36 [41194] [ERROR] Worker (pid:56861) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 03:56:36 [57138] [INFO] Booting worker with pid: 57138
+2025-02-24 03:56:36 [57141] [INFO] Booting worker with pid: 57141
+2025-02-24 03:56:36 [57142] [INFO] Booting worker with pid: 57142
+2025-02-24 03:56:36 [57146] [INFO] Booting worker with pid: 57146
+2025-02-24 04:57:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:57138)
+2025-02-24 04:57:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:57141)
+2025-02-24 04:57:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:57142)
+2025-02-24 04:57:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:57146)
+2025-02-24 04:57:42 [41194] [ERROR] Worker (pid:57138) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 04:57:42 [41194] [ERROR] Worker (pid:57146) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 04:57:42 [41194] [ERROR] Worker (pid:57141) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 04:57:42 [41194] [ERROR] Worker (pid:57142) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 04:57:42 [57469] [INFO] Booting worker with pid: 57469
+2025-02-24 04:57:42 [57470] [INFO] Booting worker with pid: 57470
+2025-02-24 04:57:42 [57471] [INFO] Booting worker with pid: 57471
+2025-02-24 04:57:42 [57472] [INFO] Booting worker with pid: 57472
+2025-02-24 05:58:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:57469)
+2025-02-24 05:58:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:57470)
+2025-02-24 05:58:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:57471)
+2025-02-24 05:58:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:57472)
+2025-02-24 05:58:48 [41194] [ERROR] Worker (pid:57472) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 05:58:48 [41194] [ERROR] Worker (pid:57470) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 05:58:48 [41194] [ERROR] Worker (pid:57469) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 05:58:48 [41194] [ERROR] Worker (pid:57471) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 05:58:48 [57750] [INFO] Booting worker with pid: 57750
+2025-02-24 05:58:48 [57751] [INFO] Booting worker with pid: 57751
+2025-02-24 05:58:48 [57752] [INFO] Booting worker with pid: 57752
+2025-02-24 05:58:48 [57753] [INFO] Booting worker with pid: 57753
+2025-02-24 06:36:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:57750)
+2025-02-24 06:36:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:57751)
+2025-02-24 06:36:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:57752)
+2025-02-24 06:36:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:57753)
+2025-02-24 06:36:06 [41194] [ERROR] Worker (pid:57751) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:36:06 [41194] [ERROR] Worker (pid:57753) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:36:06 [41194] [ERROR] Worker (pid:57750) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:36:06 [41194] [ERROR] Worker (pid:57752) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:36:06 [58015] [INFO] Booting worker with pid: 58015
+2025-02-24 06:36:06 [58016] [INFO] Booting worker with pid: 58016
+2025-02-24 06:36:06 [58017] [INFO] Booting worker with pid: 58017
+2025-02-24 06:36:06 [58018] [INFO] Booting worker with pid: 58018
+2025-02-24 06:59:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:58015)
+2025-02-24 06:59:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:58016)
+2025-02-24 06:59:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:58017)
+2025-02-24 06:59:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:58018)
+2025-02-24 06:59:54 [41194] [ERROR] Worker (pid:58017) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:59:54 [41194] [ERROR] Worker (pid:58016) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:59:54 [41194] [ERROR] Worker (pid:58018) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:59:54 [41194] [ERROR] Worker (pid:58015) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 06:59:54 [58285] [INFO] Booting worker with pid: 58285
+2025-02-24 06:59:54 [58286] [INFO] Booting worker with pid: 58286
+2025-02-24 06:59:54 [58288] [INFO] Booting worker with pid: 58288
+2025-02-24 06:59:54 [58289] [INFO] Booting worker with pid: 58289
+2025-02-24 08:00:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:58285)
+2025-02-24 08:00:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:58286)
+2025-02-24 08:00:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:58288)
+2025-02-24 08:00:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:58289)
+2025-02-24 08:01:00 [41194] [ERROR] Worker (pid:58289) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 08:01:00 [41194] [ERROR] Worker (pid:58286) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 08:01:00 [41194] [ERROR] Worker (pid:58285) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 08:01:00 [41194] [ERROR] Worker (pid:58288) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 08:01:00 [58562] [INFO] Booting worker with pid: 58562
+2025-02-24 08:01:00 [58564] [INFO] Booting worker with pid: 58564
+2025-02-24 08:01:00 [58565] [INFO] Booting worker with pid: 58565
+2025-02-24 08:01:00 [58566] [INFO] Booting worker with pid: 58566
+2025-02-24 09:02:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:58562)
+2025-02-24 09:02:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:58564)
+2025-02-24 09:02:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:58565)
+2025-02-24 09:02:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:58566)
+2025-02-24 09:02:06 [41194] [ERROR] Worker (pid:58566) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:02:06 [41194] [ERROR] Worker (pid:58562) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:02:06 [41194] [ERROR] Worker (pid:58565) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:02:06 [41194] [ERROR] Worker (pid:58564) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:02:06 [58832] [INFO] Booting worker with pid: 58832
+2025-02-24 09:02:06 [58833] [INFO] Booting worker with pid: 58833
+2025-02-24 09:02:06 [58834] [INFO] Booting worker with pid: 58834
+2025-02-24 09:02:06 [58835] [INFO] Booting worker with pid: 58835
+2025-02-24 09:12:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:58832)
+2025-02-24 09:12:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:58833)
+2025-02-24 09:12:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:58834)
+2025-02-24 09:12:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:58835)
+2025-02-24 09:12:34 [41194] [ERROR] Worker (pid:58834) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:12:34 [41194] [ERROR] Worker (pid:58832) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:12:34 [41194] [ERROR] Worker (pid:58833) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:12:34 [41194] [ERROR] Worker (pid:58835) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:12:34 [59118] [INFO] Booting worker with pid: 59118
+2025-02-24 09:12:34 [59123] [INFO] Booting worker with pid: 59123
+2025-02-24 09:12:34 [59125] [INFO] Booting worker with pid: 59125
+2025-02-24 09:12:34 [59133] [INFO] Booting worker with pid: 59133
+2025-02-24 09:26:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:59118)
+2025-02-24 09:26:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:59123)
+2025-02-24 09:26:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:59125)
+2025-02-24 09:26:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:59133)
+2025-02-24 09:26:47 [41194] [ERROR] Worker (pid:59133) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:26:47 [41194] [ERROR] Worker (pid:59125) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:26:47 [41194] [ERROR] Worker (pid:59118) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:26:47 [41194] [ERROR] Worker (pid:59123) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 09:26:47 [60042] [INFO] Booting worker with pid: 60042
+2025-02-24 09:26:47 [60043] [INFO] Booting worker with pid: 60043
+2025-02-24 09:26:47 [60044] [INFO] Booting worker with pid: 60044
+2025-02-24 09:26:47 [60045] [INFO] Booting worker with pid: 60045
+2025-02-24 11:26:40 [41194] [CRITICAL] WORKER TIMEOUT (pid:60042)
+2025-02-24 11:26:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:60043)
+2025-02-24 11:26:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:60044)
+2025-02-24 11:26:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:60045)
+2025-02-24 11:26:42 [41194] [ERROR] Worker (pid:60045) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 11:26:42 [60564] [INFO] Booting worker with pid: 60564
+2025-02-24 11:26:42 [41194] [ERROR] Worker (pid:60042) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 11:26:42 [41194] [ERROR] Worker (pid:60043) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 11:26:42 [41194] [ERROR] Worker (pid:60044) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 11:26:42 [60570] [INFO] Booting worker with pid: 60570
+2025-02-24 11:26:42 [60577] [INFO] Booting worker with pid: 60577
+2025-02-24 11:26:42 [60578] [INFO] Booting worker with pid: 60578
+2025-02-24 12:28:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:60564)
+2025-02-24 12:28:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:60570)
+2025-02-24 12:28:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:60577)
+2025-02-24 12:28:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:60578)
+2025-02-24 12:28:31 [41194] [ERROR] Worker (pid:60570) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 12:28:31 [41194] [ERROR] Worker (pid:60564) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 12:28:31 [41194] [ERROR] Worker (pid:60577) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 12:28:31 [41194] [ERROR] Worker (pid:60578) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 12:28:31 [61431] [INFO] Booting worker with pid: 61431
+2025-02-24 12:28:31 [61433] [INFO] Booting worker with pid: 61433
+2025-02-24 12:28:31 [61435] [INFO] Booting worker with pid: 61435
+2025-02-24 12:28:31 [61436] [INFO] Booting worker with pid: 61436
+2025-02-24 13:28:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:61431)
+2025-02-24 13:28:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:61433)
+2025-02-24 13:28:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:61435)
+2025-02-24 13:28:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:61436)
+2025-02-24 13:28:10 [41194] [ERROR] Worker (pid:61431) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:28:10 [41194] [ERROR] Worker (pid:61436) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:28:10 [41194] [ERROR] Worker (pid:61433) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:28:10 [61708] [INFO] Booting worker with pid: 61708
+2025-02-24 13:28:10 [41194] [ERROR] Worker (pid:61435) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:28:10 [61709] [INFO] Booting worker with pid: 61709
+2025-02-24 13:28:10 [61710] [INFO] Booting worker with pid: 61710
+2025-02-24 13:28:10 [61720] [INFO] Booting worker with pid: 61720
+2025-02-24 13:36:55 [41194] [CRITICAL] WORKER TIMEOUT (pid:61708)
+2025-02-24 13:36:55 [41194] [CRITICAL] WORKER TIMEOUT (pid:61709)
+2025-02-24 13:36:55 [41194] [CRITICAL] WORKER TIMEOUT (pid:61710)
+2025-02-24 13:36:55 [41194] [CRITICAL] WORKER TIMEOUT (pid:61720)
+2025-02-24 13:36:56 [41194] [ERROR] Worker (pid:61710) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:36:56 [41194] [ERROR] Worker (pid:61720) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:36:56 [41194] [ERROR] Worker (pid:61709) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:36:56 [41194] [ERROR] Worker (pid:61708) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:36:56 [61996] [INFO] Booting worker with pid: 61996
+2025-02-24 13:36:56 [61997] [INFO] Booting worker with pid: 61997
+2025-02-24 13:36:56 [61998] [INFO] Booting worker with pid: 61998
+2025-02-24 13:36:56 [61999] [INFO] Booting worker with pid: 61999
+2025-02-24 13:40:40 [41194] [CRITICAL] WORKER TIMEOUT (pid:61996)
+2025-02-24 13:40:40 [41194] [CRITICAL] WORKER TIMEOUT (pid:61997)
+2025-02-24 13:40:40 [41194] [CRITICAL] WORKER TIMEOUT (pid:61998)
+2025-02-24 13:40:40 [41194] [CRITICAL] WORKER TIMEOUT (pid:61999)
+2025-02-24 13:40:41 [41194] [ERROR] Worker (pid:61999) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:40:41 [41194] [ERROR] Worker (pid:61997) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:40:41 [62495] [INFO] Booting worker with pid: 62495
+2025-02-24 13:40:41 [41194] [ERROR] Worker (pid:61998) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:40:41 [41194] [ERROR] Worker (pid:61996) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 13:40:41 [62499] [INFO] Booting worker with pid: 62499
+2025-02-24 13:40:41 [62508] [INFO] Booting worker with pid: 62508
+2025-02-24 13:40:42 [62513] [INFO] Booting worker with pid: 62513
+2025-02-24 14:40:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:62495)
+2025-02-24 14:40:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:62499)
+2025-02-24 14:40:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:62508)
+2025-02-24 14:40:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:62513)
+2025-02-24 14:40:29 [41194] [ERROR] Worker (pid:62513) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 14:40:29 [41194] [ERROR] Worker (pid:62495) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 14:40:29 [64240] [INFO] Booting worker with pid: 64240
+2025-02-24 14:40:29 [41194] [ERROR] Worker (pid:62508) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 14:40:29 [41194] [ERROR] Worker (pid:62499) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 14:40:29 [64246] [INFO] Booting worker with pid: 64246
+2025-02-24 14:40:29 [64258] [INFO] Booting worker with pid: 64258
+2025-02-24 14:40:29 [64259] [INFO] Booting worker with pid: 64259
+2025-02-24 14:49:07 [41194] [CRITICAL] WORKER TIMEOUT (pid:64240)
+2025-02-24 14:49:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:64246)
+2025-02-24 14:49:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:64258)
+2025-02-24 14:49:08 [41194] [CRITICAL] WORKER TIMEOUT (pid:64259)
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64259) exited with code 1
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64259) exited with code 1.
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64258) exited with code 1
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64258) exited with code 1.
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64240) exited with code 1
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64240) exited with code 1.
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64246) exited with code 1
+2025-02-24 14:49:08 [41194] [ERROR] Worker (pid:64246) exited with code 1.
+2025-02-24 14:49:08 [65077] [INFO] Booting worker with pid: 65077
+2025-02-24 14:49:08 [65079] [INFO] Booting worker with pid: 65079
+2025-02-24 14:49:08 [65080] [INFO] Booting worker with pid: 65080
+2025-02-24 14:49:08 [65081] [INFO] Booting worker with pid: 65081
+2025-02-24 15:41:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:65077)
+2025-02-24 15:41:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:65079)
+2025-02-24 15:41:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:65080)
+2025-02-24 15:41:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:65081)
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65080) exited with code 1
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65080) exited with code 1.
+2025-02-24 15:41:29 [41194] [ERROR] Worker (pid:65079) exited with code 1
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65079) exited with code 1.
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65077) exited with code 1
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65077) exited with code 1.
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65081) exited with code 1
+2025-02-24 15:41:30 [41194] [ERROR] Worker (pid:65081) exited with code 1.
+2025-02-24 15:41:30 [65293] [INFO] Booting worker with pid: 65293
+2025-02-24 15:41:30 [65294] [INFO] Booting worker with pid: 65294
+2025-02-24 15:41:30 [65295] [INFO] Booting worker with pid: 65295
+2025-02-24 15:41:30 [65301] [INFO] Booting worker with pid: 65301
+2025-02-24 16:01:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:65293)
+2025-02-24 16:01:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:65294)
+2025-02-24 16:01:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:65295)
+2025-02-24 16:01:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:65301)
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65294) exited with code 1
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65294) exited with code 1.
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65293) exited with code 1
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65293) exited with code 1.
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65301) exited with code 1
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65301) exited with code 1.
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65295) exited with code 1
+2025-02-24 16:01:48 [41194] [ERROR] Worker (pid:65295) exited with code 1.
+2025-02-24 16:01:48 [65476] [INFO] Booting worker with pid: 65476
+2025-02-24 16:01:48 [65480] [INFO] Booting worker with pid: 65480
+2025-02-24 16:01:48 [65487] [INFO] Booting worker with pid: 65487
+2025-02-24 16:01:48 [65491] [INFO] Booting worker with pid: 65491
+2025-02-24 16:06:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:65476)
+2025-02-24 16:06:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:65480)
+2025-02-24 16:06:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:65487)
+2025-02-24 16:06:32 [41194] [CRITICAL] WORKER TIMEOUT (pid:65491)
+2025-02-24 16:06:33 [41194] [ERROR] Worker (pid:65480) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 16:06:33 [41194] [ERROR] Worker (pid:65491) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 16:06:33 [41194] [ERROR] Worker (pid:65476) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 16:06:33 [65550] [INFO] Booting worker with pid: 65550
+2025-02-24 16:06:33 [41194] [ERROR] Worker (pid:65487) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 16:06:33 [65551] [INFO] Booting worker with pid: 65551
+2025-02-24 16:06:33 [65552] [INFO] Booting worker with pid: 65552
+2025-02-24 16:06:33 [65553] [INFO] Booting worker with pid: 65553
+2025-02-24 16:08:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:65550)
+2025-02-24 16:08:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:65551)
+2025-02-24 16:08:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:65552)
+2025-02-24 16:08:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:65553)
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65552) exited with code 1
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65552) exited with code 1.
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65551) exited with code 1
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65551) exited with code 1.
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65553) exited with code 1
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65553) exited with code 1.
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65550) exited with code 1
+2025-02-24 16:08:36 [41194] [ERROR] Worker (pid:65550) exited with code 1.
+2025-02-24 16:08:36 [66386] [INFO] Booting worker with pid: 66386
+2025-02-24 16:08:36 [66387] [INFO] Booting worker with pid: 66387
+2025-02-24 16:08:36 [66388] [INFO] Booting worker with pid: 66388
+2025-02-24 16:08:36 [66389] [INFO] Booting worker with pid: 66389
+2025-02-24 17:02:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:66386)
+2025-02-24 17:02:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:66387)
+2025-02-24 17:02:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:66388)
+2025-02-24 17:02:53 [41194] [CRITICAL] WORKER TIMEOUT (pid:66389)
+2025-02-24 17:02:55 [41194] [ERROR] Worker (pid:66389) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 17:02:55 [41194] [ERROR] Worker (pid:66386) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 17:02:55 [41194] [ERROR] Worker (pid:66387) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 17:02:55 [41194] [ERROR] Worker (pid:66388) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 17:02:55 [66561] [INFO] Booting worker with pid: 66561
+2025-02-24 17:02:55 [66562] [INFO] Booting worker with pid: 66562
+2025-02-24 17:02:55 [66563] [INFO] Booting worker with pid: 66563
+2025-02-24 17:02:55 [66564] [INFO] Booting worker with pid: 66564
+2025-02-24 18:04:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:66561)
+2025-02-24 18:04:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:66562)
+2025-02-24 18:04:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:66563)
+2025-02-24 18:04:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:66564)
+2025-02-24 18:04:01 [41194] [ERROR] Worker (pid:66561) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 18:04:01 [66652] [INFO] Booting worker with pid: 66652
+2025-02-24 18:04:01 [41194] [ERROR] Worker (pid:66563) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 18:04:01 [66653] [INFO] Booting worker with pid: 66653
+2025-02-24 18:04:01 [41194] [ERROR] Worker (pid:66564) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 18:04:01 [66654] [INFO] Booting worker with pid: 66654
+2025-02-24 18:04:01 [41194] [ERROR] Worker (pid:66562) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 18:04:01 [66655] [INFO] Booting worker with pid: 66655
+2025-02-24 19:05:07 [41194] [CRITICAL] WORKER TIMEOUT (pid:66652)
+2025-02-24 19:05:09 [41194] [ERROR] Worker (pid:66652) exited with code 1
+2025-02-24 19:05:09 [41194] [ERROR] Worker (pid:66652) exited with code 1.
+2025-02-24 19:05:09 [66676] [INFO] Booting worker with pid: 66676
+2025-02-24 19:15:31 [41194] [CRITICAL] WORKER TIMEOUT (pid:66653)
+2025-02-24 19:15:31 [41194] [CRITICAL] WORKER TIMEOUT (pid:66654)
+2025-02-24 19:15:31 [41194] [CRITICAL] WORKER TIMEOUT (pid:66655)
+2025-02-24 19:15:31 [41194] [CRITICAL] WORKER TIMEOUT (pid:66676)
+2025-02-24 19:15:33 [41194] [ERROR] Worker (pid:66654) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 19:15:33 [41194] [ERROR] Worker (pid:66676) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 19:15:33 [41194] [ERROR] Worker (pid:66655) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 19:15:33 [41194] [ERROR] Worker (pid:66653) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 19:15:33 [66697] [INFO] Booting worker with pid: 66697
+2025-02-24 19:15:33 [66698] [INFO] Booting worker with pid: 66698
+2025-02-24 19:15:33 [66700] [INFO] Booting worker with pid: 66700
+2025-02-24 19:15:33 [66701] [INFO] Booting worker with pid: 66701
+2025-02-24 20:06:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:66697)
+2025-02-24 20:06:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:66698)
+2025-02-24 20:06:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:66700)
+2025-02-24 20:06:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:66701)
+2025-02-24 20:06:15 [41194] [ERROR] Worker (pid:66700) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 20:06:15 [41194] [ERROR] Worker (pid:66698) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 20:06:15 [41194] [ERROR] Worker (pid:66697) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 20:06:15 [67672] [INFO] Booting worker with pid: 67672
+2025-02-24 20:06:15 [41194] [ERROR] Worker (pid:66701) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 20:06:15 [67674] [INFO] Booting worker with pid: 67674
+2025-02-24 20:06:15 [67675] [INFO] Booting worker with pid: 67675
+2025-02-24 20:06:15 [67676] [INFO] Booting worker with pid: 67676
+2025-02-24 21:07:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:67672)
+2025-02-24 21:07:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:67674)
+2025-02-24 21:07:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:67675)
+2025-02-24 21:07:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:67676)
+2025-02-24 21:07:22 [41194] [ERROR] Worker (pid:67674) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 21:07:22 [41194] [ERROR] Worker (pid:67672) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 21:07:22 [41194] [ERROR] Worker (pid:67676) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 21:07:22 [67702] [INFO] Booting worker with pid: 67702
+2025-02-24 21:07:22 [41194] [ERROR] Worker (pid:67675) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 21:07:22 [67704] [INFO] Booting worker with pid: 67704
+2025-02-24 21:07:22 [67705] [INFO] Booting worker with pid: 67705
+2025-02-24 21:07:22 [67706] [INFO] Booting worker with pid: 67706
+2025-02-24 22:08:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:67702)
+2025-02-24 22:08:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:67704)
+2025-02-24 22:08:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:67705)
+2025-02-24 22:08:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:67706)
+2025-02-24 22:08:29 [41194] [ERROR] Worker (pid:67702) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 22:08:29 [41194] [ERROR] Worker (pid:67706) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 22:08:29 [67723] [INFO] Booting worker with pid: 67723
+2025-02-24 22:08:29 [41194] [ERROR] Worker (pid:67704) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 22:08:29 [67724] [INFO] Booting worker with pid: 67724
+2025-02-24 22:08:29 [41194] [ERROR] Worker (pid:67705) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 22:08:29 [67726] [INFO] Booting worker with pid: 67726
+2025-02-24 22:08:30 [67727] [INFO] Booting worker with pid: 67727
+2025-02-24 23:02:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:67723)
+2025-02-24 23:02:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:67724)
+2025-02-24 23:02:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:67726)
+2025-02-24 23:02:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:67727)
+2025-02-24 23:02:14 [41194] [ERROR] Worker (pid:67726) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 23:02:14 [41194] [ERROR] Worker (pid:67723) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 23:02:14 [67747] [INFO] Booting worker with pid: 67747
+2025-02-24 23:02:14 [67748] [INFO] Booting worker with pid: 67748
+2025-02-24 23:02:14 [67749] [INFO] Booting worker with pid: 67749
+2025-02-24 23:02:14 [67750] [INFO] Booting worker with pid: 67750
+2025-02-24 23:06:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:67747)
+2025-02-24 23:06:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:67748)
+2025-02-24 23:06:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:67749)
+2025-02-24 23:06:23 [41194] [CRITICAL] WORKER TIMEOUT (pid:67750)
+2025-02-24 23:06:25 [41194] [ERROR] Worker (pid:67747) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 23:06:25 [41194] [ERROR] Worker (pid:67749) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 23:06:25 [41194] [ERROR] Worker (pid:67750) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 23:06:25 [67781] [INFO] Booting worker with pid: 67781
+2025-02-24 23:06:25 [41194] [ERROR] Worker (pid:67748) was sent SIGKILL! Perhaps out of memory?
+2025-02-24 23:06:25 [67782] [INFO] Booting worker with pid: 67782
+2025-02-24 23:06:25 [67783] [INFO] Booting worker with pid: 67783
+2025-02-24 23:06:25 [67784] [INFO] Booting worker with pid: 67784
+2025-02-24 23:08:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:67781)
+2025-02-24 23:08:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:67782)
+2025-02-24 23:08:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:67783)
+2025-02-24 23:08:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:67784)
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67782) exited with code 1
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67782) exited with code 1.
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67783) exited with code 1
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67783) exited with code 1.
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67784) exited with code 1
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67784) exited with code 1.
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67781) exited with code 1
+2025-02-24 23:08:28 [41194] [ERROR] Worker (pid:67781) exited with code 1.
+2025-02-24 23:08:28 [68397] [INFO] Booting worker with pid: 68397
+2025-02-24 23:08:28 [68398] [INFO] Booting worker with pid: 68398
+2025-02-24 23:08:28 [68399] [INFO] Booting worker with pid: 68399
+2025-02-24 23:08:28 [68400] [INFO] Booting worker with pid: 68400
+2025-02-25 00:05:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:68397)
+2025-02-25 00:05:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:68398)
+2025-02-25 00:05:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:68399)
+2025-02-25 00:05:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:68400)
+2025-02-25 00:05:10 [41194] [ERROR] Worker (pid:68397) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:05:10 [41194] [ERROR] Worker (pid:68399) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:05:10 [41194] [ERROR] Worker (pid:68400) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:05:10 [41194] [ERROR] Worker (pid:68398) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:05:10 [68674] [INFO] Booting worker with pid: 68674
+2025-02-25 00:05:10 [68676] [INFO] Booting worker with pid: 68676
+2025-02-25 00:05:10 [68677] [INFO] Booting worker with pid: 68677
+2025-02-25 00:05:10 [68678] [INFO] Booting worker with pid: 68678
+2025-02-25 00:09:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:68674)
+2025-02-25 00:09:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:68676)
+2025-02-25 00:09:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:68677)
+2025-02-25 00:09:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:68678)
+2025-02-25 00:09:36 [41194] [ERROR] Worker (pid:68674) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:09:36 [69517] [INFO] Booting worker with pid: 69517
+2025-02-25 00:09:36 [41194] [ERROR] Worker (pid:68676) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:09:36 [41194] [ERROR] Worker (pid:68677) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:09:36 [41194] [ERROR] Worker (pid:68678) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 00:09:36 [69518] [INFO] Booting worker with pid: 69518
+2025-02-25 00:09:36 [69519] [INFO] Booting worker with pid: 69519
+2025-02-25 00:09:36 [69520] [INFO] Booting worker with pid: 69520
+2025-02-25 01:10:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:69517)
+2025-02-25 01:10:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:69518)
+2025-02-25 01:10:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:69519)
+2025-02-25 01:10:41 [41194] [CRITICAL] WORKER TIMEOUT (pid:69520)
+2025-02-25 01:10:42 [41194] [ERROR] Worker (pid:69519) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 01:10:42 [41194] [ERROR] Worker (pid:69518) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 01:10:42 [41194] [ERROR] Worker (pid:69520) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 01:10:42 [69532] [INFO] Booting worker with pid: 69532
+2025-02-25 01:10:42 [41194] [ERROR] Worker (pid:69517) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 01:10:42 [69533] [INFO] Booting worker with pid: 69533
+2025-02-25 01:10:42 [69534] [INFO] Booting worker with pid: 69534
+2025-02-25 01:10:42 [69535] [INFO] Booting worker with pid: 69535
+2025-02-25 02:02:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:69532)
+2025-02-25 02:02:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:69533)
+2025-02-25 02:02:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:69534)
+2025-02-25 02:02:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:69535)
+2025-02-25 02:02:51 [41194] [ERROR] Worker (pid:69534) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:02:51 [41194] [ERROR] Worker (pid:69532) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:02:51 [41194] [ERROR] Worker (pid:69535) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:02:51 [69557] [INFO] Booting worker with pid: 69557
+2025-02-25 02:02:51 [41194] [ERROR] Worker (pid:69533) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:02:51 [69559] [INFO] Booting worker with pid: 69559
+2025-02-25 02:02:51 [69560] [INFO] Booting worker with pid: 69560
+2025-02-25 02:02:51 [69562] [INFO] Booting worker with pid: 69562
+2025-02-25 02:11:47 [41194] [CRITICAL] WORKER TIMEOUT (pid:69557)
+2025-02-25 02:11:48 [41194] [CRITICAL] WORKER TIMEOUT (pid:69559)
+2025-02-25 02:11:48 [41194] [CRITICAL] WORKER TIMEOUT (pid:69560)
+2025-02-25 02:11:48 [41194] [CRITICAL] WORKER TIMEOUT (pid:69562)
+2025-02-25 02:11:49 [41194] [ERROR] Worker (pid:69557) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:11:49 [41194] [ERROR] Worker (pid:69560) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:11:49 [41194] [ERROR] Worker (pid:69562) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:11:49 [69587] [INFO] Booting worker with pid: 69587
+2025-02-25 02:11:49 [69588] [INFO] Booting worker with pid: 69588
+2025-02-25 02:11:49 [41194] [ERROR] Worker (pid:69559) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 02:11:49 [69589] [INFO] Booting worker with pid: 69589
+2025-02-25 02:11:49 [69590] [INFO] Booting worker with pid: 69590
+2025-02-25 03:12:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:69587)
+2025-02-25 03:12:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:69588)
+2025-02-25 03:12:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:69589)
+2025-02-25 03:12:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:69590)
+2025-02-25 03:12:57 [41194] [ERROR] Worker (pid:69589) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 03:12:57 [70044] [INFO] Booting worker with pid: 70044
+2025-02-25 03:12:57 [41194] [ERROR] Worker (pid:69588) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 03:12:57 [41194] [ERROR] Worker (pid:69587) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 03:12:57 [41194] [ERROR] Worker (pid:69590) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 03:12:57 [70045] [INFO] Booting worker with pid: 70045
+2025-02-25 03:12:57 [70046] [INFO] Booting worker with pid: 70046
+2025-02-25 03:12:57 [70047] [INFO] Booting worker with pid: 70047
+2025-02-25 04:14:03 [41194] [CRITICAL] WORKER TIMEOUT (pid:70044)
+2025-02-25 04:14:03 [41194] [CRITICAL] WORKER TIMEOUT (pid:70045)
+2025-02-25 04:14:03 [41194] [CRITICAL] WORKER TIMEOUT (pid:70046)
+2025-02-25 04:14:03 [41194] [CRITICAL] WORKER TIMEOUT (pid:70047)
+2025-02-25 04:14:04 [41194] [ERROR] Worker (pid:70045) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 04:14:04 [41194] [ERROR] Worker (pid:70046) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 04:14:04 [41194] [ERROR] Worker (pid:70047) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 04:14:04 [41194] [ERROR] Worker (pid:70044) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 04:14:04 [70411] [INFO] Booting worker with pid: 70411
+2025-02-25 04:14:04 [70412] [INFO] Booting worker with pid: 70412
+2025-02-25 04:14:04 [70413] [INFO] Booting worker with pid: 70413
+2025-02-25 04:14:04 [70415] [INFO] Booting worker with pid: 70415
+2025-02-25 05:15:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:70411)
+2025-02-25 05:15:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:70412)
+2025-02-25 05:15:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:70413)
+2025-02-25 05:15:09 [41194] [CRITICAL] WORKER TIMEOUT (pid:70415)
+2025-02-25 05:15:10 [41194] [ERROR] Worker (pid:70412) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 05:15:10 [41194] [ERROR] Worker (pid:70415) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 05:15:10 [41194] [ERROR] Worker (pid:70413) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 05:15:10 [41194] [ERROR] Worker (pid:70411) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 05:15:10 [70787] [INFO] Booting worker with pid: 70787
+2025-02-25 05:15:10 [70788] [INFO] Booting worker with pid: 70788
+2025-02-25 05:15:10 [70789] [INFO] Booting worker with pid: 70789
+2025-02-25 05:15:10 [70790] [INFO] Booting worker with pid: 70790
+2025-02-25 06:16:16 [41194] [CRITICAL] WORKER TIMEOUT (pid:70787)
+2025-02-25 06:16:16 [41194] [CRITICAL] WORKER TIMEOUT (pid:70788)
+2025-02-25 06:16:16 [41194] [CRITICAL] WORKER TIMEOUT (pid:70789)
+2025-02-25 06:16:16 [41194] [CRITICAL] WORKER TIMEOUT (pid:70790)
+2025-02-25 06:16:17 [41194] [ERROR] Worker (pid:70788) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 06:16:17 [41194] [ERROR] Worker (pid:70789) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 06:16:17 [41194] [ERROR] Worker (pid:70790) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 06:16:17 [41194] [ERROR] Worker (pid:70787) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 06:16:17 [71259] [INFO] Booting worker with pid: 71259
+2025-02-25 06:16:17 [71260] [INFO] Booting worker with pid: 71260
+2025-02-25 06:16:17 [71262] [INFO] Booting worker with pid: 71262
+2025-02-25 06:16:17 [71263] [INFO] Booting worker with pid: 71263
+2025-02-25 07:15:20 [41194] [CRITICAL] WORKER TIMEOUT (pid:71259)
+2025-02-25 07:15:20 [41194] [CRITICAL] WORKER TIMEOUT (pid:71260)
+2025-02-25 07:15:20 [41194] [CRITICAL] WORKER TIMEOUT (pid:71262)
+2025-02-25 07:15:20 [41194] [CRITICAL] WORKER TIMEOUT (pid:71263)
+2025-02-25 07:15:21 [41194] [ERROR] Worker (pid:71263) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 07:15:21 [41194] [ERROR] Worker (pid:71260) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 07:15:21 [41194] [ERROR] Worker (pid:71262) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 07:15:21 [71829] [INFO] Booting worker with pid: 71829
+2025-02-25 07:15:21 [41194] [ERROR] Worker (pid:71259) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 07:15:21 [71830] [INFO] Booting worker with pid: 71830
+2025-02-25 07:15:22 [71831] [INFO] Booting worker with pid: 71831
+2025-02-25 07:15:22 [71832] [INFO] Booting worker with pid: 71832
+2025-02-25 07:17:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:71829)
+2025-02-25 07:17:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:71830)
+2025-02-25 07:17:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:71831)
+2025-02-25 07:17:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:71832)
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71830) exited with code 1
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71830) exited with code 1.
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71831) exited with code 1
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71831) exited with code 1.
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71832) exited with code 1
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71832) exited with code 1.
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71829) exited with code 1
+2025-02-25 07:17:35 [41194] [ERROR] Worker (pid:71829) exited with code 1.
+2025-02-25 07:17:36 [72654] [INFO] Booting worker with pid: 72654
+2025-02-25 07:17:36 [72655] [INFO] Booting worker with pid: 72655
+2025-02-25 07:17:36 [72656] [INFO] Booting worker with pid: 72656
+2025-02-25 07:17:36 [72657] [INFO] Booting worker with pid: 72657
+2025-02-25 08:18:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:72654)
+2025-02-25 08:18:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:72655)
+2025-02-25 08:18:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:72656)
+2025-02-25 08:18:30 [41194] [CRITICAL] WORKER TIMEOUT (pid:72657)
+2025-02-25 08:18:31 [41194] [ERROR] Worker (pid:72655) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 08:18:31 [41194] [ERROR] Worker (pid:72656) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 08:18:32 [41194] [ERROR] Worker (pid:72654) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 08:18:32 [41194] [ERROR] Worker (pid:72657) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 08:18:32 [72673] [INFO] Booting worker with pid: 72673
+2025-02-25 08:18:32 [72674] [INFO] Booting worker with pid: 72674
+2025-02-25 08:18:32 [72675] [INFO] Booting worker with pid: 72675
+2025-02-25 08:18:32 [72676] [INFO] Booting worker with pid: 72676
+2025-02-25 09:19:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:72673)
+2025-02-25 09:19:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:72674)
+2025-02-25 09:19:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:72675)
+2025-02-25 09:19:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:72676)
+2025-02-25 09:19:38 [41194] [ERROR] Worker (pid:72674) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 09:19:38 [41194] [ERROR] Worker (pid:72676) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 09:19:38 [41194] [ERROR] Worker (pid:72673) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 09:19:38 [73144] [INFO] Booting worker with pid: 73144
+2025-02-25 09:19:38 [73145] [INFO] Booting worker with pid: 73145
+2025-02-25 09:19:38 [41194] [ERROR] Worker (pid:72675) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 09:19:38 [73146] [INFO] Booting worker with pid: 73146
+2025-02-25 09:19:38 [73147] [INFO] Booting worker with pid: 73147
+2025-02-25 10:20:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:73144)
+2025-02-25 10:20:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:73145)
+2025-02-25 10:20:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:73146)
+2025-02-25 10:20:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:73147)
+2025-02-25 10:20:46 [41194] [ERROR] Worker (pid:73144) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 10:20:46 [41194] [ERROR] Worker (pid:73145) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 10:20:46 [73440] [INFO] Booting worker with pid: 73440
+2025-02-25 10:20:46 [73441] [INFO] Booting worker with pid: 73441
+2025-02-25 10:20:46 [41194] [ERROR] Worker (pid:73147) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 10:20:46 [73442] [INFO] Booting worker with pid: 73442
+2025-02-25 10:20:46 [41194] [ERROR] Worker (pid:73146) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 10:20:46 [73443] [INFO] Booting worker with pid: 73443
+2025-02-25 11:21:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:73440)
+2025-02-25 11:21:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:73441)
+2025-02-25 11:21:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:73442)
+2025-02-25 11:21:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:73443)
+2025-02-25 11:21:53 [41194] [ERROR] Worker (pid:73440) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 11:21:53 [73920] [INFO] Booting worker with pid: 73920
+2025-02-25 11:21:53 [41194] [ERROR] Worker (pid:73441) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 11:21:53 [41194] [ERROR] Worker (pid:73442) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 11:21:53 [73921] [INFO] Booting worker with pid: 73921
+2025-02-25 11:21:53 [41194] [ERROR] Worker (pid:73443) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 11:21:53 [73923] [INFO] Booting worker with pid: 73923
+2025-02-25 11:21:53 [73924] [INFO] Booting worker with pid: 73924
+2025-02-25 12:23:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:73920)
+2025-02-25 12:23:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:73921)
+2025-02-25 12:23:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:73923)
+2025-02-25 12:23:00 [41194] [CRITICAL] WORKER TIMEOUT (pid:73924)
+2025-02-25 12:23:01 [41194] [ERROR] Worker (pid:73924) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:23:01 [41194] [ERROR] Worker (pid:73920) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:23:01 [41194] [ERROR] Worker (pid:73921) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:23:01 [41194] [ERROR] Worker (pid:73923) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:23:01 [74378] [INFO] Booting worker with pid: 74378
+2025-02-25 12:23:01 [74379] [INFO] Booting worker with pid: 74379
+2025-02-25 12:23:01 [74380] [INFO] Booting worker with pid: 74380
+2025-02-25 12:23:01 [74381] [INFO] Booting worker with pid: 74381
+2025-02-25 12:36:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:74378)
+2025-02-25 12:36:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:74379)
+2025-02-25 12:36:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:74380)
+2025-02-25 12:36:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:74381)
+2025-02-25 12:37:00 [41194] [ERROR] Worker (pid:74381) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:37:00 [41194] [ERROR] Worker (pid:74378) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:37:00 [41194] [ERROR] Worker (pid:74379) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:37:00 [41194] [ERROR] Worker (pid:74380) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 12:37:00 [74583] [INFO] Booting worker with pid: 74583
+2025-02-25 12:37:00 [74585] [INFO] Booting worker with pid: 74585
+2025-02-25 12:37:00 [74586] [INFO] Booting worker with pid: 74586
+2025-02-25 12:37:00 [74587] [INFO] Booting worker with pid: 74587
+2025-02-25 13:24:07 [41194] [CRITICAL] WORKER TIMEOUT (pid:74583)
+2025-02-25 13:24:07 [41194] [CRITICAL] WORKER TIMEOUT (pid:74585)
+2025-02-25 13:24:07 [41194] [CRITICAL] WORKER TIMEOUT (pid:74586)
+2025-02-25 13:24:07 [41194] [CRITICAL] WORKER TIMEOUT (pid:74587)
+2025-02-25 13:24:08 [41194] [ERROR] Worker (pid:74585) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 13:24:08 [41194] [ERROR] Worker (pid:74586) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 13:24:08 [41194] [ERROR] Worker (pid:74583) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 13:24:08 [41194] [ERROR] Worker (pid:74587) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 13:24:08 [74899] [INFO] Booting worker with pid: 74899
+2025-02-25 13:24:08 [74900] [INFO] Booting worker with pid: 74900
+2025-02-25 13:24:08 [74901] [INFO] Booting worker with pid: 74901
+2025-02-25 13:24:08 [74902] [INFO] Booting worker with pid: 74902
+2025-02-25 14:01:31 [41194] [CRITICAL] WORKER TIMEOUT (pid:74899)
+2025-02-25 14:01:33 [41194] [ERROR] Worker (pid:74899) exited with code 1
+2025-02-25 14:01:33 [41194] [ERROR] Worker (pid:74899) exited with code 1.
+2025-02-25 14:01:33 [75147] [INFO] Booting worker with pid: 75147
+2025-02-25 14:25:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:74900)
+2025-02-25 14:25:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:74901)
+2025-02-25 14:25:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:74902)
+2025-02-25 14:25:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:75147)
+2025-02-25 14:25:15 [41194] [ERROR] Worker (pid:74902) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 14:25:15 [41194] [ERROR] Worker (pid:75147) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 14:25:15 [41194] [ERROR] Worker (pid:74900) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 14:25:15 [75407] [INFO] Booting worker with pid: 75407
+2025-02-25 14:25:15 [75408] [INFO] Booting worker with pid: 75408
+2025-02-25 14:25:15 [41194] [ERROR] Worker (pid:74901) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 14:25:15 [75409] [INFO] Booting worker with pid: 75409
+2025-02-25 14:25:15 [75410] [INFO] Booting worker with pid: 75410
+2025-02-25 15:26:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:75407)
+2025-02-25 15:26:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:75408)
+2025-02-25 15:26:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:75409)
+2025-02-25 15:26:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:75410)
+2025-02-25 15:26:23 [41194] [ERROR] Worker (pid:75409) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:26:23 [41194] [ERROR] Worker (pid:75410) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:26:23 [41194] [ERROR] Worker (pid:75408) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:26:23 [41194] [ERROR] Worker (pid:75407) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:26:23 [75770] [INFO] Booting worker with pid: 75770
+2025-02-25 15:26:23 [75771] [INFO] Booting worker with pid: 75771
+2025-02-25 15:26:23 [75772] [INFO] Booting worker with pid: 75772
+2025-02-25 15:26:23 [75773] [INFO] Booting worker with pid: 75773
+2025-02-25 15:28:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:75770)
+2025-02-25 15:28:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:75771)
+2025-02-25 15:28:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:75772)
+2025-02-25 15:28:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:75773)
+2025-02-25 15:28:29 [41194] [ERROR] Worker (pid:75770) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:28:29 [41194] [ERROR] Worker (pid:75772) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:28:29 [41194] [ERROR] Worker (pid:75773) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:28:29 [41194] [ERROR] Worker (pid:75771) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 15:28:29 [76155] [INFO] Booting worker with pid: 76155
+2025-02-25 15:28:29 [76156] [INFO] Booting worker with pid: 76156
+2025-02-25 15:28:29 [76158] [INFO] Booting worker with pid: 76158
+2025-02-25 15:28:29 [76159] [INFO] Booting worker with pid: 76159
+2025-02-25 16:27:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:76155)
+2025-02-25 16:27:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:76156)
+2025-02-25 16:27:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:76158)
+2025-02-25 16:27:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:76159)
+2025-02-25 16:27:29 [41194] [ERROR] Worker (pid:76155) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 16:27:29 [41194] [ERROR] Worker (pid:76159) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 16:27:29 [41194] [ERROR] Worker (pid:76158) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 16:27:29 [76609] [INFO] Booting worker with pid: 76609
+2025-02-25 16:27:29 [76610] [INFO] Booting worker with pid: 76610
+2025-02-25 16:27:29 [76611] [INFO] Booting worker with pid: 76611
+2025-02-25 16:27:29 [41194] [ERROR] Worker (pid:76156) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 16:27:29 [76612] [INFO] Booting worker with pid: 76612
+2025-02-25 17:28:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:76609)
+2025-02-25 17:28:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:76610)
+2025-02-25 17:28:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:76611)
+2025-02-25 17:28:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:76612)
+2025-02-25 17:28:36 [41194] [ERROR] Worker (pid:76609) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 17:28:36 [41194] [ERROR] Worker (pid:76612) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 17:28:36 [41194] [ERROR] Worker (pid:76610) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 17:28:36 [76988] [INFO] Booting worker with pid: 76988
+2025-02-25 17:28:36 [76989] [INFO] Booting worker with pid: 76989
+2025-02-25 17:28:36 [76990] [INFO] Booting worker with pid: 76990
+2025-02-25 17:28:36 [41194] [ERROR] Worker (pid:76611) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 17:28:36 [76991] [INFO] Booting worker with pid: 76991
+2025-02-25 18:29:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:76988)
+2025-02-25 18:29:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:76989)
+2025-02-25 18:29:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:76990)
+2025-02-25 18:29:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:76991)
+2025-02-25 18:29:44 [41194] [ERROR] Worker (pid:76991) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 18:29:44 [77445] [INFO] Booting worker with pid: 77445
+2025-02-25 18:29:44 [41194] [ERROR] Worker (pid:76989) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 18:29:44 [77446] [INFO] Booting worker with pid: 77446
+2025-02-25 18:29:44 [41194] [ERROR] Worker (pid:76988) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 18:29:44 [41194] [ERROR] Worker (pid:76990) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 18:29:44 [77448] [INFO] Booting worker with pid: 77448
+2025-02-25 18:29:44 [77449] [INFO] Booting worker with pid: 77449
+2025-02-25 19:30:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:77445)
+2025-02-25 19:30:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:77446)
+2025-02-25 19:30:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:77448)
+2025-02-25 19:30:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:77449)
+2025-02-25 19:30:52 [41194] [ERROR] Worker (pid:77449) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 19:30:52 [41194] [ERROR] Worker (pid:77446) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 19:30:52 [41194] [ERROR] Worker (pid:77445) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 19:30:52 [77840] [INFO] Booting worker with pid: 77840
+2025-02-25 19:30:52 [77841] [INFO] Booting worker with pid: 77841
+2025-02-25 19:30:52 [77842] [INFO] Booting worker with pid: 77842
+2025-02-25 19:30:52 [41194] [ERROR] Worker (pid:77448) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 19:30:52 [77843] [INFO] Booting worker with pid: 77843
+2025-02-25 20:31:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:77840)
+2025-02-25 20:31:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:77841)
+2025-02-25 20:31:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:77842)
+2025-02-25 20:31:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:77843)
+2025-02-25 20:31:59 [41194] [ERROR] Worker (pid:77840) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 20:31:59 [78303] [INFO] Booting worker with pid: 78303
+2025-02-25 20:31:59 [41194] [ERROR] Worker (pid:77843) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 20:32:00 [78304] [INFO] Booting worker with pid: 78304
+2025-02-25 20:32:00 [41194] [ERROR] Worker (pid:77841) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 20:32:00 [78305] [INFO] Booting worker with pid: 78305
+2025-02-25 20:32:00 [41194] [ERROR] Worker (pid:77842) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 20:32:00 [78306] [INFO] Booting worker with pid: 78306
+2025-02-25 21:33:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:78303)
+2025-02-25 21:33:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:78304)
+2025-02-25 21:33:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:78305)
+2025-02-25 21:33:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:78306)
+2025-02-25 21:33:07 [41194] [ERROR] Worker (pid:78305) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 21:33:07 [78682] [INFO] Booting worker with pid: 78682
+2025-02-25 21:33:07 [41194] [ERROR] Worker (pid:78306) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 21:33:07 [41194] [ERROR] Worker (pid:78304) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 21:33:07 [41194] [ERROR] Worker (pid:78303) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 21:33:07 [78684] [INFO] Booting worker with pid: 78684
+2025-02-25 21:33:07 [78685] [INFO] Booting worker with pid: 78685
+2025-02-25 21:33:08 [78686] [INFO] Booting worker with pid: 78686
+2025-02-25 22:34:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:78682)
+2025-02-25 22:34:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:78684)
+2025-02-25 22:34:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:78685)
+2025-02-25 22:34:14 [41194] [CRITICAL] WORKER TIMEOUT (pid:78686)
+2025-02-25 22:34:15 [41194] [ERROR] Worker (pid:78686) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 22:34:15 [79059] [INFO] Booting worker with pid: 79059
+2025-02-25 22:34:15 [41194] [ERROR] Worker (pid:78682) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 22:34:15 [79060] [INFO] Booting worker with pid: 79060
+2025-02-25 22:34:15 [41194] [ERROR] Worker (pid:78684) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 22:34:15 [41194] [ERROR] Worker (pid:78685) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 22:34:15 [79061] [INFO] Booting worker with pid: 79061
+2025-02-25 22:34:15 [79062] [INFO] Booting worker with pid: 79062
+2025-02-25 23:35:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:79059)
+2025-02-25 23:35:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:79060)
+2025-02-25 23:35:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:79061)
+2025-02-25 23:35:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:79062)
+2025-02-25 23:35:22 [41194] [ERROR] Worker (pid:79060) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:35:22 [41194] [ERROR] Worker (pid:79059) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:35:22 [41194] [ERROR] Worker (pid:79061) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:35:22 [41194] [ERROR] Worker (pid:79062) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:35:22 [79534] [INFO] Booting worker with pid: 79534
+2025-02-25 23:35:22 [79535] [INFO] Booting worker with pid: 79535
+2025-02-25 23:35:22 [79536] [INFO] Booting worker with pid: 79536
+2025-02-25 23:35:22 [79537] [INFO] Booting worker with pid: 79537
+2025-02-25 23:41:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:79534)
+2025-02-25 23:41:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:79535)
+2025-02-25 23:41:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:79536)
+2025-02-25 23:41:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:79537)
+2025-02-25 23:41:37 [41194] [ERROR] Worker (pid:79537) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:41:37 [41194] [ERROR] Worker (pid:79535) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:41:37 [41194] [ERROR] Worker (pid:79534) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:41:37 [41194] [ERROR] Worker (pid:79536) was sent SIGKILL! Perhaps out of memory?
+2025-02-25 23:41:37 [80010] [INFO] Booting worker with pid: 80010
+2025-02-25 23:41:37 [80015] [INFO] Booting worker with pid: 80015
+2025-02-25 23:41:37 [80016] [INFO] Booting worker with pid: 80016
+2025-02-25 23:41:37 [80017] [INFO] Booting worker with pid: 80017
+2025-02-26 00:36:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:80010)
+2025-02-26 00:36:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:80015)
+2025-02-26 00:36:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:80016)
+2025-02-26 00:36:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:80017)
+2025-02-26 00:36:30 [41194] [ERROR] Worker (pid:80016) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 00:36:30 [41194] [ERROR] Worker (pid:80017) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 00:36:30 [80463] [INFO] Booting worker with pid: 80463
+2025-02-26 00:36:30 [80464] [INFO] Booting worker with pid: 80464
+2025-02-26 00:36:30 [41194] [ERROR] Worker (pid:80015) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 00:36:30 [80465] [INFO] Booting worker with pid: 80465
+2025-02-26 00:36:30 [41194] [ERROR] Worker (pid:80010) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 00:36:30 [80467] [INFO] Booting worker with pid: 80467
+2025-02-26 01:37:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:80463)
+2025-02-26 01:37:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:80464)
+2025-02-26 01:37:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:80465)
+2025-02-26 01:37:36 [41194] [CRITICAL] WORKER TIMEOUT (pid:80467)
+2025-02-26 01:37:37 [41194] [ERROR] Worker (pid:80464) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 01:37:37 [41194] [ERROR] Worker (pid:80465) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 01:37:37 [80951] [INFO] Booting worker with pid: 80951
+2025-02-26 01:37:37 [80952] [INFO] Booting worker with pid: 80952
+2025-02-26 01:37:37 [41194] [ERROR] Worker (pid:80463) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 01:37:37 [41194] [ERROR] Worker (pid:80467) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 01:37:37 [80953] [INFO] Booting worker with pid: 80953
+2025-02-26 01:37:37 [80954] [INFO] Booting worker with pid: 80954
+2025-02-26 02:38:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:80951)
+2025-02-26 02:38:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:80952)
+2025-02-26 02:38:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:80953)
+2025-02-26 02:38:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:80954)
+2025-02-26 02:38:44 [41194] [ERROR] Worker (pid:80951) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 02:38:44 [81424] [INFO] Booting worker with pid: 81424
+2025-02-26 02:38:44 [41194] [ERROR] Worker (pid:80952) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 02:38:44 [41194] [ERROR] Worker (pid:80953) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 02:38:44 [41194] [ERROR] Worker (pid:80954) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 02:38:44 [81425] [INFO] Booting worker with pid: 81425
+2025-02-26 02:38:44 [81426] [INFO] Booting worker with pid: 81426
+2025-02-26 02:38:44 [81427] [INFO] Booting worker with pid: 81427
+2025-02-26 03:39:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:81424)
+2025-02-26 03:39:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:81425)
+2025-02-26 03:39:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:81426)
+2025-02-26 03:39:50 [41194] [CRITICAL] WORKER TIMEOUT (pid:81427)
+2025-02-26 03:39:51 [41194] [ERROR] Worker (pid:81424) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 03:39:51 [41194] [ERROR] Worker (pid:81425) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 03:39:51 [82058] [INFO] Booting worker with pid: 82058
+2025-02-26 03:39:51 [41194] [ERROR] Worker (pid:81426) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 03:39:51 [82059] [INFO] Booting worker with pid: 82059
+2025-02-26 03:39:51 [41194] [ERROR] Worker (pid:81427) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 03:39:51 [82060] [INFO] Booting worker with pid: 82060
+2025-02-26 03:39:51 [82061] [INFO] Booting worker with pid: 82061
+2025-02-26 04:40:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:82058)
+2025-02-26 04:40:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:82059)
+2025-02-26 04:40:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:82060)
+2025-02-26 04:40:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:82061)
+2025-02-26 04:40:59 [41194] [ERROR] Worker (pid:82058) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 04:40:59 [41194] [ERROR] Worker (pid:82061) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 04:40:59 [41194] [ERROR] Worker (pid:82059) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 04:40:59 [41194] [ERROR] Worker (pid:82060) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 04:40:59 [82421] [INFO] Booting worker with pid: 82421
+2025-02-26 04:40:59 [82422] [INFO] Booting worker with pid: 82422
+2025-02-26 04:40:59 [82423] [INFO] Booting worker with pid: 82423
+2025-02-26 04:40:59 [82424] [INFO] Booting worker with pid: 82424
+2025-02-26 05:42:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:82421)
+2025-02-26 05:42:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:82422)
+2025-02-26 05:42:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:82423)
+2025-02-26 05:42:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:82424)
+2025-02-26 05:42:06 [41194] [ERROR] Worker (pid:82422) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 05:42:06 [82884] [INFO] Booting worker with pid: 82884
+2025-02-26 05:42:06 [41194] [ERROR] Worker (pid:82424) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 05:42:06 [41194] [ERROR] Worker (pid:82421) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 05:42:06 [41194] [ERROR] Worker (pid:82423) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 05:42:06 [82886] [INFO] Booting worker with pid: 82886
+2025-02-26 05:42:06 [82887] [INFO] Booting worker with pid: 82887
+2025-02-26 05:42:06 [82888] [INFO] Booting worker with pid: 82888
+2025-02-26 06:43:12 [41194] [CRITICAL] WORKER TIMEOUT (pid:82884)
+2025-02-26 06:43:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:82886)
+2025-02-26 06:43:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:82887)
+2025-02-26 06:43:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:82888)
+2025-02-26 06:43:14 [41194] [ERROR] Worker (pid:82886) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 06:43:14 [41194] [ERROR] Worker (pid:82884) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 06:43:14 [41194] [ERROR] Worker (pid:82888) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 06:43:14 [41194] [ERROR] Worker (pid:82887) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 06:43:14 [83344] [INFO] Booting worker with pid: 83344
+2025-02-26 06:43:14 [83346] [INFO] Booting worker with pid: 83346
+2025-02-26 06:43:14 [83348] [INFO] Booting worker with pid: 83348
+2025-02-26 06:43:14 [83349] [INFO] Booting worker with pid: 83349
+2025-02-26 07:44:20 [41194] [CRITICAL] WORKER TIMEOUT (pid:83344)
+2025-02-26 07:44:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:83346)
+2025-02-26 07:44:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:83348)
+2025-02-26 07:44:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:83349)
+2025-02-26 07:44:22 [41194] [ERROR] Worker (pid:83349) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:44:22 [41194] [ERROR] Worker (pid:83344) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:44:22 [41194] [ERROR] Worker (pid:83348) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:44:22 [41194] [ERROR] Worker (pid:83346) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:44:22 [83727] [INFO] Booting worker with pid: 83727
+2025-02-26 07:44:22 [83728] [INFO] Booting worker with pid: 83728
+2025-02-26 07:44:22 [83729] [INFO] Booting worker with pid: 83729
+2025-02-26 07:44:22 [83730] [INFO] Booting worker with pid: 83730
+2025-02-26 07:54:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:83727)
+2025-02-26 07:54:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:83728)
+2025-02-26 07:54:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:83729)
+2025-02-26 07:54:43 [41194] [CRITICAL] WORKER TIMEOUT (pid:83730)
+2025-02-26 07:54:45 [41194] [ERROR] Worker (pid:83730) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:54:45 [41194] [ERROR] Worker (pid:83727) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:54:45 [84186] [INFO] Booting worker with pid: 84186
+2025-02-26 07:54:45 [41194] [ERROR] Worker (pid:83729) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:54:45 [41194] [ERROR] Worker (pid:83728) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 07:54:45 [84187] [INFO] Booting worker with pid: 84187
+2025-02-26 07:54:45 [84188] [INFO] Booting worker with pid: 84188
+2025-02-26 07:54:45 [84189] [INFO] Booting worker with pid: 84189
+2025-02-26 08:45:28 [41194] [CRITICAL] WORKER TIMEOUT (pid:84186)
+2025-02-26 08:45:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:84187)
+2025-02-26 08:45:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:84188)
+2025-02-26 08:45:29 [41194] [CRITICAL] WORKER TIMEOUT (pid:84189)
+2025-02-26 08:45:30 [41194] [ERROR] Worker (pid:84188) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 08:45:30 [41194] [ERROR] Worker (pid:84186) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 08:45:30 [84647] [INFO] Booting worker with pid: 84647
+2025-02-26 08:45:30 [84646] [INFO] Booting worker with pid: 84646
+2025-02-26 08:45:30 [41194] [ERROR] Worker (pid:84189) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 08:45:30 [84648] [INFO] Booting worker with pid: 84648
+2025-02-26 08:45:30 [41194] [ERROR] Worker (pid:84187) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 08:45:30 [84649] [INFO] Booting worker with pid: 84649
+2025-02-26 09:46:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:84646)
+2025-02-26 09:46:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:84647)
+2025-02-26 09:46:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:84648)
+2025-02-26 09:46:37 [41194] [CRITICAL] WORKER TIMEOUT (pid:84649)
+2025-02-26 09:46:38 [41194] [ERROR] Worker (pid:84649) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 09:46:38 [41194] [ERROR] Worker (pid:84648) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 09:46:38 [41194] [ERROR] Worker (pid:84647) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 09:46:38 [41194] [ERROR] Worker (pid:84646) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 09:46:38 [85034] [INFO] Booting worker with pid: 85034
+2025-02-26 09:46:38 [85035] [INFO] Booting worker with pid: 85035
+2025-02-26 09:46:38 [85036] [INFO] Booting worker with pid: 85036
+2025-02-26 09:46:38 [85037] [INFO] Booting worker with pid: 85037
+2025-02-26 10:47:45 [41194] [CRITICAL] WORKER TIMEOUT (pid:85034)
+2025-02-26 10:47:45 [41194] [CRITICAL] WORKER TIMEOUT (pid:85035)
+2025-02-26 10:47:45 [41194] [CRITICAL] WORKER TIMEOUT (pid:85036)
+2025-02-26 10:47:45 [41194] [CRITICAL] WORKER TIMEOUT (pid:85037)
+2025-02-26 10:47:46 [41194] [ERROR] Worker (pid:85035) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 10:47:46 [41194] [ERROR] Worker (pid:85036) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 10:47:46 [85416] [INFO] Booting worker with pid: 85416
+2025-02-26 10:47:46 [41194] [ERROR] Worker (pid:85037) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 10:47:46 [85417] [INFO] Booting worker with pid: 85417
+2025-02-26 10:47:46 [85418] [INFO] Booting worker with pid: 85418
+2025-02-26 10:47:46 [41194] [ERROR] Worker (pid:85034) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 10:47:46 [85419] [INFO] Booting worker with pid: 85419
+2025-02-26 11:48:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:85416)
+2025-02-26 11:48:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:85417)
+2025-02-26 11:48:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:85418)
+2025-02-26 11:48:52 [41194] [CRITICAL] WORKER TIMEOUT (pid:85419)
+2025-02-26 11:48:53 [41194] [ERROR] Worker (pid:85418) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 11:48:53 [41194] [ERROR] Worker (pid:85417) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 11:48:53 [85883] [INFO] Booting worker with pid: 85883
+2025-02-26 11:48:53 [41194] [ERROR] Worker (pid:85419) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 11:48:53 [41194] [ERROR] Worker (pid:85416) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 11:48:53 [85885] [INFO] Booting worker with pid: 85885
+2025-02-26 11:48:53 [85886] [INFO] Booting worker with pid: 85886
+2025-02-26 11:48:53 [85887] [INFO] Booting worker with pid: 85887
+2025-02-26 12:07:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:85883)
+2025-02-26 12:07:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:85885)
+2025-02-26 12:07:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:85886)
+2025-02-26 12:07:05 [41194] [CRITICAL] WORKER TIMEOUT (pid:85887)
+2025-02-26 12:07:06 [41194] [ERROR] Worker (pid:85887) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:07:06 [41194] [ERROR] Worker (pid:85883) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:07:06 [41194] [ERROR] Worker (pid:85886) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:07:06 [86266] [INFO] Booting worker with pid: 86266
+2025-02-26 12:07:06 [86265] [INFO] Booting worker with pid: 86265
+2025-02-26 12:07:07 [86267] [INFO] Booting worker with pid: 86267
+2025-02-26 12:07:07 [41194] [ERROR] Worker (pid:85885) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:07:07 [86272] [INFO] Booting worker with pid: 86272
+2025-02-26 12:49:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:86265)
+2025-02-26 12:49:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:86266)
+2025-02-26 12:49:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:86267)
+2025-02-26 12:49:59 [41194] [CRITICAL] WORKER TIMEOUT (pid:86272)
+2025-02-26 12:50:00 [41194] [ERROR] Worker (pid:86267) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:50:00 [41194] [ERROR] Worker (pid:86266) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:50:00 [41194] [ERROR] Worker (pid:86265) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:50:00 [41194] [ERROR] Worker (pid:86272) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 12:50:00 [86550] [INFO] Booting worker with pid: 86550
+2025-02-26 12:50:00 [86551] [INFO] Booting worker with pid: 86551
+2025-02-26 12:50:00 [86552] [INFO] Booting worker with pid: 86552
+2025-02-26 12:50:00 [86554] [INFO] Booting worker with pid: 86554
+2025-02-26 13:51:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:86550)
+2025-02-26 13:51:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:86551)
+2025-02-26 13:51:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:86552)
+2025-02-26 13:51:06 [41194] [CRITICAL] WORKER TIMEOUT (pid:86554)
+2025-02-26 13:51:07 [41194] [ERROR] Worker (pid:86554) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 13:51:07 [41194] [ERROR] Worker (pid:86550) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 13:51:07 [86825] [INFO] Booting worker with pid: 86825
+2025-02-26 13:51:07 [41194] [ERROR] Worker (pid:86551) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 13:51:07 [86827] [INFO] Booting worker with pid: 86827
+2025-02-26 13:51:07 [41194] [ERROR] Worker (pid:86552) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 13:51:07 [86828] [INFO] Booting worker with pid: 86828
+2025-02-26 13:51:07 [86829] [INFO] Booting worker with pid: 86829
+2025-02-26 14:52:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:86825)
+2025-02-26 14:52:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:86827)
+2025-02-26 14:52:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:86828)
+2025-02-26 14:52:13 [41194] [CRITICAL] WORKER TIMEOUT (pid:86829)
+2025-02-26 14:52:14 [41194] [ERROR] Worker (pid:86827) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 14:52:14 [41194] [ERROR] Worker (pid:86825) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 14:52:14 [87297] [INFO] Booting worker with pid: 87297
+2025-02-26 14:52:14 [87298] [INFO] Booting worker with pid: 87298
+2025-02-26 14:52:14 [41194] [ERROR] Worker (pid:86829) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 14:52:14 [87299] [INFO] Booting worker with pid: 87299
+2025-02-26 14:52:14 [41194] [ERROR] Worker (pid:86828) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 14:52:14 [87300] [INFO] Booting worker with pid: 87300
+2025-02-26 15:53:20 [41194] [CRITICAL] WORKER TIMEOUT (pid:87297)
+2025-02-26 15:53:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:87298)
+2025-02-26 15:53:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:87299)
+2025-02-26 15:53:21 [41194] [CRITICAL] WORKER TIMEOUT (pid:87300)
+2025-02-26 15:53:22 [41194] [ERROR] Worker (pid:87298) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 15:53:22 [41194] [ERROR] Worker (pid:87299) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 15:53:22 [87588] [INFO] Booting worker with pid: 87588
+2025-02-26 15:53:22 [41194] [ERROR] Worker (pid:87300) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 15:53:22 [41194] [ERROR] Worker (pid:87297) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 15:53:22 [87590] [INFO] Booting worker with pid: 87590
+2025-02-26 15:53:22 [87591] [INFO] Booting worker with pid: 87591
+2025-02-26 15:53:22 [87592] [INFO] Booting worker with pid: 87592
+2025-02-26 16:07:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:87588)
+2025-02-26 16:07:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:87590)
+2025-02-26 16:07:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:87591)
+2025-02-26 16:07:51 [41194] [CRITICAL] WORKER TIMEOUT (pid:87592)
+2025-02-26 16:07:52 [41194] [ERROR] Worker (pid:87592) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:07:52 [41194] [ERROR] Worker (pid:87590) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:07:52 [41194] [ERROR] Worker (pid:87588) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:07:52 [41194] [ERROR] Worker (pid:87591) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:07:52 [87875] [INFO] Booting worker with pid: 87875
+2025-02-26 16:07:52 [87876] [INFO] Booting worker with pid: 87876
+2025-02-26 16:07:52 [87877] [INFO] Booting worker with pid: 87877
+2025-02-26 16:07:52 [87878] [INFO] Booting worker with pid: 87878
+2025-02-26 16:54:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:87875)
+2025-02-26 16:54:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:87876)
+2025-02-26 16:54:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:87877)
+2025-02-26 16:54:27 [41194] [CRITICAL] WORKER TIMEOUT (pid:87878)
+2025-02-26 16:54:28 [41194] [ERROR] Worker (pid:87877) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:54:28 [41194] [ERROR] Worker (pid:87875) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:54:28 [88328] [INFO] Booting worker with pid: 88328
+2025-02-26 16:54:28 [88329] [INFO] Booting worker with pid: 88329
+2025-02-26 16:54:28 [41194] [ERROR] Worker (pid:87878) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:54:28 [88330] [INFO] Booting worker with pid: 88330
+2025-02-26 16:54:29 [41194] [ERROR] Worker (pid:87876) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 16:54:29 [88331] [INFO] Booting worker with pid: 88331
+2025-02-26 17:55:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:88328)
+2025-02-26 17:55:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:88329)
+2025-02-26 17:55:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:88330)
+2025-02-26 17:55:35 [41194] [CRITICAL] WORKER TIMEOUT (pid:88331)
+2025-02-26 17:55:36 [41194] [ERROR] Worker (pid:88330) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 17:55:36 [41194] [ERROR] Worker (pid:88328) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 17:55:36 [41194] [ERROR] Worker (pid:88329) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 17:55:36 [41194] [ERROR] Worker (pid:88331) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 17:55:36 [88708] [INFO] Booting worker with pid: 88708
+2025-02-26 17:55:36 [88707] [INFO] Booting worker with pid: 88707
+2025-02-26 17:55:36 [88709] [INFO] Booting worker with pid: 88709
+2025-02-26 17:55:36 [88710] [INFO] Booting worker with pid: 88710
+2025-02-26 18:56:42 [41194] [CRITICAL] WORKER TIMEOUT (pid:88707)
+2025-02-26 18:56:42 [41194] [CRITICAL] WORKER TIMEOUT (pid:88708)
+2025-02-26 18:56:42 [41194] [CRITICAL] WORKER TIMEOUT (pid:88709)
+2025-02-26 18:56:42 [41194] [CRITICAL] WORKER TIMEOUT (pid:88710)
+2025-02-26 18:56:43 [41194] [ERROR] Worker (pid:88708) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 18:56:43 [41194] [ERROR] Worker (pid:88709) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 18:56:43 [41194] [ERROR] Worker (pid:88707) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 18:56:43 [89178] [INFO] Booting worker with pid: 89178
+2025-02-26 18:56:43 [41194] [ERROR] Worker (pid:88710) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 18:56:43 [89179] [INFO] Booting worker with pid: 89179
+2025-02-26 18:56:43 [89180] [INFO] Booting worker with pid: 89180
+2025-02-26 18:56:43 [89181] [INFO] Booting worker with pid: 89181
+2025-02-26 19:57:49 [41194] [CRITICAL] WORKER TIMEOUT (pid:89178)
+2025-02-26 19:57:49 [41194] [CRITICAL] WORKER TIMEOUT (pid:89179)
+2025-02-26 19:57:49 [41194] [CRITICAL] WORKER TIMEOUT (pid:89180)
+2025-02-26 19:57:49 [41194] [CRITICAL] WORKER TIMEOUT (pid:89181)
+2025-02-26 19:57:50 [41194] [ERROR] Worker (pid:89181) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 19:57:50 [41194] [ERROR] Worker (pid:89180) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 19:57:50 [89560] [INFO] Booting worker with pid: 89560
+2025-02-26 19:57:50 [41194] [ERROR] Worker (pid:89179) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 19:57:50 [41194] [ERROR] Worker (pid:89178) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 19:57:50 [89561] [INFO] Booting worker with pid: 89561
+2025-02-26 19:57:50 [89562] [INFO] Booting worker with pid: 89562
+2025-02-26 19:57:50 [89563] [INFO] Booting worker with pid: 89563
+2025-02-26 20:58:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:89560)
+2025-02-26 20:58:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:89561)
+2025-02-26 20:58:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:89562)
+2025-02-26 20:58:56 [41194] [CRITICAL] WORKER TIMEOUT (pid:89563)
+2025-02-26 20:58:57 [41194] [ERROR] Worker (pid:89562) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 20:58:57 [89941] [INFO] Booting worker with pid: 89941
+2025-02-26 20:58:57 [41194] [ERROR] Worker (pid:89560) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 20:58:57 [41194] [ERROR] Worker (pid:89561) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 20:58:57 [89942] [INFO] Booting worker with pid: 89942
+2025-02-26 20:58:57 [41194] [ERROR] Worker (pid:89563) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 20:58:57 [89943] [INFO] Booting worker with pid: 89943
+2025-02-26 20:58:57 [89944] [INFO] Booting worker with pid: 89944
+2025-02-26 22:00:04 [41194] [CRITICAL] WORKER TIMEOUT (pid:89941)
+2025-02-26 22:00:04 [41194] [CRITICAL] WORKER TIMEOUT (pid:89942)
+2025-02-26 22:00:04 [41194] [CRITICAL] WORKER TIMEOUT (pid:89943)
+2025-02-26 22:00:04 [41194] [CRITICAL] WORKER TIMEOUT (pid:89944)
+2025-02-26 22:00:05 [41194] [ERROR] Worker (pid:89941) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 22:00:05 [41194] [ERROR] Worker (pid:89942) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 22:00:05 [90319] [INFO] Booting worker with pid: 90319
+2025-02-26 22:00:05 [41194] [ERROR] Worker (pid:89943) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 22:00:05 [41194] [ERROR] Worker (pid:89944) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 22:00:05 [90321] [INFO] Booting worker with pid: 90321
+2025-02-26 22:00:05 [90322] [INFO] Booting worker with pid: 90322
+2025-02-26 22:00:05 [90323] [INFO] Booting worker with pid: 90323
+2025-02-26 23:01:11 [41194] [CRITICAL] WORKER TIMEOUT (pid:90319)
+2025-02-26 23:01:12 [41194] [CRITICAL] WORKER TIMEOUT (pid:90321)
+2025-02-26 23:01:12 [41194] [CRITICAL] WORKER TIMEOUT (pid:90322)
+2025-02-26 23:01:12 [41194] [CRITICAL] WORKER TIMEOUT (pid:90323)
+2025-02-26 23:01:13 [41194] [ERROR] Worker (pid:90323) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 23:01:13 [41194] [ERROR] Worker (pid:90321) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 23:01:13 [90796] [INFO] Booting worker with pid: 90796
+2025-02-26 23:01:13 [41194] [ERROR] Worker (pid:90322) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 23:01:13 [41194] [ERROR] Worker (pid:90319) was sent SIGKILL! Perhaps out of memory?
+2025-02-26 23:01:13 [90797] [INFO] Booting worker with pid: 90797
+2025-02-26 23:01:13 [90798] [INFO] Booting worker with pid: 90798
+2025-02-26 23:01:13 [90799] [INFO] Booting worker with pid: 90799
+2025-02-27 00:02:18 [41194] [CRITICAL] WORKER TIMEOUT (pid:90796)
+2025-02-27 00:02:18 [41194] [CRITICAL] WORKER TIMEOUT (pid:90797)
+2025-02-27 00:02:18 [41194] [CRITICAL] WORKER TIMEOUT (pid:90798)
+2025-02-27 00:02:18 [41194] [CRITICAL] WORKER TIMEOUT (pid:90799)
+2025-02-27 00:02:19 [41194] [ERROR] Worker (pid:90798) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:02:19 [91266] [INFO] Booting worker with pid: 91266
+2025-02-27 00:02:19 [41194] [ERROR] Worker (pid:90799) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:02:19 [41194] [ERROR] Worker (pid:90797) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:02:19 [41194] [ERROR] Worker (pid:90796) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:02:19 [91267] [INFO] Booting worker with pid: 91267
+2025-02-27 00:02:20 [91268] [INFO] Booting worker with pid: 91268
+2025-02-27 00:02:20 [91269] [INFO] Booting worker with pid: 91269
+2025-02-27 00:20:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:91266)
+2025-02-27 00:20:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:91267)
+2025-02-27 00:20:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:91268)
+2025-02-27 00:20:58 [41194] [CRITICAL] WORKER TIMEOUT (pid:91269)
+2025-02-27 00:20:59 [41194] [ERROR] Worker (pid:91269) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:20:59 [41194] [ERROR] Worker (pid:91266) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:20:59 [91661] [INFO] Booting worker with pid: 91661
+2025-02-27 00:20:59 [41194] [ERROR] Worker (pid:91268) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:20:59 [41194] [ERROR] Worker (pid:91267) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 00:20:59 [91662] [INFO] Booting worker with pid: 91662
+2025-02-27 00:20:59 [91663] [INFO] Booting worker with pid: 91663
+2025-02-27 00:20:59 [91664] [INFO] Booting worker with pid: 91664
+2025-02-27 01:03:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:91661)
+2025-02-27 01:03:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:91662)
+2025-02-27 01:03:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:91663)
+2025-02-27 01:03:26 [41194] [CRITICAL] WORKER TIMEOUT (pid:91664)
+2025-02-27 01:03:27 [41194] [ERROR] Worker (pid:91662) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 01:03:27 [41194] [ERROR] Worker (pid:91664) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 01:03:27 [41194] [ERROR] Worker (pid:91661) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 01:03:27 [92042] [INFO] Booting worker with pid: 92042
+2025-02-27 01:03:27 [92043] [INFO] Booting worker with pid: 92043
+2025-02-27 01:03:27 [41194] [ERROR] Worker (pid:91663) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 01:03:27 [92045] [INFO] Booting worker with pid: 92045
+2025-02-27 01:03:27 [92046] [INFO] Booting worker with pid: 92046
+2025-02-27 02:04:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:92042)
+2025-02-27 02:04:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:92043)
+2025-02-27 02:04:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:92045)
+2025-02-27 02:04:33 [41194] [CRITICAL] WORKER TIMEOUT (pid:92046)
+2025-02-27 02:04:34 [41194] [ERROR] Worker (pid:92042) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 02:04:34 [41194] [ERROR] Worker (pid:92045) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 02:04:34 [41194] [ERROR] Worker (pid:92043) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 02:04:34 [41194] [ERROR] Worker (pid:92046) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 02:04:34 [92517] [INFO] Booting worker with pid: 92517
+2025-02-27 02:04:34 [92518] [INFO] Booting worker with pid: 92518
+2025-02-27 02:04:34 [92519] [INFO] Booting worker with pid: 92519
+2025-02-27 02:04:35 [92520] [INFO] Booting worker with pid: 92520
+2025-02-27 03:05:39 [41194] [CRITICAL] WORKER TIMEOUT (pid:92517)
+2025-02-27 03:05:39 [41194] [CRITICAL] WORKER TIMEOUT (pid:92518)
+2025-02-27 03:05:39 [41194] [CRITICAL] WORKER TIMEOUT (pid:92519)
+2025-02-27 03:05:39 [41194] [CRITICAL] WORKER TIMEOUT (pid:92520)
+2025-02-27 03:05:41 [41194] [ERROR] Worker (pid:92520) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 03:05:41 [92906] [INFO] Booting worker with pid: 92906
+2025-02-27 03:05:41 [41194] [ERROR] Worker (pid:92518) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 03:05:41 [41194] [ERROR] Worker (pid:92517) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 03:05:41 [92907] [INFO] Booting worker with pid: 92907
+2025-02-27 03:05:41 [92908] [INFO] Booting worker with pid: 92908
+2025-02-27 03:05:41 [41194] [ERROR] Worker (pid:92519) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 03:05:41 [92909] [INFO] Booting worker with pid: 92909
+2025-02-27 04:06:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:92906)
+2025-02-27 04:06:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:92907)
+2025-02-27 04:06:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:92908)
+2025-02-27 04:06:46 [41194] [CRITICAL] WORKER TIMEOUT (pid:92909)
+2025-02-27 04:06:47 [41194] [ERROR] Worker (pid:92906) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 04:06:48 [93280] [INFO] Booting worker with pid: 93280
+2025-02-27 04:06:48 [41194] [ERROR] Worker (pid:92909) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 04:06:48 [41194] [ERROR] Worker (pid:92907) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 04:06:48 [41194] [ERROR] Worker (pid:92908) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 04:06:48 [93282] [INFO] Booting worker with pid: 93282
+2025-02-27 04:06:48 [93284] [INFO] Booting worker with pid: 93284
+2025-02-27 04:06:48 [93285] [INFO] Booting worker with pid: 93285
+2025-02-27 05:39:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:93280)
+2025-02-27 05:39:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:93282)
+2025-02-27 05:39:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:93284)
+2025-02-27 05:39:44 [41194] [CRITICAL] WORKER TIMEOUT (pid:93285)
+2025-02-27 05:39:46 [41194] [ERROR] Worker (pid:93280) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 05:39:46 [41194] [ERROR] Worker (pid:93285) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 05:39:46 [93747] [INFO] Booting worker with pid: 93747
+2025-02-27 05:39:46 [93748] [INFO] Booting worker with pid: 93748
+2025-02-27 05:39:46 [41194] [ERROR] Worker (pid:93284) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 05:39:46 [41194] [ERROR] Worker (pid:93282) was sent SIGKILL! Perhaps out of memory?
+2025-02-27 05:39:46 [93749] [INFO] Booting worker with pid: 93749
+2025-02-27 05:39:46 [93750] [INFO] Booting worker with pid: 93750
+2025-02-27 05:48:30 [41194] [INFO] Handling signal: int
+2025-02-27 05:48:30 [41194] [ERROR] Worker (pid:93748) was sent SIGINT!
+2025-02-27 05:48:30 [41194] [ERROR] Worker (pid:93749) was sent SIGINT!
+2025-02-27 05:48:30 [41194] [INFO] Shutting down: Master
+2025-02-27 05:54:07 [96583] [INFO] Starting gunicorn 21.2.0
+2025-02-27 05:54:07 [96583] [INFO] Listening at: http://0.0.0.0:8000 (96583)
+2025-02-27 05:54:07 [96583] [INFO] Using worker: sync
+2025-02-27 05:54:07 [96584] [INFO] Booting worker with pid: 96584
+2025-02-27 05:54:07 [96585] [INFO] Booting worker with pid: 96585
+2025-02-27 05:54:07 [96586] [INFO] Booting worker with pid: 96586
+2025-02-27 05:54:07 [96587] [INFO] Booting worker with pid: 96587
+2025-02-27 05:54:17 [ERROR] [PID:96585] [app.routes.shipments] Error in new_shipment: Could not build url for endpoint 'main.terms'. Did you mean 'main.reports' instead?
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/shipments.py", line 47, in new_shipment
+    return render_template('shipments/form.html', contact_data=contact_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/form.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 188, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/form.html", line 350, in block 'content'
+    <label for="terms" class="required">I accept the <a href="{{ url_for('main.terms') }}" target="_blank">terms and conditions</a> <span class="required-star">*</span></label>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'main.terms'. Did you mean 'main.reports' instead?
+2025-02-27 05:54:44 [96583] [INFO] Handling signal: int
+2025-02-27 05:54:45 [96583] [ERROR] Worker (pid:96586) was sent SIGINT!
+2025-02-27 05:54:45 [96583] [ERROR] Worker (pid:96584) was sent SIGINT!
+2025-02-27 05:54:45 [96583] [ERROR] Worker (pid:96585) was sent SIGINT!
+2025-02-27 05:54:45 [96583] [ERROR] Worker (pid:96587) was sent SIGINT!
+2025-02-27 05:54:45 [96583] [INFO] Shutting down: Master
+2025-02-27 05:59:00 [97482] [INFO] Starting gunicorn 21.2.0
+2025-02-27 05:59:00 [97482] [INFO] Listening at: http://0.0.0.0:8000 (97482)
+2025-02-27 05:59:00 [97482] [INFO] Using worker: sync
+2025-02-27 05:59:00 [97495] [INFO] Booting worker with pid: 97495
+2025-02-27 05:59:00 [97496] [INFO] Booting worker with pid: 97496
+2025-02-27 05:59:00 [97497] [INFO] Booting worker with pid: 97497
+2025-02-27 05:59:00 [97498] [INFO] Booting worker with pid: 97498
+2025-02-27 06:01:46 [97482] [INFO] Handling signal: int
+2025-02-27 06:01:47 [97482] [ERROR] Worker (pid:97495) was sent SIGINT!
+2025-02-27 06:01:47 [97482] [ERROR] Worker (pid:97498) was sent SIGINT!
+2025-02-27 06:01:47 [97482] [ERROR] Worker (pid:97497) was sent SIGINT!
+2025-02-27 06:01:47 [97482] [ERROR] Worker (pid:97496) was sent SIGINT!
+2025-02-27 06:01:47 [97482] [INFO] Shutting down: Master
+2025-02-27 06:12:04 [98980] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:12:04 [98980] [INFO] Listening at: http://0.0.0.0:8000 (98980)
+2025-02-27 06:12:04 [98980] [INFO] Using worker: sync
+2025-02-27 06:12:04 [98981] [INFO] Booting worker with pid: 98981
+2025-02-27 06:12:04 [98982] [INFO] Booting worker with pid: 98982
+2025-02-27 06:12:04 [98984] [INFO] Booting worker with pid: 98984
+2025-02-27 06:12:04 [98986] [INFO] Booting worker with pid: 98986
+2025-02-27 06:12:12 [ERROR] [PID:98986] [app] Error generating dashboard: Could not build url for endpoint 'shipments.print_form_template'. Did you mean 'main.print_form_template' instead?
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 206, in dashboard
+    return render_template('dashboard.html', **template_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 188, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/dashboard.html", line 324, in block 'content'
+    <a href="{{ url_for('shipments.print_form_template') }}" class="action-button" aria-label="Print forms">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1071, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/app.py", line 1060, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'shipments.print_form_template'. Did you mean 'main.print_form_template' instead?
+2025-02-27 06:14:54 [98980] [INFO] Handling signal: int
+2025-02-27 06:14:54 [98980] [ERROR] Worker (pid:98984) was sent SIGINT!
+2025-02-27 06:14:54 [98980] [ERROR] Worker (pid:98982) was sent SIGINT!
+2025-02-27 06:14:54 [98980] [ERROR] Worker (pid:98981) was sent SIGINT!
+2025-02-27 06:14:54 [98980] [ERROR] Worker (pid:98986) was sent SIGINT!
+2025-02-27 06:14:54 [98980] [INFO] Shutting down: Master
+2025-02-27 06:14:56 [99121] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:14:56 [99121] [INFO] Listening at: http://0.0.0.0:8000 (99121)
+2025-02-27 06:14:56 [99121] [INFO] Using worker: sync
+2025-02-27 06:14:56 [99122] [INFO] Booting worker with pid: 99122
+2025-02-27 06:14:56 [99123] [INFO] Booting worker with pid: 99123
+2025-02-27 06:14:56 [99124] [INFO] Booting worker with pid: 99124
+2025-02-27 06:14:56 [99125] [INFO] Booting worker with pid: 99125
+2025-02-27 06:20:40 [99121] [INFO] Handling signal: int
+2025-02-27 06:20:41 [99121] [ERROR] Worker (pid:99124) was sent SIGINT!
+2025-02-27 06:20:41 [99121] [ERROR] Worker (pid:99122) was sent SIGINT!
+2025-02-27 06:20:41 [99121] [ERROR] Worker (pid:99123) was sent SIGINT!
+2025-02-27 06:20:41 [99121] [ERROR] Worker (pid:99125) was sent SIGINT!
+2025-02-27 06:20:41 [99121] [INFO] Shutting down: Master
+2025-02-27 06:20:42 [350] [INFO] Starting gunicorn 21.2.0
+2025-02-27 06:20:42 [350] [INFO] Listening at: http://0.0.0.0:8000 (350)
+2025-02-27 06:20:42 [350] [INFO] Using worker: sync
+2025-02-27 06:20:42 [356] [INFO] Booting worker with pid: 356
+2025-02-27 06:20:42 [357] [INFO] Booting worker with pid: 357
+2025-02-27 06:20:43 [358] [INFO] Booting worker with pid: 358
+2025-02-27 06:20:43 [360] [INFO] Booting worker with pid: 360
+2025-02-27 06:21:23 [350] [INFO] Handling signal: int
+2025-02-27 06:21:23 [350] [ERROR] Worker (pid:358) was sent SIGINT!
+2025-02-27 06:21:23 [350] [ERROR] Worker (pid:357) was sent SIGINT!
+2025-02-27 06:21:23 [350] [ERROR] Worker (pid:356) was sent SIGINT!
+2025-02-27 06:21:23 [350] [ERROR] Worker (pid:360) was sent SIGINT!
+2025-02-27 06:21:23 [350] [INFO] Shutting down: Master

@@ -42,12 +42,68 @@
     .btn-clear:hover {
         background-color: #5a6268;
     }
+    
+    /* Error message styles */
+    .error-message {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+    
+    /* Terms and conditions styles */
+    .checkbox-group {
+        margin-bottom: 1rem;
+        position: relative;
+    }
+    
+    .checkbox-group label {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .checkbox-group .error-message {
+        margin-left: 1.5rem;
+    }
+    
+    .checkbox-group.is-invalid input[type="checkbox"] {
+        outline: 2px solid #dc3545;
+    }
+    
+    /* Improved accessibility */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    /* Responsive form improvements */
+    @media (max-width: 768px) {
+        .form-row {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        
+        .pricing-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 {# DEBUG: Content block start #}
-<form method="POST" action="{{ url_for('shipments.submit_shipment') }}" enctype="multipart/form-data" class="export-form" novalidate>
+<form method="POST" action="{{ url_for('shipments.submit_shipment') }}" enctype="multipart/form-data" class="export-form" id="exportForm" novalidate>
     <div class="form-container">
         {# DEBUG: Form container start #}
         <div class="form-header">
@@ -77,11 +133,13 @@
                 </div>
                 <div class="form-group">
                     <label for="sender_name" class="form-label required">Name</label>
-                    <input type="text" id="sender_name" name="sender_name" value="{{ contact_data.sender_name|default('') }}" class="form-control" required>
+                    <input type="text" id="sender_name" name="sender_name" value="{{ contact_data.sender_name|default('') }}" class="form-control" required aria-required="true">
+                    <div class="error-message" id="sender_name_error"></div>
                 </div>
                 <div class="form-group">
                     <label for="sender_email" class="form-label">Email</label>
                     <input type="email" id="sender_email" name="sender_email" value="{{ contact_data.sender_email|default('') }}" class="form-control">
+                    <div class="error-message" id="sender_email_error"></div>
                 </div>
                 <div class="form-group">
                     <label for="sender_address" class="form-label">Address</label>
@@ -93,7 +151,8 @@
                 </div>
                 <div class="form-group">
                     <label for="sender_mobile" class="form-label required">Mobile</label>
-                    <input type="tel" id="sender_mobile" name="sender_mobile" value="{{ contact_data.sender_mobile|default('') }}" class="form-control" required>
+                    <input type="tel" id="sender_mobile" name="sender_mobile" value="{{ contact_data.sender_mobile|default('') }}" class="form-control" required aria-required="true">
+                    <div class="error-message" id="sender_mobile_error"></div>
                 </div>
             </div>
 
@@ -104,11 +163,13 @@
                 </div>
                 <div class="form-group">
                     <label for="receiver_name" class="form-label required">Name</label>
-                    <input type="text" id="receiver_name" name="receiver_name" value="{{ contact_data.receiver_name }}" class="form-control" required>
+                    <input type="text" id="receiver_name" name="receiver_name" value="{{ contact_data.receiver_name }}" class="form-control" required aria-required="true">
+                    <div class="error-message" id="receiver_name_error"></div>
                 </div>
                 <div class="form-group">
                     <label for="receiver_email" class="form-label">Email</label>
                     <input type="email" id="receiver_email" name="receiver_email" value="{{ contact_data.receiver_email }}" class="form-control">
+                    <div class="error-message" id="receiver_email_error"></div>
                 </div>
                 <div class="form-group">
                     <label for="receiver_address" class="form-label">Address</label>
@@ -120,7 +181,8 @@
                 </div>
                 <div class="form-group">
                     <label for="receiver_mobile" class="form-label required">Mobile</label>
-                    <input type="tel" id="receiver_mobile" name="receiver_mobile" value="{{ contact_data.receiver_mobile }}" class="form-control" required>
+                    <input type="tel" id="receiver_mobile" name="receiver_mobile" value="{{ contact_data.receiver_mobile }}" class="form-control" required aria-required="true">
+                    <div class="error-message" id="receiver_mobile_error"></div>
                 </div>
             </div>
         </div>
@@ -135,15 +197,18 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="destination_address" class="form-label required">Address</label>
-                        <input type="text" id="destination_address" name="destination_address" class="form-control" required>
+                        <input type="text" id="destination_address" name="destination_address" class="form-control" required aria-required="true">
+                        <div class="error-message" id="destination_address_error"></div>
                     </div>
                     <div class="form-group">
                         <label for="destination_country" class="form-label required">Country</label>
-                        <input type="text" id="destination_country" name="destination_country" class="form-control" required>
+                        <input type="text" id="destination_country" name="destination_country" class="form-control" required aria-required="true">
+                        <div class="error-message" id="destination_country_error"></div>
                     </div>
                     <div class="form-group">
                         <label for="destination_postcode" class="form-label required">Postcode/Zipcode</label>
-                        <input type="text" id="destination_postcode" name="destination_postcode" class="form-control" required>
+                        <input type="text" id="destination_postcode" name="destination_postcode" class="form-control" required aria-required="true">
+                        <div class="error-message" id="destination_postcode_error"></div>
                     </div>
                 </div>
             </div>
@@ -160,19 +225,23 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="description_0" class="form-label required">Description</label>
-                                <input type="text" id="description_0" name="description[]" class="form-control" required>
+                                <input type="text" id="description_0" name="description[]" class="form-control" required aria-required="true">
+                                <div class="error-message" id="description_0_error"></div>
                             </div>
                             <div class="form-group">
                                 <label for="value_0" class="form-label required">Value</label>
-                                <input type="number" id="value_0" name="value[]" step="0.01" class="form-control" required>
+                                <input type="number" id="value_0" name="value[]" step="0.01" class="form-control" required aria-required="true">
+                                <div class="error-message" id="value_0_error"></div>
                             </div>
                             <div class="form-group">
                                 <label for="quantity_0" class="form-label required">Quantity</label>
-                                <input type="number" id="quantity_0" name="quantity[]" class="form-control" required>
+                                <input type="number" id="quantity_0" name="quantity[]" class="form-control" required aria-required="true">
+                                <div class="error-message" id="quantity_0_error"></div>
                             </div>
                             <div class="form-group">
                                 <label for="weight_0" class="form-label required">Weight (kg)</label>
-                                <input type="number" id="weight_0" name="weight[]" step="0.1" class="form-control" required>
+                                <input type="number" id="weight_0" name="weight[]" step="0.1" class="form-control" required aria-required="true">
+                                <div class="error-message" id="weight_0_error"></div>
                             </div>
                             <div class="form-group">
                                 <label for="item_image_0" class="form-label">Item Image</label>
@@ -181,9 +250,10 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary add-item-btn" onclick="addItemEntry()">
+                <button type="button" class="btn btn-primary add-item-btn" id="addItemBtn" onclick="addItemEntry()">
                     <i class="fas fa-plus"></i> Add Another Item
                 </button>
+                <div class="error-message" id="items_error"></div>
             </div>
         </div>
 
@@ -247,8 +317,8 @@
                     <label for="is_collection">Is Collection?</label>
                 </div>
                 <div class="form-group">
-                    <label for="customer_group">Customer Group</label>
-                    <select id="customer_group" name="customer_group" class="form-select" required>
+                    <label for="customer_group" class="form-label required">Customer Group</label>
+                    <select id="customer_group" name="customer_group" class="form-select" required aria-required="true">
                         <option value="">Select Customer Group</option>
                         <option value="Walk In">Walk In - New Customers</option>
                         <option value="Returning">Returning - Established Customers</option>
@@ -256,13 +326,14 @@
                         <option value="Corporate">Corporate - Business Accounts</option>
                         <option value="Online">Online - Digital Channel Customers</option>
                     </select>
+                    <div class="error-message" id="customer_group_error"></div>
                 </div>
                 <div class="form-group">
                     <label for="order_booked_by">Order Booked By</label>
                     <input type="text" id="order_booked_by" name="order_booked_by" value="{{ current_user.name }}" class="form-control" readonly style="background-color: #f8f9fa; border-color: #dee2e6;">
                 </div>
                 <div class="form-group">
-                    <label for="signature-pad">Sender Signature <span class="required-star">*</span></label>
+                    <label for="signature-pad" class="form-label required">Sender Signature <span class="required-star">*</span></label>
                     <div class="signature-pad-container">
                         <canvas id="signature-pad" class="signature-pad"></canvas>
                         <div class="signature-pad-controls">
@@ -272,11 +343,12 @@
                         </div>
                     </div>
                     <input type="hidden" name="sender_signature" id="signature-input" required>
-                    <div class="error-message" aria-live="polite"></div>
+                    <div class="error-message" id="signature_error"></div>
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I accept the terms and conditions</label>
+                <div class="checkbox-group" id="terms-container">
+                    <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                    <label for="terms" class="required">I accept the <a href="{{ url_for('main.terms') }}" target="_blank">terms and conditions</a> <span class="required-star">*</span></label>
+                    <div class="error-message" id="terms_error"></div>
                 </div>
             </div>
         </div>
@@ -306,24 +378,28 @@ function addItemEntry() {
     newEntry.innerHTML = `
         <div class="form-row">
             <div class="form-group">
-                <label for="description_${itemCounter}">Description <span class="required-star">*</span></label>
-                <input type="text" id="description_${itemCounter}" name="description[]" required>
+                <label for="description_${itemCounter}" class="form-label required">Description <span class="required-star">*</span></label>
+                <input type="text" id="description_${itemCounter}" name="description[]" class="form-control" required aria-required="true">
+                <div class="error-message" id="description_${itemCounter}_error"></div>
             </div>
             <div class="form-group">
-                <label for="value_${itemCounter}">Value <span class="required-star">*</span></label>
-                <input type="number" id="value_${itemCounter}" name="value[]" step="0.01" required>
+                <label for="value_${itemCounter}" class="form-label required">Value <span class="required-star">*</span></label>
+                <input type="number" id="value_${itemCounter}" name="value[]" step="0.01" class="form-control" required aria-required="true">
+                <div class="error-message" id="value_${itemCounter}_error"></div>
             </div>
             <div class="form-group">
-                <label for="quantity_${itemCounter}">Quantity <span class="required-star">*</span></label>
-                <input type="number" id="quantity_${itemCounter}" name="quantity[]" required>
+                <label for="quantity_${itemCounter}" class="form-label required">Quantity <span class="required-star">*</span></label>
+                <input type="number" id="quantity_${itemCounter}" name="quantity[]" class="form-control" required aria-required="true">
+                <div class="error-message" id="quantity_${itemCounter}_error"></div>
             </div>
             <div class="form-group">
-                <label for="weight_${itemCounter}">Weight (kg) <span class="required-star">*</span></label>
-                <input type="number" id="weight_${itemCounter}" name="weight[]" step="0.1" required>
+                <label for="weight_${itemCounter}" class="form-label required">Weight (kg) <span class="required-star">*</span></label>
+                <input type="number" id="weight_${itemCounter}" name="weight[]" step="0.1" class="form-control" required aria-required="true">
+                <div class="error-message" id="weight_${itemCounter}_error"></div>
             </div>
             <div class="form-group">
                 <label for="item_image_${itemCounter}">Item Image</label>
-                <input type="file" id="item_image_${itemCounter}" name="item_image[]" accept="image/*">
+                <input type="file" id="item_image_${itemCounter}" name="item_image[]" accept="image/*" class="form-control">
             </div>
         </div>
         <button type="button" class="remove-item-btn" onclick="removeItemEntry(this)">
@@ -332,6 +408,11 @@ function addItemEntry() {
     `;
     
     container.appendChild(newEntry);
+    
+    // Clear items error if present
+    document.getElementById('items_error').textContent = '';
+    document.getElementById('addItemBtn').classList.remove('btn-danger');
+    document.getElementById('addItemBtn').classList.add('btn-primary');
 }
 
 function removeItemEntry(button) {
@@ -361,60 +442,132 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     calculateTotals();
-});
-
-$(document).ready(function() {
-    // Existing form validation
-    $('form').on('submit', function(e) {
+    
+    // Enhanced form validation
+    const form = document.getElementById('exportForm');
+    
+    form.addEventListener('submit', function(e) {
         let isValid = true;
         
-        // Validate sender and receiver fields
+        // Clear all previous error messages
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.textContent = '';
+        });
+        document.querySelectorAll('.is-invalid').forEach(el => {
+            el.classList.remove('is-invalid');
+        });
+        
+        // Validate required fields
         const requiredFields = [
             'sender_name', 'sender_mobile',
             'receiver_name', 'receiver_mobile',
-            'destination_address', 'destination_country', 'destination_postcode'
+            'destination_address', 'destination_country', 'destination_postcode',
+            'customer_group'
         ];
         
         requiredFields.forEach(field => {
-            const input = $(`#${field}`);
-            if (!input.val().trim()) {
+            const input = document.getElementById(field);
+            if (!input.value.trim()) {
                 isValid = false;
-                input.addClass('is-invalid');
+                input.classList.add('is-invalid');
+                const errorMsg = document.getElementById(`${field}_error`);
                 const fieldName = field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
-                input.next('.invalid-feedback').remove();
-                input.after(`<div class="invalid-feedback">${fieldName} is required</div>`);
-            } else {
-                input.removeClass('is-invalid');
-                input.next('.invalid-feedback').remove();
+                if (errorMsg) {
+                    errorMsg.textContent = `${fieldName} is required`;
+                }
             }
         });
-
-        // Validate at least one item
-        if ($('.item-entry').length === 0) {
+        
+        // Validate items
+        const itemEntries = document.querySelectorAll('.item-entry');
+        if (itemEntries.length === 0) {
             isValid = false;
-            $('#addItemBtn').addClass('btn-danger').removeClass('btn-primary');
-            if (!$('#itemError').length) {
-                $('#addItemBtn').after('<div id="itemError" class="text-danger mt-2">Please add at least one item</div>');
-            }
+            document.getElementById('addItemBtn').classList.add('btn-danger');
+            document.getElementById('addItemBtn').classList.remove('btn-primary');
+            document.getElementById('items_error').textContent = 'Please add at least one item';
+        } else {
+            // Validate each item's required fields
+            itemEntries.forEach((entry, index) => {
+                const fields = ['description', 'value', 'quantity', 'weight'];
+                fields.forEach(field => {
+                    const input = document.getElementById(`${field}_${index}`);
+                    if (input && !input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                        const errorMsg = document.getElementById(`${field}_${index}_error`);
+                        if (errorMsg) {
+                            errorMsg.textContent = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+                        }
+                    }
+                });
+            });
         }
-
+        
+        // Validate signature
+        if (signaturePad.isEmpty()) {
+            isValid = false;
+            const container = document.querySelector('.signature-pad-container');
+            container.style.borderColor = '#dc3545';
+            document.getElementById('signature_error').textContent = 'Please provide a signature';
+        }
+        
+        // Validate terms acceptance
+        const termsCheckbox = document.getElementById('terms');
+        if (!termsCheckbox.checked) {
+            isValid = false;
+            document.getElementById('terms-container').classList.add('is-invalid');
+            document.getElementById('terms_error').textContent = 'You must accept the terms and conditions';
+        }
+        
         if (!isValid) {
             e.preventDefault();
             // Scroll to first error
-            const firstError = $('.is-invalid').first();
-            if (firstError.length) {
-                $('html, body').animate({
-                    scrollTop: firstError.offset().top - 100
-                }, 500);
+            const firstErrorMsg = document.querySelector('.error-message:not(:empty)');
+            if (firstErrorMsg) {
+                firstErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
     });
-
-    // Remove validation styling on input
-    $('input').on('input', function() {
-        $(this).removeClass('is-invalid');
-        $(this).next('.invalid-feedback').remove();
+    
+    // Clear validation errors on input
+    document.querySelectorAll('input, select').forEach(element => {
+        element.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+            const fieldId = this.id;
+            const errorMsg = document.getElementById(`${fieldId}_error`);
+            if (errorMsg) {
+                errorMsg.textContent = '';
+            }
+            
+            // Special handling for terms checkbox
+            if (fieldId === 'terms') {
+                document.getElementById('terms-container').classList.remove('is-invalid');
+            }
+        });
     });
+    
+    // Handle email validation
+    const emailFields = ['sender_email', 'receiver_email'];
+    emailFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (input) {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() !== '' && !isValidEmail(this.value)) {
+                    this.classList.add('is-invalid');
+                    const errorMsg = document.getElementById(`${field}_error`);
+                    if (errorMsg) {
+                        errorMsg.textContent = 'Please enter a valid email address';
+                    }
+                }
+            });
+        }
+    });
+    
+    // Email validation function
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
 });
 
 let signaturePad;
@@ -434,21 +587,33 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.btn-clear').addEventListener('click', () => {
         signaturePad.clear();
         document.getElementById('signature-input').value = '';
+        document.querySelector('.signature-pad-container').style.borderColor = '#dee2e6';
+        document.getElementById('signature_error').textContent = '';
     });
 
-    // Form submission
+    // Form submission signature handling
     document.querySelector('form').addEventListener('submit', function(e) {
         if (signaturePad.isEmpty()) {
             e.preventDefault();
             const container = document.querySelector('.signature-pad-container');
             container.style.borderColor = '#dc3545';
-            // Show error message
-            document.querySelector('.error-message').textContent = 'Please provide a signature';
+            document.getElementById('signature_error').textContent = 'Please provide a signature';
             return;
         }
         // Convert to PNG and set hidden input value
         const signatureData = signaturePad.toDataURL();
         document.getElementById('signature-input').value = signatureData;
+    });
+    
+    // Reset border color when signature starts
+    canvas.addEventListener('mousedown', function() {
+        document.querySelector('.signature-pad-container').style.borderColor = '#dee2e6';
+        document.getElementById('signature_error').textContent = '';
+    });
+    
+    canvas.addEventListener('touchstart', function() {
+        document.querySelector('.signature-pad-container').style.borderColor = '#dee2e6';
+        document.getElementById('signature_error').textContent = '';
     });
 });
 

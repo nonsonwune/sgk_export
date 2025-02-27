@@ -55,6 +55,16 @@ def index():
         logger.error(f"Request details: {request.environ}")
         return render_template('error.html', error=f"An error occurred: {str(e)}"), 500
 
+@bp.route('/terms')
+def terms():
+    """Terms and conditions page"""
+    logger.debug("Accessing terms and conditions page")
+    try:
+        return render_template('terms.html')
+    except Exception as e:
+        logger.error(f"Error loading terms page: {str(e)}")
+        return render_template('error.html', error=f"An error occurred: {str(e)}"), 500
+
 @bp.route('/dashboard')
 @login_required
 def dashboard():
