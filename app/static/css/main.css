@@ -236,6 +236,7 @@ img {
     border-radius: 0.25rem;
 }
 
+/* Badge color overrides for dark mode/visibility */
 .table .badge.bg-success {
     background-color: var(--success-color) !important;
     color: #fff !important;
@@ -243,7 +244,7 @@ img {
 
 .table .badge.bg-warning {
     background-color: var(--warning-color) !important;
-    color: #212529 !important;
+    color: #212529 !important; /* Dark text for light background */
 }
 
 .table .badge.bg-danger {
@@ -253,7 +254,7 @@ img {
 
 .table .badge.bg-info {
     background-color: var(--info-color) !important;
-    color: #fff !important;
+    color: #212529 !important; /* Dark text for light background */
 }
 
 .table .badge.bg-primary {
@@ -262,6 +263,50 @@ img {
 }
 
 .table .badge.bg-secondary {
+    background-color: var(--secondary-color) !important;
+    color: #212529 !important; /* Dark text for light background */
+}
+
+/* Standard badge styling for all pages */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+/* Global badge styles - these apply outside tables too */
+.badge.bg-success {
+    background-color: var(--success-color) !important;
+    color: #fff !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color) !important;
+    color: #212529 !important;
+}
+
+.badge.bg-danger {
+    background-color: var(--danger-color) !important;
+    color: #fff !important;
+}
+
+.badge.bg-info {
+    background-color: var(--info-color) !important;
+    color: #212529 !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+.badge.bg-secondary {
     background-color: var(--secondary-color) !important;
     color: #212529 !important;
 }

@@ -34,15 +34,6 @@
         background-color: var(--primary-darker) !important;
         color: var(--text-primary) !important;
     }
-    
-    .badge {
-        display: inline-block;
-        padding: 0.25em 0.5em;
-        font-size: 0.75em;
-        font-weight: 700;
-        line-height: 1;
-        border-radius: 0.25rem;
-    }
 </style>
 {% endblock %}
 
@@ -121,7 +112,16 @@
                         <tr>
                             <th>Status:</th>
                             <td>
-                                <span class="badge bg-{{ 'success' if shipment.status == 'completed' else 'warning' }}">
+                                {% set status_classes = {
+                                    'pending': 'bg-warning',
+                                    'confirmed': 'bg-info',
+                                    'processing': 'bg-primary',
+                                    'in_transit': 'bg-primary',
+                                    'delivered': 'bg-success',
+                                    'cancelled': 'bg-danger',
+                                    'saved': 'bg-secondary'
+                                } %}
+                                <span class="badge {{ status_classes.get(shipment.status, 'bg-secondary') }}">
                                     {{ shipment.status }}
                                 </span>
                             </td>
