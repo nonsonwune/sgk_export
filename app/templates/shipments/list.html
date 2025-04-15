@@ -368,6 +368,7 @@
                     <th>Receiver</th>
                     <th>Status</th>
                     <th>Created At</th>
+                    <th>Submitted By</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -379,11 +380,12 @@
                     <td>{{ shipment.receiver_name }}</td>
                     <td><span class="status-badge status-{{ shipment.status|lower }}">{{ shipment.status }}</span></td>
                     <td>{{ shipment.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ shipment.creator.name if shipment.creator else 'N/A' }}</td>
                     <td class="actions">
                         <a href="{{ url_for('shipments.view_shipment', shipment_id=shipment.id) }}" class="action-button">View</a>
                         {% if current_user.is_superuser %}
                         <a href="{{ url_for('shipments.edit_shipment', shipment_id=shipment.id) }}" class="action-button warning">Edit</a>
-                        <form method="POST" action="{{ url_for('shipments.delete_shipment', shipment_id=shipment.id) }}" style="display: inline;">
+                        <form method="POST" action="{{ url_for('shipments.delete_shipment', shipment_id=shipment.id) }}" class="display-inline">
                             <button type="submit" class="action-button danger" onclick="return confirm('Are you sure you want to delete this shipment?')">Delete</button>
                         </form>
                         {% endif %}

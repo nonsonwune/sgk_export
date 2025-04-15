@@ -476,16 +476,23 @@ def get_dashboard_data():
         time_range = request.args.get('timeRange', '30')
         current_app.logger.debug(f"Processing timeRange parameter: {time_range}")
         
-        # Convert time range to days
-        days = int(time_range)
-        current_app.logger.debug(f"Converted timeRange to days: {days}")
-        
         # Calculate date range
         end_date = datetime.now()
-        start_date = end_date - timedelta(days=days)
+        
+        # Handle "all" time range for super users
+        if time_range == 'all' and hasattr(current_user, 'is_superuser') and current_user.is_superuser:
+            current_app.logger.debug("Super user requested all-time data")
+            # Use a very old start date to get all records
+            start_date = datetime(2000, 1, 1)
+        else:
+            # Convert time range to days
+            days = int(time_range)
+            current_app.logger.debug(f"Converted timeRange to days: {days}")
+            start_date = end_date - timedelta(days=days)
+        
         current_app.logger.debug(f"Date range: {start_date} to {end_date}")
         
-        # Get status counts with validation
+        # Get status counts with validation - RESTORE DATE FILTER
         current_app.logger.debug("=== Starting Status Count Query ===")
         status_counts = db.session.query(
             Shipment.status,
@@ -504,11 +511,13 @@ def get_dashboard_data():
             'delivered': 0,
             'cancelled': 0
         }
-        formatted_status_counts.update(dict(status_counts))
+        # Convert status_counts to dict properly
+        current_app.logger.debug(f"Converting status_counts to dict: {[(status.lower(), count) for status, count in status_counts]}")
+        formatted_status_counts.update({status.lower(): count for status, count in status_counts})
         
         current_app.logger.debug(f"Formatted status counts: {formatted_status_counts}")
         
-        # Get aggregated data
+        # Get aggregated data - RESTORE DATE FILTER
         stats = db.session.query(
             func.count(Shipment.id).label('total_shipments'),
             func.sum(Shipment.total).label('total_revenue'),
@@ -521,7 +530,7 @@ def get_dashboard_data():
         
         current_app.logger.debug(f"Stats query result: {stats}")
         
-        # Get daily trend data
+        # Get daily trend data - KEEP DATE FILTER FOR TRENDS
         trend_data = db.session.query(
             func.date_trunc('day', Shipment.created_at).label('date'),
             func.count(Shipment.id).label('count'),

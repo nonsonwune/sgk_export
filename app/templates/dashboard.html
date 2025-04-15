@@ -11,10 +11,14 @@
         <div class="header-left">
             <h1>Dashboard</h1>
             <div class="date-filter">
+                <label for="timeRange" class="date-filter-label">Data Period:</label>
                 <select id="timeRange" class="form-select">
                     <option value="7">Last 7 Days</option>
                     <option value="30" selected>Last 30 Days</option>
                     <option value="90">Last 90 Days</option>
+                    {% if current_user.is_superuser %}
+                    <option value="all" class="super-user-option">All Time</option>
+                    {% endif %}
                 </select>
             </div>
         </div>
@@ -37,6 +41,7 @@
         <!-- Status Overview -->
         <div class="status-overview">
             <h3>Shipment Status Overview</h3>
+            <div class="time-period-indicator">{{ monthly_stats.time_period }}</div>
             <div class="status-cards">
                 <div class="status-card pending">
                     <div class="status-icon">
@@ -153,7 +158,7 @@
                     <div class="spinner"></div>
                     <p>Loading chart data...</p>
                 </div>
-                <div class="chart-error-state" style="display: none;">
+                <div class="chart-error-state hidden">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>Failed to load chart data</p>
                     <button class="retry-btn">Retry</button>
@@ -175,7 +180,7 @@
                     <div class="spinner"></div>
                     <p>Loading chart data...</p>
                 </div>
-                <div class="chart-error-state" style="display: none;">
+                <div class="chart-error-state hidden">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>Failed to load chart data</p>
                     <button class="retry-btn">Retry</button>
@@ -192,7 +197,7 @@
                     <div class="spinner"></div>
                     <p>Loading chart data...</p>
                 </div>
-                <div class="chart-error-state" style="display: none;">
+                <div class="chart-error-state hidden">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>Failed to load chart data</p>
                     <button class="retry-btn">Retry</button>

@@ -6,6 +6,7 @@
 @import url('/static/css/components/forms.css');
 @import url('/static/css/components/tables.css');
 @import url('/static/css/components/buttons.css');
+@import url('/static/css/components/states.css');
 
 /* Global Styles */
 :root {

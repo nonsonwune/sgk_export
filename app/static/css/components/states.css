@@ -1,0 +1,103 @@
+/* Element States CSS
+ * This file contains styles for different states of elements
+ * such as hidden, visible, loading, etc.
+ */
+
+/* Hidden state for elements that start hidden but may be shown later */
+.hidden {
+    display: none;
+}
+
+/* Initially hidden but may be shown */
+.initially-hidden {
+    display: none;
+}
+
+/* Used for inline form elements */
+.display-inline {
+    display: inline;
+}
+
+/* Inline-block display for forms */
+.display-inline-block {
+    display: inline-block;
+}
+
+/* For error states */
+.error-state {
+    background-color: #fff5f5;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* For success states */
+.success-state {
+    background-color: #f0fff4;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* For loading states */
+.loading-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    text-align: center;
+}
+
+.loading-state .spinner {
+    margin-bottom: 1rem;
+}
+
+/* Chart error states */
+.chart-error-state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 1;
+}
+
+/* QR code error state */
+.qr-code-error {
+    color: #e53e3e;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Signature error state */
+.signature-error {
+    color: #e53e3e;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Image upload error */
+.image-error {
+    color: #dc3545;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Read-only form elements */
+.readonly-input {
+    background-color: #f8f9fa !important;
+    border-color: #dee2e6 !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+} 

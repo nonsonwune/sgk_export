@@ -22,12 +22,53 @@
     gap: 1.5rem;
 }
 
+.date-filter {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    border: 2px solid #4169E1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.date-filter-label {
+    font-weight: 600;
+    color: #4169E1;
+    margin-right: 10px;
+    font-size: 0.95rem;
+}
+
 .date-filter select {
     padding: 0.5rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #4169E1;
     border-radius: 0.375rem;
     background-color: white;
-    font-size: 0.875rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1e293b;
+    cursor: pointer;
+}
+
+/* Style for super user option */
+.super-user-option {
+    font-weight: bold;
+    color: #4169E1;
+    border-top: 1px dashed #4169E1;
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+/* Style for when All Time filter is active */
+.all-time-active {
+    background-color: #e6eeff;
+    border: 2px solid #2040a0;
+    box-shadow: 0 0 10px rgba(65, 105, 225, 0.4);
+}
+
+.all-time-active .date-filter-label {
+    color: #2040a0;
+    font-weight: 700;
 }
 
 .refresh-info {
@@ -437,4 +478,24 @@
     .metric-value {
         font-size: 1.5rem;
     }
+}
+
+/* Add style for time period indicator */
+.time-period-indicator {
+  font-size: 0.85rem;
+  color: #6c757d;
+  text-align: center;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+/* Add highlight animation for date filter */
+@keyframes dateFilterHighlight {
+    0% { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+    50% { box-shadow: 0 0 15px rgba(65, 105, 225, 0.7); }
+    100% { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+}
+
+.date-filter-highlight {
+    animation: dateFilterHighlight 1s ease-in-out 2;
 } 

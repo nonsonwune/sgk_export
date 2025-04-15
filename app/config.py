@@ -8,6 +8,10 @@ class Config:
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
     TEMPLATES_AUTO_RELOAD = True
     
+    # NAS storage configuration
+    USE_NAS_STORAGE = os.environ.get('USE_NAS_STORAGE', 'False').lower() == 'true'
+    NAS_UPLOAD_FOLDER = os.environ.get('NAS_UPLOAD_FOLDER', '\\\\NAS_SERVER\\sgk_export_share\\uploads')
+    
     # Database configuration
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):

@@ -8,9 +8,27 @@ logger = logging.getLogger(__name__)
 
 def get_upload_path():
     """Get the upload directory path, ensure it exists"""
-    upload_folder = current_app.config['UPLOAD_FOLDER']
+    # Check if we're using local or NAS storage
+    if current_app.config.get('USE_NAS_STORAGE', False):
+        upload_folder = current_app.config['NAS_UPLOAD_FOLDER']
+        logger.debug(f"Using NAS storage path: {upload_folder}")
+    else:
+        upload_folder = current_app.config['UPLOAD_FOLDER']
+        logger.debug(f"Using local storage path: {upload_folder}")
+        
     if not os.path.exists(upload_folder):
-        os.makedirs(upload_folder)
+        try:
+            logger.debug(f"Creating upload directory: {upload_folder}")
+            os.makedirs(upload_folder)
+        except Exception as e:
+            logger.error(f"Failed to create upload directory: {str(e)}")
+            # Fallback to local if NAS fails
+            if current_app.config.get('USE_NAS_STORAGE', False):
+                logger.warning("Falling back to local storage")
+                upload_folder = current_app.config['UPLOAD_FOLDER']
+                if not os.path.exists(upload_folder):
+                    os.makedirs(upload_folder)
+    
     return upload_folder
 
 def upload_file(file_bytes, filename):

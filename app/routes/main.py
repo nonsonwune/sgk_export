@@ -135,7 +135,7 @@ def dashboard():
         
         current_app.logger.debug(f'Final monthly stats: {monthly_stats}')
         
-        # Get status distribution
+        # Get status distribution - RESTORE DATE FILTER TO SHOW CURRENT MONTH ONLY
         status_counts = db.session.query(
             Shipment.status,
             func.count(Shipment.id).label('count')
@@ -149,13 +149,32 @@ def dashboard():
             'processing_count': 0,
             'in_transit_count': 0,
             'delivered_count': 0,
-            'cancelled_count': 0
+            'cancelled_count': 0,
+            'time_period': f"Current month ({current_month_start.strftime('%b %Y')})"  # Add time period label
         })
         
-        for status, count in status_counts:
-            monthly_stats[f'{status}_count'] = count
+        # Check if super user is viewing all-time data from the URL parameter
+        time_range = request.args.get('timeRange')
+        if time_range == 'all' and hasattr(current_user, 'is_superuser') and current_user.is_superuser:
+            current_app.logger.debug("Super user viewing all-time data")
+            monthly_stats['time_period'] = "All Time"
+            
+            # Get status counts for all time
+            status_counts = db.session.query(
+                Shipment.status,
+                func.count(Shipment.id).label('count')
+            ).group_by(Shipment.status).all()
         
-        current_app.logger.debug(f'Status distribution: {status_counts}')
+        # Log status counts for debugging
+        current_app.logger.debug(f'Raw status distribution: {status_counts}')
+        
+        # Map status values to their corresponding keys in monthly_stats
+        for status, count in status_counts:
+            status_key = f'{status.lower().replace("-", "_")}_count'
+            current_app.logger.debug(f'Mapping status "{status}" to key "{status_key}" with count {count}')
+            monthly_stats[status_key] = count
+        
+        current_app.logger.debug(f'Final status distribution in monthly_stats: {monthly_stats}')
         
         # Get trend data
         current_app.logger.debug('=== Starting Trend Data Generation ===')

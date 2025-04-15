@@ -30,7 +30,7 @@
                     <td>Administrator</td>
                     <td class="actions">
                         <button class="action-button warning" onclick="showEditAdminForm('{{ user.id }}', '{{ user.username }}', '{{ user.name }}')">Modify</button>
-                        <form method="POST" action="{{ url_for('admin.delete_admin', user_id=user.id) }}" style="display: inline;">
+                        <form method="POST" action="{{ url_for('admin.delete_admin', user_id=user.id) }}" class="display-inline">
                             <button type="submit" class="action-button danger" onclick="return confirm('Are you sure you want to remove this administrator? This action cannot be undone.')">Remove</button>
                         </form>
                     </td>

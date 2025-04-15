@@ -71,6 +71,17 @@ function hideLoadingState() {
     }
 }
 
+// Add this near the top of the initializeDashboard function
+function highlightDateFilter() {
+    const dateFilter = document.querySelector('.date-filter');
+    if (dateFilter) {
+        dateFilter.classList.add('date-filter-highlight');
+        setTimeout(() => {
+            dateFilter.classList.remove('date-filter-highlight');
+        }, 2000);
+    }
+}
+
 // Unified initialization function
 async function initializeDashboard() {
     debugLog('Starting dashboard initialization');
@@ -81,6 +92,9 @@ async function initializeDashboard() {
             showError('Dashboard initialization failed: Missing required elements');
             return;
         }
+
+        // Highlight the date filter to draw attention to it
+        highlightDateFilter();
 
         // Initialize loading state
         showLoadingState();
@@ -417,8 +431,26 @@ function setupEventListeners() {
     // Time range selector
     const timeRange = document.getElementById('timeRange');
     if (timeRange) {
+        // Update UI when "all" option is selected
+        if (timeRange.value === 'all') {
+            debugLog('All time view is active');
+            highlightAllTimeFilter();
+        }
+        
         timeRange.addEventListener('change', async (event) => {
             debugLog('Time range changed:', event.target.value);
+            
+            // Special handling for "all" option
+            if (event.target.value === 'all') {
+                highlightAllTimeFilter();
+            } else {
+                // Remove any special styling
+                const dateFilter = document.querySelector('.date-filter');
+                if (dateFilter) {
+                    dateFilter.classList.remove('all-time-active');
+                }
+            }
+            
             await refreshDashboardData(event.target.value);
         });
     }
@@ -778,4 +810,12 @@ function formatCurrency(value) {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }).format(value);
+}
+
+// Function to highlight the filter when "All Time" is selected
+function highlightAllTimeFilter() {
+    const dateFilter = document.querySelector('.date-filter');
+    if (dateFilter) {
+        dateFilter.classList.add('all-time-active');
+    }
 } 

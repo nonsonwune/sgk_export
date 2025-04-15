@@ -42,7 +42,7 @@
                          class="qr-code-image"
                          onerror="if(this.nextElementSibling) { this.style.display='none'; this.nextElementSibling.style.display='block'; }"
                          onload="if(this.nextElementSibling) { this.style.display='block'; this.nextElementSibling.style.display='none'; }">
-                    <div class="qr-code-error" style="display: none;">
+                    <div class="qr-code-error hidden">
                         <i class="fas fa-exclamation-circle"></i>
                         <span>QR Code not available</span>
                     </div>
@@ -266,7 +266,7 @@
                                      class="signature-image"
                                      onerror="if(this.parentElement.querySelector('.signature-error')) { this.style.display='none'; this.parentElement.querySelector('.signature-error').style.display='block'; }"
                                      onload="if(this.parentElement.querySelector('.signature-error')) { this.style.display='block'; this.parentElement.querySelector('.signature-error').style.display='none'; }">
-                                <div class="signature-error" style="display: none;">
+                                <div class="signature-error hidden">
                                     <i class="fas fa-exclamation-circle"></i>
                                     <span>Signature not available</span>
                                 </div>
@@ -287,28 +287,28 @@
 
         <div class="action-buttons">
             {% if shipment.status == 'pending' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" style="display: inline;">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
                 <input type="hidden" name="status" value="confirmed">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-check"></i> Mark as Confirmed
                 </button>
             </form>
             {% elif shipment.status == 'confirmed' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" style="display: inline;">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
                 <input type="hidden" name="status" value="processing">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-cog"></i> Mark as Processing
                 </button>
             </form>
             {% elif shipment.status == 'processing' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" style="display: inline;">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
                 <input type="hidden" name="status" value="in_transit">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-truck"></i> Mark as In Transit
                 </button>
             </form>
             {% elif shipment.status == 'in_transit' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" style="display: inline;">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
                 <input type="hidden" name="status" value="delivered">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-box-check"></i> Mark as Delivered
@@ -316,7 +316,7 @@
             </form>
             {% endif %}
             {% if shipment.status not in ['cancelled', 'delivered'] %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" style="display: inline;">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
                 <input type="hidden" name="status" value="cancelled">
                 <button type="submit" class="action-button danger">
                     <i class="fas fa-times"></i> Cancel Shipment
@@ -339,7 +339,7 @@
         <div id="imageLoading" class="image-loading">
             <div class="spinner"></div>
         </div>
-        <div id="imageError" style="display:none; color: #dc3545; text-align: center;">
+        <div id="imageError" class="image-error hidden">
             <i class="fas fa-exclamation-circle"></i>
             <span>Image not available</span>
         </div>
