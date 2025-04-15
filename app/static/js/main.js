@@ -216,4 +216,195 @@ $.ajaxSetup({
 window.addEventListener('error', function(e) {
     console.error('Global error:', e.error);
     // You could send this to your error tracking service
+});
+
+// PWA Functionality
+let deferredPrompt;
+const pwaVersion = '1.0.0'; // Update this when releasing a new version
+
+// Handle PWA install prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    
+    // Show install promotion after user has been on the site for 30 seconds
+    setTimeout(() => {
+        if (deferredPrompt && !localStorage.getItem('pwa-install-dismissed')) {
+            showPWAInstallPrompt();
+        }
+    }, 30000);
+});
+
+// Create and show PWA install banner
+function showPWAInstallPrompt() {
+    // Create banner element
+    const banner = document.createElement('div');
+    banner.className = 'pwa-install-banner';
+    banner.innerHTML = `
+        <div class="pwa-banner-content">
+            <img src="/static/images/icons/icon-192x192.png" alt="SGK Export App Icon" class="pwa-banner-icon">
+            <div class="pwa-banner-text">
+                <p>Install SGK Export for offline access</p>
+                <p class="pwa-banner-subtitle">Access shipment information even without internet</p>
+            </div>
+        </div>
+        <div class="pwa-banner-actions">
+            <button id="pwa-install-btn" class="btn btn-primary">Install</button>
+            <button id="pwa-dismiss-btn" class="btn btn-link">Not now</button>
+        </div>
+    `;
+    
+    // Add banner styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .pwa-install-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 16px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slide-up 0.3s ease-out;
+        }
+        @keyframes slide-up {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .pwa-banner-content {
+            display: flex;
+            align-items: center;
+        }
+        .pwa-banner-icon {
+            width: 48px;
+            height: 48px;
+            margin-right: 16px;
+        }
+        .pwa-banner-text {
+            flex: 1;
+        }
+        .pwa-banner-text p {
+            margin: 0;
+        }
+        .pwa-banner-subtitle {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .pwa-banner-actions {
+            display: flex;
+            gap: 8px;
+        }
+    `;
+    
+    // Add to DOM
+    document.head.appendChild(style);
+    document.body.appendChild(banner);
+    
+    // Add event listeners
+    document.getElementById('pwa-install-btn').addEventListener('click', async () => {
+        // Hide the banner
+        banner.remove();
+        
+        // Show the install prompt
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User ${outcome} the A2HS prompt`);
+            
+            // Clear the saved prompt since it can't be used again
+            deferredPrompt = null;
+        }
+    });
+    
+    document.getElementById('pwa-dismiss-btn').addEventListener('click', () => {
+        banner.remove();
+        // Save preference in localStorage to not show again for a week
+        const now = new Date();
+        const expiryTime = now.getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days
+        localStorage.setItem('pwa-install-dismissed', expiryTime.toString());
+    });
+}
+
+// Check service worker version
+function checkServiceWorkerVersion() {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+            type: 'CHECK_VERSION',
+            version: pwaVersion
+        });
+    }
+}
+
+// Listen for messages from service worker
+navigator.serviceWorker.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'VERSION_STATUS' && event.data.needsUpdate) {
+        showUpdateNotification();
+    }
+});
+
+// Show update notification
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.className = 'update-notification';
+    notification.innerHTML = `
+        <div class="update-notification-content">
+            <i class="fas fa-sync-alt"></i>
+            <span>A new version is available. Refresh to update.</span>
+        </div>
+        <button id="update-now-btn" class="btn btn-sm btn-primary">Update Now</button>
+    `;
+    
+    // Add styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .update-notification {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            animation: fade-in 0.3s ease-out;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .update-notification-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .update-notification i {
+            color: #4169E1;
+        }
+    `;
+    
+    // Add to DOM
+    document.head.appendChild(style);
+    document.body.appendChild(notification);
+    
+    // Add event listener
+    document.getElementById('update-now-btn').addEventListener('click', () => {
+        window.location.reload();
+    });
+}
+
+// Call these functions when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Check for service worker updates
+    setTimeout(checkServiceWorkerVersion, 5000);
 }); 

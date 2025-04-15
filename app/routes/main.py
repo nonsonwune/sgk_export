@@ -26,6 +26,13 @@ def service_worker():
     static_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static'))
     return send_from_directory(static_dir, 'sw.js', mimetype='application/javascript', max_age=0)
 
+@bp.route('/manifest.json')
+def manifest():
+    """Serve the web app manifest file from the root URL path"""
+    logger.debug("Serving manifest.json file")
+    static_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static'))
+    return send_from_directory(static_dir, 'manifest.json', mimetype='application/manifest+json', max_age=0)
+
 @bp.route('/offline.html')
 def offline_page():
     """Serve the offline page from the root URL path"""
