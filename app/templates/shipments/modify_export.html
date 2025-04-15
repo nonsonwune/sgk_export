@@ -8,6 +8,7 @@
     <h2>Waybill #{{ shipment.waybill_number }}</h2>
     
     <form method="POST" class="export-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-section">
             <h3>Sender Information</h3>
             <div class="form-group">

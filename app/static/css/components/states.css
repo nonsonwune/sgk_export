@@ -25,20 +25,22 @@
 
 /* For error states */
 .error-state {
-    background-color: #fff5f5;
+    background-color: var(--danger-lighter);
     border-radius: 0.5rem;
     padding: 1.5rem;
     text-align: center;
     margin: 1rem 0;
+    color: var(--danger-color);
 }
 
 /* For success states */
 .success-state {
-    background-color: #f0fff4;
+    background-color: var(--success-lighter);
     border-radius: 0.5rem;
     padding: 1.5rem;
     text-align: center;
     margin: 1rem 0;
+    color: var(--success-color);
 }
 
 /* For loading states */
@@ -49,6 +51,7 @@
     flex-direction: column;
     padding: 2rem;
     text-align: center;
+    color: var(--text-secondary);
 }
 
 .loading-state .spinner {
@@ -66,13 +69,14 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(28, 46, 93, 0.9);
     z-index: 1;
+    color: var(--text-primary);
 }
 
 /* QR code error state */
 .qr-code-error {
-    color: #e53e3e;
+    color: var(--danger-color);
     text-align: center;
     margin-top: 0.5rem;
     font-size: 0.875rem;
@@ -80,7 +84,7 @@
 
 /* Signature error state */
 .signature-error {
-    color: #e53e3e;
+    color: var(--danger-color);
     text-align: center;
     margin-top: 0.5rem;
     font-size: 0.875rem;
@@ -88,7 +92,7 @@
 
 /* Image upload error */
 .image-error {
-    color: #dc3545;
+    color: var(--danger-color);
     text-align: center;
     margin-top: 0.5rem;
     font-size: 0.875rem;
@@ -96,8 +100,8 @@
 
 /* Read-only form elements */
 .readonly-input {
-    background-color: #f8f9fa !important;
-    border-color: #dee2e6 !important;
+    background-color: var(--background-tertiary) !important;
+    border-color: var(--border-color) !important;
     cursor: not-allowed;
     opacity: 0.7;
 } 

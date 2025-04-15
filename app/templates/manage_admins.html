@@ -31,6 +31,7 @@
                     <td class="actions">
                         <button class="action-button warning" onclick="showEditAdminForm('{{ user.id }}', '{{ user.username }}', '{{ user.name }}')">Modify</button>
                         <form method="POST" action="{{ url_for('admin.delete_admin', user_id=user.id) }}" class="display-inline">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <button type="submit" class="action-button danger" onclick="return confirm('Are you sure you want to remove this administrator? This action cannot be undone.')">Remove</button>
                         </form>
                     </td>
@@ -47,6 +48,7 @@
     <div class="modal-content">
         <h2>Add New Administrator</h2>
         <form method="POST" action="{{ url_for('admin.add_admin') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -72,6 +74,7 @@
     <div class="modal-content">
         <h2>Modify Administrator</h2>
         <form id="editAdminForm" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="edit_username">Username</label>
                 <input type="text" id="edit_username" name="username" required>

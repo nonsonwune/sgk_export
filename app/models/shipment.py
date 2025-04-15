@@ -167,14 +167,14 @@ class ShipmentStatusHistory(db.Model):
     __tablename__ = 'shipment_status_history'
     
     id = db.Column(GUID(), primary_key=True, default=uuid.uuid4)
-    shipment_id = db.Column(GUID(), db.ForeignKey('export_request.id'), nullable=False)
+    shipment_id = db.Column(GUID(), db.ForeignKey('export_request.id', ondelete='CASCADE'), nullable=False)
     old_status = db.Column(db.String(50))
     new_status = db.Column(db.String(50), nullable=False)
     changed_by = db.Column(GUID(), db.ForeignKey('user.id'), nullable=False)
     changed_at = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
     
     # Relationships
-    shipment = db.relationship('Shipment', backref=db.backref('status_history', lazy='dynamic', order_by='ShipmentStatusHistory.changed_at'))
+    shipment = db.relationship('Shipment', backref=db.backref('status_history', lazy='dynamic', order_by='ShipmentStatusHistory.changed_at', cascade='all, delete-orphan'))
     user = db.relationship('User', backref=db.backref('status_changes_made', lazy='dynamic'))
 
 class Shipment(db.Model):

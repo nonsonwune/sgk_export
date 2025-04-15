@@ -13,7 +13,7 @@
     align-items: center;
     margin-bottom: 2rem;
     padding: 1rem 0;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-left {
@@ -22,58 +22,85 @@
     gap: 1.5rem;
 }
 
+/* Dashboard section headers */
+.status-overview h3,
+.recent-activity h3,
+.quick-actions h3,
+.metric-header h3,
+.section-header h3 {
+    color: var(--text-primary);
+}
+
+/* Dashboard section titles */
+.status-overview .section-title,
+.chart-container .section-title,
+.metrics-grid .section-title,
+.activity-list .section-title {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Time period indicator */
+.time-period-indicator {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
 .date-filter {
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    background-color: #f0f4f8;
+    background-color: var(--background-primary);
     border-radius: 8px;
-    border: 2px solid #4169E1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .date-filter-label {
     font-weight: 600;
-    color: #4169E1;
+    color: var(--secondary-color);
     margin-right: 10px;
     font-size: 0.95rem;
 }
 
 .date-filter select {
     padding: 0.5rem;
-    border: 1px solid #4169E1;
+    border: 1px solid var(--border-color);
     border-radius: 0.375rem;
-    background-color: white;
+    background-color: var(--background-primary);
     font-size: 0.95rem;
     font-weight: 500;
-    color: #1e293b;
+    color: var(--text-primary);
     cursor: pointer;
 }
 
 /* Style for super user option */
 .super-user-option {
     font-weight: bold;
-    color: #4169E1;
-    border-top: 1px dashed #4169E1;
+    color: var(--secondary-color);
+    border-top: 1px dashed var(--border-color);
     margin-top: 4px;
     padding-top: 4px;
 }
 
 /* Style for when All Time filter is active */
 .all-time-active {
-    background-color: #e6eeff;
-    border: 2px solid #2040a0;
-    box-shadow: 0 0 10px rgba(65, 105, 225, 0.4);
+    background-color: var(--primary-lighter);
+    border: 2px solid var(--secondary-darker);
+    box-shadow: 0 0 10px rgba(225, 197, 130, 0.3);
 }
 
 .all-time-active .date-filter-label {
-    color: #2040a0;
+    color: var(--secondary-darker);
     font-weight: 700;
 }
 
 .refresh-info {
     font-size: 0.875rem;
-    color: #718096;
+    color: var(--text-tertiary);
 }
 
 .refresh-info i {
@@ -83,10 +110,10 @@
 /* Status Overview */
 .status-overview {
     grid-column: 1 / -1;
-    background: white;
+    background: var(--background-primary);
     border-radius: 0.5rem;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .status-cards {
@@ -101,7 +128,7 @@
     align-items: center;
     padding: 1rem;
     border-radius: 0.5rem;
-    background: #f8fafc;
+    background: var(--background-tertiary);
     transition: transform 0.2s;
 }
 
@@ -121,23 +148,28 @@
 }
 
 .status-card.pending .status-icon {
-    background: #fef3c7;
-    color: #d97706;
+    background: rgba(255, 183, 77, 0.2);
+    color: var(--warning-color);
 }
 
 .status-card.processing .status-icon {
-    background: #dbeafe;
-    color: #2563eb;
+    background: rgba(100, 181, 246, 0.2);
+    color: var(--info-color);
 }
 
 .status-card.in-transit .status-icon {
-    background: #dcfce7;
-    color: #16a34a;
+    background: rgba(61, 209, 111, 0.2);
+    color: var(--success-color);
 }
 
 .status-card.delivered .status-icon {
-    background: #f3e8ff;
-    color: #7e22ce;
+    background: rgba(156, 39, 176, 0.2);
+    color: #ce93d8;
+}
+
+.status-card.cancelled .status-icon {
+    background: rgba(255, 87, 87, 0.2);
+    color: var(--danger-color);
 }
 
 .status-details {
@@ -148,20 +180,20 @@
     display: block;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--text-primary);
 }
 
 .status-label {
     font-size: 0.875rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 /* Metric Cards */
 .metric-card {
-    background: white;
+    background: var(--background-primary);
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .metric-header {
@@ -179,7 +211,7 @@
 .metric-value {
     font-size: 2rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--text-primary);
     margin: 0.5rem 0;
 }
 
@@ -187,15 +219,15 @@
     display: flex;
     align-items: center;
     font-size: 0.875rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .trend-up {
-    color: #16a34a;
+    color: var(--success-color);
 }
 
 .trend-down {
-    color: #dc2626;
+    color: var(--danger-color);
 }
 
 .metric-trend i {
@@ -204,10 +236,10 @@
 
 /* Charts */
 .chart-container {
-    background: white;
+    background: var(--background-primary);
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     height: 400px;
     max-width: 100%;
     position: relative;
@@ -231,8 +263,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(28, 46, 93, 0.9);
     z-index: 1;
+    color: var(--text-primary);
+}
+
+/* Chart spinner */
+.chart-loading-state .spinner,
+.chart-error-state .spinner {
+    border-color: var(--secondary-color);
+    border-right-color: transparent;
+}
+
+/* Chart error message */
+.chart-error-state p {
+    color: var(--text-primary);
+    margin-top: 1rem;
+}
+
+/* Retry button */
+.chart-error-state .retry-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.chart-error-state .retry-btn:hover {
+    background-color: var(--primary-lighter);
 }
 
 /* Status Distribution Chart */
@@ -257,26 +318,26 @@
 .chart-controls .btn {
     padding: 0.25rem 0.75rem;
     font-size: 0.875rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     border-radius: 0.375rem;
-    background: white;
-    color: #64748b;
+    background: var(--background-primary);
+    color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .chart-controls .btn.active {
-    background: #4169E1;
-    color: white;
-    border-color: #4169E1;
+    background: var(--primary-color);
+    color: var(--text-primary);
+    border-color: var(--primary-color);
 }
 
 /* Quick Actions */
 .quick-actions {
-    background: white;
+    background: var(--background-primary);
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .action-grid {
@@ -291,30 +352,30 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    background: #f8fafc;
+    background: var(--background-tertiary);
     border-radius: 0.5rem;
     text-decoration: none;
-    color: #1e293b;
+    color: var(--text-primary);
     transition: all 0.2s;
 }
 
 .action-button:hover {
     transform: translateY(-2px);
-    background: #f1f5f9;
+    background: var(--primary-lighter);
 }
 
 .action-button i {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #4169E1;
+    color: var(--secondary-color);
 }
 
 /* Recent Activity */
 .recent-activity {
-    background: white;
+    background: var(--background-primary);
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     grid-column: span 2;
 }
 
@@ -327,7 +388,7 @@
 
 .view-all {
     font-size: 0.875rem;
-    color: #4169E1;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 
@@ -341,31 +402,22 @@
     display: flex;
     align-items: center;
     padding: 1rem;
-    background: #f8fafc;
+    background: var(--background-tertiary);
     border-radius: 0.5rem;
     transition: background-color 0.2s;
 }
 
 .activity-item:hover {
-    background: #f1f5f9;
+    background: var(--primary-lighter);
 }
 
-.activity-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-right: 1rem;
-}
-
-.activity-icon.status-pending { background: #fef3c7; color: #d97706; }
-.activity-icon.status-confirmed { background: #dbeafe; color: #2563eb; }
-.activity-icon.status-processing { background: #dbeafe; color: #2563eb; }
-.activity-icon.status-in_transit { background: #dcfce7; color: #16a34a; }
-.activity-icon.status-delivered { background: #f3e8ff; color: #7e22ce; }
-.activity-icon.status-cancelled { background: #fee2e2; color: #dc2626; }
+/* Activity Icons */
+.activity-icon.status-pending { background: rgba(255, 183, 77, 0.2); color: var(--warning-color); }
+.activity-icon.status-confirmed { background: rgba(100, 181, 246, 0.2); color: var(--info-color); }
+.activity-icon.status-processing { background: rgba(100, 181, 246, 0.2); color: var(--info-color); }
+.activity-icon.status-in_transit { background: rgba(61, 209, 111, 0.2); color: var(--success-color); }
+.activity-icon.status-delivered { background: rgba(156, 39, 176, 0.2); color: #ce93d8; }
+.activity-icon.status-cancelled { background: rgba(255, 87, 87, 0.2); color: var(--danger-color); }
 
 .activity-details {
     flex: 1;
@@ -378,23 +430,30 @@
     margin-bottom: 0.25rem;
 }
 
+.activity-main strong {
+    color: var(--text-primary);
+}
+
+/* Status Badges */
 .status-badge {
+    display: inline-flex;
+    align-items: center;
     padding: 0.25rem 0.5rem;
     border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 500;
 }
 
-.status-badge.status-pending { background: #fef3c7; color: #d97706; }
-.status-badge.status-confirmed { background: #dbeafe; color: #2563eb; }
-.status-badge.status-processing { background: #dbeafe; color: #2563eb; }
-.status-badge.status-in_transit { background: #dcfce7; color: #16a34a; }
-.status-badge.status-delivered { background: #f3e8ff; color: #7e22ce; }
-.status-badge.status-cancelled { background: #fee2e2; color: #dc2626; }
+.status-badge.status-pending { background: var(--warning-lighter); color: var(--warning-color); }
+.status-badge.status-confirmed { background: var(--info-lighter); color: var(--info-color); }
+.status-badge.status-processing { background: var(--info-lighter); color: var(--info-color); }
+.status-badge.status-in_transit { background: var(--success-lighter); color: var(--success-color); }
+.status-badge.status-delivered { background: rgba(156, 39, 176, 0.2); color: #ce93d8; }
+.status-badge.status-cancelled { background: var(--danger-lighter); color: var(--danger-color); }
 
 .activity-meta {
     font-size: 0.875rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .activity-meta .customer {
@@ -402,27 +461,52 @@
 }
 
 .activity-action {
-    color: #64748b;
+    color: var(--text-tertiary);
     padding: 0.5rem;
     border-radius: 0.375rem;
     transition: all 0.2s;
 }
 
 .activity-action:hover {
-    background: #e2e8f0;
-    color: #1e293b;
+    background: var(--background-tertiary);
+    color: var(--text-primary);
 }
 
 .empty-state {
     text-align: center;
     padding: 2rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .empty-state i {
     font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: #94a3b8;
+    color: var(--border-color);
+}
+
+/* Add highlight animation for date filter */
+@keyframes dateFilterHighlight {
+    0% { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+    50% { box-shadow: 0 0 15px rgba(225, 197, 130, 0.5); }
+    100% { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+}
+
+.date-filter-highlight {
+    animation: dateFilterHighlight 1s ease-in-out 2;
+}
+
+/* Special labels that might need more contrast */
+h1, h2, h3, 
+.dashboard-header h1,
+.section-title,
+.metric-header h3,
+.chart-header h3 {
+    color: var(--text-primary);
+}
+
+/* Make sure canvas elements have dark backgrounds */
+canvas {
+    background: var(--background-primary);
 }
 
 /* Responsive Design */
@@ -478,24 +562,4 @@
     .metric-value {
         font-size: 1.5rem;
     }
-}
-
-/* Add style for time period indicator */
-.time-period-indicator {
-  font-size: 0.85rem;
-  color: #6c757d;
-  text-align: center;
-  margin-bottom: 15px;
-  font-style: italic;
-}
-
-/* Add highlight animation for date filter */
-@keyframes dateFilterHighlight {
-    0% { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-    50% { box-shadow: 0 0 15px rgba(65, 105, 225, 0.7); }
-    100% { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-}
-
-.date-filter-highlight {
-    animation: dateFilterHighlight 1s ease-in-out 2;
 } 

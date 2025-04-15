@@ -130,9 +130,16 @@ export function preparePrint() {
                         width: 100% !important;
                         max-width: 100% !important;
                         background: white !important;
+                        color: #1A202C !important;
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;
                     }
+                    
+                    /* Force all text to be visible */
+                    h1, h2, h3, h4, h5, h6, p, span, div, td, th, li, label, input {
+                        color: #1A202C !important;
+                    }
+                    
                     .preview-container,
                     .print-form {
                         width: 100% !important;
@@ -141,7 +148,25 @@ export function preparePrint() {
                         padding: 0 !important;
                         background: white !important;
                         box-shadow: none !important;
+                        color: #1A202C !important;
                     }
+                    
+                    /* Special handling for form elements */
+                    .print-form *,
+                    .preview-container * {
+                        color: #1A202C !important;
+                    }
+                    
+                    .input-label, 
+                    .company-header h1,
+                    .company-header p,
+                    .section-title,
+                    .manual-input,
+                    .required-note,
+                    .signature-line {
+                        color: #1A202C !important;
+                    }
+                    
                     .info-section {
                         width: 100% !important;
                         max-width: 100% !important;
@@ -200,16 +225,32 @@ export function preparePrint() {
                         page-break-inside: avoid !important;
                         margin-bottom: 6mm !important;
                     }
+                    
+                    /* Table styles for print */
+                    .items-table th,
+                    .items-table td {
+                        color: #1A202C !important;
+                        border-color: #e2e8f0 !important;
+                    }
+                    
                     @media print {
                         body {
                             width: 100% !important;
                             max-width: 100% !important;
+                            color: #1A202C !important;
                         }
+                        
                         .preview-container,
                         .print-form {
                             width: 100% !important;
                             max-width: 100% !important;
+                            color: #1A202C !important;
                         }
+                        
+                        h1, h2, h3, h4, h5, h6, p, span, div, td, th, li, label {
+                            color: #1A202C !important;
+                        }
+                        
                         .screen-controls,
                         .main-nav,
                         .action-buttons,
@@ -221,44 +262,30 @@ export function preparePrint() {
             </head>
             <body class="printing">
                 ${clonedContent.outerHTML}
+                <script>
+                    setTimeout(function() {
+                        window.print();
+                        setTimeout(function() {
+                            window.frameElement.remove();
+                        }, 100);
+                    }, 500);
+                </script>
             </body>
             </html>
         `);
         frameDoc.close();
-
-        // Wait for resources to load
-        setTimeout(() => {
-            try {
-                console.debug('[Print] Initiating print');
-                printFrame.contentWindow.print();
-
-                // Cleanup after printing
-                printFrame.contentWindow.onafterprint = function() {
-                    document.body.removeChild(printFrame);
-                    hidePrintPreview();
-                    console.debug('[Print] Print completed and cleanup finished');
-                };
-
-                // Fallback cleanup
-                setTimeout(() => {
-                    if (document.body.contains(printFrame)) {
-                        document.body.removeChild(printFrame);
-                        hidePrintPreview();
-                        console.debug('[Print] Cleanup after timeout');
-                    }
-                }, 1000);
-            } catch (e) {
-                console.error('[Print] Error during print:', e);
+        
+        // Hide preview overlay when iframe is loaded
+        printFrame.onload = function() {
+            setTimeout(function() {
                 hidePrintPreview();
-                if (document.body.contains(printFrame)) {
-                    document.body.removeChild(printFrame);
-                }
-            }
-        }, 1000);
+            }, 700);
+        };
 
-    } catch (e) {
-        console.error('[Print] Error preparing print:', e);
+    } catch (error) {
+        console.error('[Print] Error preparing print:', error);
         hidePrintPreview();
+        alert('An error occurred while preparing to print. Please try again.');
     }
 }
 

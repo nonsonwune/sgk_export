@@ -2,56 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="description" content="SGK Global Shipping Export Documentation">
+    <meta name="theme-color" content="#4169E1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="format-detection" content="telephone=no">
     <title>{% block title %}SGK Global Shipping{% endblock %}</title>
     
     <!-- Critical CSS -->
     {{ critical_css|safe }}
     
-    <!-- Deferred CSS -->
+    <!-- Deferred CSS with Resource Hints -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="{{ url_for('static', filename='css/main.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="{{ url_for('static', filename='css/components/navigation.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for JavaScript-disabled browsers -->
     <noscript>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/components/navigation.css') }}">
     </noscript>
     
     <!-- Third-party CSS -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
-    <!-- Application CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/forms.css') }}" onload="console.log('forms.css loaded')" onerror="console.error('Failed to load forms.css')">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/tables.css') }}" onload="console.log('tables.css loaded')" onerror="console.error('Failed to load tables.css')">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/modals.css') }}" onload="console.log('modals.css loaded')" onerror="console.error('Failed to load modals.css')">
-    
-    <!-- CSS Loading Verification -->
+    <!-- CSS Loading Script -->
     <script>
-        window.addEventListener('load', function() {
-            console.log('Verifying CSS loading...');
-            const styleSheets = document.styleSheets;
-            for (let i = 0; i < styleSheets.length; i++) {
-                try {
-                    const href = styleSheets[i].href;
-                    if (href) {
-                        console.log('Loaded stylesheet:', href);
-                    }
-                } catch (e) {
-                    console.error('Error checking stylesheet:', e);
-                }
-            }
-        });
+      /* Update to use a working CDN that hosts loadCSS */
+      (function(w){"use strict";var loadCSS=function(href,before,media,attributes){var doc=w.document;var ss=doc.createElement("link");var ref;if(before){ref=before}else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;if(attributes){for(var key in attributes){if(attributes.hasOwnProperty(key)){ss.setAttribute(key,attributes[key])}}}ss.rel="stylesheet";ss.href=href;ss.media="only x";function ready(cb){if(doc.body){return cb()}setTimeout(function(){ready(cb)})}ready(function(){ref.parentNode.insertBefore(ss,(before?ref:ref.nextSibling))});var onloadcssdefined=function(cb){var resolvedHref=ss.href;var i=sheets.length;while(i--){if(sheets[i].href===resolvedHref){return cb()}}setTimeout(function(){onloadcssdefined(cb)})};function loadCB(){if(ss.addEventListener){ss.removeEventListener("load",loadCB)}ss.media=media||"all"}if(ss.addEventListener){ss.addEventListener("load",loadCB)}ss.onloadcssdefined=onloadcssdefined;onloadcssdefined(loadCB);return ss};if(typeof exports!=="undefined"){exports.loadCSS=loadCSS}else{w.loadCSS=loadCSS}})(typeof global!=="undefined"?global:this);
     </script>
     
     <!-- Page-specific CSS -->
     {% block extra_head %}{% endblock %}
     
-    <!-- Third-party JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Analytics (Assuming you have analytics) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXX-Y');
+    </script>
 </head>
-<body>
+<body class="{% if request.endpoint == 'auth.login' %}login-page{% elif request.endpoint == 'main.print_form_template' %}print-form-page{% endif %} {% block body_class %}{% endblock %}">
     <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
         <div class="main-nav">
             <div class="nav-brand">
@@ -181,7 +174,10 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
@@ -189,6 +185,26 @@
         </div>
     </main>
 
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-company">
+                    <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping Logo" class="footer-logo" width="30" height="30">
+                    <p>© 2023 SGK Global Shipping</p>
+                </div>
+                <div class="footer-links">
+                    <a href="{{ url_for('main.terms') }}">Terms & Conditions</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#contactSupportModal">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
     <!-- Application JavaScript -->
     <script type="module" src="{{ url_for('static', filename='js/modules/navigation.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/modules/modal.js') }}"></script>
@@ -197,5 +213,29 @@
     
     <!-- Page-specific JavaScript -->
     {% block scripts %}{% endblock %}
+    
+    <!-- Accessibility & Service Worker -->
+    <script>
+        // Enable focus outlines only when using keyboard navigation
+        document.body.addEventListener('mousedown', function() {
+            document.body.classList.add('using-mouse');
+        });
+        document.body.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.remove('using-mouse');
+            }
+        });
+        
+        // Register service worker for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html> 

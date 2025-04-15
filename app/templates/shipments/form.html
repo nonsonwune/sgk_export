@@ -104,6 +104,7 @@
 {% block content %}
 {# DEBUG: Content block start #}
 <form method="POST" action="{{ url_for('shipments.submit_shipment') }}" enctype="multipart/form-data" class="export-form" id="exportForm" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="form-container">
         {# DEBUG: Form container start #}
         <div class="form-header">

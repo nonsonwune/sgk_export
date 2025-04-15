@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="SGK Global Shipping - Offline">
+    <meta name="theme-color" content="#4169E1">
+    <title>Offline - SGK Global Shipping</title>
+    <style>
+        :root {
+            --primary-color: #4169E1;
+            --text-primary: #1A202C;
+            --text-secondary: #4A5568;
+            --background-primary: #FFFFFF;
+            --background-secondary: #F7FAFC;
+            --border-color: #E2E8F0;
+            --space-2: 0.5rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--background-secondary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: var(--space-4);
+        }
+        
+        .offline-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: var(--space-8);
+            background-color: var(--background-primary);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: var(--space-6);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: var(--space-4);
+            font-size: 2rem;
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-6);
+            line-height: 1.6;
+        }
+        
+        .icon-wifi {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: var(--space-6);
+        }
+        
+        .retry-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: var(--space-4) var(--space-8);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .retry-button:hover {
+            background-color: #3154b4;
+        }
+        
+        .cached-links {
+            margin-top: var(--space-8);
+            width: 100%;
+        }
+        
+        .cached-links h2 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+        }
+        
+        .links-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .links-list li {
+            margin-bottom: var(--space-2);
+        }
+        
+        .links-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: block;
+            padding: var(--space-2);
+            border-radius: 4px;
+        }
+        
+        .links-list a:hover {
+            background-color: var(--background-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .offline-container {
+                padding: var(--space-6) var(--space-4);
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <img src="/static/images/SGKlogo.png" alt="SGK Global Shipping Logo" class="logo">
+        <div class="icon-wifi">📡</div>
+        <h1>You're Offline</h1>
+        <p>It looks like you've lost your internet connection. Some features may be unavailable until you reconnect.</p>
+        <button class="retry-button" onclick="window.location.reload()">Try Again</button>
+        
+        <div class="cached-links">
+            <h2>Available Offline</h2>
+            <ul class="links-list" id="availablePages">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Check for cached pages when offline
+        if ('caches' in window) {
+            caches.open('sgk-cache-v1').then(function(cache) {
+                cache.keys().then(function(requests) {
+                    const availablePages = document.getElementById('availablePages');
+                    const pagesSet = new Set();
+                    
+                    // Add home page as default
+                    pagesSet.add('/');
+                    
+                    requests.forEach(function(request) {
+                        const url = new URL(request.url);
+                        if (url.pathname.endsWith('.html') || 
+                            url.pathname === '/' || 
+                            url.pathname.endsWith('/')) {
+                            pagesSet.add(url.pathname);
+                        }
+                    });
+                    
+                    // Convert Set to Array and sort
+                    const pages = Array.from(pagesSet).sort();
+                    
+                    // Clear default home page
+                    availablePages.innerHTML = '';
+                    
+                    // Add all available pages
+                    pages.forEach(function(page) {
+                        let pageName = page === '/' ? 'Home' : page.split('/').pop().replace('.html', '').replace(/-/g, ' ');
+                        pageName = pageName || page.split('/').filter(Boolean).pop() || 'Home';
+                        pageName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+                        
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = page;
+                        a.textContent = pageName;
+                        li.appendChild(a);
+                        availablePages.appendChild(li);
+                    });
+                });
+            });
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', function() {
+            document.querySelector('.retry-button').textContent = 'You\'re back online! Reload';
+        });
+    </script>
+</body>
+</html> 

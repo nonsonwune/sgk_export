@@ -1,14 +1,45 @@
-/* Critical Navigation Styles */
+/* Critical CSS - Above the fold content */
 :root {
-    --nav-bg: white;
-    --nav-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    --nav-text: #4a5568;
-    --nav-text-hover: #2d3748;
-    --nav-active-bg: #ebf4ff;
-    --nav-active-color: #4169E1;
-    --nav-border: #e2e8f0;
+    /* Primary Brand Colors */
+    --primary-color: #1c2e5d;
+    --primary-darker: #152348;
+    
+    /* Neutral Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #e1e1e1;
+    --background-primary: #172444;
+    --background-secondary: #1c2e5d;
+    --border-color: #2a3f78;
+    
+    /* Navigation Specific */
+    --nav-bg: #172444;
+    --nav-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    --nav-text: #e1e1e1;
+    --nav-text-hover: #ffffff;
+    --nav-active-bg: #2a3f78;
+    --nav-active-color: #e1c582;
+    --nav-border: #2a3f78;
+    
+    /* Spacing Scale - Minimum for critical CSS */
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
 }
 
+/* Critical Base Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--background-secondary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Critical Navigation Styles */
 .sticky-nav {
     position: sticky;
     top: 0;
@@ -16,10 +47,11 @@
     right: 0;
     z-index: 1000;
     background: var(--nav-bg);
+    transition: all 0.3s ease;
 }
 
 .main-nav {
-    padding: 0.75rem 2rem;
+    padding: var(--space-3) var(--space-6);
     background: var(--nav-bg);
     box-shadow: var(--nav-shadow);
     display: flex;
@@ -30,9 +62,10 @@
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-4);
     flex-shrink: 0;
-    margin-right: 2rem;
+    margin-right: var(--space-6);
+    text-decoration: none;
 }
 
 .nav-logo {
@@ -44,12 +77,32 @@
 .brand-text {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 600;
-    color: var(--nav-text-hover);
+    color: var(--text-primary);
 }
 
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--nav-text);
+    cursor: pointer;
+    padding: var(--space-2);
+    transition: color 0.2s ease;
+    min-height: 44px;
+    min-width: 44px; /* Ensuring touch target size */
+}
+
+/* Critical Mobile Styles */
 @media (max-width: 768px) {
+    .main-nav {
+        padding: var(--space-3) var(--space-4);
+    }
+    
     .mobile-menu-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .nav-links {
@@ -58,5 +111,13 @@
     
     .nav-links.active {
         display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        flex-direction: column;
+        box-shadow: var(--nav-shadow);
+        padding: var(--space-4);
     }
 } 

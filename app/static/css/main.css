@@ -7,20 +7,76 @@
 @import url('/static/css/components/tables.css');
 @import url('/static/css/components/buttons.css');
 @import url('/static/css/components/states.css');
+@import url('/static/css/components/footer.css');
 
 /* Global Styles */
 :root {
-    --primary-color: #4169E1;
-    --secondary-color: #718096;
-    --success-color: #48BB78;
-    --danger-color: #F56565;
-    --warning-color: #ED8936;
-    --info-color: #4299E1;
-    --text-primary: #2D3748;
-    --text-secondary: #4A5568;
-    --background-primary: #FFFFFF;
-    --background-secondary: #F7FAFC;
-    --border-color: #E2E8F0;
+    /* Primary Brand Colors */
+    --primary-color: #1c2e5d !important;
+    --primary-darker: #152348 !important;
+    --primary-lighter: #2a3f78 !important;
+    
+    /* Secondary Brand Colors - Using accent color */
+    --secondary-color: #e1c582 !important;
+    --secondary-darker: #d4b46b !important;
+    --secondary-lighter: #eed599 !important;
+    
+    /* Semantic Colors */
+    --success-color: #3dd16f !important;
+    --success-lighter: #183e24 !important;
+    --danger-color: #ff5757 !important;
+    --danger-lighter: #3d1919 !important;
+    --warning-color: #ffb74d !important;
+    --warning-lighter: #3d2e19 !important;
+    --info-color: #64b5f6 !important;
+    --info-lighter: #193e5c !important;
+    
+    /* Neutral Colors - Dark theme */
+    --text-primary: #ffffff !important;
+    --text-secondary: #e1e1e1 !important;
+    --text-tertiary: #cccccc !important;
+    --background-primary: #172444 !important;
+    --background-secondary: #1c2e5d !important;
+    --background-tertiary: #223770 !important;
+    --border-color: #2a3f78 !important;
+    --border-color-dark: #344b8a !important;
+    
+    /* Elevation & Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.4) !important;
+    
+    /* Spacing Scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 1rem;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+}
+
+/* Base Element Styles */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 body {
@@ -28,59 +84,258 @@ body {
     color: var(--text-primary);
     background-color: var(--background-secondary);
     line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 .main-content {
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: var(--space-4);
+    margin-top: 0;
+    background-color: var(--background-secondary);
+    border-top: none;
+    position: relative;
 }
 
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 var(--space-4);
+    background-color: var(--background-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
 }
 
 /* Alert Styles */
 .alert {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.375rem;
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
+    font-weight: 500;
 }
 
 .alert-success {
-    background-color: #F0FFF4;
-    color: #22543D;
-    border: 1px solid #C6F6D5;
+    background-color: var(--success-lighter);
+    color: var(--success-color);
+    border: 1px solid var(--success-lighter);
 }
 
 .alert-danger {
-    background-color: #FFF5F5;
-    color: #742A2A;
-    border: 1px solid #FED7D7;
+    background-color: var(--danger-lighter);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-lighter);
 }
 
 .alert-warning {
-    background-color: #FFFAF0;
-    color: #7B341E;
-    border: 1px solid #FEEBC8;
+    background-color: var(--warning-lighter);
+    color: var(--warning-color);
+    border: 1px solid var(--warning-lighter);
 }
 
 .alert-info {
-    background-color: #EBF8FF;
-    color: #2C5282;
-    border: 1px solid #BEE3F8;
+    background-color: var(--info-lighter);
+    color: var(--info-color);
+    border: 1px solid var(--info-lighter);
 }
 
 /* Responsive table containers */
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-4);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Ensure all text in tables is visible */
+.table {
+    color: var(--text-primary) !important;
+}
+
+.table th, 
+.table td {
+    color: var(--text-primary) !important;
+}
+
+/* Override Bootstrap table styles for dark mode */
+.card .table,
+.card .table thead,
+.card .table tbody,
+.card .table tfoot {
+    color: var(--text-primary) !important;
+    background-color: transparent !important;
+}
+
+.card .table thead th,
+.card .table tbody td,
+.card .table tfoot td,
+.card .table tfoot th {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+    background-color: transparent !important;
+}
+
+.card .table-primary,
+.card .table-primary > th,
+.card .table-primary > td {
+    background-color: var(--primary-darker) !important;
+    color: var(--text-primary) !important;
+}
+
+.card .table-secondary,
+.card .table-secondary > th,
+.card .table-secondary > td {
+    background-color: var(--background-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+.card .table-success,
+.card .table-success > th,
+.card .table-success > td {
+    background-color: var(--success-lighter) !important;
+    color: var(--success-color) !important;
+}
+
+.card .table-warning,
+.card .table-warning > th,
+.card .table-warning > td {
+    background-color: var(--warning-lighter) !important;
+    color: var(--warning-color) !important;
+}
+
+.card .table-danger,
+.card .table-danger > th,
+.card .table-danger > td {
+    background-color: var(--danger-lighter) !important;
+    color: var(--danger-color) !important;
+}
+
+/* Fix badge colors in tables */
+.table .badge {
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.table .badge.bg-success {
+    background-color: var(--success-color) !important;
+    color: #fff !important;
+}
+
+.table .badge.bg-warning {
+    background-color: var(--warning-color) !important;
+    color: #212529 !important;
+}
+
+.table .badge.bg-danger {
+    background-color: var(--danger-color) !important;
+    color: #fff !important;
+}
+
+.table .badge.bg-info {
+    background-color: var(--info-color) !important;
+    color: #fff !important;
+}
+
+.table .badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+.table .badge.bg-secondary {
+    background-color: var(--secondary-color) !important;
+    color: #212529 !important;
+}
+
+/* Force color for all inputs and form fields */
+input, select, textarea, .form-control {
+    color: var(--text-primary) !important;
+    background-color: var(--background-tertiary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Force text color on all text elements */
+p, span, label, a, div, li {
+    color: var(--text-primary) !important;
+}
+
+/* Force dark text for all headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+}
+
+/* Print styles - override dark theme for printing */
+@media print {
+    :root {
+        /* Primary Brand Colors */
+        --primary-color: #4169E1 !important;
+        --primary-darker: #3154b4 !important;
+        --primary-lighter: #6889e8 !important;
+        
+        /* Secondary Brand Colors */
+        --secondary-color: #718096 !important;
+        --secondary-darker: #4a5568 !important;
+        --secondary-lighter: #a0aec0 !important;
+        
+        /* Semantic Colors */
+        --success-color: #38A169 !important;
+        --success-lighter: #C6F6D5 !important;
+        --danger-color: #E53E3E !important;
+        --danger-lighter: #FED7D7 !important;
+        --warning-color: #DD6B20 !important;
+        --warning-lighter: #FEEBC8 !important;
+        --info-color: #3182CE !important;
+        --info-lighter: #BEE3F8 !important;
+        
+        /* Neutral Colors */
+        --text-primary: #1A202C !important;
+        --text-secondary: #4A5568 !important;
+        --text-tertiary: #718096 !important;
+        --background-primary: #FFFFFF !important;
+        --background-secondary: #F7FAFC !important;
+        --background-tertiary: #EDF2F7 !important;
+        --border-color: #E2E8F0 !important;
+        --border-color-dark: #CBD5E0 !important;
+    }
+    
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .main-nav, 
+    .app-footer,
+    .sticky-nav {
+        display: none !important;
+    }
+    
+    /* Ensure print text colors */
+    p, span, label, a, div, li, th, td, input, select, textarea, .form-control {
+        color: var(--text-primary) !important;
+    }
+    
+    .table, .table th, .table td {
+        color: var(--text-primary) !important;
+    }
 }
 
 /* Form responsiveness */
@@ -91,26 +346,36 @@ body {
 
     .form-group {
         width: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: var(--space-4);
     }
 
     .form-card {
-        padding: 1rem;
+        padding: var(--space-4);
     }
 
     .two-columns {
         grid-template-columns: 1fr;
     }
+    
+    .main-content {
+        padding: var(--space-3);
+    }
+    
+    .container {
+        padding: 0 var(--space-3);
+    }
 }
 
 /* Card grid responsiveness */
 @media (max-width: 576px) {
-    .info-cards-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .info-cards-grid,
     .pricing-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+    
+    .alert {
+        padding: var(--space-3);
     }
 }
 
@@ -118,8 +383,8 @@ body {
 @media (max-width: 768px) {
     .action-button,
     .btn {
-        padding: 0.75rem 1rem;
-        min-height: 44px;
+        padding: var(--space-3) var(--space-4);
+        min-height: 44px; /* Minimum touch target size */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -127,6 +392,364 @@ body {
 
     .action-buttons {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: var(--space-2);
     }
+}
+
+/* Accessibility focus styles */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Helper classes for spacing */
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Visibility helpers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Force dark mode for all containers */
+.container, 
+.main-content,
+.table-container,
+.form-container,
+.modal-container,
+.card,
+.table,
+.app-footer,
+.footer-content,
+.main-nav,
+.sticky-nav,
+.nav-container {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+/* Additional background fixes to prevent white artifacts */
+html, body {
+    background-color: var(--background-secondary) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Remove any potential white borders and ensure dark backgrounds */
+.sticky-nav,
+.main-nav,
+.main-content,
+.app-footer,
+.container-fluid,
+.row,
+.col,
+.card,
+.input-group,
+.dropdown-menu,
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer {
+    border: none !important;
+    background-color: var(--background-primary) !important;
+}
+
+/* Remove white line below navbar */
+.main-nav {
+    border-bottom: none !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Login specific background fixes */
+body.login-page {
+    background-color: var(--background-secondary) !important;
+}
+
+body.login-page .main-content,
+body.login-page .container {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+body.login-page .login-form-container {
+    background-color: var(--background-primary) !important;
+}
+
+body.login-page .sticky-nav,
+body.login-page .app-footer {
+    background-color: var(--nav-bg) !important;
+}
+
+/* Footer fix for all pages */
+.app-footer {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: var(--space-6) 0 !important;
+    overflow: hidden !important;
+    background-color: var(--background-primary) !important;
+    position: relative !important;
+}
+
+.app-footer > .container {
+    background-color: var(--background-primary) !important;
+}
+
+.app-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, 
+        rgba(42, 63, 120, 0), 
+        rgba(42, 63, 120, 0.7), 
+        rgba(42, 63, 120, 0));
+}
+
+/* Fix for container in all pages */
+.container {
+    background-color: var(--background-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-4);
+}
+
+/* --- Start Navigation Dropdown Fix --- */
+
+/* Style the dropdown toggle buttons in the nav */
+.main-nav .nav-link.dropdown-toggle {
+    color: var(--text-primary) !important;
+    background-color: transparent !important; /* Match other nav links */
+    border: none !important;
+    padding: var(--space-2) var(--space-3); /* Adjust padding if needed */
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
+}
+
+.main-nav .nav-link.dropdown-toggle:hover,
+.main-nav .nav-link.dropdown-toggle:focus {
+    color: var(--text-primary) !important;
+    background-color: var(--background-tertiary) !important; /* Subtle highlight on hover/focus */
+}
+
+/* Style the dropdown menu itself */
+.dropdown-menu {
+    background-color: var(--background-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md);
+    padding: var(--space-2) 0;
+    box-shadow: var(--shadow-md);
+}
+
+/* Style the items within the dropdown menu */
+.dropdown-menu .dropdown-item {
+    color: var(--text-primary) !important;
+    background-color: transparent !important;
+    padding: var(--space-2) var(--space-4);
+    transition: background-color var(--transition-fast);
+}
+
+.dropdown-menu .dropdown-item i {
+     color: var(--text-secondary) !important; /* Slightly dimmer icon color */
+     margin-right: var(--space-2);
+     width: 1em; /* Ensure alignment */
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    color: var(--text-primary) !important;
+    background-color: var(--primary-color) !important; /* Use primary color for selection */
+}
+
+.dropdown-menu .dropdown-item:hover i,
+.dropdown-menu .dropdown-item:focus i {
+    color: var(--text-primary) !important; /* Make icon brighter on hover */
+}
+
+/* Style the divider in the dropdown menu */
+.dropdown-divider {
+    border-top: 1px solid var(--border-color) !important;
+    margin: var(--space-2) 0;
+}
+
+/* --- End Navigation Dropdown Fix --- */
+
+/* Bootstrap card override */
+.card {
+    background-color: var(--background-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Ensure card headers/titles are primary text color */
+.card-header h2,
+.card h4 {
+     color: var(--text-primary) !important; 
+}
+
+/* Ensure general card body text is legible */
+.card-body {
+    color: var(--text-secondary) !important;
+}
+
+/* Ensure text in view page tables is visible in dark mode */
+.card .table th,
+.card .table td {
+    color: var(--text-secondary) !important; 
+    border-color: var(--border-color-dark) !important; 
+}
+
+/* Override Bootstrap's contextual table row colors */
+.card .table .table-primary th,
+.card .table .table-primary td {
+    color: var(--text-primary) !important; /* Use primary for better contrast on colored bg */
+    background-color: var(--primary-darker) !important; /* Adjust bg color if needed */
+    border-color: var(--primary-lighter) !important;
+}
+
+/* Override Bootstrap's default table background to inherit card background */
+ .card .table {
+     background-color: transparent !important; 
+     margin-bottom: 0; 
+ }
+
+/* Ensure all content has dark background */
+.content-wrapper,
+.page-wrapper,
+main,
+section,
+article,
+aside,
+div {
+    background-color: inherit !important;
+}
+
+/* Print styles - override dark theme for printing */
+@media print {
+    :root {
+        /* Primary Brand Colors */
+        --primary-color: #4169E1 !important;
+        --primary-darker: #3154b4 !important;
+        --primary-lighter: #6889e8 !important;
+        
+        /* Secondary Brand Colors */
+        --secondary-color: #718096 !important;
+        --secondary-darker: #4a5568 !important;
+        --secondary-lighter: #a0aec0 !important;
+        
+        /* Semantic Colors */
+        --success-color: #38A169 !important;
+        --success-lighter: #C6F6D5 !important;
+        --danger-color: #E53E3E !important;
+        --danger-lighter: #FED7D7 !important;
+        --warning-color: #DD6B20 !important;
+        --warning-lighter: #FEEBC8 !important;
+        --info-color: #3182CE !important;
+        --info-lighter: #BEE3F8 !important;
+        
+        /* Neutral Colors */
+        --text-primary: #1A202C !important;
+        --text-secondary: #4A5568 !important;
+        --text-tertiary: #718096 !important;
+        --background-primary: #FFFFFF !important;
+        --background-secondary: #F7FAFC !important;
+        --background-tertiary: #EDF2F7 !important;
+        --border-color: #E2E8F0 !important;
+        --border-color-dark: #CBD5E0 !important;
+    }
+    
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .main-nav, 
+    .app-footer,
+    .sticky-nav {
+        display: none !important;
+    }
+    
+    /* Ensure print text colors */
+    p, span, label, a, div, li, th, td, input, select, textarea, .form-control {
+        color: var(--text-primary) !important;
+    }
+    
+    .table, .table th, .table td {
+        color: var(--text-primary) !important;
+    }
+}
+
+/* Print form template page - white background */
+/* COMMENTING OUT SCREEN-SPECIFIC LIGHT THEME FOR PRINT PAGE */
+/*
+body.print-form-page .main-content {
+    background-color: var(--background-secondary) !important;
+    box-shadow: none !important;
+}
+
+body.print-form-page .print-form-container {
+    background-color: white !important;
+    color: #333 !important;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+body.print-form-page .print-form-container * {
+    color: #333 !important;
+}
+
+body.print-form-page .print-form-container h1,
+body.print-form-page .print-form-container h2,
+body.print-form-page .print-form-container h3,
+body.print-form-page .print-form-container h4,
+body.print-form-page .print-form-container h5,
+body.print-form-page .print-form-container h6 {
+    color: #1c2e5d !important;
+}
+
+body.print-form-page .print-form-container label,
+body.print-form-page .print-form-container .label {
+    color: #555 !important;
+}
+
+body.print-form-page .print-form-container input,
+body.print-form-page .print-form-container textarea,
+body.print-form-page .print-form-container select {
+    background-color: white !important;
+    border: 1px solid #ccc !important;
+    color: #333 !important;
+}
+
+body.print-form-page .container {
+    background-color: transparent !important;
+    box-shadow: none !important;
 } 
+*/ 

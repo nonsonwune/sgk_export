@@ -82,6 +82,35 @@ function highlightDateFilter() {
     }
 }
 
+// Add these constants at the beginning of the file or where chart configurations are defined
+const chartColors = {
+    primary: '#1c2e5d',
+    secondary: '#e1c582',
+    accent: '#64b5f6',
+    success: '#3dd16f',
+    warning: '#ffb74d',
+    danger: '#ff5757',
+    background: '#172444',
+    gridLines: 'rgba(255, 255, 255, 0.1)',
+    text: '#ffffff'
+};
+
+const statusColors = {
+    'pending': '#ffb74d', 
+    'processing': '#64b5f6',
+    'in_transit': '#3dd16f',
+    'delivered': '#ce93d8',  
+    'cancelled': '#ff5757'
+};
+
+const statusTextColors = {
+    'pending': '#3d2e19', 
+    'processing': '#193e5c',
+    'in_transit': '#183e24',
+    'delivered': '#37155a',  
+    'cancelled': '#3d1919'
+};
+
 // Unified initialization function
 async function initializeDashboard() {
     debugLog('Starting dashboard initialization');
@@ -262,28 +291,13 @@ const chartRegistry = {
     }
 };
 
+// Make chartRegistry globally available
+window.chartRegistry = chartRegistry;
+
 function destroyChart(chartId) {
     debugLog(`Cleanup requested for chart: ${chartId}`);
     chartRegistry.destroy(chartId);
 }
-
-// Status color definitions for consistent theming
-const statusColors = {
-    'pending': '#fef3c7',     // Light amber from status-card.pending
-    'processing': '#dbeafe',  // Light blue from status-card.processing
-    'in_transit': '#dcfce7',  // Light green from status-card.in-transit
-    'delivered': '#f3e8ff',   // Light purple from status-card.delivered
-    'cancelled': '#fee2e2'    // Light red for cancelled status
-};
-
-// Status text colors for consistent theming
-const statusTextColors = {
-    'pending': '#d97706',     // Amber text from status-card.pending
-    'processing': '#2563eb',  // Blue text from status-card.processing
-    'in_transit': '#16a34a',  // Green text from status-card.in-transit
-    'delivered': '#7e22ce',   // Purple text from status-card.delivered
-    'cancelled': '#dc2626'    // Red text for cancelled status
-};
 
 // Initialize charts with validated data
 async function initializeCharts() {
@@ -296,6 +310,9 @@ async function initializeCharts() {
         });
         
         const data = await getValidatedChartData();
+        
+        // Get dynamic colors based on current theme
+        const colors = chartColors;
         
         // Initialize shipment trend chart
         const shipmentTrendCtx = document.getElementById('shipmentTrendChart');
@@ -313,7 +330,39 @@ async function initializeCharts() {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                color: colors.gridLines
+                            },
+                            ticks: {
+                                color: colors.text
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: colors.gridLines
+                            },
+                            ticks: {
+                                color: colors.text
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: colors.text
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: colors.background,
+                            titleColor: colors.text,
+                            bodyColor: colors.text,
+                            borderColor: colors.gridLines,
+                            borderWidth: 1
+                        }
+                    }
                 }
             });
             chartRegistry.register('shipmentTrendChart', shipmentChart);
@@ -335,7 +384,39 @@ async function initializeCharts() {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                color: colors.gridLines
+                            },
+                            ticks: {
+                                color: colors.text
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: colors.gridLines
+                            },
+                            ticks: {
+                                color: colors.text
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: colors.text
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: colors.background,
+                            titleColor: colors.text,
+                            bodyColor: colors.text,
+                            borderColor: colors.gridLines,
+                            borderWidth: 1
+                        }
+                    }
                 }
             });
             chartRegistry.register('revenueChart', revenueChart);
@@ -360,6 +441,24 @@ async function initializeCharts() {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                color: colors.gridLines
+                            },
+                            ticks: {
+                                color: colors.text
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: colors.gridLines
+                            },
+                            ticks: {
+                                color: colors.text
+                            }
+                        }
+                    },
                     plugins: {
                         legend: {
                             position: 'right',
@@ -368,10 +467,14 @@ async function initializeCharts() {
                                 padding: 20,
                                 font: {
                                     size: 12
-                                }
+                                },
+                                color: colors.text
                             }
                         },
                         tooltip: {
+                            backgroundColor: colors.background,
+                            titleColor: colors.text,
+                            bodyColor: colors.text,
                             callbacks: {
                                 label: function(context) {
                                     const label = context.label || '';

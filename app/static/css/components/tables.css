@@ -3,10 +3,12 @@
 /* Table Container */
 .table-container {
     background: var(--background-primary);
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
     overflow-x: auto;
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-6);
+    -webkit-overflow-scrolling: touch;
+    position: relative;
 }
 
 /* Table Styles */
@@ -14,23 +16,29 @@
     width: 100%;
     border-collapse: collapse;
     margin: 0;
+    color: var(--text-primary);
 }
 
 /* Table Header */
 .table thead th {
-    background-color: var(--background-secondary);
-    color: var(--text-secondary);
+    background-color: var(--primary-color);
+    color: var(--text-primary);
     font-weight: 600;
     text-align: left;
-    padding: 1rem;
+    padding: var(--space-4);
     border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
 }
 
 /* Table Body */
 .table tbody td {
-    padding: 1rem;
+    padding: var(--space-4);
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
+    transition: background-color var(--transition-fast);
 }
 
 .table tbody tr:last-child td {
@@ -39,101 +47,282 @@
 
 /* Table Row Hover */
 .table tbody tr:hover {
-    background-color: var(--background-secondary);
+    background-color: var(--background-tertiary);
 }
 
 /* Table Actions */
 .table-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--space-2);
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.action-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
+/* Status Indicators */
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: var(--space-2);
 }
 
-.action-button.edit {
-    background-color: var(--info-color);
-    color: white;
+.status-indicator.active {
+    background-color: var(--success-color);
 }
 
-.action-button.edit:hover {
-    background-color: #2b6cb0;
-}
-
-.action-button.delete {
+.status-indicator.inactive {
     background-color: var(--danger-color);
-    color: white;
 }
 
-.action-button.delete:hover {
-    background-color: #c53030;
+.status-indicator.pending {
+    background-color: var(--warning-color);
 }
 
 /* Status Badges */
 .status-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-xl);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-badge.active, .status-badge.confirmed {
+    background-color: var(--success-lighter);
+    color: var(--success-color);
+}
+
+.status-badge.inactive, .status-badge.cancelled {
+    background-color: var(--danger-lighter);
+    color: var(--danger-color);
+}
+
+.status-badge.pending {
+    background-color: var(--warning-lighter);
+    color: var(--warning-color);
+}
+
+.status-badge.processing, .status-badge.in-transit {
+    background-color: var(--info-lighter);
+    color: var(--info-color);
+}
+
+/* Empty State */
+.table-empty-state {
+    padding: var(--space-8);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.table-empty-state i {
+    font-size: 3rem;
+    color: var(--border-color);
+    margin-bottom: var(--space-4);
+}
+
+.table-empty-state h3 {
+    margin-bottom: var(--space-2);
+    font-weight: 600;
+}
+
+/* Table Pagination */
+.table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.pagination-info {
+    color: var(--text-secondary);
     font-size: 0.875rem;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: var(--space-1);
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-md);
+    background-color: var(--background-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.page-link:hover {
+    background-color: var(--background-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color-dark);
+}
+
+.page-item.active .page-link {
+    background-color: var(--secondary-color);
+    color: var(--primary-darker);
+    border-color: var(--secondary-color);
+}
+
+.page-item.disabled .page-link {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Table Card View for Mobile */
+.table-card-view {
+    display: none;
+}
+
+.table-card {
+    background-color: var(--background-primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--space-3);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table-card-header {
+    padding: var(--space-3);
+    background-color: var(--background-secondary);
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-card-body {
+    padding: var(--space-3);
+}
+
+.table-card-row {
+    display: flex;
+    margin-bottom: var(--space-2);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-2);
+}
+
+.table-card-row:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.table-card-label {
+    flex: 0 0 40%;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
-.status-badge.active {
-    background-color: #C6F6D5;
-    color: #22543D;
+.table-card-value {
+    flex: 0 0 60%;
 }
 
-.status-badge.inactive {
-    background-color: #FED7D7;
-    color: #742A2A;
+.table-card-footer {
+    padding: var(--space-3);
+    background-color: var(--background-secondary);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
 }
 
-/* Responsive Tables */
-@media (max-width: 768px) {
-    .table-container {
-        border-radius: 0;
-        box-shadow: none;
+/* Mobile Responsive Table */
+@media (max-width: 1024px) {
+    .table thead th,
+    .table tbody td {
+        padding: var(--space-3);
     }
     
-    .table thead {
+    .table-pagination {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-3);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Option 1: Responsive data-label approach */
+    .table-responsive-stack .table thead {
         display: none;
     }
     
-    .table tbody tr {
+    .table-responsive-stack .table tbody tr {
         display: block;
         border-bottom: 1px solid var(--border-color);
-        padding: 1rem;
+        padding: var(--space-3);
     }
     
-    .table tbody td {
+    .table-responsive-stack .table tbody td {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
+        padding: var(--space-2) 0;
         border: none;
+        text-align: right;
     }
     
-    .table tbody td::before {
+    .table-responsive-stack .table tbody td::before {
         content: attr(data-label);
         font-weight: 600;
         color: var(--text-secondary);
+        text-align: left;
+        padding-right: var(--space-2);
+    }
+    
+    /* Option 2: Card view for mobile */
+    .table-responsive-cards .table-container {
+        display: none;
+    }
+    
+    .table-responsive-cards .table-card-view {
+        display: block;
     }
     
     .table-actions {
-        justify-content: flex-start;
-        margin-top: 1rem;
+        flex-direction: column;
+        width: 100%;
+        gap: var(--space-2);
     }
+    
+    .table-actions .btn,
+    .table-actions .action-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .pagination {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: var(--space-2);
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Accessible Focus States */
+.page-link:focus-visible,
+.table-card:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 } 

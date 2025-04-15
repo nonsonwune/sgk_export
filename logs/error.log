@@ -37730,3 +37730,374 @@ DETAIL:  Failing row contains (54914a49-5249-448d-b947-b33d3496fbe3, null, pendi
 [parameters: {'shipment_id': None, 'shipment_status_history_id': UUID('54914a49-5249-448d-b947-b33d3496fbe3')}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2025-04-15 14:32:47 [26854] [INFO] Handling signal: winch
+2025-04-15 14:52:01 [26854] [INFO] Handling signal: int
+2025-04-15 14:52:01 [26854] [ERROR] Worker (pid:26858) was sent SIGINT!
+2025-04-15 14:52:01 [26854] [ERROR] Worker (pid:26857) was sent SIGINT!
+2025-04-15 14:52:01 [26854] [ERROR] Worker (pid:26855) was sent SIGINT!
+2025-04-15 14:52:01 [26854] [ERROR] Worker (pid:26856) was sent SIGINT!
+2025-04-15 14:52:01 [26854] [INFO] Shutting down: Master
+2025-04-15 14:52:21 [30589] [INFO] Starting gunicorn 21.2.0
+2025-04-15 14:52:21 [30589] [INFO] Listening at: http://0.0.0.0:8000 (30589)
+2025-04-15 14:52:21 [30589] [INFO] Using worker: sync
+2025-04-15 14:52:21 [30615] [INFO] Booting worker with pid: 30615
+2025-04-15 14:52:21 [30616] [INFO] Booting worker with pid: 30616
+2025-04-15 14:52:21 [30617] [INFO] Booting worker with pid: 30617
+2025-04-15 14:52:21 [30618] [INFO] Booting worker with pid: 30618
+2025-04-15 14:53:41 [ERROR] [PID:30618] [app.routes.main] No file found with ID: 67ac96f3000ac8e4ddb3
+2025-04-15 14:55:11 [ERROR] [PID:30616] [app.routes.main] No file found with ID: 67ac96f3000ac8e4ddb3
+2025-04-15 15:01:13 [30589] [INFO] Handling signal: int
+2025-04-15 15:01:13 [30589] [INFO] Shutting down: Master
+2025-04-15 15:01:16 [30979] [INFO] Starting gunicorn 21.2.0
+2025-04-15 15:01:16 [30979] [INFO] Listening at: http://0.0.0.0:8000 (30979)
+2025-04-15 15:01:16 [30979] [INFO] Using worker: sync
+2025-04-15 15:01:16 [30980] [INFO] Booting worker with pid: 30980
+2025-04-15 15:01:16 [30981] [INFO] Booting worker with pid: 30981
+2025-04-15 15:01:16 [30982] [INFO] Booting worker with pid: 30982
+2025-04-15 15:01:16 [30983] [INFO] Booting worker with pid: 30983
+2025-04-15 15:35:09 [30979] [INFO] Handling signal: int
+2025-04-15 15:35:10 [30979] [INFO] Shutting down: Master
+2025-04-15 15:35:15 [33102] [INFO] Starting gunicorn 21.2.0
+2025-04-15 15:35:15 [33102] [INFO] Listening at: http://0.0.0.0:8000 (33102)
+2025-04-15 15:35:15 [33102] [INFO] Using worker: sync
+2025-04-15 15:35:15 [33103] [INFO] Booting worker with pid: 33103
+2025-04-15 15:35:15 [33104] [INFO] Booting worker with pid: 33104
+2025-04-15 15:35:15 [33105] [INFO] Booting worker with pid: 33105
+2025-04-15 15:35:15 [33106] [INFO] Booting worker with pid: 33106
+2025-04-15 15:40:11 [33102] [INFO] Handling signal: term
+2025-04-15 15:40:11 [33102] [ERROR] Worker (pid:33106) was sent SIGTERM!
+2025-04-15 15:40:11 [33102] [ERROR] Worker (pid:33104) was sent SIGTERM!
+2025-04-15 15:40:11 [33102] [ERROR] Worker (pid:33103) was sent SIGTERM!
+2025-04-15 15:40:11 [33102] [ERROR] Worker (pid:33105) was sent SIGTERM!
+2025-04-15 15:40:12 [33102] [INFO] Shutting down: Master
+2025-04-15 15:40:12 [33646] [INFO] Starting gunicorn 21.2.0
+2025-04-15 15:40:12 [33646] [INFO] Listening at: http://0.0.0.0:8000 (33646)
+2025-04-15 15:40:12 [33646] [INFO] Using worker: sync
+2025-04-15 15:40:12 [33664] [INFO] Booting worker with pid: 33664
+2025-04-15 15:40:12 [33669] [INFO] Booting worker with pid: 33669
+2025-04-15 15:40:12 [33670] [INFO] Booting worker with pid: 33670
+2025-04-15 15:40:12 [33671] [INFO] Booting worker with pid: 33671
+2025-04-15 15:43:55 [33732] [INFO] Starting gunicorn 21.2.0
+2025-04-15 15:43:55 [33732] [ERROR] Connection in use: ('0.0.0.0', 8000)
+2025-04-15 15:43:55 [33732] [ERROR] Retrying in 1 second.
+2025-04-15 15:43:56 [33732] [ERROR] Connection in use: ('0.0.0.0', 8000)
+2025-04-15 15:43:56 [33732] [ERROR] Retrying in 1 second.
+2025-04-15 15:43:57 [33732] [ERROR] Connection in use: ('0.0.0.0', 8000)
+2025-04-15 15:43:57 [33732] [ERROR] Retrying in 1 second.
+2025-04-15 15:43:58 [33732] [ERROR] Connection in use: ('0.0.0.0', 8000)
+2025-04-15 15:43:58 [33732] [ERROR] Retrying in 1 second.
+2025-04-15 15:43:59 [33732] [ERROR] Connection in use: ('0.0.0.0', 8000)
+2025-04-15 15:43:59 [33732] [ERROR] Retrying in 1 second.
+2025-04-15 15:44:00 [33732] [ERROR] Can't connect to ('0.0.0.0', 8000)
+2025-04-15 15:44:33 [33646] [INFO] Handling signal: term
+2025-04-15 15:44:33 [33646] [ERROR] Worker (pid:33669) was sent SIGTERM!
+2025-04-15 15:44:33 [33646] [ERROR] Worker (pid:33664) was sent SIGTERM!
+2025-04-15 15:44:33 [33646] [ERROR] Worker (pid:33670) was sent SIGTERM!
+2025-04-15 15:44:33 [33646] [ERROR] Worker (pid:33671) was sent SIGTERM!
+2025-04-15 15:44:33 [33646] [INFO] Shutting down: Master
+2025-04-15 15:44:33 [33832] [INFO] Starting gunicorn 21.2.0
+2025-04-15 15:44:33 [33832] [INFO] Listening at: http://0.0.0.0:8000 (33832)
+2025-04-15 15:44:33 [33832] [INFO] Using worker: sync
+2025-04-15 15:44:33 [33850] [INFO] Booting worker with pid: 33850
+2025-04-15 15:44:33 [33855] [INFO] Booting worker with pid: 33855
+2025-04-15 15:44:34 [33856] [INFO] Booting worker with pid: 33856
+2025-04-15 15:44:34 [33857] [INFO] Booting worker with pid: 33857
+2025-04-15 15:47:33 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:33 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:33 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:34 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:36 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:36 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:36 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:36 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:36 [33832] [INFO] Handling signal: winch
+2025-04-15 15:47:37 [33832] [INFO] Handling signal: winch
+2025-04-15 16:03:21 [33832] [INFO] Handling signal: int
+2025-04-15 16:03:21 [33832] [INFO] Shutting down: Master
+2025-04-15 16:03:28 [35048] [INFO] Starting gunicorn 21.2.0
+2025-04-15 16:03:28 [35048] [INFO] Listening at: http://0.0.0.0:8000 (35048)
+2025-04-15 16:03:28 [35048] [INFO] Using worker: sync
+2025-04-15 16:03:28 [35049] [INFO] Booting worker with pid: 35049
+2025-04-15 16:03:28 [35050] [INFO] Booting worker with pid: 35050
+2025-04-15 16:03:28 [35051] [INFO] Booting worker with pid: 35051
+2025-04-15 16:03:28 [35052] [INFO] Booting worker with pid: 35052
+2025-04-15 16:20:51 [35048] [INFO] Handling signal: int
+2025-04-15 16:20:52 [35048] [ERROR] Worker (pid:35050) was sent SIGINT!
+2025-04-15 16:20:52 [35048] [ERROR] Worker (pid:35049) was sent SIGINT!
+2025-04-15 16:20:52 [35048] [ERROR] Worker (pid:35052) was sent SIGINT!
+2025-04-15 16:20:52 [35048] [ERROR] Worker (pid:35051) was sent SIGINT!
+2025-04-15 16:20:52 [35048] [INFO] Shutting down: Master
+2025-04-15 16:20:56 [36243] [INFO] Starting gunicorn 21.2.0
+2025-04-15 16:20:56 [36243] [INFO] Listening at: http://0.0.0.0:8000 (36243)
+2025-04-15 16:20:56 [36243] [INFO] Using worker: sync
+2025-04-15 16:20:56 [36244] [INFO] Booting worker with pid: 36244
+2025-04-15 16:20:56 [36245] [INFO] Booting worker with pid: 36245
+2025-04-15 16:20:56 [36246] [INFO] Booting worker with pid: 36246
+2025-04-15 16:20:56 [36247] [INFO] Booting worker with pid: 36247
+2025-04-15 16:26:50 [36243] [INFO] Handling signal: int
+2025-04-15 16:26:50 [36243] [INFO] Shutting down: Master
+2025-04-15 16:26:52 [36689] [INFO] Starting gunicorn 21.2.0
+2025-04-15 16:26:52 [36689] [INFO] Listening at: http://0.0.0.0:8000 (36689)
+2025-04-15 16:26:52 [36689] [INFO] Using worker: sync
+2025-04-15 16:26:52 [36690] [INFO] Booting worker with pid: 36690
+2025-04-15 16:26:52 [36691] [INFO] Booting worker with pid: 36691
+2025-04-15 16:26:52 [36692] [INFO] Booting worker with pid: 36692
+2025-04-15 16:26:52 [36693] [INFO] Booting worker with pid: 36693
+2025-04-15 16:34:23 [36689] [INFO] Handling signal: int
+2025-04-15 16:34:23 [36689] [INFO] Shutting down: Master
+2025-04-15 16:34:32 [37133] [INFO] Starting gunicorn 21.2.0
+2025-04-15 16:34:32 [37133] [INFO] Listening at: http://0.0.0.0:8000 (37133)
+2025-04-15 16:34:32 [37133] [INFO] Using worker: sync
+2025-04-15 16:34:32 [37134] [INFO] Booting worker with pid: 37134
+2025-04-15 16:34:32 [37135] [INFO] Booting worker with pid: 37135
+2025-04-15 16:34:32 [37136] [INFO] Booting worker with pid: 37136
+2025-04-15 16:34:32 [37137] [INFO] Booting worker with pid: 37137
+2025-04-15 16:39:09 [37133] [INFO] Handling signal: int
+2025-04-15 16:39:09 [37133] [ERROR] Worker (pid:37136) was sent SIGINT!
+2025-04-15 16:39:09 [37133] [ERROR] Worker (pid:37134) was sent SIGINT!
+2025-04-15 16:39:09 [37133] [ERROR] Worker (pid:37135) was sent SIGINT!
+2025-04-15 16:39:09 [37133] [ERROR] Worker (pid:37137) was sent SIGINT!
+2025-04-15 16:39:09 [37133] [INFO] Shutting down: Master
+2025-04-15 16:39:16 [37497] [INFO] Starting gunicorn 21.2.0
+2025-04-15 16:39:16 [37497] [INFO] Listening at: http://0.0.0.0:8000 (37497)
+2025-04-15 16:39:16 [37497] [INFO] Using worker: sync
+2025-04-15 16:39:16 [37498] [INFO] Booting worker with pid: 37498
+2025-04-15 16:39:16 [37499] [INFO] Booting worker with pid: 37499
+2025-04-15 16:39:16 [37500] [INFO] Booting worker with pid: 37500
+2025-04-15 16:39:16 [37501] [INFO] Booting worker with pid: 37501
+2025-04-15 16:54:56 [37497] [INFO] Handling signal: int
+2025-04-15 16:54:56 [37497] [ERROR] Worker (pid:37499) was sent SIGINT!
+2025-04-15 16:54:56 [37497] [ERROR] Worker (pid:37498) was sent SIGINT!
+2025-04-15 16:54:56 [37497] [ERROR] Worker (pid:37501) was sent SIGINT!
+2025-04-15 16:54:56 [37497] [ERROR] Worker (pid:37500) was sent SIGINT!
+2025-04-15 16:54:56 [37497] [INFO] Shutting down: Master
+2025-04-15 16:54:59 [38230] [INFO] Starting gunicorn 21.2.0
+2025-04-15 16:54:59 [38230] [INFO] Listening at: http://0.0.0.0:8000 (38230)
+2025-04-15 16:54:59 [38230] [INFO] Using worker: sync
+2025-04-15 16:54:59 [38231] [INFO] Booting worker with pid: 38231
+2025-04-15 16:54:59 [38232] [INFO] Booting worker with pid: 38232
+2025-04-15 16:54:59 [38233] [INFO] Booting worker with pid: 38233
+2025-04-15 16:54:59 [38234] [INFO] Booting worker with pid: 38234
+2025-04-15 18:09:09 [38230] [INFO] Handling signal: int
+2025-04-15 18:09:10 [38230] [ERROR] Worker (pid:38233) was sent SIGINT!
+2025-04-15 18:09:10 [38230] [ERROR] Worker (pid:38232) was sent SIGINT!
+2025-04-15 18:09:10 [38230] [ERROR] Worker (pid:38231) was sent SIGINT!
+2025-04-15 18:09:10 [38230] [ERROR] Worker (pid:38234) was sent SIGINT!
+2025-04-15 18:09:10 [38230] [INFO] Shutting down: Master
+2025-04-15 18:09:30 [41337] [INFO] Starting gunicorn 21.2.0
+2025-04-15 18:09:30 [41337] [INFO] Listening at: http://0.0.0.0:8000 (41337)
+2025-04-15 18:09:30 [41337] [INFO] Using worker: sync
+2025-04-15 18:09:30 [41338] [INFO] Booting worker with pid: 41338
+2025-04-15 18:09:30 [41339] [INFO] Booting worker with pid: 41339
+2025-04-15 18:09:30 [41340] [INFO] Booting worker with pid: 41340
+2025-04-15 18:09:30 [41341] [INFO] Booting worker with pid: 41341
+2025-04-15 18:25:07 [41337] [INFO] Handling signal: int
+2025-04-15 18:25:07 [41337] [ERROR] Worker (pid:41338) was sent SIGINT!
+2025-04-15 18:25:07 [41337] [ERROR] Worker (pid:41340) was sent SIGINT!
+2025-04-15 18:25:07 [41337] [ERROR] Worker (pid:41339) was sent SIGINT!
+2025-04-15 18:25:07 [41337] [ERROR] Worker (pid:41341) was sent SIGINT!
+2025-04-15 18:25:07 [41337] [INFO] Shutting down: Master
+2025-04-15 18:25:15 [43147] [INFO] Starting gunicorn 21.2.0
+2025-04-15 18:25:15 [43147] [INFO] Listening at: http://0.0.0.0:8000 (43147)
+2025-04-15 18:25:15 [43147] [INFO] Using worker: sync
+2025-04-15 18:25:16 [43148] [INFO] Booting worker with pid: 43148
+2025-04-15 18:25:16 [43149] [INFO] Booting worker with pid: 43149
+2025-04-15 18:25:16 [43150] [INFO] Booting worker with pid: 43150
+2025-04-15 18:25:16 [43151] [INFO] Booting worker with pid: 43151
+2025-04-15 18:25:29 [ERROR] [PID:43148] [app] Error loading print form template: Object of type Undefined is not JSON serializable
+2025-04-15 18:25:29 [ERROR] [PID:43148] [app] Stack trace:
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 298, in print_form_template
+    return render_template('shipments/print_form_template.html',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 184, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 241, in block 'content'
+    <button class="btn btn-primary print-button" data-shipment='{{ shipment_data|tojson }}'>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1702, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/utils.py", line 658, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2025-04-15 18:25:36 [ERROR] [PID:43151] [app] Error loading print form template: Object of type Undefined is not JSON serializable
+2025-04-15 18:25:36 [ERROR] [PID:43151] [app] Stack trace:
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 298, in print_form_template
+    return render_template('shipments/print_form_template.html',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 184, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 241, in block 'content'
+    <button class="btn btn-primary print-button" data-shipment='{{ shipment_data|tojson }}'>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1702, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/utils.py", line 658, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2025-04-15 18:25:38 [ERROR] [PID:43150] [app] Error loading print form template: Object of type Undefined is not JSON serializable
+2025-04-15 18:25:38 [ERROR] [PID:43150] [app] Stack trace:
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 298, in print_form_template
+    return render_template('shipments/print_form_template.html',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 184, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 241, in block 'content'
+    <button class="btn btn-primary print-button" data-shipment='{{ shipment_data|tojson }}'>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1702, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/utils.py", line 658, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2025-04-15 18:28:21 [ERROR] [PID:43151] [app] Error loading print form template: Object of type Undefined is not JSON serializable
+2025-04-15 18:28:21 [ERROR] [PID:43151] [app] Stack trace:
+Traceback (most recent call last):
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/routes/main.py", line 298, in print_form_template
+    'createdAt': datetime.now().isoformat(),
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/base.html", line 184, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/app/templates/shipments/print_form_template.html", line 241, in block 'content'
+    <button class="btn btn-primary print-button" data-shipment='{{ shipment_data|tojson }}'>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/filters.py", line 1702, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/jinja2/utils.py", line 658, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/nonsonwune/Desktop/personal_projects/sgk_export/venv/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2025-04-15 18:29:20 [43147] [INFO] Handling signal: int
+2025-04-15 18:29:20 [43147] [ERROR] Worker (pid:43151) was sent SIGINT!
+2025-04-15 18:29:20 [43147] [ERROR] Worker (pid:43149) was sent SIGINT!
+2025-04-15 18:29:20 [43147] [ERROR] Worker (pid:43148) was sent SIGINT!
+2025-04-15 18:29:20 [43147] [ERROR] Worker (pid:43150) was sent SIGINT!
+2025-04-15 18:29:20 [43147] [INFO] Shutting down: Master
+2025-04-15 18:29:23 [43304] [INFO] Starting gunicorn 21.2.0
+2025-04-15 18:29:23 [43304] [INFO] Listening at: http://0.0.0.0:8000 (43304)
+2025-04-15 18:29:23 [43304] [INFO] Using worker: sync
+2025-04-15 18:29:23 [43307] [INFO] Booting worker with pid: 43307
+2025-04-15 18:29:23 [43308] [INFO] Booting worker with pid: 43308
+2025-04-15 18:29:23 [43309] [INFO] Booting worker with pid: 43309
+2025-04-15 18:29:23 [43310] [INFO] Booting worker with pid: 43310
+2025-04-15 18:33:03 [43304] [INFO] Handling signal: int
+2025-04-15 18:33:04 [43304] [INFO] Shutting down: Master
+2025-04-15 18:33:06 [43942] [INFO] Starting gunicorn 21.2.0
+2025-04-15 18:33:06 [43942] [INFO] Listening at: http://0.0.0.0:8000 (43942)
+2025-04-15 18:33:06 [43942] [INFO] Using worker: sync
+2025-04-15 18:33:06 [43943] [INFO] Booting worker with pid: 43943
+2025-04-15 18:33:06 [43944] [INFO] Booting worker with pid: 43944
+2025-04-15 18:33:06 [43945] [INFO] Booting worker with pid: 43945
+2025-04-15 18:33:06 [43946] [INFO] Booting worker with pid: 43946

@@ -1,12 +1,49 @@
 /* Preview Container Styles */
 .preview-container {
-    background: #ffffff;
+    background: var(--background-primary);
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     overflow: hidden;
     margin: 2rem auto;
     max-width: 1200px;
     padding: 2rem;
+}
+
+/* Ensure all text is visible */
+.preview-container * {
+    color: var(--text-primary);
+}
+
+/* Ensure headers are visible */
+.company-info h1 {
+    color: var(--text-primary) !important;
+}
+
+/* Force all table text to be visible */
+.items-table,
+.items-table table,
+.items-table thead,
+.items-table tbody,
+.items-table tr,
+.items-table th,
+.items-table td {
+    color: var(--text-primary) !important;
+}
+
+.items-table .view-images-btn {
+    color: #4169E1 !important;
+}
+
+.items-table .view-images-btn i {
+    color: #4169E1 !important;
+}
+
+.items-table .view-images-btn:hover {
+    color: white !important;
+}
+
+.items-table .view-images-btn:hover i {
+    color: white !important;
 }
 
 /* Document Header Styles */
@@ -50,7 +87,7 @@
     margin: 0;
     font-size: 2.2rem;
     letter-spacing: -0.5px;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 /* Document Meta Styles */
@@ -66,7 +103,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: #4a5568;
+    color: var(--text-primary);
 }
 
 /* QR Code Section */
@@ -83,9 +120,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8f9fa;
+    background: var(--background-tertiary);
     border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
 }
 
 .qr-code-image {
@@ -95,7 +132,7 @@
 
 .qr-code-label {
     font-size: 0.9rem;
-    color: #718096;
+    color: var(--text-primary);
 }
 
 /* Info Section Styles */
@@ -112,8 +149,8 @@
 
 /* Card Styles */
 .info-card {
-    background: #ffffff;
-    border: 1px solid #eef0f3;
+    background: var(--background-tertiary);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.2s ease;
@@ -124,9 +161,9 @@
 }
 
 .card-header {
-    background: #f8f9fe;
+    background: var(--background-secondary);
     padding: 1.25rem;
-    border-bottom: 1px solid #eef0f3;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -134,14 +171,14 @@
 
 .card-header i {
     font-size: 1.4rem;
-    color: #4169E1;
+    color: var(--secondary-color);
 }
 
 .card-header h2 {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 600;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .info-content {
@@ -154,7 +191,7 @@
     grid-template-columns: 120px 1fr;
     gap: 1rem;
     padding: 0.75rem 0;
-    border-bottom: 1px solid #f5f6f8;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .info-row:last-child {
@@ -162,19 +199,19 @@
 }
 
 .label {
-    color: #718096;
+    color: var(--text-secondary);
     font-weight: 500;
     font-size: 0.95rem;
 }
 
 .value {
-    color: #2d3748;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 /* Table Styles */
 .items-table {
-    border: 1px solid #eef0f3;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
     margin: 1.5rem;
@@ -186,22 +223,23 @@
 }
 
 .items-table th {
-    background: #f8f9fe;
+    background: var(--background-secondary);
     padding: 1rem;
     text-align: left;
-    color: #4169E1;
+    color: var(--text-primary);
     font-weight: 600;
-    border-bottom: 2px solid #eef0f3;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .items-table td {
     padding: 1rem;
-    border-bottom: 1px solid #eef0f3;
+    border-bottom: 1px solid var(--border-color);
     vertical-align: top;
+    color: var(--text-primary);
 }
 
 .items-table tr:nth-child(even) {
-    background: #fafbff;
+    background: var(--background-tertiary);
 }
 
 /* Financial Summary Styles */
@@ -218,17 +256,17 @@
 }
 
 .total-section {
-    background: #f8f9fe;
+    background: var(--background-tertiary);
     padding: 1.5rem;
     border-radius: 8px;
-    border: 1px solid #eef0f3;
+    border: 1px solid var(--border-color);
 }
 
 .total-row {
     display: flex;
     justify-content: space-between;
     padding: 0.75rem 0;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .total-row.final {
@@ -236,7 +274,7 @@
     font-weight: 600;
     padding-top: 1rem;
     margin-top: 1rem;
-    border-top: 2px solid #eef0f3;
+    border-top: 2px solid var(--border-color);
 }
 
 /* Action Buttons */
@@ -245,8 +283,8 @@
     gap: 1rem;
     justify-content: flex-end;
     padding: 2rem 3rem;
-    background: #f8f9fe;
-    border-top: 1px solid #eef0f3;
+    background: var(--background-secondary);
+    border-top: 1px solid var(--border-color);
 }
 
 .action-button {

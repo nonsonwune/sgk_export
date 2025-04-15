@@ -1,0 +1,123 @@
+/* Footer Component Styles */
+
+.app-footer {
+    padding: var(--space-6) 0;
+    background-color: var(--background-primary);
+    border-top: none;
+    margin-top: var(--space-8);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Add a subtle shadow at the top to create separation instead of a border */
+.app-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, 
+        rgba(42, 63, 120, 0), 
+        rgba(42, 63, 120, 0.7), 
+        rgba(42, 63, 120, 0));
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    background-color: var(--background-primary);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    box-sizing: border-box;
+}
+
+.footer-company {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background-color: var(--background-primary);
+}
+
+.footer-company p {
+    margin: 0;
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+}
+
+.footer-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    background-color: var(--background-primary);
+}
+
+.footer-links a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-4);
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+/* Force dark theme for all footer components and ensure no white space anywhere */
+.app-footer,
+.app-footer *,
+.footer-content,
+.footer-company,
+.footer-links,
+.footer-links a,
+.container .app-footer,
+.app-footer .container {
+    background-color: var(--background-primary) !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix for extra white space around footer */
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-footer {
+    margin-top: auto;
+} 

@@ -203,6 +203,12 @@ function initializeAlerts() {
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content
+    },
+    beforeSend: function(xhr, settings) {
+        // Only add the CSRF token for POST, PUT, DELETE requests
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]')?.content);
+        }
     }
 });
 

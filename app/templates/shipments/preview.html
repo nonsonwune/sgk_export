@@ -6,6 +6,37 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/preview.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/modal.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/print.css') }}">
+<style>
+    /* Fix visibility issues */
+    .company-info h1 {
+        color: var(--text-primary) !important;
+    }
+    
+    .items-table table {
+        color: var(--text-primary) !important;
+    }
+    
+    .items-table th, 
+    .items-table td {
+        color: var(--text-primary) !important;
+    }
+    
+    .items-table .view-images-btn {
+        color: #4169E1 !important;
+    }
+    
+    .items-table .view-images-btn i {
+        color: #4169E1 !important;
+    }
+    
+    .items-table .view-images-btn:hover {
+        color: white !important;
+    }
+    
+    .items-table .view-images-btn:hover i {
+        color: white !important;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -288,6 +319,7 @@
         <div class="action-buttons">
             {% if shipment.status == 'pending' %}
             <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="confirmed">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-check"></i> Mark as Confirmed
@@ -295,6 +327,7 @@
             </form>
             {% elif shipment.status == 'confirmed' %}
             <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="processing">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-cog"></i> Mark as Processing
@@ -302,6 +335,7 @@
             </form>
             {% elif shipment.status == 'processing' %}
             <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="in_transit">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-truck"></i> Mark as In Transit
@@ -309,6 +343,7 @@
             </form>
             {% elif shipment.status == 'in_transit' %}
             <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="delivered">
                 <button type="submit" class="action-button primary">
                     <i class="fas fa-box-check"></i> Mark as Delivered
@@ -317,6 +352,7 @@
             {% endif %}
             {% if shipment.status not in ['cancelled', 'delivered'] %}
             <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="cancelled">
                 <button type="submit" class="action-button danger">
                     <i class="fas fa-times"></i> Cancel Shipment

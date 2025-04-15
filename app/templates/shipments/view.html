@@ -2,6 +2,50 @@
 
 {% block title %}View Shipment - {{ shipment.waybill_number }}{% endblock %}
 
+{% block extra_head %}
+<style>
+    /* Ensure all text in tables is visible in card context */
+    .card {
+        background-color: var(--background-primary) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .card-header h2 {
+        color: var(--text-primary) !important;
+    }
+    
+    .card-body h4 {
+        color: var(--text-primary) !important;
+    }
+    
+    .table {
+        color: var(--text-primary) !important;
+    }
+    
+    .table th, 
+    .table td {
+        color: var(--text-primary) !important;
+        border-color: var(--border-color) !important;
+    }
+    
+    .table-primary, 
+    .table-primary > th, 
+    .table-primary > td {
+        background-color: var(--primary-darker) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        font-size: 0.75em;
+        font-weight: 700;
+        line-height: 1;
+        border-radius: 0.25rem;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
     <div class="card">
