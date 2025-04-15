@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
 from flask_login import login_required, current_user
 from ..models.shipment import Shipment, ShipmentItem, ShipmentStatusHistory
-from ..utils.appwrite import upload_file, delete_file
+from ..utils.file_storage import upload_file, delete_file
 from ..utils.helpers import calculate_subtotal, calculate_vat, generate_qr_code
 from ..extensions import db
 import logging

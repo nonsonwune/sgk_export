@@ -6,8 +6,8 @@ from sqlalchemy import func, case
 import logging
 from datetime import datetime, timedelta
 import os
-from appwrite.client import Client
-from ..utils.appwrite import init_appwrite
+import mimetypes
+from ..utils.file_storage import get_upload_path
 from app.models import ExportRequest
 
 logger = logging.getLogger(__name__)
@@ -349,47 +349,38 @@ def reports():
 
 @bp.route('/uploads/<path:file_id>')
 def serve_image(file_id):
-    """Serve uploaded images"""
+    """Serve uploaded images from local storage"""
     logger.debug(f'Attempting to serve image with file_id: {file_id}')
     try:
-        # Initialize Appwrite storage
-        storage = init_appwrite()
-        logger.debug('Initialized Appwrite storage')
+        # Get upload folder path
+        upload_path = get_upload_path()
+        logger.debug(f'Upload path: {upload_path}')
         
-        try:
-            bucket_id = current_app.config['APPWRITE_BUCKET_ID']
-            logger.debug(f'Getting file from Appwrite - bucket: {bucket_id}, file: {file_id}')
-            
-            # First get the file details to determine content type
-            file_details = storage.get_file(
-                bucket_id=bucket_id,
-                file_id=file_id
-            )
-            logger.debug(f'Got file details from Appwrite: {file_details["mimeType"]}')
-            
-            # Get the actual file data
-            file_response = storage.get_file_download(
-                bucket_id=bucket_id,
-                file_id=file_id
-            )
-            logger.debug('Successfully retrieved file data from Appwrite')
-            
-            # Create response with proper mime type
-            response = current_app.response_class(
-                file_response,
-                mimetype=file_details['mimeType']
-            )
-            
-            # Add caching headers
-            response.headers['Cache-Control'] = 'public, max-age=3600'
-            
-            logger.debug(f'Sending file response with mime type: {file_details["mimeType"]}')
-            return response
-            
-        except Exception as e:
-            logger.error(f'Error getting file from Appwrite: {str(e)}', exc_info=True)
-            return 'File not found', 404
-            
+        # Find the file with the given file_id (could have different extensions)
+        for filename in os.listdir(upload_path):
+            if filename.startswith(file_id):
+                file_path = os.path.join(upload_path, filename)
+                logger.debug(f'Found file: {file_path}')
+                
+                # Determine content type
+                content_type, _ = mimetypes.guess_type(file_path)
+                if not content_type:
+                    content_type = 'application/octet-stream'
+                
+                logger.debug(f'Serving file with content type: {content_type}')
+                
+                # Return the file with proper mimetype
+                return send_from_directory(
+                    upload_path, 
+                    filename,
+                    mimetype=content_type,
+                    as_attachment=False,
+                    max_age=3600
+                )
+        
+        logger.error(f'No file found with ID: {file_id}')
+        return 'File not found', 404
+                
     except Exception as e:
         logger.error(f'Error serving image: {str(e)}', exc_info=True)
         return 'Error serving image', 500

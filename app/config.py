@@ -4,14 +4,9 @@ class Config:
     """Base configuration."""
     SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secure-key-here')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # Upload folder configuration for local file storage
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
     TEMPLATES_AUTO_RELOAD = True
-    
-    # AppWrite configuration
-    APPWRITE_ENDPOINT = os.environ.get('APPWRITE_ENDPOINT', 'https://cloud.appwrite.io/v1')
-    APPWRITE_PROJECT_ID = os.environ.get('APPWRITE_PROJECT_ID')
-    APPWRITE_BUCKET_ID = os.environ.get('APPWRITE_BUCKET_ID')
-    APPWRITE_API_KEY = os.environ.get('APPWRITE_API_KEY')
     
     # Database configuration
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
