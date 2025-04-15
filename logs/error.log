@@ -38101,3 +38101,58 @@ TypeError: Object of type Undefined is not JSON serializable
 2025-04-15 18:33:06 [43944] [INFO] Booting worker with pid: 43944
 2025-04-15 18:33:06 [43945] [INFO] Booting worker with pid: 43945
 2025-04-15 18:33:06 [43946] [INFO] Booting worker with pid: 43946
+2025-04-15 20:18:34 [43942] [CRITICAL] WORKER TIMEOUT (pid:43943)
+2025-04-15 20:18:35 [43942] [CRITICAL] WORKER TIMEOUT (pid:43944)
+2025-04-15 20:18:35 [43942] [CRITICAL] WORKER TIMEOUT (pid:43945)
+2025-04-15 20:18:35 [43942] [CRITICAL] WORKER TIMEOUT (pid:43946)
+2025-04-15 20:18:37 [43942] [ERROR] Worker (pid:43943) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 20:18:37 [43942] [ERROR] Worker (pid:43946) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 20:18:37 [45851] [INFO] Booting worker with pid: 45851
+2025-04-15 20:18:37 [43942] [ERROR] Worker (pid:43944) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 20:18:37 [43942] [ERROR] Worker (pid:43945) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 20:18:37 [45852] [INFO] Booting worker with pid: 45852
+2025-04-15 20:18:37 [45853] [INFO] Booting worker with pid: 45853
+2025-04-15 20:18:37 [45854] [INFO] Booting worker with pid: 45854
+2025-04-15 20:24:17 [43942] [INFO] Handling signal: int
+2025-04-15 20:24:18 [43942] [INFO] Shutting down: Master
+2025-04-15 20:24:33 [46442] [INFO] Starting gunicorn 21.2.0
+2025-04-15 20:24:33 [46442] [INFO] Listening at: http://0.0.0.0:8000 (46442)
+2025-04-15 20:24:33 [46442] [INFO] Using worker: sync
+2025-04-15 20:24:33 [46443] [INFO] Booting worker with pid: 46443
+2025-04-15 20:24:33 [46444] [INFO] Booting worker with pid: 46444
+2025-04-15 20:24:33 [46445] [INFO] Booting worker with pid: 46445
+2025-04-15 20:24:33 [46446] [INFO] Booting worker with pid: 46446
+2025-04-15 20:59:00 [46442] [INFO] Handling signal: int
+2025-04-15 20:59:00 [46442] [ERROR] Worker (pid:46444) was sent SIGINT!
+2025-04-15 20:59:00 [46442] [ERROR] Worker (pid:46443) was sent SIGINT!
+2025-04-15 20:59:00 [46442] [ERROR] Worker (pid:46446) was sent SIGINT!
+2025-04-15 20:59:00 [46442] [ERROR] Worker (pid:46445) was sent SIGINT!
+2025-04-15 20:59:00 [46442] [INFO] Shutting down: Master
+2025-04-15 20:59:08 [48437] [INFO] Starting gunicorn 21.2.0
+2025-04-15 20:59:08 [48437] [INFO] Listening at: http://0.0.0.0:8000 (48437)
+2025-04-15 20:59:08 [48437] [INFO] Using worker: sync
+2025-04-15 20:59:08 [48438] [INFO] Booting worker with pid: 48438
+2025-04-15 20:59:08 [48439] [INFO] Booting worker with pid: 48439
+2025-04-15 20:59:08 [48440] [INFO] Booting worker with pid: 48440
+2025-04-15 20:59:08 [48441] [INFO] Booting worker with pid: 48441
+2025-04-15 21:08:04 [48437] [INFO] Handling signal: int
+2025-04-15 21:08:05 [48437] [INFO] Shutting down: Master
+2025-04-15 21:08:11 [49139] [INFO] Starting gunicorn 21.2.0
+2025-04-15 21:08:11 [49139] [INFO] Listening at: http://0.0.0.0:8000 (49139)
+2025-04-15 21:08:11 [49139] [INFO] Using worker: sync
+2025-04-15 21:08:11 [49140] [INFO] Booting worker with pid: 49140
+2025-04-15 21:08:11 [49141] [INFO] Booting worker with pid: 49141
+2025-04-15 21:08:11 [49143] [INFO] Booting worker with pid: 49143
+2025-04-15 21:08:11 [49144] [INFO] Booting worker with pid: 49144
+2025-04-15 22:45:26 [49139] [CRITICAL] WORKER TIMEOUT (pid:49140)
+2025-04-15 22:45:26 [49139] [CRITICAL] WORKER TIMEOUT (pid:49141)
+2025-04-15 22:45:26 [49139] [CRITICAL] WORKER TIMEOUT (pid:49143)
+2025-04-15 22:45:26 [49139] [CRITICAL] WORKER TIMEOUT (pid:49144)
+2025-04-15 22:45:27 [49139] [ERROR] Worker (pid:49141) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 22:45:27 [49139] [ERROR] Worker (pid:49143) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 22:45:27 [49139] [ERROR] Worker (pid:49140) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 22:45:27 [49139] [ERROR] Worker (pid:49144) was sent SIGKILL! Perhaps out of memory?
+2025-04-15 22:45:27 [55418] [INFO] Booting worker with pid: 55418
+2025-04-15 22:45:27 [55421] [INFO] Booting worker with pid: 55421
+2025-04-15 22:45:27 [55422] [INFO] Booting worker with pid: 55422
+2025-04-15 22:45:27 [55423] [INFO] Booting worker with pid: 55423
