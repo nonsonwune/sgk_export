@@ -342,13 +342,13 @@
     margin-right: 0.5rem;
 }
 
-.status-badge.status-pending { background-color: #fff3cd; color: #856404; }
-.status-badge.status-confirmed { background-color: #cce5ff; color: #004085; }
-.status-badge.status-processing { background-color: #d4edda; color: #155724; }
-.status-badge.status-in_transit { background-color: #e2e3e5; color: #383d41; }
-.status-badge.status-delivered { background-color: #d1e7dd; color: #0f5132; }
-.status-badge.status-cancelled { background-color: #f8d7da; color: #721c24; }
-.status-badge.status-saved { background-color: #e2e3e5; color: #383d41; }
+.status-badge.status-pending { background-color: #856404; color: #856404; }
+.status-badge.status-confirmed { background-color: #004085; color: #004085; }
+.status-badge.status-processing { background-color: #155724; color: #155724; }
+.status-badge.status-in_transit { background-color: #383d41; color: #383d41; }
+.status-badge.status-delivered { background-color: #0f5132; color: #0f5132; }
+.status-badge.status-cancelled { background-color: #721c24; color: #721c24; }
+.status-badge.status-saved { background-color: #383d41; color: #383d41; }
 
 /* Signature Styles */
 .signature-container {

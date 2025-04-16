@@ -22,10 +22,26 @@
         color: var(--text-primary) !important;
     }
     
-    .table th, 
-    .table td {
+    /* Make table headers more visible with themed background */
+    .table thead th,
+    .table th {
+        color: white !important;
+        border-color: var(--border-color) !important;
+        background-color: var(--primary-color) !important;
+        font-weight: bold !important;
+    }
+    
+    /* Use contrasting colors for odd/even rows */
+    .table tbody tr:nth-child(odd) td {
         color: var(--text-primary) !important;
         border-color: var(--border-color) !important;
+        background-color: var(--background-tertiary) !important;
+    }
+    
+    .table tbody tr:nth-child(even) td {
+        color: var(--primary-darker) !important;
+        border-color: var(--border-color) !important;
+        background-color: #ffffff !important;
     }
     
     .table-primary, 

@@ -5,243 +5,50 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/print.css') }}">
 <style>
-    /* Consistent print styling */
-    @media print {
-        @page {
-            size: A4;
-            margin: 0;
-        }
-        .main-nav, .action-buttons, .screen-controls, .footer { 
-            display: none !important; 
-        }
-        body { 
-            font-size: 11pt;
-            line-height: 1.3;
-            background: white !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-        .print-form {
-            width: 210mm;
-            padding: 20mm !important;
-            margin: 0 auto !important;
-            box-shadow: none !important;
-            background: white !important;
-        }
-        .section-title {
-            background-color: #f8f9fe !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-        .items-table th {
-            background-color: #f8f9fe !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-        .items-table tr:nth-child(even) td {
-            background-color: #f8f9fe !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-    }
-
-    .print-form {
-        max-width: 210mm;  /* A4 width */
-        margin: 2rem auto;
-        padding: 20mm;
-        background: white;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        color: #1A202C;
-    }
-    
-    /* Ensure all text in print form is visible against its background */
-    .print-form * {
-        color: #1A202C !important;
-    }
-
-    .company-header {
-        text-align: center;
-        margin-bottom: 5mm;
-        padding-bottom: 5mm;
-        border-bottom: 2px solid #4169E1;
-    }
-    
-    .company-header h1,
-    .company-header p {
-        color: #1A202C !important;
-    }
-
-    .company-logo {
-        width: 100px;
-        height: auto;
-        margin-bottom: 2mm;
-    }
-
-    .company-header h1 {
-        margin: 3mm 0 2mm;
-        font-size: 24pt;
-        font-weight: 600;
-        color: #1A202C !important;
-    }
-
-    .company-header p {
-        margin: 0;
-        font-size: 12pt;
-        color: #1A202C !important;
-    }
-
-    .form-section {
-        margin-bottom: 6mm;
-        page-break-inside: avoid;
-    }
-
+    /* Fix section title visibility */
     .section-title {
-        font-size: 12pt;
-        font-weight: 600;
-        margin-bottom: 3mm;
-        background: #f8f9fe;
-        padding: 2mm 3mm;
-        border-left: 4px solid #4169E1;
-        display: flex;
-        align-items: center;
-        gap: 3mm;
-        color: #1A202C !important;
-    }
-
-    .section-title i {
-        color: #4169E1 !important;
-    }
-
-    .input-row {
-        display: flex;
-        margin-bottom: 3mm;
-        align-items: baseline;
-    }
-
-    .input-label {
-        width: 25%;
-        font-weight: 500;
-        padding-right: 3mm;
-        color: #1A202C !important;
-    }
-
-    .input-field {
-        width: 75%;
-        border-bottom: 1px solid #e2e8f0;
-        min-height: 6mm;
-        padding: 1mm 0;
-        color: #1A202C !important;
-    }
-
-    .items-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 2mm 0 6mm;
-    }
-
-    .items-table th {
-        background: #f8f9fe;
-        color: #1A202C !important;
-        font-weight: 600;
-        text-align: left;
-        padding: 2mm 3mm;
-        border: 1px solid #e2e8f0;
-    }
-
-    .items-table td {
-        padding: 3mm;
-        border: 1px solid #e2e8f0;
-        height: 7mm;
-        color: #1A202C !important;
-    }
-
-    .items-table tr:nth-child(even) td {
-        background: #f8f9fe;
-    }
-
-    .signature-section {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10mm;
-        page-break-inside: avoid;
-    }
-
-    .signature-box {
-        width: 45%;
-    }
-
-    .signature-line {
-        border-top: 1px solid #4169E1;
-        margin-top: 15mm;
-        padding-top: 2mm;
-        text-align: center;
-        color: #1A202C !important;
-    }
-
-    .manual-input {
-        display: inline-block;
-        min-width: 150px;
-        border-bottom: 1px solid #000;
-        text-align: center;
-        color: #1A202C !important;
-    }
-
-    .required-note {
-        margin: 3mm 0;
-        color: #1A202C !important;
-        font-size: 0.9em;
-    }
-
-    .screen-controls {
-        margin-bottom: 4mm;
-        text-align: right;
-    }
-
-    .print-button {
-        padding: 2mm 4mm;
-        background: #4169E1;
+        background-color: var(--primary-color) !important;
         color: white !important;
-        border: none;
-        border-radius: 2mm;
-        cursor: pointer;
-        font-size: 11pt;
-        display: inline-flex;
-        align-items: center;
-        gap: 2mm;
-    }
-
-    .print-button:hover {
-        background: #3154b4;
+        font-weight: bold !important;
+        padding: 8px 12px !important;
+        border-radius: 4px !important;
+        border-left: 4px solid var(--secondary-color) !important;
     }
     
-    /* Fix for dark mode */
-    body.print-form-page .main-content {
-        background-color: var(--background-secondary) !important;
+    .section-title i {
+        color: var(--secondary-color) !important;
+        margin-right: 8px !important;
     }
     
-    body.print-form-page .container {
-        background-color: transparent !important;
+    /* Ensure all table headers are visible */
+    .items-table th {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+        font-weight: bold !important;
+        border-color: var(--border-color) !important;
     }
     
-    /* Text color fixes for dark mode */
-    .print-form h1,
-    .print-form p,
-    .print-form .required-note,
-    .print-form .input-label,
-    .print-form .section-title,
-    .print-form .signature-line {
-        color: var(--text-primary) !important;
+    /* Fix other text elements for visibility */
+    .input-label, .signature-line, .required-note {
+        color: var(--primary-darker) !important;
+        font-weight: 500 !important;
     }
     
-    /* Ensure table text is visible */
-    .print-form .items-table th,
-    .print-form .items-table td {
-        color: var(--text-primary) !important;
+    /* Override print.css styles when viewing on screen */
+    @media screen {
+        .print-form .section-title {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+        }
+        
+        .print-form .section-title i {
+            color: var(--secondary-color) !important;
+        }
     }
 </style>
 {% endblock %}
+
+{% block body_class %}print-form-page{% endblock %}
 
 {% block content %}
 <div class="screen-controls no-print">

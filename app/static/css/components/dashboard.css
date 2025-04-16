@@ -444,12 +444,12 @@
     font-weight: 500;
 }
 
-.status-badge.status-pending { background: var(--warning-lighter); color: var(--warning-color); }
-.status-badge.status-confirmed { background: var(--info-lighter); color: var(--info-color); }
-.status-badge.status-processing { background: var(--info-lighter); color: var(--info-color); }
-.status-badge.status-in_transit { background: var(--success-lighter); color: var(--success-color); }
+.status-badge.status-pending { background: var(--warning); color: var(--warning-color); }
+.status-badge.status-confirmed { background: var(--info); color: var(--info-color); }
+.status-badge.status-processing { background: var(--info); color: var(--info-color); }
+.status-badge.status-in_transit { background: var(--success); color: var(--success-color); }
 .status-badge.status-delivered { background: rgba(156, 39, 176, 0.2); color: #ce93d8; }
-.status-badge.status-cancelled { background: var(--danger-lighter); color: var(--danger-color); }
+.status-badge.status-cancelled { background: var(--danger); color: var(--danger-color); }
 
 .activity-meta {
     font-size: 0.875rem;

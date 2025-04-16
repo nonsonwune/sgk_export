@@ -35,6 +35,7 @@
     padding: 20mm;
     background: white !important;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    color: #1A202C;
 }
 
 /* Force all print form content to be visible */
@@ -65,7 +66,7 @@
 
 .company-header {
     text-align: center;
-    margin-bottom: 8mm;
+    margin-bottom: 5mm;
     padding-bottom: 5mm;
     border-bottom: 2px solid #4169E1;
 }
@@ -73,24 +74,24 @@
 .company-logo {
     width: 100px;
     height: auto;
-    margin-bottom: 4mm;
+    margin-bottom: 2mm;
 }
 
 .company-header h1 {
-    margin: 4mm 0 3mm;
+    margin: 3mm 0 2mm;
     color: #1A202C !important;
     font-size: 24pt;
     font-weight: 600;
 }
 
 .company-header p {
-    margin: 2mm 0;
+    margin: 0;
     color: #1A202C !important;
     font-size: 12pt;
 }
 
 .form-section {
-    margin-bottom: 8mm;
+    margin-bottom: 6mm;
     page-break-inside: avoid;
     padding-right: 5mm;
 }
@@ -98,23 +99,23 @@
 .section-title {
     font-size: 12pt;
     font-weight: 600;
-    margin-bottom: 4mm;
-    color: #1A202C !important;
-    background: #f8f9fe;
-    padding: 3mm 4mm;
+    margin-bottom: 3mm;
+    background: #f8f9fe !important;
+    padding: 2mm 3mm;
     border-left: 4px solid #4169E1;
     display: flex;
     align-items: center;
     gap: 3mm;
+    color: #1A202C !important;
 }
 
 .section-title i {
-    color: #4169E1;
+    color: #4169E1 !important;
 }
 
 .input-row {
     display: flex;
-    margin-bottom: 4mm;
+    margin-bottom: 3mm;
     align-items: baseline;
     page-break-inside: avoid;
     padding-right: 5mm;
@@ -124,47 +125,48 @@
     width: 25%;
     font-weight: 500;
     color: #1A202C !important;
-    padding-right: 4mm;
+    padding-right: 3mm;
 }
 
 .input-field {
     width: 75%;
     border-bottom: 1px solid #e2e8f0;
-    min-height: 7mm;
-    padding: 1.5mm 0;
+    min-height: 6mm;
+    padding: 1mm 0;
+    color: #1A202C !important;
 }
 
 .items-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 4mm 0 8mm;
+    margin: 2mm 0 6mm;
     page-break-inside: avoid;
 }
 
 .items-table th {
-    background: #f8f9fe;
+    background: #f8f9fe !important;
     color: #1A202C !important;
     font-weight: 600;
     text-align: left;
-    padding: 3mm 4mm;
+    padding: 2mm 3mm;
     border: 1px solid #e2e8f0;
 }
 
 .items-table td {
-    padding: 4mm;
+    padding: 3mm;
     border: 1px solid #e2e8f0;
-    height: 8mm;
+    height: 7mm;
     color: #1A202C !important;
 }
 
 .items-table tr:nth-child(even) td {
-    background: #f8f9fe;
+    background: #f8f9fe !important;
 }
 
 .signature-section {
     display: flex;
     justify-content: space-between;
-    margin-top: 15mm;
+    margin-top: 10mm;
     page-break-inside: avoid;
     padding-right: 5mm;
 }
@@ -175,8 +177,8 @@
 
 .signature-line {
     border-top: 1px solid #4169E1;
-    margin-top: 20mm;
-    padding-top: 3mm;
+    margin-top: 15mm;
+    padding-top: 2mm;
     text-align: center;
     color: #1A202C !important;
 }
@@ -187,23 +189,24 @@
     border-bottom: 1px solid #000;
     text-align: center;
     margin: 0 2mm;
+    color: #1A202C !important;
 }
 
 .required-note {
-    margin: 4mm 0;
+    margin: 3mm 0;
     color: #1A202C !important;
     font-size: 0.9em;
 }
 
 .screen-controls {
-    margin-bottom: 6mm;
+    margin-bottom: 4mm;
     text-align: right;
 }
 
 .print-button {
     padding: 2mm 4mm;
     background: #4169E1;
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 2mm;
     cursor: pointer;
@@ -217,21 +220,71 @@
     background: #3154b4;
 }
 
+/* Dark Mode Fixes */
+body.print-form-page .main-content {
+    background-color: var(--background-secondary) !important;
+}
+
+body.print-form-page .container {
+    background-color: transparent !important;
+}
+
+/* Text color fixes for dark mode */
+.print-form h1,
+.print-form p,
+.print-form .required-note,
+.print-form .input-label,
+.print-form .section-title,
+.print-form .signature-line {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure table text is visible in dark mode */
+.print-form .items-table th,
+.print-form .items-table td {
+    color: var(--text-primary) !important;
+}
+
 /* Print Media Queries */
 @media print {
     @page {
-        margin: 0.5in 0 !important; /* Only top/bottom margins for headers/footers */
+        size: A4;
+        margin: 0;
     }
-
+    
     /* Reset all containers to full width */
     html, body {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
+        font-size: 11pt;
+        line-height: 1.3;
         background: white !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+    }
+    
+    /* Hide navigation and controls */
+    .main-nav, 
+    .action-buttons, 
+    .screen-controls, 
+    .footer,
+    nav,
+    .navbar,
+    .nav-section,
+    .no-print,
+    .view-images-btn {
+        display: none !important;
+    }
+    
+    /* Print form specific settings */
+    .print-form {
+        width: 210mm;
+        padding: 20mm !important;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+        background: white !important;
     }
     
     /* Force all printed content to have dark text on light background */
@@ -240,18 +293,32 @@
         background-color: transparent !important;
     }
 
-    /* Hide navigation */
-    .main-nav, 
-    nav,
-    .navbar,
-    .nav-section {
-        display: none !important;
+    /* Background colors that need to be preserved */
+    .section-title {
+        background-color: #f8f9fe !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    .items-table th {
+        background-color: #f8f9fe !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    .items-table tr:nth-child(even) td {
+        background-color: #f8f9fe !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
     /* Reset container constraints */
     .preview-container,
     .container,
-    .container-fluid {
+    .container-fluid,
+    .row,
+    .col,
+    [class^="col-"] {
         width: 100% !important;
         max-width: none !important;
         margin: 0 !important;
@@ -305,30 +372,11 @@
         margin: 5mm 0 !important;
     }
 
-    /* Remove all Bootstrap container constraints */
-    .container, 
-    .container-fluid,
-    .row,
-    .col,
-    [class^="col-"] {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
     /* Ensure proper page breaks */
     .info-card,
     .items-table,
     .signature-section {
         page-break-inside: avoid !important;
-    }
-
-    /* Hide screen-only elements */
-    .no-print,
-    .action-buttons,
-    .screen-controls {
-        display: none !important;
     }
 
     /* Typography Optimizations */
@@ -449,6 +497,8 @@
         object-fit: contain !important;
         display: block !important;
         margin: 0 auto !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
     }
 
     /* Adjust company header layout */
@@ -485,35 +535,6 @@
         overflow: visible !important;
     }
 
-    .no-print {
-        display: none !important;
-    }
-    
-    /* Other print styles */
-    body {
-        background: white;
-        font-size: 12pt;
-    }
-    
-    .preview-container {
-        margin: 0;
-        padding: 0;
-        box-shadow: none;
-    }
-    
-    .action-buttons {
-        display: none;
-    }
-    
-    .view-images-btn {
-        display: none;
-    }
-    
-    /* Ensure proper page breaks */
-    .info-card {
-        page-break-inside: avoid;
-    }
-    
     /* Remove unnecessary backgrounds and borders */
     .info-card,
     .card-header,
@@ -531,12 +552,6 @@
     .items-table th,
     .items-table td {
         border: 1px solid #000;
-    }
-    
-    /* Ensure QR code prints clearly */
-    .qr-code-image {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
     }
 }
 
