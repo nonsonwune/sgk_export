@@ -183,6 +183,12 @@ input[type="number"],
     .action-buttons {
         display: none;
     }
+    
+    /* Ensure we don't override the centered company header styles */
+    .company-header {
+        text-align: center !important;
+        display: block !important;
+    }
 }
 
 /* Company header styles */

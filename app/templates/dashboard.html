@@ -133,7 +133,7 @@
                     <h3>Total Revenue</h3>
                     <div class="metric-sparkline" id="revenueSparkline"></div>
                 </div>
-                <div class="metric-value" id="revenue-total">${{ "%.2f"|format(monthly_stats.total_revenue) }}</div>
+                <div class="metric-value" id="revenue-total">₦{{ "%.2f"|format(monthly_stats.total_revenue) }}</div>
                 <div class="metric-trend {% if monthly_stats.revenue_change > 0 %}trend-up{% else %}trend-down{% endif %}">
                     <i class="fas fa-arrow-{% if monthly_stats.revenue_change > 0 %}up{% else %}down{% endif %}"></i>
                     <span>{{ "%.1f"|format(monthly_stats.revenue_change|abs) }}% vs last month</span>

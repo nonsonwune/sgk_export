@@ -491,15 +491,15 @@
                 <div class="total-section">
                     <div class="total-row">
                         <div>Subtotal</div>
-                        <div id="subtotal">$0.00</div>
+                        <div id="subtotal">₦0.00</div>
                     </div>
                     <div class="total-row">
-                        <div>VAT (7%)</div>
-                        <div id="vat">$0.00</div>
+                        <div>VAT (7.5%)</div>
+                        <div id="vat">₦0.00</div>
                     </div>
                     <div class="total-row final">
                         <div>Total Amount</div>
-                        <div id="total">$0.00</div>
+                        <div id="total">₦0.00</div>
                     </div>
                 </div>
             </div>
@@ -628,7 +628,7 @@ document.addEventListener('DOMContentLoaded', function() {
             subtotal += parseFloat(input.value || 0);
         });
         
-        const vat = subtotal * 0.07;
+        const vat = subtotal * 0.075;
         const total = subtotal + vat;
         
         document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;

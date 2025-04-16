@@ -360,9 +360,34 @@ body.print-form-page .container {
     }
 
     .company-header {
+        text-align: center !important;
+        display: block !important; /* Override flex display */
         width: 100% !important;
-        padding: 0 !important;
-        margin-bottom: 5mm !important;
+        margin: 0 auto 5mm auto !important;
+        padding-bottom: 5mm !important;
+        border-bottom: 2px solid #4169E1 !important;
+    }
+    
+    .company-logo {
+        width: 100px !important;
+        height: auto !important;
+        margin: 0 auto 2mm auto !important; /* Center the logo */
+        display: block !important;
+    }
+    
+    .company-header h1 {
+        text-align: center !important;
+        margin: 3mm 0 2mm !important;
+        color: #1A202C !important;
+        font-size: 18pt !important;
+        font-weight: 600 !important;
+    }
+    
+    .company-header p {
+        text-align: center !important;
+        margin: 0 !important;
+        color: #1A202C !important;
+        font-size: 12pt !important;
     }
 
     /* Table adjustments */
@@ -502,16 +527,6 @@ body.print-form-page .container {
     }
 
     /* Adjust company header layout */
-    .company-header {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: flex-start !important;
-        width: 100% !important;
-        margin: 0 0 5mm 0 !important;
-        padding: 0 !important;
-        gap: 10mm !important; /* Ensure space between content and QR */
-    }
-
     .company-info-section {
         flex: 1 !important;
         max-width: calc(100% - 140px) !important; /* Account for QR width */
@@ -553,6 +568,41 @@ body.print-form-page .container {
     .items-table td {
         border: 1px solid #000;
     }
+
+    /* Styles for company headers with QR codes in print mode */
+    .company-header-with-qr {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        margin: 0 0 5mm 0 !important;
+        padding-bottom: 5mm !important;
+        border-bottom: 2px solid #4169E1 !important;
+        gap: 10mm !important;
+    }
+    
+    .company-header-with-qr .company-logo {
+        margin: 0 0 2mm 0 !important;
+        display: inline-block !important;
+    }
+    
+    .company-header-with-qr h1,
+    .company-header-with-qr p {
+        text-align: left !important;
+    }
+    
+    /* QR Code print optimizations */
+    .qr-code-section {
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 130px !important;
+    }
 }
 
 /* Screen-only styles */
@@ -572,4 +622,31 @@ body.print-form-page .container {
     .company-header {
         gap: 10mm;
     }
+}
+
+/* Special class for company headers with QR codes */
+.company-header-with-qr {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-bottom: 5mm !important;
+    padding-bottom: 5mm !important;
+    border-bottom: 2px solid #4169E1 !important;
+}
+
+.company-header-with-qr .company-logo {
+    margin: 0 0 2mm 0 !important;
+    display: inline-block !important;
+}
+
+.company-header-with-qr h1,
+.company-header-with-qr p {
+    text-align: left !important;
+}
+
+/* QR Code styles */
+.qr-code-section {
+    min-width: 130px;
 } 

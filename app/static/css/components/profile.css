@@ -155,22 +155,22 @@
 }
 
 .status-icon.pending {
-    background: #FEF3C7;
+    background: #7d670e;
     color: #D97706;
 }
 
 .status-icon.processing {
-    background: #E6FFFA;
+    background: #24c1a1;
     color: #38B2AC;
 }
 
 .status-icon.in-transit {
-    background: #EBF4FF;
+    background: #1b5baa;
     color: #4169E1;
 }
 
 .status-icon.delivered {
-    background: #F0FFF4;
+    background: #09982f;
     color: #48BB78;
 }
 
@@ -256,22 +256,22 @@
 }
 
 .status-badge.pending {
-    background: #FEF3C7;
+    background: #897623;
     color: #D97706;
 }
 
 .status-badge.processing {
-    background: #E6FFFA;
+    background: #2fa188;
     color: #38B2AC;
 }
 
 .status-badge.in-transit {
-    background: #EBF4FF;
+    background: #2e64a6;
     color: #4169E1;
 }
 
 .status-badge.delivered {
-    background: #F0FFF4;
+    background: #2eae4e;
     color: #48BB78;
 }
 

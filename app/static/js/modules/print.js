@@ -80,6 +80,20 @@ export function preparePrint() {
         // Clone content and prepare for print
         const clonedContent = contentToClone.cloneNode(true);
         
+        // Check if QR code exists and add appropriate class to company header
+        const hasQrCode = contentToClone.querySelector('.qr-code-container') !== null;
+        const companyHeader = clonedContent.querySelector('.company-header');
+        if (companyHeader) {
+            if (hasQrCode) {
+                companyHeader.classList.add('company-header-with-qr');
+                console.debug('[Print] Added company-header-with-qr class for QR layout');
+            } else {
+                // Ensure the regular centered layout
+                companyHeader.classList.remove('company-header-with-qr');
+                console.debug('[Print] Using standard centered company header layout');
+            }
+        }
+
         // Handle QR code if present
         const qrCodeImg = clonedContent.querySelector('.qr-code-container img');
         if (qrCodeImg) {
@@ -158,12 +172,49 @@ export function preparePrint() {
                     }
                     
                     .input-label, 
-                    .company-header h1,
-                    .company-header p,
-                    .section-title,
-                    .manual-input,
                     .required-note,
                     .signature-line {
+                        color: #1A202C !important;
+                    }
+                    
+                    /* Company header styles - ensure proper centering */
+                    .company-header {
+                        text-align: center !important;
+                        display: block !important;
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        margin: 0 auto 5mm auto !important;
+                        padding-bottom: 5mm !important;
+                        border-bottom: 2px solid #4169E1 !important;
+                    }
+                    
+                    .company-logo {
+                        width: 100px !important;
+                        height: auto !important;
+                        margin: 0 auto 2mm auto !important;
+                        display: block !important;
+                    }
+                    
+                    .company-header h1 {
+                        text-align: center !important;
+                        margin: 3mm 0 2mm !important;
+                        color: #1A202C !important;
+                        font-size: 18pt !important;
+                        font-weight: 600 !important;
+                    }
+                    
+                    .company-header p {
+                        text-align: center !important;
+                        color: #1A202C !important;
+                        font-size: 12pt !important;
+                        margin: 0 !important;
+                    }
+                    
+                    .section-title {
+                        color: #1A202C !important;
+                    }
+
+                    .manual-input {
                         color: #1A202C !important;
                     }
                     
@@ -183,15 +234,6 @@ export function preparePrint() {
                     .info-card {
                         width: 100% !important;
                         max-width: 100% !important;
-                    }
-                    .company-header {
-                        width: 100% !important;
-                        max-width: 100% !important;
-                        padding: 0 !important;
-                        margin-bottom: 4mm !important;
-                    }
-                    .company-info-section {
-                        max-width: calc(100% - 160px) !important;
                     }
                     .document-header {
                         width: 100% !important;

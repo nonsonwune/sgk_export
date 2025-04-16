@@ -6,6 +6,10 @@ logs/
 /logs
 /venv
 
+venv
+venv/
+/venv/
+
 migrate_to_render.txt
 appWrite_bucket_docs.md
 synthetic-profiles.md
