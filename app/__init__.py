@@ -2,7 +2,7 @@ print("Starting package load: app/__init__.py")
 import os
 import sys
 import logging
-from flask import Flask
+from flask import Flask, render_template, flash
 from .extensions import db, login_manager, migrate, csrf
 from .models.user import User
 from .utils.logging_config import setup_logging
@@ -57,6 +57,19 @@ def create_app(config_name=None):
         logger.error(f"Failed to initialize extensions: {str(e)}", exc_info=True)
         raise
     
+    # CSRF and HTTP 400 Error Handler
+    @app.errorhandler(400)
+    def handle_csrf_error(e):
+        # Check if this is a CSRF error
+        if 'CSRF' in str(e) or hasattr(e, 'description') and 'CSRF' in str(e.description):
+            logger.error(f"CSRF Error: {str(e)}")
+            flash("CSRF validation failed. Please try again.", "error")
+            return render_template('error.html', error="Security validation failed. Please try again."), 400
+        
+        # Handle other 400 errors
+        logger.error(f"400 Error: {str(e)}")
+        return render_template('error.html', error=f"Bad request: {str(e)}"), 400
+    
     # Register blueprints
     try:
         logger.debug("Registering blueprints")
@@ -73,6 +86,10 @@ def create_app(config_name=None):
     except Exception as e:
         logger.error(f"Failed to register blueprints: {str(e)}", exc_info=True)
         raise
+    
+    # Configure CSRF to accept tokens from headers (after blueprints are registered)
+    from .extensions import configure_csrf
+    configure_csrf(app)
     
     # User loader callback
     @login_manager.user_loader

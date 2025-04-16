@@ -188,6 +188,16 @@
                         </ul>
                     </div>
                 </div>
+                
+                <!-- Offline Status Indicator in Navigation -->
+                <div class="nav-section offline-section offline-only" role="group" aria-label="Offline status">
+                    <div class="nav-item">
+                        <span class="nav-link offline-indicator-nav">
+                            <i class="fas fa-wifi-slash" aria-hidden="true"></i>
+                            <span>Offline Mode</span>
+                        </span>
+                    </div>
+                </div>
             </div>
             {% endif %}
         </div>
@@ -205,6 +215,16 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
+            
+            <!-- Offline Mode Banner (only shown when offline) -->
+            <div class="offline-banner offline-only">
+                <div class="offline-banner-icon">📶</div>
+                <div class="offline-banner-content">
+                    <p class="offline-banner-title">You're in offline mode</p>
+                    <p class="offline-banner-message">Some features may be limited. Changes will sync when you reconnect.</p>
+                </div>
+            </div>
+            
             {% block content %}{% endblock %}
         </div>
     </main>
@@ -228,6 +248,12 @@
     <!-- JavaScript Dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <!-- Offline Support JavaScript -->
+    <script type="module" src="{{ url_for('static', filename='js/modules/offline.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/offline-form.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/offline-navigation.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/api-service.js') }}"></script>
     
     <!-- Application JavaScript -->
     <script type="module" src="{{ url_for('static', filename='js/modules/navigation.js') }}"></script>
@@ -261,5 +287,60 @@
             });
         }
     </script>
+    
+    <!-- Offline CSS -->
+    <style>
+        /* Offline Banner */
+        .offline-banner {
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            display: none;
+            align-items: center;
+        }
+        
+        .offline-banner-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .offline-banner-title {
+            font-weight: bold;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .offline-banner-message {
+            margin: 4px 0 0 0;
+            font-size: 14px;
+        }
+        
+        /* Offline Indicator in Nav */
+        .offline-indicator-nav {
+            background-color: #f44336;
+            color: white;
+            border-radius: 4px;
+            padding: 6px 12px;
+        }
+        
+        .offline-indicator-nav i {
+            margin-right: 8px;
+        }
+        
+        /* Show/hide based on offline status */
+        body.is-offline .online-only {
+            display: none !important;
+        }
+        
+        body.is-offline .offline-only {
+            display: flex !important;
+        }
+        
+        body:not(.is-offline) .offline-only {
+            display: none !important;
+        }
+    </style>
 </body>
 </html> 

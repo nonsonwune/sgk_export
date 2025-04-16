@@ -222,7 +222,13 @@ async function getValidatedChartData() {
     debugLog('Fetching and validating chart data');
     try {
         const timeRange = document.getElementById('timeRange').value;
-        const response = await fetch(`/api/dashboard/data?timeRange=${timeRange}`);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+        
+        const response = await fetch(`/api/dashboard/data?timeRange=${timeRange}`, {
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
+        });
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
@@ -604,7 +610,13 @@ async function refreshDashboardData(timeRange) {
     debugLog('Refreshing dashboard data', { timeRange });
     try {
         debugLog('Making API request to /api/dashboard/data');
-        const response = await fetch(`/api/dashboard/data?timeRange=${timeRange}`);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+        
+        const response = await fetch(`/api/dashboard/data?timeRange=${timeRange}`, {
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
+        });
         
         if (!response.ok) {
             debugLog('API request failed', {

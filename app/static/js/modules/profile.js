@@ -117,10 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const shipmentId = form.dataset.shipmentId;
 
                 try {
+                    // Get CSRF token
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+                    
                     const response = await fetch(`/profile/api/shipments/${shipmentId}/status`, {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
                         },
                         body: JSON.stringify({
                             status: formData.get('status')

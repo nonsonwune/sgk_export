@@ -318,7 +318,7 @@
 
         <div class="action-buttons">
             {% if shipment.status == 'pending' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline" data-no-offline>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="confirmed">
                 <button type="submit" class="action-button primary">
@@ -326,7 +326,7 @@
                 </button>
             </form>
             {% elif shipment.status == 'confirmed' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline" data-no-offline>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="processing">
                 <button type="submit" class="action-button primary">
@@ -334,7 +334,7 @@
                 </button>
             </form>
             {% elif shipment.status == 'processing' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline" data-no-offline>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="in_transit">
                 <button type="submit" class="action-button primary">
@@ -342,7 +342,7 @@
                 </button>
             </form>
             {% elif shipment.status == 'in_transit' %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline" data-no-offline>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="delivered">
                 <button type="submit" class="action-button primary">
@@ -351,7 +351,7 @@
             </form>
             {% endif %}
             {% if shipment.status not in ['cancelled', 'delivered'] %}
-            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline">
+            <form action="{{ url_for('shipments.update_status', shipment_id=shipment.id) }}" method="POST" class="display-inline" data-no-offline>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status" value="cancelled">
                 <button type="submit" class="action-button danger">

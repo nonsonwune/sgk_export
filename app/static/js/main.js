@@ -51,12 +51,19 @@ console.log('Loading main.js');
 import { initializeModals } from './modules/modal.js';
 import { initializeFormValidation } from './modules/validation.js';
 import { initializePrint } from './modules/print.js';
+import { OfflineManager } from './modules/offline.js';
+import { enhanceFormWithOfflineSupport } from './modules/offline-form.js';
+import { enhanceNavigationWithOfflineIndicators, addCurrentPageToOfflineCache } from './modules/offline-navigation.js';
+import apiService from './modules/api-service.js';
 
 // Initialize all modules when the DOM is ready
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM Content Loaded');
     
     try {
+        // Cache current page for offline access
+        addCurrentPageToOfflineCache();
+        
         // Initialize print functionality if on print template page
         if (document.querySelector('.print-content')) {
             console.log('Initializing print functionality');
@@ -122,6 +129,20 @@ document.addEventListener('DOMContentLoaded', async function() {
         } else {
             console.log('No pricing elements found, skipping calculations');
         }
+        
+        // Initialize offline form support for all forms
+        console.log('Enhancing forms with offline support');
+        initializeOfflineForms();
+        
+        // Add offline indicators to navigation
+        console.log('Enhancing navigation with offline indicators');
+        enhanceNavigationWithOfflineIndicators();
+        
+        // Add offline badge to header
+        addOfflineBadgeToUI();
+        
+        // Add offline pending requests indicator
+        addPendingRequestsIndicator();
 
     } catch (error) {
         console.error('Error during initialization:', error);
@@ -200,23 +221,252 @@ function initializeAlerts() {
 }
 
 // Global AJAX setup
+function getCsrfToken() {
+    return document.querySelector('meta[name="csrf-token"]')?.content;
+}
+
 $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content
+        'X-CSRF-TOKEN': getCsrfToken()
     },
     beforeSend: function(xhr, settings) {
         // Only add the CSRF token for POST, PUT, DELETE requests
         if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]')?.content);
+            xhr.setRequestHeader("X-CSRF-TOKEN", getCsrfToken());
         }
     }
 });
+
+// Intercept fetch requests to add CSRF token
+const originalFetch = window.fetch;
+window.fetch = function(url, options = {}) {
+    // Only add for non-GET requests
+    if (options.method && !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(options.method)) {
+        // Create headers if they don't exist
+        if (!options.headers) {
+            options.headers = {};
+        }
+        
+        // If headers is a Headers object, use set method
+        if (options.headers instanceof Headers) {
+            options.headers.set('X-CSRF-TOKEN', getCsrfToken());
+        } else {
+            // Otherwise treat as a plain object
+            options.headers['X-CSRF-TOKEN'] = getCsrfToken();
+        }
+    }
+    
+    return originalFetch(url, options);
+};
 
 // Global error handler
 window.addEventListener('error', function(e) {
     console.error('Global error:', e.error);
     // You could send this to your error tracking service
 });
+
+// Initialize offline form support
+function initializeOfflineForms() {
+    // Find all forms that should have offline support
+    document.querySelectorAll('form:not([data-no-offline])').forEach(form => {
+        // Skip the login form explicitly, as it uses redirects and doesn't need offline queueing
+        if (form.action.includes('/login')) {
+            return;
+        }
+
+        // Skip forms that can't or shouldn't be stored offline
+        if (form.method.toLowerCase() !== 'post' && form.method.toLowerCase() !== 'put') {
+            return;
+        }
+        
+        // Skip forms with file inputs (unless we implement file storage)
+        if (form.querySelector('input[type="file"]')) {
+            return;
+        }
+        
+        // Enhanced the form with offline support
+        enhanceFormWithOfflineSupport(form, {
+            formId: form.id || form.getAttribute('name') || `form-${Math.random().toString(36).substr(2, 9)}`,
+            endpoint: form.action,
+            method: form.method.toUpperCase(),
+            successMessage: 'Form submitted successfully',
+            offlineMessage: 'You are offline. This form will be submitted when you reconnect.',
+            onSuccess: (data) => {
+                console.log('Form submitted successfully:', data);
+                // Any specific success handling can go here
+            },
+            onOffline: (data) => {
+                console.log('Form saved for offline submission:', data);
+                // Any specific offline handling can go here
+            }
+        });
+        
+        console.log('Enhanced form with offline support:', form.id || form.action);
+    });
+}
+
+// Add offline badge to UI
+function addOfflineBadgeToUI() {
+    // Create the badge container
+    const offlineBadge = document.createElement('div');
+    offlineBadge.id = 'offline-status-badge';
+    offlineBadge.className = 'offline-status-badge hidden';
+    offlineBadge.innerHTML = `
+        <span class="offline-icon">📶</span>
+        <span class="offline-text">Offline</span>
+    `;
+    
+    // Add styles if not already added
+    if (!document.getElementById('offline-badge-styles')) {
+        const style = document.createElement('style');
+        style.id = 'offline-badge-styles';
+        style.textContent = `
+            .offline-status-badge {
+                position: fixed;
+                bottom: 16px;
+                right: 16px;
+                background-color: #f44336;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-weight: bold;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                display: flex;
+                align-items: center;
+                z-index: 9000;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            .offline-status-badge.hidden {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            .offline-icon {
+                margin-right: 8px;
+                font-size: 16px;
+            }
+            .offline-status-badge.online {
+                background-color: #4CAF50;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(offlineBadge);
+    
+    // Show/hide badge based on online status
+    function updateOfflineBadge() {
+        if (!navigator.onLine) {
+            offlineBadge.classList.remove('hidden');
+            offlineBadge.classList.remove('online');
+            offlineBadge.querySelector('.offline-text').textContent = 'Offline';
+        } else {
+            offlineBadge.classList.add('online');
+            offlineBadge.querySelector('.offline-text').textContent = 'Online';
+            
+            // Show briefly when coming back online, then hide
+            offlineBadge.classList.remove('hidden');
+            setTimeout(() => {
+                offlineBadge.classList.add('hidden');
+            }, 3000);
+        }
+    }
+    
+    // Listen for online/offline events
+    window.addEventListener('online', updateOfflineBadge);
+    window.addEventListener('offline', updateOfflineBadge);
+    
+    // Initial state
+    updateOfflineBadge();
+}
+
+// Add pending requests indicator to UI
+function addPendingRequestsIndicator() {
+    // Create badge for pending offline requests
+    const badge = document.createElement('div');
+    badge.id = 'offline-pending-badge';
+    badge.className = 'offline-pending-badge hidden';
+    badge.textContent = '0';
+    
+    // Add styles
+    if (!document.getElementById('offline-pending-styles')) {
+        const style = document.createElement('style');
+        style.id = 'offline-pending-styles';
+        style.textContent = `
+            .offline-pending-badge {
+                position: fixed;
+                bottom: 16px;
+                right: 96px;
+                background-color: #ff9800;
+                color: white;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                font-weight: bold;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 9001;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                cursor: pointer;
+            }
+            .offline-pending-badge.hidden {
+                transform: scale(0);
+                opacity: 0;
+            }
+            .offline-pending-badge:hover {
+                background-color: #e65100;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(badge);
+    
+    // Add click handler to force sync when online
+    badge.addEventListener('click', () => {
+        if (navigator.onLine) {
+            // Trigger sync via service worker
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.ready.then(registration => {
+                    registration.sync.register('form-sync').then(() => {
+                        console.log('Sync registered');
+                    }).catch(error => {
+                        console.error('Error registering sync:', error);
+                    });
+                });
+            }
+        } else {
+            // Show message that we're offline
+            const notification = document.createElement('div');
+            notification.className = 'sync-notification';
+            notification.innerHTML = `
+                <div class="offline-notification-icon">⚠️</div>
+                <div class="offline-notification-content">
+                    <p class="offline-notification-title">You're Offline</p>
+                    <p class="offline-notification-message">Pending requests will be sent when you're back online.</p>
+                </div>
+                <button class="offline-notification-close" aria-label="Close notification">✕</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Add close button functionality
+            const closeButton = notification.querySelector('.offline-notification-close');
+            closeButton.addEventListener('click', () => {
+                notification.remove();
+            });
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+    });
+}
 
 // PWA Functionality
 let deferredPrompt;
@@ -347,6 +597,12 @@ navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'VERSION_STATUS' && event.data.needsUpdate) {
         showUpdateNotification();
     }
+    
+    // Handle message to sync forms
+    if (event.data && event.data.type === 'SYNC_FORMS') {
+        // This will be handled by the OfflineFormManager automatically
+        console.log('Received sync forms message from service worker');
+    }
 });
 
 // Show update notification
@@ -403,8 +659,24 @@ function showUpdateNotification() {
     });
 }
 
+// Cache current page button (for quick development testing)
+function addCacheCurrentPageButton() {
+    // Removed the button creation logic
+    // Now we'll automatically cache the current page instead
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+            type: 'CACHE_PAGE',
+            url: window.location.pathname
+        });
+        console.log('Page automatically cached for offline use');
+    }
+}
+
 // Call these functions when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Check for service worker updates
     setTimeout(checkServiceWorkerVersion, 5000);
+    
+    // Automatically cache the current page for offline use
+    addCacheCurrentPageButton();
 }); 

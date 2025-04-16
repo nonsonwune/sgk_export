@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from ..models.shipment import Shipment, ShipmentItem, ShipmentStatusHistory
 from ..utils.file_storage import upload_file, delete_file
 from ..utils.helpers import calculate_subtotal, calculate_vat, generate_qr_code
-from ..extensions import db
+from ..extensions import db, csrf
 import logging
 from datetime import datetime
 from werkzeug.utils import secure_filename
